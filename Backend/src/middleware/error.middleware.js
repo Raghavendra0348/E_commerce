@@ -45,6 +45,25 @@ const errorHandler = (err, req, res, next) => {
         });
     }
 
+    // ── Zod validation errors (fallback if unhandled) ──
+    if (err.name === "ZodError" || err.issues) {
+        const extractedErrors = err.issues?.map((issue) => {
+            const path = [...issue.path];
+            if (["body", "query", "params"].includes(path[0])) {
+                path.shift();
+            }
+            return {
+                field: path.join(".") || "field",
+                message: issue.message
+            };
+        });
+        return res.status(400).json({
+            success: false,
+            message: "Validation failed",
+            errors: extractedErrors
+        });
+    }
+
     // ── Multer file-size error ──
     if (err.code === "LIMIT_FILE_SIZE") {
         return res.status(400).json({

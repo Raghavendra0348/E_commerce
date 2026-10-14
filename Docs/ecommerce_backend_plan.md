@@ -55,7 +55,7 @@ graph TB
   
     subgraph "Express Application"
         MW["Global Middleware<br/>cors, helmet, morgan,<br/>rate-limiter, json parser"]
-      
+    
         subgraph "Route Modules"
             AR["Auth Routes<br/>/api/auth/*"]
             PR["Product Routes<br/>/api/products/*"]
@@ -67,15 +67,15 @@ graph TB
             PayR["Payment Routes<br/>/api/payments/*"]
             AdminR["Admin Routes<br/>/api/admin/*"]
         end
-      
+    
         subgraph "Middleware Layer"
             AuthMW["auth.middleware<br/>(JWT verify)"]
             AdminMW["admin.middleware<br/>(role check)"]
-            ValMW["validate.middleware<br/>(express-validator)"]
+            ValMW["validate.middleware<br/>(Zod schema)"]
             UploadMW["upload.middleware<br/>(Multer + Cloudinary)"]
             ErrMW["error.middleware<br/>(global handler)"]
         end
-      
+    
         subgraph "Controller Layer"
             AC["auth.controller"]
             PC["product.controller"]
@@ -87,7 +87,7 @@ graph TB
             PayC["payment.controller"]
             AdminC["admin.controller"]
         end
-      
+    
         subgraph "Service Layer"
             AS["auth.service"]
             PS["product.service"]
@@ -96,7 +96,7 @@ graph TB
             OS["order.service"]
             PayS["payment.service"]
         end
-      
+    
         subgraph "Utils"
             JWT["jwt.utils"]
             APIErr["ApiError class"]
@@ -205,7 +205,7 @@ Backend/
 | ---------------------- | ------------------------------------- |
 | `bcrypt`             | Password hashing                      |
 | `jsonwebtoken`       | JWT token generation & verification   |
-| `express-validator`  | Request input validation              |
+| `zod`                | Schema declaration & input validation |
 | `express-rate-limit` | API rate limiting                     |
 | `multer`             | File upload handling (memory storage) |
 | `cloudinary`         | Cloud image upload & management       |
@@ -213,7 +213,7 @@ Backend/
 | `slugify`            | URL-friendly slug generation          |
 
 ```bash
-npm install bcrypt jsonwebtoken express-validator express-rate-limit multer cloudinary razorpay slugify
+npm install bcrypt jsonwebtoken zod express-rate-limit multer cloudinary razorpay slugify
 ```
 
 ---
@@ -267,6 +267,8 @@ class ApiError extends Error {
 
 module.exports = ApiError;
 ```
+
+g
 
 ---
 
@@ -425,22 +427,46 @@ module.exports = authorizeAdmin;
 
 #### [NEW] `src/middleware/validate.middleware.js`
 
-Runs express-validator checks and returns structured errors:
+Runs Zod schema checks, replaces request data with parsed/sanitized payload, and returns structured errors:
 
 ```js
-const { validationResult } = require("express-validator");
 const ApiError = require("../utils/ApiError");
 
-const validate = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const extractedErrors = errors.array().map((err) => ({
-            field: err.path,
-            message: err.msg
-        }));
-        return next(ApiError.badRequest("Validation failed", extractedErrors));
+const validate = (schema) => async (req, res, next) => {
+    try {
+        const shape = schema.shape;
+        const hasContainer = shape && (shape.body || shape.query || shape.params);
+
+        if (hasContainer) {
+            const parsed = await schema.parseAsync({
+                body: req.body,
+                query: req.query,
+                params: req.params
+            });
+            if (parsed.body !== undefined) req.body = parsed.body;
+            if (parsed.query !== undefined) req.query = parsed.query;
+            if (parsed.params !== undefined) req.params = parsed.params;
+        } else {
+            req.body = await schema.parseAsync(req.body);
+        }
+
+        next();
+    } catch (error) {
+        if (error.name === "ZodError" || error.issues) {
+            const extractedErrors = error.issues.map((issue) => {
+                const path = [...issue.path];
+                if (["body", "query", "params"].includes(path[0])) {
+                    path.shift();
+                }
+                return {
+                    field: path.join(".") || "field",
+                    message: issue.message
+                };
+            });
+            return next(ApiError.badRequest("Validation failed", extractedErrors));
+        }
+        next(error);
     }
-    next();
 };
 
 module.exports = validate;
@@ -559,31 +585,47 @@ module.exports = razorpay;
 #### [NEW] `src/validators/auth.validator.js`
 
 ```js
-const { body } = require("express-validator");
+const { z } = require("zod");
 
-const registerValidator = [
-    body("name").trim().notEmpty().withMessage("Name is required"),
-    body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
-    body("password")
-        .isLength({ min: 8 }).withMessage("Password must be at least 8 characters")
-        .matches(/\d/).withMessage("Password must contain a number")
-        .matches(/[A-Z]/).withMessage("Password must contain an uppercase letter"),
-    body("phone").optional().isMobilePhone().withMessage("Valid phone number required")
-];
+const phoneRegex = /^\+?[1-9]\d{6,14}$/;
 
-const loginValidator = [
-    body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
-    body("password").notEmpty().withMessage("Password is required")
-];
+const registerSchema = z.object({
+    body: z.object({
+        name: z.string({ required_error: "Name is required" }).trim().min(1, "Name is required"),
+        email: z.string({ required_error: "Valid email is required" }).trim().email("Valid email is required").toLowerCase(),
+        password: z.string({ required_error: "Password is required" })
+            .min(8, "Password must be at least 8 characters")
+            .regex(/\d/, "Password must contain a number")
+            .regex(/[A-Z]/, "Password must contain an uppercase letter"),
+        phone: z.string().trim().regex(phoneRegex, "Valid phone number required").optional().or(z.literal("").transform(() => undefined))
+    })
+});
 
-const changePasswordValidator = [
-    body("currentPassword").notEmpty().withMessage("Current password is required"),
-    body("newPassword")
-        .isLength({ min: 8 }).withMessage("New password must be at least 8 characters")
-        .matches(/\d/).withMessage("Password must contain a number")
-];
+const loginSchema = z.object({
+    body: z.object({
+        email: z.string({ required_error: "Valid email is required" }).trim().email("Valid email is required").toLowerCase(),
+        password: z.string({ required_error: "Password is required" }).min(1, "Password is required")
+    })
+});
 
-module.exports = { registerValidator, loginValidator, changePasswordValidator };
+const updateProfileSchema = z.object({
+    body: z.object({
+        name: z.string().trim().min(1, "Name cannot be empty").optional(),
+        phone: z.string().trim().regex(phoneRegex, "Valid phone number required").optional().or(z.literal("").transform(() => undefined))
+    })
+});
+
+const changePasswordSchema = z.object({
+    body: z.object({
+        currentPassword: z.string({ required_error: "Current password is required" }).min(1, "Current password is required"),
+        newPassword: z.string({ required_error: "New password is required" })
+            .min(8, "New password must be at least 8 characters")
+            .regex(/\d/, "Password must contain a number")
+            .regex(/[A-Z]/, "Password must contain an uppercase letter")
+    })
+});
+
+module.exports = { registerSchema, loginSchema, updateProfileSchema, changePasswordSchema };
 ```
 
 ---
