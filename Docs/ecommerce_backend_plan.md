@@ -37,13 +37,14 @@ Build a production-ready REST API backend for a full-featured e-commerce platfor
 
 ---
 
-## Open Questions
+## Resolved Architecture Decisions (Grill-Me Alignment)
 
-> [!IMPORTANT]
-> **Email Verification**: Should user registration require email verification (via Nodemailer/SendGrid), or is direct registration acceptable for now?
-
-> [!IMPORTANT]
-> **Forgot Password**: Do you want a password reset flow (forgot password → email link → reset), or just a "change password" endpoint for logged-in users?
+1. **Authentication Strategy:** Direct registration without email verification blocker; authenticated `PUT /api/auth/change-password` endpoint.
+2. **Media Storage:** Dual-layer upload pipeline with Cloudinary support and automated local disk fallback (`/uploads`) for zero-friction development.
+3. **Payment Gateway:** Razorpay integration with mock testing mode fallback + Cash on Delivery (COD) support.
+4. **Checkout & Inventory:** Atomic Prisma `$transaction` that verifies stock, decrements quantity, creates order items, and empties user cart.
+5. **Order Cancellation & Restock:** Users can cancel orders in `PENDING` or `CONFIRMED` state; automatically restocks inventory inside a transaction and flags payment as `REFUNDED`.
+6. **Execution Priority:** Phase 1 targets **Categories & Products CRUD** (slug generation, search, category filter, pagination, image uploads, and admin guards).
 
 ---
 
