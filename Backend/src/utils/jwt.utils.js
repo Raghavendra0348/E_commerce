@@ -1,26 +1,41 @@
 const jwt = require("jsonwebtoken");
+const env = require("../config/env");
 
 /**
- * Generate an access token containing the user's id and role.
- *
- * @param {number} userId
- * @param {string} role - "USER" | "ADMIN"
- * @returns {string} Signed JWT
+ * Generate a short-lived access token containing user ID and role.
  */
 const generateAccessToken = (userId, role) => {
-    return jwt.sign({ userId, role }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN || "1d"
+    return jwt.sign({ userId, role }, env.JWT_SECRET, {
+        expiresIn: env.JWT_EXPIRES_IN || "15m"
     });
 };
 
 /**
- * Verify and decode a JWT.
- *
- * @param {string} token
- * @returns {{ userId: number, role: string, iat: number, exp: number }}
+ * Generate a long-lived refresh token.
  */
-const verifyToken = (token) => {
-    return jwt.verify(token, process.env.JWT_SECRET);
+const generateRefreshToken = (userId) => {
+    return jwt.sign({ userId }, env.JWT_REFRESH_SECRET, {
+        expiresIn: env.JWT_REFRESH_EXPIRES_IN || "7d"
+    });
 };
 
-module.exports = { generateAccessToken, verifyToken };
+/**
+ * Verify and decode an access token.
+ */
+const verifyToken = (token) => {
+    return jwt.verify(token, env.JWT_SECRET);
+};
+
+/**
+ * Verify and decode a refresh token.
+ */
+const verifyRefreshToken = (token) => {
+    return jwt.verify(token, env.JWT_REFRESH_SECRET);
+};
+
+module.exports = {
+    generateAccessToken,
+    generateRefreshToken,
+    verifyToken,
+    verifyRefreshToken
+};

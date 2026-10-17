@@ -59,9 +59,26 @@ const changePasswordSchema = z.object({
     })
 });
 
+const refreshTokenSchema = z.object({
+    body: z.object({
+        refreshToken: z.string({ required_error: "refreshToken is required" })
+            .min(1, "refreshToken cannot be empty")
+    })
+});
+
+const logoutSchema = z.object({
+    body: z.object({
+        refreshToken: z.string({ required_error: "refreshToken is required" })
+            .min(1, "refreshToken cannot be empty")
+    })
+});
+
 module.exports = {
     registerSchema,
     loginSchema,
     updateProfileSchema,
-    changePasswordSchema
+    changePasswordSchema,
+    refreshTokenSchema,
+    logoutSchema
 };
+

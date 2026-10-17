@@ -11,7 +11,9 @@
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
     "db:validate": "prisma validate",
-    "db:format": "prisma format"
+    "db:format": "prisma format",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
@@ -27,9 +29,13 @@
     "multer": "^2.4.0",
     "razorpay": "^2.9.8",
     "slugify": "^1.6.9",
+    "winston": "^3.19.0",
     "zod": "^4.6.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
     "nodemon": "^3.1.14",
     "prisma": "^6.19.3"
   }

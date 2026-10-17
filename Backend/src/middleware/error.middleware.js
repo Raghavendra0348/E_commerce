@@ -1,10 +1,11 @@
 const ApiError = require("../utils/ApiError");
+const logger = require("../config/logger");
 
 /**
  * Global error-handling middleware.
  * Must be registered as the LAST middleware in app.js.
  */
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
     // ── Known operational errors (thrown via ApiError) ──
     if (err instanceof ApiError) {
         return res.status(err.statusCode).json({
@@ -73,11 +74,12 @@ const errorHandler = (err, req, res, next) => {
     }
 
     // ── Fallback for unhandled errors ──
-    console.error("Unhandled Error:", err);
+    logger.error("Unhandled Error: %s", err.stack || err.message, { requestId: req.id });
     return res.status(500).json({
         success: false,
         message: "Internal server error"
     });
+
 };
 
 module.exports = errorHandler;
