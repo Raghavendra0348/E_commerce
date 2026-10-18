@@ -1,0 +1,155 @@
+﻿userEmail,productSlug,rating,comment
+customer07@example.com,data-structures-and-algorithms,5,Works exactly as expected.
+customer08@example.com,data-structures-and-algorithms,5,Works exactly as expected.
+customer01@example.com,data-structures-and-algorithms,4,Useful product with minor room for improvement.
+customer13@example.com,braided-usb-c-cable,4,Solid quality; happy with the purchase.
+customer10@example.com,braided-usb-c-cable,4,Good product overall.
+customer04@example.com,braided-usb-c-cable,4,Useful product with minor room for improvement.
+customer13@example.com,wireless-bluetooth-headphones,3,"It does the job, but expectations were higher."
+customer07@example.com,wireless-bluetooth-headphones,5,Good quality and useful for everyday use.
+customer12@example.com,wireless-bluetooth-headphones,4,Solid quality; happy with the purchase.
+customer10@example.com,usb-c-ethernet-adapter,3,"It does the job, but expectations were higher."
+customer11@example.com,usb-c-ethernet-adapter,3,"It does the job, but expectations were higher."
+customer01@example.com,usb-c-ethernet-adapter,3,"It does the job, but expectations were higher."
+customer06@example.com,table-fan,4,Solid quality; happy with the purchase.
+customer04@example.com,table-fan,5,Works exactly as expected.
+customer13@example.com,cotton-bedsheet-set,4,Good product overall.
+customer14@example.com,cotton-bedsheet-set,4,Useful product with minor room for improvement.
+customer01@example.com,running-shoes,5,Good quality and useful for everyday use.
+customer06@example.com,running-shoes,2,Quality could be better.
+customer04@example.com,running-shoes,5,Excellent value for money.
+customer10@example.com,hard-shell-cabin-trolley,3,Average product for the price.
+customer11@example.com,car-phone-mount,5,Excellent value for money.
+customer02@example.com,car-phone-mount,4,Solid quality; happy with the purchase.
+customer03@example.com,webcam-full-hd,5,Good quality and useful for everyday use.
+customer10@example.com,webcam-full-hd,5,Excellent value for money.
+customer02@example.com,demo-laptop,2,Not quite what I expected.
+customer10@example.com,demo-laptop,5,Works exactly as expected.
+customer12@example.com,android-smartphone-128gb,3,Decent for occasional use.
+customer04@example.com,android-smartphone-128gb,5,Excellent value for money.
+customer12@example.com,bookshelf-4-tier,5,Good quality and useful for everyday use.
+customer13@example.com,silicone-phone-case,5,Excellent value for money.
+customer02@example.com,silicone-phone-case,4,Solid quality; happy with the purchase.
+customer15@example.com,silicone-phone-case,5,Excellent value for money.
+customer11@example.com,usb-podcast-microphone,5,Works exactly as expected.
+customer06@example.com,usb-podcast-microphone,3,"It does the job, but expectations were higher."
+customer01@example.com,usb-podcast-microphone,5,Works exactly as expected.
+customer03@example.com,adjustable-dumbbell-pair,5,Good quality and useful for everyday use.
+customer07@example.com,adjustable-dumbbell-pair,4,Useful product with minor room for improvement.
+customer15@example.com,adjustable-dumbbell-pair,5,Works exactly as expected.
+customer14@example.com,the-illustrated-science-book,5,Works exactly as expected.
+customer12@example.com,the-illustrated-science-book,5,Excellent value for money.
+customer15@example.com,daily-face-cleanser,4,Solid quality; happy with the purchase.
+customer08@example.com,daily-face-cleanser,5,Good quality and useful for everyday use.
+customer06@example.com,hair-dryer-compact,4,Solid quality; happy with the purchase.
+customer01@example.com,hair-dryer-compact,3,Average product for the price.
+customer13@example.com,classic-cotton-t-shirt,4,Useful product with minor room for improvement.
+customer05@example.com,classic-cotton-t-shirt,5,Works exactly as expected.
+customer01@example.com,reusable-food-storage-bags,3,Decent for occasional use.
+customer09@example.com,reusable-food-storage-bags,4,Useful product with minor room for improvement.
+customer04@example.com,reusable-food-storage-bags,5,Good quality and useful for everyday use.
+customer11@example.com,gaming-mouse-pad-xl,4,Good product overall.
+customer12@example.com,gaming-mouse-pad-xl,3,Average product for the price.
+customer12@example.com,badminton-racket,4,Useful product with minor room for improvement.
+customer04@example.com,badminton-racket,4,Useful product with minor room for improvement.
+customer06@example.com,electric-kettle-1-5l,5,Works exactly as expected.
+customer07@example.com,electric-kettle-1-5l,5,Works exactly as expected.
+customer12@example.com,electric-kettle-1-5l,4,Good product overall.
+customer12@example.com,educational-puzzle-set,4,Good product overall.
+customer09@example.com,clean-code-study-edition,3,Average product for the price.
+customer13@example.com,clean-code-study-edition,5,Works exactly as expected.
+customer12@example.com,clean-code-study-edition,5,Good quality and useful for everyday use.
+customer05@example.com,airtight-storage-container-set,4,Solid quality; happy with the purchase.
+customer02@example.com,airtight-storage-container-set,3,Average product for the price.
+customer04@example.com,airtight-storage-container-set,5,Excellent value for money.
+customer01@example.com,tyre-pressure-gauge,5,Good quality and useful for everyday use.
+customer15@example.com,tyre-pressure-gauge,5,Good quality and useful for everyday use.
+customer02@example.com,ergonomic-office-chair,1,Did not meet my expectations.
+customer14@example.com,ergonomic-office-chair,4,Solid quality; happy with the purchase.
+customer03@example.com,laptop-stand-aluminium,4,Solid quality; happy with the purchase.
+customer01@example.com,laptop-stand-aluminium,3,Average product for the price.
+customer08@example.com,remote-control-car,5,Good quality and useful for everyday use.
+customer02@example.com,remote-control-car,2,Quality could be better.
+customer05@example.com,javascript-fundamentals,3,"It does the job, but expectations were higher."
+customer02@example.com,javascript-fundamentals,5,Good quality and useful for everyday use.
+customer04@example.com,javascript-fundamentals,4,Useful product with minor room for improvement.
+customer08@example.com,microfiber-cleaning-cloths,4,Useful product with minor room for improvement.
+customer15@example.com,microfiber-cleaning-cloths,5,Works exactly as expected.
+customer10@example.com,tempered-glass-screen-protector,5,Excellent value for money.
+customer01@example.com,tempered-glass-screen-protector,5,Excellent value for money.
+customer15@example.com,tempered-glass-screen-protector,5,Works exactly as expected.
+customer02@example.com,over-ear-studio-headphones,3,Average product for the price.
+customer03@example.com,over-ear-studio-headphones,3,"It does the job, but expectations were higher."
+customer04@example.com,over-ear-studio-headphones,4,Useful product with minor room for improvement.
+customer05@example.com,yoga-mat-6mm,4,Useful product with minor room for improvement.
+customer01@example.com,yoga-mat-6mm,4,Solid quality; happy with the purchase.
+customer11@example.com,desk-organizer,4,Solid quality; happy with the purchase.
+customer10@example.com,car-cleaning-kit,5,Works exactly as expected.
+customer11@example.com,car-cleaning-kit,3,Average product for the price.
+customer13@example.com,car-cleaning-kit,5,Works exactly as expected.
+customer02@example.com,laptop-backpack-15-inch,2,Not quite what I expected.
+customer12@example.com,skipping-rope,5,Works exactly as expected.
+customer14@example.com,skipping-rope,3,Decent for occasional use.
+customer10@example.com,skipping-rope,4,Solid quality; happy with the purchase.
+customer09@example.com,insulated-sports-bottle,4,Good product overall.
+customer15@example.com,insulated-sports-bottle,5,Works exactly as expected.
+customer06@example.com,family-board-game,2,Quality could be better.
+customer10@example.com,family-board-game,5,Good quality and useful for everyday use.
+customer05@example.com,family-board-game,5,Excellent value for money.
+customer14@example.com,smart-led-desk-lamp,2,Quality could be better.
+customer05@example.com,smart-led-desk-lamp,4,Useful product with minor room for improvement.
+customer10@example.com,smart-led-desk-lamp,4,Solid quality; happy with the purchase.
+customer10@example.com,digital-sports-watch,4,Solid quality; happy with the purchase.
+customer08@example.com,gel-pen-set,4,Solid quality; happy with the purchase.
+customer11@example.com,electric-grooming-trimmer,5,Works exactly as expected.
+customer02@example.com,electric-grooming-trimmer,4,Solid quality; happy with the purchase.
+customer11@example.com,regular-fit-jeans,5,Good quality and useful for everyday use.
+customer07@example.com,regular-fit-jeans,2,Quality could be better.
+customer05@example.com,study-desk,3,"It does the job, but expectations were higher."
+customer06@example.com,study-desk,5,Excellent value for money.
+customer14@example.com,moisturizing-lotion,4,Good product overall.
+customer09@example.com,moisturizing-lotion,4,Useful product with minor room for improvement.
+customer08@example.com,moisturizing-lotion,5,Good quality and useful for everyday use.
+customer13@example.com,gaming-headset,4,Useful product with minor room for improvement.
+customer01@example.com,gaming-headset,3,"It does the job, but expectations were higher."
+customer15@example.com,20000mah-power-bank,4,Good product overall.
+customer12@example.com,20000mah-power-bank,5,Good quality and useful for everyday use.
+customer12@example.com,lunch-box-set,3,Decent for occasional use.
+customer09@example.com,nonstick-frying-pan,4,Good product overall.
+customer08@example.com,wireless-mouse,5,Good quality and useful for everyday use.
+customer08@example.com,ddr5-laptop-ram-16gb,5,Works exactly as expected.
+customer12@example.com,wireless-game-controller,5,Works exactly as expected.
+customer05@example.com,wireless-game-controller,4,Useful product with minor room for improvement.
+customer07@example.com,wireless-game-controller,3,Average product for the price.
+customer09@example.com,stainless-steel-water-bottle,5,Works exactly as expected.
+customer12@example.com,stainless-steel-water-bottle,5,Works exactly as expected.
+customer03@example.com,stainless-steel-water-bottle,4,Useful product with minor room for improvement.
+customer14@example.com,wired-in-ear-earphones,4,Solid quality; happy with the purchase.
+customer01@example.com,wired-in-ear-earphones,5,Good quality and useful for everyday use.
+customer08@example.com,laundry-storage-basket,4,Solid quality; happy with the purchase.
+customer14@example.com,laundry-storage-basket,4,Useful product with minor room for improvement.
+customer03@example.com,laundry-storage-basket,5,Works exactly as expected.
+customer15@example.com,fitness-band,5,Good quality and useful for everyday use.
+customer06@example.com,fitness-band,4,Solid quality; happy with the purchase.
+customer14@example.com,productivity-journal,5,Excellent value for money.
+customer12@example.com,mixer-grinder,5,Works exactly as expected.
+customer08@example.com,mixer-grinder,4,Useful product with minor room for improvement.
+customer03@example.com,laptop-sleeve-15-inch,3,Decent for occasional use.
+customer08@example.com,laptop-sleeve-15-inch,4,Good product overall.
+customer01@example.com,laptop-sleeve-15-inch,5,Works exactly as expected.
+customer09@example.com,travel-duffel-bag,5,Excellent value for money.
+customer03@example.com,smart-watch,5,Excellent value for money.
+customer07@example.com,smart-watch,4,Solid quality; happy with the purchase.
+customer11@example.com,smart-watch,4,Useful product with minor room for improvement.
+customer11@example.com,usb-c-fast-charger,5,Good quality and useful for everyday use.
+customer02@example.com,usb-c-fast-charger,5,Works exactly as expected.
+customer11@example.com,a5-notebook-pack,5,Works exactly as expected.
+customer12@example.com,a5-notebook-pack,5,Excellent value for money.
+customer02@example.com,nvme-ssd-1tb,5,Works exactly as expected.
+customer04@example.com,nvme-ssd-1tb,5,Good quality and useful for everyday use.
+customer11@example.com,nvme-ssd-1tb,3,Average product for the price.
+customer12@example.com,mechanical-keyboard,4,Useful product with minor room for improvement.
+customer14@example.com,mechanical-keyboard,4,Good product overall.
+customer02@example.com,mechanical-keyboard,2,Quality could be better.
+customer06@example.com,ceramic-coffee-mug-set,4,Good product overall.
+customer15@example.com,ceramic-coffee-mug-set,4,Useful product with minor room for improvement.

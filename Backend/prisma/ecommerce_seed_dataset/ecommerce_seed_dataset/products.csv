@@ -1,0 +1,79 @@
+﻿slug,name,description,price,stock,categorySlug
+wireless-bluetooth-headphones,Wireless Bluetooth Headphones,Premium wireless headphones with clear sound and comfortable ear cushions,4160.08,0,electronics
+portable-bluetooth-speaker,Portable Bluetooth Speaker,Compact portable speaker for music at home or outdoors,3146.12,7,electronics
+20000mah-power-bank,20000mAh Power Bank,High-capacity portable charging bank with USB output,1333.82,2,electronics
+usb-c-fast-charger,USB-C Fast Charger,Compact fast charger for compatible USB-C devices,1143.37,60,electronics
+smart-led-desk-lamp,Smart LED Desk Lamp,Adjustable LED desk lamp with multiple brightness levels,764.18,25,electronics
+usb-c-hub-7-in-1,USB-C Hub 7-in-1,Multiport USB-C hub for laptops and tablets,1384.81,2,electronics
+webcam-full-hd,Webcam Full HD,Full HD webcam for meetings and online classes,1358.14,60,electronics
+wireless-mouse,Wireless Mouse,Ergonomic wireless mouse for everyday computing,1021.42,60,electronics
+everyday-laptop-15-demo,Everyday Laptop 15,"Portable laptop for productivity, study and everyday computing",49940.88,60,computers-accessories
+mechanical-keyboard,Mechanical Keyboard,Mechanical keyboard with tactile keys for work and gaming,3386.84,40,computers-accessories
+laptop-stand-aluminium,Laptop Stand Aluminium,Adjustable laptop stand for a more comfortable desk setup,1800.75,0,computers-accessories
+nvme-ssd-1tb,NVMe SSD 1TB,High-speed 1TB NVMe solid-state storage drive,9551.84,4,computers-accessories
+ddr5-laptop-ram-16gb,DDR5 Laptop RAM 16GB,16GB DDR5 memory module for compatible laptops,4942.49,18,computers-accessories
+usb-c-ethernet-adapter,USB-C Ethernet Adapter,Compact Ethernet adapter for compatible USB-C devices,776.87,7,computers-accessories
+laptop-sleeve-15-inch,Laptop Sleeve 15-inch,Protective padded sleeve for laptops up to 15 inches,1260.49,18,computers-accessories
+android-smartphone-128gb,Android Smartphone 128GB,Unlocked Android smartphone with 128GB storage,14860.89,25,mobiles-accessories
+tempered-glass-screen-protector,Tempered Glass Screen Protector,Screen protector designed for compatible smartphones,182.85,18,mobiles-accessories
+silicone-phone-case,Silicone Phone Case,Flexible protective case for everyday use,561.24,0,mobiles-accessories
+braided-usb-c-cable,Braided USB-C Cable,Durable USB-C charging and data cable,550.35,60,mobiles-accessories
+wireless-charging-stand,Wireless Charging Stand,Desk stand for compatible wireless-charging devices,1248.65,25,mobiles-accessories
+classic-cotton-t-shirt,Classic Cotton T-Shirt,Soft cotton crew-neck T-shirt for everyday wear,354.16,12,fashion
+regular-fit-jeans,Regular Fit Jeans,Classic denim jeans with a regular fit,2226.05,100,fashion
+running-shoes,Running Shoes,"Lightweight shoes for walking, running and daily use",4575.17,18,fashion
+analog-wrist-watch,Analog Wrist Watch,Minimal analog watch with a comfortable strap,2646.53,2,fashion
+everyday-backpack,Everyday Backpack,"Roomy backpack for college, commuting and travel",781.48,7,fashion
+stainless-steel-water-bottle,Stainless Steel Water Bottle,Reusable insulated bottle for daily hydration,994.76,2,home-kitchen
+nonstick-frying-pan,Nonstick Frying Pan,Everyday nonstick frying pan with ergonomic handle,1610.91,2,home-kitchen
+airtight-storage-container-set,Airtight Storage Container Set,Reusable containers for pantry and kitchen organization,817.14,40,home-kitchen
+cotton-bedsheet-set,Cotton Bedsheet Set,Comfortable bedsheet set for everyday use,1879.66,18,home-kitchen
+ceramic-coffee-mug-set,Ceramic Coffee Mug Set,Reusable ceramic mugs for tea and coffee,412.86,18,home-kitchen
+javascript-fundamentals,JavaScript Fundamentals,Beginner-friendly guide to modern JavaScript programming,503.75,12,books
+data-structures-and-algorithms,Data Structures and Algorithms,Practice-oriented guide to core data structures and algorithms,1060.46,2,books
+clean-code-study-edition,Clean Code Study Edition,A software craftsmanship reference for developers,1147.22,4,books
+the-illustrated-science-book,The Illustrated Science Book,Accessible illustrated introduction to science concepts,566.07,7,books
+productivity-journal,Productivity Journal,"Undated journal for planning, notes and daily reflection",264.36,25,books
+daily-face-cleanser,Daily Face Cleanser,Gentle everyday facial cleanser,333.97,60,beauty-personal-care
+moisturizing-lotion,Moisturizing Lotion,Lightweight moisturizer for daily skin care,391.75,18,beauty-personal-care
+electric-grooming-trimmer,Electric Grooming Trimmer,Rechargeable trimmer for personal grooming,2668.99,0,beauty-personal-care
+hair-dryer-compact,Hair Dryer Compact,Compact hair dryer for home use,1188.38,0,beauty-personal-care
+badminton-racket,Badminton Racket,Lightweight racket for recreational badminton,2550.61,25,sports-fitness
+yoga-mat-6mm,Yoga Mat 6mm,Non-slip exercise mat for yoga and stretching,766.74,7,sports-fitness
+insulated-sports-bottle,Insulated Sports Bottle,Reusable bottle for workouts and outdoor activities,938.20,100,sports-fitness
+adjustable-dumbbell-pair,Adjustable Dumbbell Pair,Home workout dumbbells with adjustable weight,5504.47,18,sports-fitness
+skipping-rope,Skipping Rope,Adjustable skipping rope for cardio workouts,244.68,40,sports-fitness
+building-blocks-set,Building Blocks Set,Creative construction blocks for supervised play,1092.45,40,toys-games
+family-board-game,Family Board Game,Easy-to-learn board game for family game nights,556.16,4,toys-games
+educational-puzzle-set,Educational Puzzle Set,Puzzle set designed for problem-solving practice,471.64,60,toys-games
+remote-control-car,Remote Control Car,Rechargeable remote control toy car,1715.26,100,toys-games
+reusable-food-storage-bags,Reusable Food Storage Bags,Washable reusable bags for kitchen storage,370.37,100,grocery-essentials
+microfiber-cleaning-cloths,Microfiber Cleaning Cloths,Multi-purpose cloths for household cleaning,288.79,7,grocery-essentials
+lunch-box-set,Lunch Box Set,Reusable lunch containers for school and office,997.13,4,grocery-essentials
+laundry-storage-basket,Laundry Storage Basket,Lightweight basket for laundry organization,857.57,2,grocery-essentials
+electric-kettle-1-5l,Electric Kettle 1.5L,Electric kettle for boiling water at home or office,1705.94,2,home-appliances
+mixer-grinder,Mixer Grinder,Kitchen mixer grinder for everyday food preparation,2457.52,4,home-appliances
+table-fan,Table Fan,Compact table fan for personal cooling,2624.74,25,home-appliances
+air-fryer-4l,Air Fryer 4L,Countertop air fryer for convenient cooking,5981.05,25,home-appliances
+ergonomic-office-chair,Ergonomic Office Chair,Adjustable office chair for study and work,8815.19,40,furniture
+study-desk,Study Desk,Compact desk for home study and computer work,6173.69,60,furniture
+bookshelf-4-tier,Bookshelf 4 Tier,Space-saving shelf for books and home storage,4511.73,0,furniture
+car-phone-mount,Car Phone Mount,Adjustable mount for compatible smartphones,775.20,2,automotive
+tyre-pressure-gauge,Tyre Pressure Gauge,Portable gauge for checking vehicle tyre pressure,608.03,60,automotive
+car-cleaning-kit,Car Cleaning Kit,Basic kit for cleaning vehicle interiors and surfaces,1249.88,18,automotive
+a5-notebook-pack,A5 Notebook Pack,"Pack of notebooks for class, office and planning",243.62,25,office-products
+gel-pen-set,Gel Pen Set,Smooth-writing pens for everyday notes,146.45,0,office-products
+desk-organizer,Desk Organizer,Organizer for stationery and desk accessories,868.98,12,office-products
+travel-duffel-bag,Travel Duffel Bag,Lightweight duffel bag for short trips and gym use,2939.97,4,bags-luggage
+hard-shell-cabin-trolley,Hard Shell Cabin Trolley,Cabin-size trolley suitcase for travel,4783.57,2,bags-luggage
+laptop-backpack-15-inch,Laptop Backpack 15-inch,Padded backpack with a laptop compartment,3175.30,12,bags-luggage
+wired-in-ear-earphones,Wired In-Ear Earphones,Wired earphones with inline microphone,872.34,60,audio
+usb-podcast-microphone,USB Podcast Microphone,"USB microphone for calls, streaming and recording",3630.40,4,audio
+over-ear-studio-headphones,Over-Ear Studio Headphones,Over-ear headphones for listening and home studio use,3868.57,4,audio
+wireless-game-controller,Wireless Game Controller,Wireless controller for compatible gaming devices,3386.83,60,gaming
+gaming-mouse-pad-xl,Gaming Mouse Pad XL,Extended desk mat for mouse and keyboard,1409.34,100,gaming
+gaming-headset,Gaming Headset,Over-ear headset with microphone for gaming,1971.47,0,gaming
+fitness-band,Fitness Band,Activity band for steps and everyday fitness tracking,1890.54,18,wearables
+smart-watch,Smart Watch,Smart watch with notifications and activity features,9089.41,12,wearables
+digital-sports-watch,Digital Sports Watch,Lightweight digital watch for everyday use,858.18,7,wearables
+demo-laptop,Demo Laptop,A demo laptop for our e-commerce platform,75000.00,10,laptops

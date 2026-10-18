@@ -36,13 +36,17 @@ const getProducts = async (query) => {
         where.stock = { gt: 0 };
     }
 
+    const sortField = ["price", "createdAt", "name"].includes(query.sort) ? query.sort : "createdAt";
+    const sortDirection = query.order === "asc" ? "asc" : "desc";
+    const orderBy = { [sortField]: sortDirection };
+
     const [total, products] = await Promise.all([
         prisma.product.count({ where }),
         prisma.product.findMany({
             where,
             skip,
             take: limit,
-            orderBy: { createdAt: "desc" },
+            orderBy,
             include: {
                 category: { select: { id: true, name: true, slug: true } },
                 images: { select: { id: true, url: true, altText: true } }

@@ -1,0 +1,11 @@
+﻿userEmail,name,phone,address,city,state,postalCode,country
+customer01@example.com,Demo Customer 01,9000000001,"Demo Street 1, Sample Apartment",Tirupati,Andhra Pradesh,517501,India
+customer02@example.com,Demo Customer 02,9000000002,"Demo Street 2, Sample Apartment",Vijayawada,Andhra Pradesh,520001,India
+customer03@example.com,Demo Customer 03,9000000003,"Demo Street 3, Sample Apartment",Visakhapatnam,Andhra Pradesh,530001,India
+customer04@example.com,Demo Customer 04,9000000004,"Demo Street 4, Sample Apartment",Hyderabad,Telangana,500001,India
+customer05@example.com,Demo Customer 05,9000000005,"Demo Street 5, Sample Apartment",Bengaluru,Karnataka,560001,India
+customer06@example.com,Demo Customer 06,9000000006,"Demo Street 6, Sample Apartment",Chennai,Tamil Nadu,600001,India
+customer07@example.com,Demo Customer 07,9000000007,"Demo Street 7, Sample Apartment",Mysuru,Karnataka,570001,India
+customer08@example.com,Demo Customer 08,9000000008,"Demo Street 8, Sample Apartment",Pune,Maharashtra,411001,India
+customer09@example.com,Demo Customer 09,9000000009,"Demo Street 9, Sample Apartment",Mumbai,Maharashtra,400001,India
+customer10@example.com,Demo Customer 10,9000000010,"Demo Street 10, Sample Apartment",Kochi,Kerala,682001,India

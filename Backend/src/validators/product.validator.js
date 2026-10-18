@@ -107,7 +107,15 @@ const productQuerySchema = z.object({
             }),
         inStock: z
             .enum(["true", "false"])
+            .optional(),
+        sort: z
+            .enum(["price", "createdAt", "name"])
             .optional()
+            .default("createdAt"),
+        order: z
+            .enum(["asc", "desc"])
+            .optional()
+            .default("desc")
     })
 });
 

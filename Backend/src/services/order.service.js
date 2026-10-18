@@ -5,7 +5,7 @@ const ApiError = require("../utils/ApiError");
  * Place a new order from the user's current cart.
  * Atomic transaction: validate stock → create order → deduct stock → clear cart.
  */
-const placeOrder = async (userId, addressId) => {
+const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
     const address = await prisma.address.findFirst({ where: { id: addressId, userId } });
     if (!address) throw ApiError.notFound("Address not found");
 
@@ -29,22 +29,38 @@ const placeOrder = async (userId, addressId) => {
         (sum, item) => sum + parseFloat(item.product.price) * item.quantity, 0
     );
 
+    const isCod = paymentMethod === "COD";
+
     return prisma.$transaction(async (tx) => {
         // Create order with items (price snapshot)
         const order = await tx.order.create({
             data: {
                 userId,
                 totalAmount,
+                status: isCod ? "CONFIRMED" : "PENDING",
+                paymentStatus: "PENDING",
                 items: {
                     create: cart.items.map((item) => ({
                         productId: item.productId,
                         quantity:  item.quantity,
                         price:     item.product.price
                     }))
-                }
+                },
+                ...(isCod
+                    ? {
+                        payment: {
+                            create: {
+                                amount: totalAmount,
+                                status: "PENDING",
+                                provider: "COD"
+                            }
+                        }
+                    }
+                    : {})
             },
             include: {
-                items: { include: { product: { select: { id: true, name: true, slug: true } } } }
+                items: { include: { product: { select: { id: true, name: true, slug: true } } } },
+                payment: true
             }
         });
 
@@ -113,7 +129,7 @@ const getOrderById = async (userId, orderId) => {
 const cancelOrder = async (userId, orderId) => {
     const order = await prisma.order.findFirst({
         where: { id: orderId, userId },
-        include: { items: true }
+        include: { items: true, payment: true }
     });
     if (!order) throw ApiError.notFound("Order not found");
     if (!["PENDING", "CONFIRMED"].includes(order.status)) {
@@ -121,7 +137,23 @@ const cancelOrder = async (userId, orderId) => {
     }
 
     await prisma.$transaction(async (tx) => {
-        await tx.order.update({ where: { id: orderId }, data: { status: "CANCELLED" } });
+        const isPaid = order.paymentStatus === "PAID" || order.payment?.status === "PAID";
+
+        await tx.order.update({
+            where: { id: orderId },
+            data: {
+                status: "CANCELLED",
+                ...(isPaid ? { paymentStatus: "REFUNDED" } : {})
+            }
+        });
+
+        if (isPaid && order.payment) {
+            await tx.payment.update({
+                where: { id: order.payment.id },
+                data: { status: "REFUNDED" }
+            });
+        }
+
         for (const item of order.items) {
             await tx.product.update({
                 where: { id: item.productId },

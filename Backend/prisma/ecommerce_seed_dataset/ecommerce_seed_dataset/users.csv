@@ -1,0 +1,17 @@
+﻿email,name,password,phone,role
+admin@example.com,Demo Store Admin,ChangeMe_Admin123!,9000000001,ADMIN
+customer01@example.com,Demo Customer 01,ChangeMe_User123!,9000000001,USER
+customer02@example.com,Demo Customer 02,ChangeMe_User123!,9000000002,USER
+customer03@example.com,Demo Customer 03,ChangeMe_User123!,9000000003,USER
+customer04@example.com,Demo Customer 04,ChangeMe_User123!,9000000004,USER
+customer05@example.com,Demo Customer 05,ChangeMe_User123!,9000000005,USER
+customer06@example.com,Demo Customer 06,ChangeMe_User123!,9000000006,USER
+customer07@example.com,Demo Customer 07,ChangeMe_User123!,9000000007,USER
+customer08@example.com,Demo Customer 08,ChangeMe_User123!,9000000008,USER
+customer09@example.com,Demo Customer 09,ChangeMe_User123!,9000000009,USER
+customer10@example.com,Demo Customer 10,ChangeMe_User123!,9000000010,USER
+customer11@example.com,Demo Customer 11,ChangeMe_User123!,9000000011,USER
+customer12@example.com,Demo Customer 12,ChangeMe_User123!,9000000012,USER
+customer13@example.com,Demo Customer 13,ChangeMe_User123!,9000000013,USER
+customer14@example.com,Demo Customer 14,ChangeMe_User123!,9000000014,USER
+customer15@example.com,Demo Customer 15,ChangeMe_User123!,9000000015,USER

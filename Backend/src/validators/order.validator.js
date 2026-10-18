@@ -2,7 +2,8 @@ const { z } = require("zod");
 
 const placeOrderSchema = z.object({
     body: z.object({
-        addressId: z.number({ required_error: "addressId is required" }).int().positive()
+        addressId: z.number({ required_error: "addressId is required" }).int().positive(),
+        paymentMethod: z.enum(["ONLINE", "COD"]).optional().default("ONLINE")
     })
 });
 

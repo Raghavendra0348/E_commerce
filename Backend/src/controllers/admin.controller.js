@@ -23,6 +23,14 @@ const updateUserRole = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
+const getUserDetails = async (req, res, next) => {
+    try {
+        const id   = parseInt(req.params.id, 10);
+        const user = await adminService.getUserDetails(id);
+        return success(res, 200, "User details fetched successfully", user);
+    } catch (error) { next(error); }
+};
+
 const getLowStockProducts = async (req, res, next) => {
     try {
         const products = await adminService.getLowStockProducts(req.query);
@@ -30,4 +38,10 @@ const getLowStockProducts = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
-module.exports = { getDashboardStats, getAllUsers, updateUserRole, getLowStockProducts };
+module.exports = {
+    getDashboardStats,
+    getAllUsers,
+    getUserDetails,
+    updateUserRole,
+    getLowStockProducts
+};

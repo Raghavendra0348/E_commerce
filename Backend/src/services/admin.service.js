@@ -66,6 +66,41 @@ const updateUserRole = async (targetId, role) => {
 };
 
 /**
+ * Single user details including addresses and recent orders.
+ */
+const getUserDetails = async (userId) => {
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            role: true,
+            createdAt: true,
+            addresses: true,
+            orders: {
+                orderBy: { createdAt: "desc" },
+                take: 10,
+                include: {
+                    payment: true,
+                    items: {
+                        include: {
+                            product: {
+                                select: { id: true, name: true, slug: true }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    if (!user) throw ApiError.notFound("User not found");
+    return user;
+};
+
+/**
  * Products with stock below a given threshold (default: 10).
  */
 const getLowStockProducts = async (query = {}) => {
@@ -80,4 +115,10 @@ const getLowStockProducts = async (query = {}) => {
     });
 };
 
-module.exports = { getDashboardStats, getAllUsers, updateUserRole, getLowStockProducts };
+module.exports = {
+    getDashboardStats,
+    getAllUsers,
+    getUserDetails,
+    updateUserRole,
+    getLowStockProducts
+};
