@@ -25,7 +25,9 @@ enum PaymentStatus {
   PENDING
   PAID
   FAILED
-  REFUNDED
+  REFUND_PENDING  // Refund requested, awaiting gateway confirmation
+  REFUND_FAILED   // Gateway refund attempt failed — requires manual review
+  REFUNDED        // Gateway confirmed refund complete
 }
 
 model User {
@@ -130,13 +132,14 @@ model Address {
 }
 
 model Order {
-  id            Int           @id @default(autoincrement())
-  userId        Int
-  totalAmount   Decimal       @db.Decimal(10, 2)
-  status        OrderStatus   @default(PENDING)
-  paymentStatus PaymentStatus @default(PENDING)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id              Int           @id @default(autoincrement())
+  userId          Int
+  totalAmount     Decimal       @db.Decimal(10, 2)
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(PENDING)
+  shippingAddress Json?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
   user    User        @relation(fields: [userId], references: [id])
   items   OrderItem[]

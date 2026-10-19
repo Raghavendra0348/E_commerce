@@ -6,6 +6,7 @@ const authenticate = require("../middleware/auth.middleware");
 const authorizeAdmin = require("../middleware/admin.middleware");
 const validate = require("../middleware/validate.middleware");
 const upload = require("../middleware/upload.middleware");
+const { validateImageSignatures } = require("../middleware/upload.middleware");
 const {
     createProductSchema,
     updateProductSchema,
@@ -32,6 +33,7 @@ router.post(
     authenticate,
     authorizeAdmin,
     upload.array("images", 5),
+    validateImageSignatures,
     validate(createProductSchema),
     productController.createProduct
 );
@@ -52,6 +54,7 @@ router.post(
     authorizeAdmin,
     validate(productIdSchema),
     upload.array("images", 5),
+    validateImageSignatures,
     productController.addProductImages
 );
 

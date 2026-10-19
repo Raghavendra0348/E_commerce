@@ -1,13 +1,37 @@
 const prisma = require("../config/database");
 const ApiError = require("../utils/ApiError");
 
+const ALLOWED_ORDER_TRANSITIONS = {
+    PENDING: ["CONFIRMED", "CANCELLED"],
+    CONFIRMED: ["PROCESSING", "CANCELLED"],
+    PROCESSING: ["SHIPPED", "CANCELLED"],
+    SHIPPED: ["DELIVERED"],
+    DELIVERED: [],
+    CANCELLED: []
+};
+
 /**
  * Place a new order from the user's current cart.
- * Atomic transaction: validate stock → create order → deduct stock → clear cart.
+ * Concurrency-safe atomic transaction:
+ * 1. Resolves address snapshot.
+ * 2. Conditionally decrements stock (WHERE stock >= quantity) to prevent overselling.
+ * 3. Creates order with price snapshot and address snapshot.
+ * 4. Clears user cart.
  */
 const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
     const address = await prisma.address.findFirst({ where: { id: addressId, userId } });
     if (!address) throw ApiError.notFound("Address not found");
+
+    const shippingAddressSnapshot = {
+        addressId: address.id,
+        name: address.name,
+        phone: address.phone,
+        address: address.address,
+        city: address.city,
+        state: address.state,
+        postalCode: address.postalCode,
+        country: address.country
+    };
 
     const cart = await prisma.cart.findUnique({
         where: { userId },
@@ -16,7 +40,7 @@ const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
 
     if (!cart || cart.items.length === 0) throw ApiError.badRequest("Your cart is empty");
 
-    // Validate stock
+    // Preliminary check for fast-failure UX
     for (const item of cart.items) {
         if (item.product.stock < item.quantity) {
             throw ApiError.badRequest(
@@ -25,20 +49,42 @@ const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
         }
     }
 
-    const totalAmount = cart.items.reduce(
-        (sum, item) => sum + parseFloat(item.product.price) * item.quantity, 0
+    const totalAmount = Number(
+        cart.items.reduce(
+            (sum, item) => sum + (Number(item.product.price) * item.quantity), 0
+        ).toFixed(2)
     );
 
     const isCod = paymentMethod === "COD";
 
     return prisma.$transaction(async (tx) => {
-        // Create order with items (price snapshot)
+        // Concurrency-safe atomic inventory reservation
+        for (const item of cart.items) {
+            const updateResult = await tx.product.updateMany({
+                where: {
+                    id: item.productId,
+                    stock: { gte: item.quantity }
+                },
+                data: {
+                    stock: { decrement: item.quantity }
+                }
+            });
+
+            if (updateResult.count === 0) {
+                throw ApiError.badRequest(
+                    `Insufficient stock for "${item.product.name}". Item was just claimed by another order.`
+                );
+            }
+        }
+
+        // Create order with price & shipping address snapshots
         const order = await tx.order.create({
             data: {
                 userId,
                 totalAmount,
                 status: isCod ? "CONFIRMED" : "PENDING",
                 paymentStatus: "PENDING",
+                shippingAddress: shippingAddressSnapshot,
                 items: {
                     create: cart.items.map((item) => ({
                         productId: item.productId,
@@ -64,14 +110,6 @@ const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
             }
         });
 
-        // Deduct stock
-        for (const item of cart.items) {
-            await tx.product.update({
-                where: { id: item.productId },
-                data:  { stock: { decrement: item.quantity } }
-            });
-        }
-
         // Clear cart
         await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
 
@@ -83,8 +121,8 @@ const placeOrder = async (userId, addressId, paymentMethod = "ONLINE") => {
  * Paginated order history for a user.
  */
 const getUserOrders = async (userId, query = {}) => {
-    const page  = parseInt(query.page, 10)  || 1;
-    const limit = parseInt(query.limit, 10) || 10;
+    const page  = Math.max(1, parseInt(query.page, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(query.limit, 10) || 10));
     const skip  = (page - 1) * limit;
 
     const [total, orders] = await Promise.all([
@@ -124,7 +162,7 @@ const getOrderById = async (userId, orderId) => {
 };
 
 /**
- * Cancel order — only PENDING or CONFIRMED, rolls back stock.
+ * Cancel order — only PENDING or CONFIRMED, rolls back stock atomically.
  */
 const cancelOrder = async (userId, orderId) => {
     const order = await prisma.order.findFirst({
@@ -132,6 +170,9 @@ const cancelOrder = async (userId, orderId) => {
         include: { items: true, payment: true }
     });
     if (!order) throw ApiError.notFound("Order not found");
+    if (order.status === "CANCELLED") {
+        throw ApiError.badRequest("Order is already cancelled");
+    }
     if (!["PENDING", "CONFIRMED"].includes(order.status)) {
         throw ApiError.badRequest(`Cannot cancel an order with status "${order.status}"`);
     }
@@ -143,14 +184,16 @@ const cancelOrder = async (userId, orderId) => {
             where: { id: orderId },
             data: {
                 status: "CANCELLED",
-                ...(isPaid ? { paymentStatus: "REFUNDED" } : {})
+                // Mark refund as pending — the actual Razorpay refund is initiated
+                // by paymentService.initiateRefund and confirmed via webhook.
+                ...(isPaid ? { paymentStatus: "REFUND_PENDING" } : {})
             }
         });
 
         if (isPaid && order.payment) {
             await tx.payment.update({
                 where: { id: order.payment.id },
-                data: { status: "REFUNDED" }
+                data: { status: "REFUND_PENDING" }
             });
         }
 
@@ -161,13 +204,15 @@ const cancelOrder = async (userId, orderId) => {
             });
         }
     });
+
+    return order;
 };
 
 // ── Admin ─────────────────────────────────────────────────────────────────────
 
 const getAllOrders = async (query = {}) => {
-    const page  = parseInt(query.page, 10)  || 1;
-    const limit = parseInt(query.limit, 10) || 20;
+    const page  = Math.max(1, parseInt(query.page, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(query.limit, 10) || 20));
     const skip  = (page - 1) * limit;
     const where = {};
     if (query.status) where.status = query.status;
@@ -186,10 +231,52 @@ const getAllOrders = async (query = {}) => {
     return { orders, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } };
 };
 
-const updateOrderStatus = async (orderId, status) => {
-    const order = await prisma.order.findUnique({ where: { id: orderId } });
+const updateOrderStatus = async (orderId, nextStatus) => {
+    const order = await prisma.order.findUnique({
+        where: { id: orderId },
+        include: { items: true, payment: true }
+    });
     if (!order) throw ApiError.notFound("Order not found");
-    return prisma.order.update({ where: { id: orderId }, data: { status } });
+
+    if (order.status === nextStatus) return order;
+
+    const allowed = ALLOWED_ORDER_TRANSITIONS[order.status] || [];
+    if (!allowed.includes(nextStatus)) {
+        throw ApiError.badRequest(`Invalid order status transition from "${order.status}" to "${nextStatus}"`);
+    }
+
+    if (nextStatus === "CANCELLED") {
+        return prisma.$transaction(async (tx) => {
+            const isPaid = order.paymentStatus === "PAID" || order.payment?.status === "PAID";
+            const updated = await tx.order.update({
+                where: { id: orderId },
+                data: {
+                    status: "CANCELLED",
+                    // Mark refund as pending — actual refund is initiated separately
+                    // by paymentService.initiateRefund and confirmed via webhook.
+                    ...(isPaid ? { paymentStatus: "REFUND_PENDING" } : {})
+                }
+            });
+
+            if (isPaid && order.payment) {
+                await tx.payment.update({
+                    where: { id: order.payment.id },
+                    data: { status: "REFUND_PENDING" }
+                });
+            }
+
+            for (const item of order.items) {
+                await tx.product.update({
+                    where: { id: item.productId },
+                    data: { stock: { increment: item.quantity } }
+                });
+            }
+
+            return updated;
+        });
+    }
+
+    return prisma.order.update({ where: { id: orderId }, data: { status: nextStatus } });
 };
 
 module.exports = { placeOrder, getUserOrders, getOrderById, cancelOrder, getAllOrders, updateOrderStatus };

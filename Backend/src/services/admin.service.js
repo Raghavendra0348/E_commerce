@@ -37,8 +37,8 @@ const getDashboardStats = async () => {
  * List all users with pagination.
  */
 const getAllUsers = async (query = {}) => {
-    const page  = parseInt(query.page, 10)  || 1;
-    const limit = parseInt(query.limit, 10) || 20;
+    const page  = Math.max(1, parseInt(query.page, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(query.limit, 10) || 20));
     const skip  = (page - 1) * limit;
 
     const [total, users] = await Promise.all([
@@ -54,10 +54,19 @@ const getAllUsers = async (query = {}) => {
 
 /**
  * Promote or demote a user's role (USER <-> ADMIN).
+ * Safeguard: Cannot demote the last remaining administrator.
  */
 const updateUserRole = async (targetId, role) => {
     const user = await prisma.user.findUnique({ where: { id: targetId } });
     if (!user) throw ApiError.notFound("User not found");
+
+    if (user.role === "ADMIN" && role === "USER") {
+        const adminCount = await prisma.user.count({ where: { role: "ADMIN" } });
+        if (adminCount <= 1) {
+            throw ApiError.badRequest("Cannot demote the last remaining administrator");
+        }
+    }
+
     return prisma.user.update({
         where:  { id: targetId },
         data:   { role },

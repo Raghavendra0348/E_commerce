@@ -18,5 +18,20 @@ module.exports = [
             "no-console": "off",
             "eqeqeq": ["error", "always"]
         }
+    },
+    {
+        files: ["tests/**/*.js"],
+        languageOptions: {
+            globals: {
+                describe: "readonly",
+                it: "readonly",
+                expect: "readonly",
+                beforeAll: "readonly",
+                afterAll: "readonly",
+                beforeEach: "readonly",
+                afterEach: "readonly",
+                vi: "readonly"
+            }
+        }
     }
 ];

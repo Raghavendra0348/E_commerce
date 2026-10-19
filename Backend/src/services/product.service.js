@@ -260,11 +260,17 @@ const deleteProductImage = async (productId, imageId) => {
 const deleteProduct = async (id) => {
     const product = await prisma.product.findUnique({
         where: { id },
-        include: { images: true }
+        include: { images: true, orderItems: { take: 1 } }
     });
 
     if (!product) {
         throw ApiError.notFound("Product not found");
+    }
+
+    if (product.orderItems && product.orderItems.length > 0) {
+        throw ApiError.badRequest(
+            "Cannot delete product because it is linked to past customer orders. Set stock to 0 to retire it instead."
+        );
     }
 
     // Delete images from Cloudinary / local in parallel

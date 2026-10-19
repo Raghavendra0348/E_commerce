@@ -24,6 +24,7 @@ const wishlistRoutes = require("./routes/wishlist.routes");
 const addressRoutes = require("./routes/address.routes");
 const orderRoutes = require("./routes/order.routes");
 const paymentRoutes = require("./routes/payment.routes");
+const webhookRoutes = require("./routes/webhook.routes");
 const adminRoutes = require("./routes/admin.routes");
 const reviewRoutes = require("./routes/review.routes");
 
@@ -49,6 +50,11 @@ app.use(cors({
 
 // 5. Health Check Route (placed before rate limiter so probes are never throttled)
 app.use("/api/health", healthroutes);
+
+// 5a. Webhook routes — MUST be mounted BEFORE express.json() so the raw body
+//     is preserved for HMAC signature verification. Each webhook route applies
+//     express.raw() itself, scoped to that path only.
+app.use("/api/webhooks", webhookRoutes);
 
 // 6. Rate Limiting (protects server before parsing expensive request bodies)
 app.use(apiLimiter);

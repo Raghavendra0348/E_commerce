@@ -5,8 +5,8 @@ const ApiError = require("../utils/ApiError");
  * Get paginated reviews for a product, with average rating.
  */
 const getProductReviews = async (productId, query = {}) => {
-    const page  = parseInt(query.page, 10)  || 1;
-    const limit = parseInt(query.limit, 10) || 10;
+    const page  = Math.max(1, parseInt(query.page, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(query.limit, 10) || 10));
     const skip  = (page - 1) * limit;
 
     const product = await prisma.product.findUnique({ where: { id: productId } });

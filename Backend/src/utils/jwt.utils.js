@@ -10,11 +10,14 @@ const generateAccessToken = (userId, role) => {
     });
 };
 
+const crypto = require("crypto");
+
 /**
  * Generate a long-lived refresh token.
+ * Uses a cryptographically unique jti to guarantee uniqueness even in high-throughput bursts.
  */
 const generateRefreshToken = (userId) => {
-    return jwt.sign({ userId }, env.JWT_REFRESH_SECRET, {
+    return jwt.sign({ userId, jti: crypto.randomUUID() }, env.JWT_REFRESH_SECRET, {
         expiresIn: env.JWT_REFRESH_EXPIRES_IN || "7d"
     });
 };

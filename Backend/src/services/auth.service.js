@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const prisma = require("../config/database");
 const ApiError = require("../utils/ApiError");
@@ -10,7 +11,14 @@ const {
 const SALT_ROUNDS = 12;
 
 /**
- * Helper to create and store a refresh token record in DB.
+ * Hash refresh token with SHA-256 before database storage/lookup.
+ */
+const hashToken = (token) => {
+    return crypto.createHash("sha256").update(token).digest("hex");
+};
+
+/**
+ * Helper to store a hashed refresh token record in DB.
  */
 const saveRefreshToken = async (userId, token, metadata = {}) => {
     const expiresAt = new Date();
@@ -18,7 +26,7 @@ const saveRefreshToken = async (userId, token, metadata = {}) => {
 
     return prisma.refreshToken.create({
         data: {
-            token,
+            token: hashToken(token),
             userId,
             userAgent: metadata.userAgent || null,
             ipAddress: metadata.ipAddress || null,
@@ -100,6 +108,7 @@ const login = async ({ email, password }, metadata = {}) => {
 
 /**
  * Refresh session using Refresh Token Rotation (RTR).
+ * Concurrency-safe: atomic conditional revocation prevents replay races.
  */
 const refreshSession = async (refreshToken, metadata = {}) => {
     let decoded;
@@ -109,8 +118,10 @@ const refreshSession = async (refreshToken, metadata = {}) => {
         throw ApiError.unauthorized("Invalid or expired refresh token");
     }
 
+    const hashed = hashToken(refreshToken);
+
     const tokenRecord = await prisma.refreshToken.findUnique({
-        where: { token: refreshToken },
+        where: { token: hashed },
         include: { user: true }
     });
 
@@ -132,11 +143,19 @@ const refreshSession = async (refreshToken, metadata = {}) => {
         throw ApiError.unauthorized("Refresh token has expired, please log in again");
     }
 
-    // Revoke current refresh token
-    await prisma.refreshToken.update({
-        where: { id: tokenRecord.id },
+    // Atomic conditional revocation to prevent concurrent rotation race
+    const revocationResult = await prisma.refreshToken.updateMany({
+        where: { id: tokenRecord.id, revokedAt: null },
         data: { revokedAt: new Date() }
     });
+
+    if (revocationResult.count === 0) {
+        await prisma.refreshToken.updateMany({
+            where: { userId: tokenRecord.userId },
+            data: { revokedAt: new Date() }
+        });
+        throw ApiError.unauthorized("Suspicious concurrent token rotation detected. Sessions invalidated.");
+    }
 
     // Issue new pair
     const newAccessToken = generateAccessToken(tokenRecord.user.id, tokenRecord.user.role);
@@ -154,8 +173,9 @@ const refreshSession = async (refreshToken, metadata = {}) => {
  * Log out a single session by revoking the specific refresh token.
  */
 const logout = async (refreshToken) => {
+    const hashed = hashToken(refreshToken);
     const tokenRecord = await prisma.refreshToken.findUnique({
-        where: { token: refreshToken }
+        where: { token: hashed }
     });
 
     if (tokenRecord && !tokenRecord.revokedAt) {
@@ -223,7 +243,7 @@ const updateProfile = async (userId, data) => {
 };
 
 /**
- * Change user password.
+ * Change user password and revoke all existing sessions.
  */
 const changePassword = async (userId, currentPassword, newPassword) => {
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -237,10 +257,16 @@ const changePassword = async (userId, currentPassword, newPassword) => {
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
-    await prisma.user.update({
-        where: { id: userId },
-        data: { password: hashedPassword }
-    });
+    await prisma.$transaction([
+        prisma.user.update({
+            where: { id: userId },
+            data: { password: hashedPassword }
+        }),
+        prisma.refreshToken.updateMany({
+            where: { userId, revokedAt: null },
+            data: { revokedAt: new Date() }
+        })
+    ]);
 };
 
 module.exports = {
@@ -251,5 +277,6 @@ module.exports = {
     logoutAll,
     getProfile,
     updateProfile,
-    changePassword
+    changePassword,
+    hashToken
 };

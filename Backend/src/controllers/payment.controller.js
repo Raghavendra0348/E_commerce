@@ -23,4 +23,17 @@ const getPayment = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
-module.exports = { createOrder, verifyPayment, getPayment };
+/**
+ * POST /api/payments/orders/:orderId/refund  (admin only)
+ * Initiates a real Razorpay refund for a cancelled paid order.
+ * The final REFUNDED / REFUND_FAILED status is set by the webhook handler.
+ */
+const initiateRefund = async (req, res, next) => {
+    try {
+        const orderId = parseInt(req.params.orderId, 10);
+        const refund  = await paymentService.initiateRefund(req.user.userId, orderId);
+        return success(res, 200, "Refund submitted to Razorpay. Final status will be updated via webhook.", refund);
+    } catch (error) { next(error); }
+};
+
+module.exports = { createOrder, verifyPayment, getPayment, initiateRefund };

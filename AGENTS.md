@@ -71,8 +71,13 @@ E_commerce/
 - [x] **2. Cash on Delivery (COD) Support:** ✅ COMPLETED 2026-10-18
 - [x] **3. Order Cancellation Refund Status:** ✅ COMPLETED 2026-10-18
 - [x] **4. Product Dynamic Sorting:** ✅ COMPLETED 2026-10-18
-- [x] **5. Admin Single User Endpoint:** ✅ COMPLETED 2026-10-18
-- [ ] **6. Automated Test Suite (Optional):** Can be introduced anytime.
+- [x] **6. Automated Test Suite & Critical Hardening:** ✅ COMPLETED 2026-10-18
+  - Concurrency-safe atomic conditional inventory decrement (`WHERE stock >= quantity`).
+  - Order delivery address snapshot (`shippingAddress Json?` migration).
+  - SHA-256 hashed refresh token storage with cryptographically unique `jti`.
+  - Session revocation on password change.
+  - Razorpay order ID matching & idempotent payment verification.
+  - 11 Vitest integration & unit tests passing across Auth, Orders, Payments, and Admin.
 
 ---
 
