@@ -192,3 +192,39 @@ docker compose up -d --build
 - Restored stale-only focus/mount/reconnect query refreshes, throttled cart focus checks and deduplicated overlapping cart fetches.
 - Added Retry-After cooldown handling for reads and disabled immediate query retries on 429. Background polling resumes network requests after cooldown; backend limiter protections remain unchanged.
 - Removed noisy product-query debug logging.
+
+## Downloaded image uploads - 2026-10-31
+
+- Uploaded 23 local downloaded image files to the configured Cloudinary account using `Backend/scripts/upload-downloaded-images.js` (repeatable with deterministic asset IDs and a saved upload report).
+- Linked 13 DummyJSON demo reference images to products 10 (3), 17 (3), 19 (4), and 38 (3). Reused placeholder records where possible and preserved existing real images.
+- Ten incorrectly matched Pixabay downloads are stored under `ecommerce/review-downloads/` but not linked to products (examples: lipstick assigned to SSD and desktop RAM assigned to laptop RAM).
+- Cloudinary URLs, upload status and original image-association backup are in `Backend/downloads/cloudinary-upload-report.json`. All 13 database links were verified after upload.
+
+## Mismatched image removal - 2026-10-31
+
+- At user request, deleted the 10 mismatched Pixabay assets under Cloudinary `ecommerce/review-downloads/` and their local files in Backend/downloads.
+- Confirmed none were linked in ProductImage before deletion. Removed corresponding manifest image entries to prevent re-upload, and retained deletion status in the upload report.
+- Product records and the 13 linked DummyJSON images were preserved.
+
+## Reference photo batch upload - 2026-10-31
+
+- Uploaded and linked 130 reference photos from the first-10, next-20, next-30 and next-70 download folders to their matching database product IDs.
+- Verified all input checksums, product names/IDs and 130 resulting ProductImage associations. Removed replaced placeholder associations, retaining original image records in `Backend/downloads/search-batch-cloudinary-report.json` for recovery.
+- Preserved existing real images and verified all Product fields unchanged. Repeatable uploader: `node Backend/scripts/upload-search-batches.js --apply`.
+- Refreshed root `products-without-images.txt`; 143 products now have non-placeholder images and 78 remain without them. Sources are demo/reference photos; brand/variant/book edition differences are retained in provenance rather than changing product details.
+
+## Remaining image uploads - 2026-10-31
+
+- Uploaded and linked all 78 remaining downloaded reference photos from `Backend/downloads/remaining-78-product-photos` to Cloudinary and their matching product IDs (149-226).
+- Verified input checksums, all 78 resulting database associations and unchanged Product fields. Repeatable uploader: `node Backend/scripts/upload-remaining-product-images.js --apply`.
+- Original image associations and upload results are recorded in `Backend/downloads/remaining-78-cloudinary-report.json`.
+- All 221 database products now have at least one non-placeholder image; refreshed `products-without-images.txt` to reflect zero missing products. Reference photos may differ in brand or variant from generic listings.
+
+## Image library organization - 2026-10-31
+
+- Consolidated all 221 local photos into `Backend/downloads/products/<product-slug>/` across 212 product folders. Each folder has numbered files plus a manifest compatible with the retained images upload command.
+- Inventory: `Backend/downloads/products/index.json`. Sources, hashes, Cloudinary URLs and upload status are retained in each product manifest.
+- Recovery/upload reports and original search links are retained under `Backend/downloads/products/_metadata/`; report file paths were updated. Three moved lotion files were recovered by matching their upload-report checksums.
+- Removed redundant ZIPs, search-candidate JSON, intermediate product lists, old batch directories, empty mismatched-photo directories, temporary root DummyJSON catalog and obsolete one-off download/upload/delete scripts.
+- Retained `npm run images:download`, `npm run images:upload`, `npm run images:import` and their scripts. Earlier historical batch-script commands above are superseded by this organized library.
+- Verify all stored files: `node Backend/scripts/organize-product-images.js --verify`. All 221 checksums, 221 preserved report links and npm image-script paths were verified. No database or Cloudinary changes were made.

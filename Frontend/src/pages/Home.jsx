@@ -1,3 +1,4 @@
+import FestivalPromoCard, { EXTRA_FESTIVAL_CARDS } from "@/components/home/FestivalPromoCard";
 import HomeDiscoveryPanels from "@/components/home/HomeDiscoveryPanels";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/ui/button";
@@ -53,6 +54,7 @@ function HeroBanner() {
             <div className="festival-art"><img src="/image%20copy.png" alt={deal.title} fetchPriority={index === 0 ? "high" : "auto"} draggable="false" style={{ left: (-deal.x / 460 * 100) + "%" }} /></div>
           </Link>
         ))}
+        {EXTRA_FESTIVAL_CARDS.map(card => <FestivalPromoCard key={card.slug} card={card} />)}
       </div></div>
       <Button variant="secondary" className="festival-arrow festival-arrow-prev" onClick={() => emblaApi?.scrollPrev()} aria-label="Previous festival offers"><ChevronLeft /></Button>
       <Button variant="secondary" className="festival-arrow festival-arrow-next" onClick={() => emblaApi?.scrollNext()} aria-label="Next festival offers"><ChevronRight /></Button>
