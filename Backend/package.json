@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "images:import": "node scripts/import-product-images.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
