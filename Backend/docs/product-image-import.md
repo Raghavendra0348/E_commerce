@@ -1,29 +1,33 @@
-# Bulk product image importer
+# Bulk product image importer — first-five test
 
-This script imports real photographs from the Pexels API into the existing Cloudinary account and records each image in PostgreSQL through Prisma. It is deliberately limited to five products by default.
+Searches the official Pixabay API, downloads image files to the backend process, validates them, uploads them to Cloudinary and stores image/source metadata in PostgreSQL through Prisma.
 
-## 1. Get a Pexels API key
+## Pixabay API restrictions
 
-Create a free Pexels account and request an API key at https://www.pexels.com/api/. The importer uses the official Pexels photo-search endpoint. It stores the photographer name and source page URL so the storefront can credit the photographer and link to Pexels.
+Pixabay requires API search responses to be cached for at least 24 hours. Its documentation also says the API is intended for real human requests and systematic mass downloads are not allowed. This importer is intentionally capped at five products per run for a small evaluation. Do not use it as a bulk scraper for the full catalog; review Pixabay's current terms and obtain any required approval before expanding usage.
 
-Pexels API guidelines: https://www.pexels.com/api/documentation/
+Official documentation: https://pixabay.com/api/docs/
+
+## 1. Get a key
+
+Sign in or create an account at https://pixabay.com/, then open https://pixabay.com/api/docs/ while signed in and copy your API key.
 
 ## 2. Configure Backend/.env
 
-Add these values to your existing `Backend/.env` (do not commit this file):
+Add these values to your local .env (never commit secrets):
 
 ```dotenv
-PEXELS_API_KEY=your_pexels_api_key
+PIXABAY_API_KEY=your_pixabay_api_key
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-Your existing `DATABASE_URL` must point to the PostgreSQL database containing the products.
+Keep your existing DATABASE_URL pointing to your PostgreSQL catalog.
 
 ## 3. Apply the Prisma migration
 
-From the Backend directory:
+From Backend:
 
 ```bash
 npx prisma migrate deploy
@@ -32,42 +36,33 @@ npx prisma generate
 
 For local development, use `npx prisma migrate dev` instead of `migrate deploy`.
 
-## 4. Test the first five products
-
-First run a dry run. This searches Pexels but does not upload images or change the database:
+## 4. Dry run the first five products
 
 ```bash
 npm run images:import -- --dry-run
 ```
 
-Then import images:
+Search results are cached in `Backend/.cache/pixabay` for 24 hours. Dry run does not upload or write product image records.
+
+## 5. Import
 
 ```bash
 npm run images:import
 ```
 
-The script processes the first five products by ascending database ID. It fills each product up to three non-placeholder images, skips already-complete products, downloads images to the backend process, validates their MIME type and file signature, deduplicates by SHA-256, uploads them to Cloudinary, and only removes existing `placehold.co` rows after the product has at least three real image records.
+The script processes up to five products ordered by database ID and fills each to three non-placeholder images. Existing valid images are preserved. Placeholder rows are deleted only after three non-placeholder records exist.
 
-## 5. Useful options
+Options:
 
 ```bash
-# First 20 products
-npm run images:import -- --limit=20
-
-# All products
-npm run images:import -- --all
-
-# Specific products by slug
+npm run images:import -- --limit=2
 npm run images:import -- --product-slugs=demo-laptop,wireless-mouse
-
-# Search/validate only, without upload or database writes
 npm run images:import -- --dry-run --limit=5
 ```
 
-## Important quality and licensing notes
+## Quality and licensing
 
-- Search results are real Pexels photographs, but stock photography is not guaranteed to depict the exact brand/model or included accessories. Review the five-product test before scaling up.
-- Pexels requires a prominent link to Pexels and recommends photographer attribution. Product image rows now retain `sourceName`, `sourceUrl`, `photographer`, and `photographerUrl`. Display credits on product detail pages, for example: “Photo by [photographer] on Pexels”.
-- The importer uses one search request per product and processes products sequentially to respect API limits.
-- The script never deletes existing non-placeholder images. If a product cannot get all required new images, its existing records and placeholders remain untouched.
-- Uploaded Cloudinary assets may remain if the database write fails; rerunning is safe at the database level, and Cloudinary public IDs are deterministic per Pexels photo ID.
+- Search results are real stock photographs, not verified exact model/product listings. They may not match brand, model, color, ports, capacity, accessories or packaging. Review every image before representing it as the exact product.
+- Pixabay's API documentation asks API users to show where images come from when search results are displayed. Source page, contributor and contributor profile are stored on each ProductImage row; show suitable source credit/link in the storefront.
+- The importer checks image MIME type, file signature, dimensions from search metadata, file size and duplicate content within each product.
+- Pixabay prohibits permanent hotlinking, so the script downloads images and uploads them to Cloudinary rather than saving Pixabay CDN URLs in the storefront.
