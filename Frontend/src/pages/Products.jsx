@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useSearchParams, Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { useProducts } from "@/hooks/useProducts";
@@ -46,7 +47,7 @@ export default function Products() {
     limit: 20,
   };
 
-  const { data, isLoading, isFetching } = useProducts(queryParams);
+  const { data, isLoading, isFetching, error, refetch } = useProducts(queryParams);
   const products = data?.products || [];
   const pagination = data?.pagination || {};
 
@@ -192,13 +193,17 @@ export default function Products() {
         )}
 
 
-            <ProductGrid
+            {error && <div role="alert" className="rounded border border-[#e7c46c] bg-[#fff8e5] p-4 mb-3 text-sm">
+              {error.response?.status === 429 ? "Too many requests. Products will retry automatically after the server cooldown." : "Products could not be loaded. Check that the backend server is running."}
+              {error.response?.status !== 429 && <Button variant="link" size="sm" onClick={() => refetch()}>Try again</Button>}
+            </div>}
+            {(!error || products.length > 0) && <ProductGrid
               products={products}
               isLoading={isLoading}
               skeletonCount={20}
               emptyTitle={search ? `No results for "${search}"` : "No products found"}
               emptyDescription="Try adjusting your search or filters."
-            />
+            />}
             <Pagination
               page={pagination.page || 1}
               totalPages={pagination.totalPages || 1}

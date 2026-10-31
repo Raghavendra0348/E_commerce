@@ -228,3 +228,17 @@ docker compose up -d --build
 - Removed redundant ZIPs, search-candidate JSON, intermediate product lists, old batch directories, empty mismatched-photo directories, temporary root DummyJSON catalog and obsolete one-off download/upload/delete scripts.
 - Retained `npm run images:download`, `npm run images:upload`, `npm run images:import` and their scripts. Earlier historical batch-script commands above are superseded by this organized library.
 - Verify all stored files: `node Backend/scripts/organize-product-images.js --verify`. All 221 checksums, 221 preserved report links and npm image-script paths were verified. No database or Cloudinary changes were made.
+
+## Phone preview QR - 2026-10-31
+
+- User approved adding development-only `qrcode`. Frontend Vite now binds to 0.0.0.0 for LAN access and prints local terminal QR codes after the actual network URLs are resolved.
+- QR addresses prefer Wi-Fi interfaces and reflect the actual port when Vite falls back from an occupied 5173. Existing /api and /uploads proxies are retained.
+- Start with `cd Frontend` then `npm run dev`; keep the backend on port 5000 and connect the phone to the same Wi-Fi. See Frontend/README.md.
+- Verified production build, 33 tests and a real dev startup with QR output and HTTP 200. The temporary verification server was closed; existing user servers were preserved.
+
+## Phone catalog access - 2026-10-31
+
+- Backend logs showed phone/catalog requests being rejected with 429 because the Vite proxy collapsed devices into the loopback rate-limit identity.
+- Vite now forwards client IP headers to 127.0.0.1:5000; Express trusts only loopback proxies in development. Production proxy trust and rate limits remain unchanged.
+- Catalog and homepage product rows now surface API/rate-limit errors instead of silently rendering empty product areas.
+- Verified 3 proxy tests, 33 frontend tests and production build. Restart development servers and rescan the QR when using the updated network configuration.

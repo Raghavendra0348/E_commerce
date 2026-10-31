@@ -151,7 +151,7 @@ function CategoryRow() {
 
 // ─── Horizontal Product Row ───────────────────────────────────────────────────
 function ProductRow({ title, params, seeAllHref }) {
-  const { data, isLoading } = useProducts({ limit: 12, ...params });
+  const { data, isLoading, error } = useProducts({ limit: 12, ...params });
   const products = data?.products || [];
 
   return (
@@ -166,6 +166,7 @@ function ProductRow({ title, params, seeAllHref }) {
             See all <Arrow className="h-3.5 w-3.5" />
           </Link>
         </div>
+        {error && <p role="alert" className="text-sm text-[#565959] mb-3">{error.response?.status === 429 ? "Products are temporarily rate-limited. Automatic updates resume after the server cooldown." : "Products could not be loaded. Check that the backend is running."}</p>}
         <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
           {isLoading
             ? Array.from({ length: 8 }).map((_, i) => (
