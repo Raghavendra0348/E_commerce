@@ -66,3 +66,8 @@ desktop.ini
 *.swo
 *~
 *.bak
+
+# ── Tool & Knowledge Graph Artifacts ──
+graphify-out/
+uv-extracted/
+*.zip

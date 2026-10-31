@@ -3,7 +3,7 @@
 These files target the current Prisma schema in `Backend/prisma/schema.prisma`; they do not change the schema.
 
 ## Files and reference keys
-- `categories.csv`: category names and unique slugs, including `electronics` and `laptops`.
+- `categories.csv`: category names and unique slugs, covering the 17 cleaned-up catalog categories.
 - `products.csv`: `categorySlug` is a CSV-only key; resolve to `Category.id`.
 - `product_images.csv`: 2–3 placeholder image URLs per product; resolve `productSlug` to `Product.id`.
 - `users.csv`: synthetic users. The `password` column is seed-only plaintext and MUST be bcrypt-hashed before inserting.
@@ -26,3 +26,9 @@ Demo credentials are `admin@example.com` / `ChangeMe_Admin123!` and `customer01@
 Copy this folder to `Backend/prisma/seed-data/`, then put `import-seed.js` in `Backend/prisma/` and change `DATA_DIR` to `path.join(__dirname, "seed-data")`, or keep the files alongside the script. From `Backend/`, run `node prisma/import-seed.js`. It requires the project's existing `@prisma/client` and `bcrypt` dependencies.
 
 The importer intentionally preserves existing category/product fields and existing user credentials. New demo users get bcrypt-hashed passwords. It does not truncate tables. Because the current `Order` model has no stable external reference column, it matches imported orders using user, amount, status and creation timestamp; for stronger long-term idempotency, consider adding an optional unique `seedRef` field in a future schema migration, or keep the current schema and carefully preserve the same CSV timestamps.
+
+## Catalog expansion (2026-10-31)
+
+The catalog now has 221 products across 17 categories, with 13 products per category. The 143 additional products intentionally have no entries in `product_images.csv`; upload their images later through the admin product editor. Existing image rows are retained.
+
+From the repository root, run `node Backend/scripts/expand-catalog.js` for a preview or add `--apply` to populate missing catalog candidates without importing users, orders, payments or images. Existing products are preserved.

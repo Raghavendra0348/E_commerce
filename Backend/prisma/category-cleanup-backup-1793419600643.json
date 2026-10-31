@@ -1,0 +1,662 @@
+{
+  "applied": true,
+  "changes": [
+    {
+      "id": 2,
+      "slug": "wireless-bluetooth-headphones",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "audio",
+      "targetId": 16
+    },
+    {
+      "id": 3,
+      "slug": "portable-bluetooth-speaker",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "audio",
+      "targetId": 16
+    },
+    {
+      "id": 4,
+      "slug": "20000mah-power-bank",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "mobiles-accessories",
+      "targetId": 3
+    },
+    {
+      "id": 5,
+      "slug": "usb-c-fast-charger",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "mobiles-accessories",
+      "targetId": 3
+    },
+    {
+      "id": 7,
+      "slug": "usb-c-hub-7-in-1",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "computers-accessories",
+      "targetId": 2
+    },
+    {
+      "id": 8,
+      "slug": "webcam-full-hd",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "computers-accessories",
+      "targetId": 2
+    },
+    {
+      "id": 9,
+      "slug": "wireless-mouse",
+      "categoryId": 1,
+      "from": "electronics",
+      "to": "computers-accessories",
+      "targetId": 2
+    },
+    {
+      "id": 25,
+      "slug": "analog-wrist-watch",
+      "categoryId": 4,
+      "from": "fashion",
+      "to": "wearables",
+      "targetId": 18
+    },
+    {
+      "id": 26,
+      "slug": "everyday-backpack",
+      "categoryId": 4,
+      "from": "fashion",
+      "to": "bags-luggage",
+      "targetId": 15
+    },
+    {
+      "id": 50,
+      "slug": "reusable-food-storage-bags",
+      "categoryId": 10,
+      "from": "grocery-essentials",
+      "to": "home-kitchen",
+      "targetId": 5
+    },
+    {
+      "id": 51,
+      "slug": "microfiber-cleaning-cloths",
+      "categoryId": 10,
+      "from": "grocery-essentials",
+      "to": "home-kitchen",
+      "targetId": 5
+    },
+    {
+      "id": 52,
+      "slug": "lunch-box-set",
+      "categoryId": 10,
+      "from": "grocery-essentials",
+      "to": "home-kitchen",
+      "targetId": 5
+    },
+    {
+      "id": 53,
+      "slug": "laundry-storage-basket",
+      "categoryId": 10,
+      "from": "grocery-essentials",
+      "to": "home-kitchen",
+      "targetId": 5
+    },
+    {
+      "id": 79,
+      "slug": "demo-laptop",
+      "categoryId": 19,
+      "from": "laptops",
+      "to": "computers-accessories",
+      "targetId": 2
+    }
+  ],
+  "removed": [
+    {
+      "id": 10,
+      "name": "Grocery & Essentials",
+      "slug": "grocery-essentials",
+      "createdAt": "2026-10-18T10:03:19.201Z",
+      "updatedAt": "2026-10-18T10:03:19.201Z"
+    },
+    {
+      "id": 19,
+      "name": "Laptops",
+      "slug": "laptops",
+      "createdAt": "2026-10-18T10:03:19.224Z",
+      "updatedAt": "2026-10-18T10:03:19.224Z"
+    }
+  ],
+  "before": {
+    "categories": [
+      {
+        "id": 1,
+        "name": "Electronics",
+        "slug": "electronics",
+        "createdAt": "2026-10-16T17:19:31.811Z",
+        "updatedAt": "2026-10-16T17:19:31.811Z"
+      },
+      {
+        "id": 2,
+        "name": "Computers & Accessories",
+        "slug": "computers-accessories",
+        "createdAt": "2026-10-18T10:03:19.167Z",
+        "updatedAt": "2026-10-18T10:03:19.167Z"
+      },
+      {
+        "id": 3,
+        "name": "Mobiles & Accessories",
+        "slug": "mobiles-accessories",
+        "createdAt": "2026-10-18T10:03:19.178Z",
+        "updatedAt": "2026-10-18T10:03:19.178Z"
+      },
+      {
+        "id": 4,
+        "name": "Fashion",
+        "slug": "fashion",
+        "createdAt": "2026-10-18T10:03:19.182Z",
+        "updatedAt": "2026-10-18T10:03:19.182Z"
+      },
+      {
+        "id": 5,
+        "name": "Home & Kitchen",
+        "slug": "home-kitchen",
+        "createdAt": "2026-10-18T10:03:19.186Z",
+        "updatedAt": "2026-10-18T10:03:19.186Z"
+      },
+      {
+        "id": 6,
+        "name": "Books",
+        "slug": "books",
+        "createdAt": "2026-10-18T10:03:19.189Z",
+        "updatedAt": "2026-10-18T10:03:19.189Z"
+      },
+      {
+        "id": 7,
+        "name": "Beauty & Personal Care",
+        "slug": "beauty-personal-care",
+        "createdAt": "2026-10-18T10:03:19.192Z",
+        "updatedAt": "2026-10-18T10:03:19.192Z"
+      },
+      {
+        "id": 8,
+        "name": "Sports & Fitness",
+        "slug": "sports-fitness",
+        "createdAt": "2026-10-18T10:03:19.195Z",
+        "updatedAt": "2026-10-18T10:03:19.195Z"
+      },
+      {
+        "id": 9,
+        "name": "Toys & Games",
+        "slug": "toys-games",
+        "createdAt": "2026-10-18T10:03:19.198Z",
+        "updatedAt": "2026-10-18T10:03:19.198Z"
+      },
+      {
+        "id": 10,
+        "name": "Grocery & Essentials",
+        "slug": "grocery-essentials",
+        "createdAt": "2026-10-18T10:03:19.201Z",
+        "updatedAt": "2026-10-18T10:03:19.201Z"
+      },
+      {
+        "id": 11,
+        "name": "Home Appliances",
+        "slug": "home-appliances",
+        "createdAt": "2026-10-18T10:03:19.204Z",
+        "updatedAt": "2026-10-18T10:03:19.204Z"
+      },
+      {
+        "id": 12,
+        "name": "Furniture",
+        "slug": "furniture",
+        "createdAt": "2026-10-18T10:03:19.208Z",
+        "updatedAt": "2026-10-18T10:03:19.208Z"
+      },
+      {
+        "id": 13,
+        "name": "Automotive",
+        "slug": "automotive",
+        "createdAt": "2026-10-18T10:03:19.209Z",
+        "updatedAt": "2026-10-18T10:03:19.209Z"
+      },
+      {
+        "id": 14,
+        "name": "Office Products",
+        "slug": "office-products",
+        "createdAt": "2026-10-18T10:03:19.213Z",
+        "updatedAt": "2026-10-18T10:03:19.213Z"
+      },
+      {
+        "id": 15,
+        "name": "Bags & Luggage",
+        "slug": "bags-luggage",
+        "createdAt": "2026-10-18T10:03:19.215Z",
+        "updatedAt": "2026-10-18T10:03:19.215Z"
+      },
+      {
+        "id": 16,
+        "name": "Audio",
+        "slug": "audio",
+        "createdAt": "2026-10-18T10:03:19.216Z",
+        "updatedAt": "2026-10-18T10:03:19.216Z"
+      },
+      {
+        "id": 17,
+        "name": "Gaming",
+        "slug": "gaming",
+        "createdAt": "2026-10-18T10:03:19.218Z",
+        "updatedAt": "2026-10-18T10:03:19.218Z"
+      },
+      {
+        "id": 18,
+        "name": "Wearables",
+        "slug": "wearables",
+        "createdAt": "2026-10-18T10:03:19.220Z",
+        "updatedAt": "2026-10-18T10:03:19.220Z"
+      },
+      {
+        "id": 19,
+        "name": "Laptops",
+        "slug": "laptops",
+        "createdAt": "2026-10-18T10:03:19.224Z",
+        "updatedAt": "2026-10-18T10:03:19.224Z"
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "slug": "wireless-bluetooth-headphones",
+        "categoryId": 1
+      },
+      {
+        "id": 3,
+        "slug": "portable-bluetooth-speaker",
+        "categoryId": 1
+      },
+      {
+        "id": 4,
+        "slug": "20000mah-power-bank",
+        "categoryId": 1
+      },
+      {
+        "id": 5,
+        "slug": "usb-c-fast-charger",
+        "categoryId": 1
+      },
+      {
+        "id": 6,
+        "slug": "smart-led-desk-lamp",
+        "categoryId": 1
+      },
+      {
+        "id": 7,
+        "slug": "usb-c-hub-7-in-1",
+        "categoryId": 1
+      },
+      {
+        "id": 8,
+        "slug": "webcam-full-hd",
+        "categoryId": 1
+      },
+      {
+        "id": 9,
+        "slug": "wireless-mouse",
+        "categoryId": 1
+      },
+      {
+        "id": 10,
+        "slug": "everyday-laptop-15-demo",
+        "categoryId": 2
+      },
+      {
+        "id": 11,
+        "slug": "mechanical-keyboard",
+        "categoryId": 2
+      },
+      {
+        "id": 12,
+        "slug": "laptop-stand-aluminium",
+        "categoryId": 2
+      },
+      {
+        "id": 13,
+        "slug": "nvme-ssd-1tb",
+        "categoryId": 2
+      },
+      {
+        "id": 14,
+        "slug": "ddr5-laptop-ram-16gb",
+        "categoryId": 2
+      },
+      {
+        "id": 15,
+        "slug": "usb-c-ethernet-adapter",
+        "categoryId": 2
+      },
+      {
+        "id": 16,
+        "slug": "laptop-sleeve-15-inch",
+        "categoryId": 2
+      },
+      {
+        "id": 17,
+        "slug": "android-smartphone-128gb",
+        "categoryId": 3
+      },
+      {
+        "id": 18,
+        "slug": "tempered-glass-screen-protector",
+        "categoryId": 3
+      },
+      {
+        "id": 19,
+        "slug": "silicone-phone-case",
+        "categoryId": 3
+      },
+      {
+        "id": 20,
+        "slug": "braided-usb-c-cable",
+        "categoryId": 3
+      },
+      {
+        "id": 21,
+        "slug": "wireless-charging-stand",
+        "categoryId": 3
+      },
+      {
+        "id": 22,
+        "slug": "classic-cotton-t-shirt",
+        "categoryId": 4
+      },
+      {
+        "id": 23,
+        "slug": "regular-fit-jeans",
+        "categoryId": 4
+      },
+      {
+        "id": 24,
+        "slug": "running-shoes",
+        "categoryId": 4
+      },
+      {
+        "id": 25,
+        "slug": "analog-wrist-watch",
+        "categoryId": 4
+      },
+      {
+        "id": 26,
+        "slug": "everyday-backpack",
+        "categoryId": 4
+      },
+      {
+        "id": 27,
+        "slug": "stainless-steel-water-bottle",
+        "categoryId": 5
+      },
+      {
+        "id": 28,
+        "slug": "nonstick-frying-pan",
+        "categoryId": 5
+      },
+      {
+        "id": 29,
+        "slug": "airtight-storage-container-set",
+        "categoryId": 5
+      },
+      {
+        "id": 30,
+        "slug": "cotton-bedsheet-set",
+        "categoryId": 5
+      },
+      {
+        "id": 31,
+        "slug": "ceramic-coffee-mug-set",
+        "categoryId": 5
+      },
+      {
+        "id": 32,
+        "slug": "javascript-fundamentals",
+        "categoryId": 6
+      },
+      {
+        "id": 33,
+        "slug": "data-structures-and-algorithms",
+        "categoryId": 6
+      },
+      {
+        "id": 34,
+        "slug": "clean-code-study-edition",
+        "categoryId": 6
+      },
+      {
+        "id": 35,
+        "slug": "the-illustrated-science-book",
+        "categoryId": 6
+      },
+      {
+        "id": 36,
+        "slug": "productivity-journal",
+        "categoryId": 6
+      },
+      {
+        "id": 37,
+        "slug": "daily-face-cleanser",
+        "categoryId": 7
+      },
+      {
+        "id": 38,
+        "slug": "moisturizing-lotion",
+        "categoryId": 7
+      },
+      {
+        "id": 39,
+        "slug": "electric-grooming-trimmer",
+        "categoryId": 7
+      },
+      {
+        "id": 40,
+        "slug": "hair-dryer-compact",
+        "categoryId": 7
+      },
+      {
+        "id": 41,
+        "slug": "badminton-racket",
+        "categoryId": 8
+      },
+      {
+        "id": 42,
+        "slug": "yoga-mat-6mm",
+        "categoryId": 8
+      },
+      {
+        "id": 43,
+        "slug": "insulated-sports-bottle",
+        "categoryId": 8
+      },
+      {
+        "id": 44,
+        "slug": "adjustable-dumbbell-pair",
+        "categoryId": 8
+      },
+      {
+        "id": 45,
+        "slug": "skipping-rope",
+        "categoryId": 8
+      },
+      {
+        "id": 46,
+        "slug": "building-blocks-set",
+        "categoryId": 9
+      },
+      {
+        "id": 47,
+        "slug": "family-board-game",
+        "categoryId": 9
+      },
+      {
+        "id": 48,
+        "slug": "educational-puzzle-set",
+        "categoryId": 9
+      },
+      {
+        "id": 49,
+        "slug": "remote-control-car",
+        "categoryId": 9
+      },
+      {
+        "id": 50,
+        "slug": "reusable-food-storage-bags",
+        "categoryId": 10
+      },
+      {
+        "id": 51,
+        "slug": "microfiber-cleaning-cloths",
+        "categoryId": 10
+      },
+      {
+        "id": 52,
+        "slug": "lunch-box-set",
+        "categoryId": 10
+      },
+      {
+        "id": 53,
+        "slug": "laundry-storage-basket",
+        "categoryId": 10
+      },
+      {
+        "id": 54,
+        "slug": "electric-kettle-1-5l",
+        "categoryId": 11
+      },
+      {
+        "id": 55,
+        "slug": "mixer-grinder",
+        "categoryId": 11
+      },
+      {
+        "id": 56,
+        "slug": "table-fan",
+        "categoryId": 11
+      },
+      {
+        "id": 57,
+        "slug": "air-fryer-4l",
+        "categoryId": 11
+      },
+      {
+        "id": 58,
+        "slug": "ergonomic-office-chair",
+        "categoryId": 12
+      },
+      {
+        "id": 59,
+        "slug": "study-desk",
+        "categoryId": 12
+      },
+      {
+        "id": 60,
+        "slug": "bookshelf-4-tier",
+        "categoryId": 12
+      },
+      {
+        "id": 61,
+        "slug": "car-phone-mount",
+        "categoryId": 13
+      },
+      {
+        "id": 62,
+        "slug": "tyre-pressure-gauge",
+        "categoryId": 13
+      },
+      {
+        "id": 63,
+        "slug": "car-cleaning-kit",
+        "categoryId": 13
+      },
+      {
+        "id": 64,
+        "slug": "a5-notebook-pack",
+        "categoryId": 14
+      },
+      {
+        "id": 65,
+        "slug": "gel-pen-set",
+        "categoryId": 14
+      },
+      {
+        "id": 66,
+        "slug": "desk-organizer",
+        "categoryId": 14
+      },
+      {
+        "id": 67,
+        "slug": "travel-duffel-bag",
+        "categoryId": 15
+      },
+      {
+        "id": 68,
+        "slug": "hard-shell-cabin-trolley",
+        "categoryId": 15
+      },
+      {
+        "id": 69,
+        "slug": "laptop-backpack-15-inch",
+        "categoryId": 15
+      },
+      {
+        "id": 70,
+        "slug": "wired-in-ear-earphones",
+        "categoryId": 16
+      },
+      {
+        "id": 71,
+        "slug": "usb-podcast-microphone",
+        "categoryId": 16
+      },
+      {
+        "id": 72,
+        "slug": "over-ear-studio-headphones",
+        "categoryId": 16
+      },
+      {
+        "id": 73,
+        "slug": "wireless-game-controller",
+        "categoryId": 17
+      },
+      {
+        "id": 74,
+        "slug": "gaming-mouse-pad-xl",
+        "categoryId": 17
+      },
+      {
+        "id": 75,
+        "slug": "gaming-headset",
+        "categoryId": 17
+      },
+      {
+        "id": 76,
+        "slug": "fitness-band",
+        "categoryId": 18
+      },
+      {
+        "id": 77,
+        "slug": "smart-watch",
+        "categoryId": 18
+      },
+      {
+        "id": 78,
+        "slug": "digital-sports-watch",
+        "categoryId": 18
+      },
+      {
+        "id": 79,
+        "slug": "demo-laptop",
+        "categoryId": 19
+      }
+    ]
+  }
+}

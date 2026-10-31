@@ -10,7 +10,9 @@
 - **Backend Stack:** Node.js, Express 5, PostgreSQL 18, Prisma ORM 6
 - **Security & Infrastructure:** Winston structured logger, Zod environment validation, `x-request-id` correlation tracing, Helmet security headers, CORS, rate limiting, XSS sanitization, Refresh Token Rotation (RTR).
 - **Integrations:** Razorpay (payments with HMAC-SHA256 verification), Cloudinary (image uploads with local disk `/uploads/` fallback).
-- **Frontend Stack (Upcoming):** React 18/19 + Vite, Vanilla CSS design tokens (luxury dark aesthetic), Zustand state management, Axios with auto-refresh interceptors.
+- **Frontend Stack:** React 19 + Vite 6, Tailwind CSS v4, shadcn/ui + Radix UI, React Router v7, Axios (JWT auto-refresh), TanStack Query v5, Zustand v5, React Hook Form + Zod, Sonner, Embla Carousel, Lucide React.
+- **Frontend Style:** Amazon.in-inspired — white storefront, dark navbar (#131921), orange CTAs (#FF9900).
+- **Frontend Rules:** Detailed in `.agents/rules/amazon-ecommerce-ui.md` (model-decision activation).
 
 ---
 
@@ -19,16 +21,24 @@
 ```
 E_commerce/
 ├── AGENTS.md                  # Permanent agent memory & guidelines (this file)
+├── docs/
+│   ├── FRONTEND_PLAN.md            # Amazon-style UI: pages, components, API map, phases
+│   ├── DESIGN_SYSTEM.md            # Colors, typography, spacing, component styles
+│   └── IMPLEMENTATION_STATUS.md    # Verified status tracker & next task
 ├── Docs/
 │   └── Backend/
 │       ├── ecommerce_backend_plan.md   # Original 42-endpoint backend specification
 │       └── next_stage_plan.md          # Multi-stage roadmap & frontend specification
+├── .agents/
+│   └── rules/
+│       ├── amazon-ecommerce-ui.md  # Frontend coding rules (model-decision activation)
+│       └── graphify.md             # Knowledge graph rules
 ├── Backend/
 │   ├── prisma/
-│   │   ├── schema.prisma           # 11 models (User, Category, Product, ProductImage, Cart, CartItem, Address, Order, OrderItem, Payment, Wishlist, Review, RefreshToken)
+│   │   ├── schema.prisma           # 11 models (User→RefreshToken)
 │   │   ├── seed.js                 # Minimal seed script
 │   │   ├── migrations/             # Applied Prisma migrations
-│   │   └── ecommerce_seed_dataset/ # Comprehensive seed dataset (CSVs + import-seed.js)
+│   │   └── ecommerce_seed_dataset/ # 18 categories, 79 products, 16 users
 │   ├── src/
 │   │   ├── server.js               # Entry point with graceful shutdown handling
 │   │   ├── app.js                  # Express pipeline & route registrations
@@ -36,11 +46,11 @@ E_commerce/
 │   │   ├── middleware/             # auth, admin, validate, error, rateLimiter, upload, requestId, sanitize
 │   │   ├── controllers/            # auth, product, category, cart, order, payment, address, wishlist, review, admin, health
 │   │   ├── services/               # auth, product, category, cart, order, payment, address, wishlist, review, admin
-│   │   ├── routes/                 # Express route modules
+│   │   ├── routes/                 # 13 route modules (51 verified endpoints)
 │   │   ├── validators/             # Zod input schemas
 │   │   └── utils/                  # ApiError, response.utils, jwt.utils, slug.utils, cloudinary.utils
 │   └── uploads/                    # Local storage fallback for uploaded images
-└── Frontend/                       # (Stage 8 — To be initialized with React + Vite)
+└── Frontend/                       # Stage 8 — Amazon.in clone SPA (React + Vite)
 ```
 
 ---
@@ -81,23 +91,44 @@ E_commerce/
 
 ---
 
-## 🚀 5. Next Major Milestone: Stage 8 (Frontend)
+## 🚀 5. Stage 8 (Frontend) — 100% COMPLETE ✅
 
-- **Goal:** Build the React + Vite Single Page Application (SPA).
-- **Key Modules:**
-  - Customer Storefront (Hero, dynamic category carousel, product catalog with instant search & filters, product details page with image gallery & review widget).
-  - Sliding Cart Drawer & Multi-Step Checkout with Razorpay modal integration.
-  - Customer Account Portal (Profile, Addresses, Order history & live status tracker).
-  - Admin Dashboard Portal (Metrics, product inventory management, order pipeline status updater, user management).
-- Reference: Detailed frontend specification in `Docs/Backend/next_stage_plan.md`.
+- **Status:** All 5 phases (8.1 through 8.5) completely implemented, wired to live API, and verified with zero build errors.
+- **Completed Modules:**
+  - **Phase 8.1 — Foundation & Design System:** Vite 6 + React 19, Tailwind CSS v4 Amazon theme, Axios JWT interceptors, Zustand auth/cart stores, PageLayout, Navbar, SubNav, Footer, CartDrawer.
+  - **Phase 8.2 — Storefront & Catalog Experience:** Auto-playing Embla Hero carousel, dynamic category strip, ProductCard with image zoom, responsive ProductGrid with skeletons, URL-driven catalog filters and sorting, full ProductDetail page with Embla gallery, star rating breakdown, and review submission.
+  - **Phase 8.3 — Cart, Wishlist & Checkout:** Sliding CartDrawer, full Cart page, Wishlist with remove overlays, 3-step linear checkout (Address → Payment → Review), Razorpay modal checkout & Cash on Delivery (COD) support, OrderSuccess confirmation.
+  - **Phase 8.4 — Customer Account Portal:** Profile & credentials manager, saved addresses CRUD modal book, order history with Amazon ribbons, order tracking timeline, print invoice, and order cancellation with auto-refund synchronization.
+  - **Phase 8.5 — Admin Dashboard & Control Center:** Revenue/orders/user metrics, fulfillment pipeline status breakdown, low-stock inventory alerts, product catalog table with multipart image upload dialogs, order status advancement pipeline, user directory with USER ↔ ADMIN role switching.
+- **Detailed Reference:** `docs/FRONTEND_PLAN.md`, `docs/PHASE_6_PLAN.md` & `docs/IMPLEMENTATION_STATUS.md`
 
 ---
 
-## ⚙️ 6. Useful Commands
+## 🛡️ 6. Phase 6 (Production Readiness, SRE Observability & Testing) — 100% COMPLETE ✅
+
+- **Bundle Optimization:** Route code-splitting with `React.lazy` across 17 routes + isolated Rollup vendor chunks (`vendor-react`, `vendor-ui`, `vendor-query`). Monolith eliminated: all route chunks < 25 kB each. Zero build warnings.
+- **SRE Probes & Observability:** Dual process probes (`GET /api/health/live`, `GET /api/health/ready` with DB ping ms and memory metrics) and live SRE dashboard at `/admin/system`.
+- **Client Resilience & SEO:** Global `ErrorBoundary.jsx`, live `useNetworkStatus.js` offline alert banner, dynamic document head titles via `useDocumentTitle.js`.
+- **Full-Stack Automated Tests:** 23 passing Vitest tests (12 Frontend tests + 11 Backend tests).
+- **Containerization & CI:** Multi-stage `Backend/Dockerfile`, `Frontend/Dockerfile` (Nginx Alpine), `Frontend/nginx.conf`, root `docker-compose.yml`, and `.github/workflows/ci.yml`.
+
+---
+
+## ⚙️ 7. Useful Commands
 
 ```bash
 # Start backend in development
 cd Backend && npm run dev
+
+# Start frontend in development
+cd Frontend && npm run dev
+
+# Run automated tests
+cd Backend && npm test
+cd Frontend && npm test
+
+# Run frontend production build
+cd Frontend && npm run build
 
 # Run database validations & migrations
 cd Backend && npm run db:validate
@@ -108,4 +139,56 @@ cd Backend && npm run lint
 
 # Run seed import
 cd Backend && node prisma/ecommerce_seed_dataset/ecommerce_seed_dataset/import-seed.js
+
+# Launch full-stack containerized cluster with Docker Compose
+docker compose up -d --build
 ```
+
+
+## Category cleanup � 2026-10-31
+
+- Live database now has 17 categories and 78 products; no products were deleted.
+- Merged `laptops` into `computers-accessories` and `grocery-essentials` into `home-kitchen` (all existing grocery entries were household products).
+- Reassigned audio devices, computer peripherals, mobile chargers, a backpack and an analog watch to their specific existing categories; 14 products moved overall.
+- Updated both seed sources. Repeatable cleanup: `node Backend/scripts/cleanup-categories.js` previews, `--apply` applies transactionally and writes a category/product-assignment backup under `Backend/prisma/`.
+
+## Catalog expansion � 2026-10-31
+
+- Live catalog and `products.csv` now contain 221 products: 13 products in each of 17 categories.
+- Added 143 products with descriptions, INR prices and stock. No image records were added; existing 78 products and their images were verified unchanged.
+- Preview expansion with `node Backend/scripts/expand-catalog.js`; use `--apply` to insert missing candidates and synchronize seed CSV/manifest. Repeat runs add no duplicates.
+
+## Storefront refinement � 2026-10-31
+
+- Replaced large orange discovery panels with compact white 2x2 product collections, live category links/prices and responsive layouts over an Amazon-style gray canvas.
+- Added local product fallback artwork and category-specific missing-image states; retained the supplied festive hero artwork.
+- Fixed frontend `sortBy`/`sortOrder` translation to backend `sort`/`order` so value collections actually sort by price.
+- Verified production build and 13 frontend tests. Browser visual QA unavailable because the browser access host/native pipe could not connect.
+
+## Cart redesign � 2026-10-31
+
+- Added Amazon-style wide white cart rows, larger thumbnails, yellow quantity pills and a compact checkout sidebar with a rounded yellow CTA.
+- Matched the sliding drawer, added local image fallback handling, removed the non-persisted gift checkbox and unverified delivery/purchase-protection promises from the summary.
+- Verified build and 15 frontend tests, including item quantity/remove callbacks and stock limits. Browser visual verification remains unavailable in this session.
+
+## Checkout and image resilience � 2026-10-31
+
+- Corrected Razorpay Checkout `order_id` to use backend `razorpayOrderId`; validate setup and callback completeness before verification without changing backend signature checks.
+- Prevent duplicate concurrent clicks and reuse the pending application order during same-component payment retries; release busy state after verification errors.
+- Product image components now show "Images coming soon" for absent/placeholder/broken images and skip the reported dead loopback image ports. Existing image data is preserved.
+- Build and 22 frontend tests pass, including checkout ID/callback tests and image fallback tests. No real payment was made. The source of the reported loopback PNG requests was not found in app source or database; requests from injected/third-party scripts require browser Initiator inspection if they persist.
+
+## Automatic data updates � 2026-10-31
+
+- Added successful-write notifications to the Axios client and resource-scoped query invalidation so admin saves refresh relevant storefront/order/review data without reloading the page.
+- Added same-origin BroadcastChannel change notifications for open tabs (resource names only), plus visible-page query polling every 20 seconds and refresh on mount/focus/reconnect.
+- Authenticated Zustand cart data refreshes every 20 seconds while visible/online, on tab return and on related inventory/order changes; timer/listener/channel cleanup supports StrictMode.
+- Polling detects other-session and direct database changes; this is background refetching rather than server-pushed instant updates.
+- Production build and 27 frontend tests pass, including active-query refresh after save, cross-tab notifications, ignored read/auth requests and timer cleanup.
+
+## Rate-limit correction � 2026-10-31
+
+- Reduced background polling to 180 seconds to fit the existing general API limit of 100 requests per 15 minutes per IP; saved changes still invalidate related views immediately.
+- Restored stale-only focus/mount/reconnect query refreshes, throttled cart focus checks and deduplicated overlapping cart fetches.
+- Added Retry-After cooldown handling for reads and disabled immediate query retries on 429. Background polling resumes network requests after cooldown; backend limiter protections remain unchanged.
+- Removed noisy product-query debug logging.

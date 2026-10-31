@@ -21,12 +21,16 @@ const success = (res, statusCode, message, data = null) => {
  * @param {object} pagination - { page, limit, total, totalPages }
  */
 const paginated = (res, message, data, pagination) => {
+    const isArray = Array.isArray(data);
     return res.status(200).json({
         success: true,
         message,
-        count: data.length,
+        count: isArray ? data.length : 0,
         data,
-        pagination
+        pagination,
+        products: isArray ? data : undefined,
+        orders: isArray ? data : undefined,
+        users: isArray ? data : undefined
     });
 };
 

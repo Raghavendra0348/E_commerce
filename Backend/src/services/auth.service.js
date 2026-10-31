@@ -39,6 +39,7 @@ const saveRefreshToken = async (userId, token, metadata = {}) => {
  * Register a new user.
  */
 const register = async ({ name, email, password, phone }, metadata = {}) => {
+    //need to update : checking phone number also 
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
         throw ApiError.conflict("Email already registered");

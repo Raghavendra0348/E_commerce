@@ -7,7 +7,6 @@ const { success, paginated } = require("../utils/response.utils");
  */
 const getProducts = async (req, res, next) => {
     try {
-        console.log("🔍 [getProducts] Query:", req.query);
         const { products, pagination } = await productService.getProducts(req.query);
         return paginated(res, "Products fetched successfully", products, pagination);
     } catch (error) {

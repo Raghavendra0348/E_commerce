@@ -2,10 +2,10 @@
   "files": {
     "orders.csv": 24,
     "product_images.csv": 187,
-    "categories.csv": 19,
+    "categories.csv": 17,
     "reviews.csv": 154,
     "users.csv": 16,
-    "products.csv": 78,
+    "products.csv": 221,
     "carts.csv": 12,
     "cart_items.csv": 23,
     "order_items.csv": 54,
@@ -13,9 +13,9 @@
     "wishlists.csv": 31,
     "payments.csv": 24
   },
-  "total_csv_data_rows": 632,
-  "products": 78,
-  "categories": 19,
+  "total_csv_data_rows": 773,
+  "products": 221,
+  "categories": 17,
   "images": 187,
   "users": 16,
   "reviews": 154

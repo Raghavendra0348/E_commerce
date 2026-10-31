@@ -1,12 +1,12 @@
 ﻿slug,name,description,price,stock,categorySlug
-wireless-bluetooth-headphones,Wireless Bluetooth Headphones,Premium wireless headphones with clear sound and comfortable ear cushions,4160.08,0,electronics
-portable-bluetooth-speaker,Portable Bluetooth Speaker,Compact portable speaker for music at home or outdoors,3146.12,7,electronics
-20000mah-power-bank,20000mAh Power Bank,High-capacity portable charging bank with USB output,1333.82,2,electronics
-usb-c-fast-charger,USB-C Fast Charger,Compact fast charger for compatible USB-C devices,1143.37,60,electronics
+wireless-bluetooth-headphones,Wireless Bluetooth Headphones,Premium wireless headphones with clear sound and comfortable ear cushions,4160.08,0,audio
+portable-bluetooth-speaker,Portable Bluetooth Speaker,Compact portable speaker for music at home or outdoors,3146.12,7,audio
+20000mah-power-bank,20000mAh Power Bank,High-capacity portable charging bank with USB output,1333.82,2,mobiles-accessories
+usb-c-fast-charger,USB-C Fast Charger,Compact fast charger for compatible USB-C devices,1143.37,60,mobiles-accessories
 smart-led-desk-lamp,Smart LED Desk Lamp,Adjustable LED desk lamp with multiple brightness levels,764.18,25,electronics
-usb-c-hub-7-in-1,USB-C Hub 7-in-1,Multiport USB-C hub for laptops and tablets,1384.81,2,electronics
-webcam-full-hd,Webcam Full HD,Full HD webcam for meetings and online classes,1358.14,60,electronics
-wireless-mouse,Wireless Mouse,Ergonomic wireless mouse for everyday computing,1021.42,60,electronics
+usb-c-hub-7-in-1,USB-C Hub 7-in-1,Multiport USB-C hub for laptops and tablets,1384.81,2,computers-accessories
+webcam-full-hd,Webcam Full HD,Full HD webcam for meetings and online classes,1358.14,60,computers-accessories
+wireless-mouse,Wireless Mouse,Ergonomic wireless mouse for everyday computing,1021.42,60,computers-accessories
 everyday-laptop-15-demo,Everyday Laptop 15,"Portable laptop for productivity, study and everyday computing",49940.88,60,computers-accessories
 mechanical-keyboard,Mechanical Keyboard,Mechanical keyboard with tactile keys for work and gaming,3386.84,40,computers-accessories
 laptop-stand-aluminium,Laptop Stand Aluminium,Adjustable laptop stand for a more comfortable desk setup,1800.75,0,computers-accessories
@@ -22,8 +22,8 @@ wireless-charging-stand,Wireless Charging Stand,Desk stand for compatible wirele
 classic-cotton-t-shirt,Classic Cotton T-Shirt,Soft cotton crew-neck T-shirt for everyday wear,354.16,12,fashion
 regular-fit-jeans,Regular Fit Jeans,Classic denim jeans with a regular fit,2226.05,100,fashion
 running-shoes,Running Shoes,"Lightweight shoes for walking, running and daily use",4575.17,18,fashion
-analog-wrist-watch,Analog Wrist Watch,Minimal analog watch with a comfortable strap,2646.53,2,fashion
-everyday-backpack,Everyday Backpack,"Roomy backpack for college, commuting and travel",781.48,7,fashion
+analog-wrist-watch,Analog Wrist Watch,Minimal analog watch with a comfortable strap,2646.53,2,wearables
+everyday-backpack,Everyday Backpack,"Roomy backpack for college, commuting and travel",781.48,7,bags-luggage
 stainless-steel-water-bottle,Stainless Steel Water Bottle,Reusable insulated bottle for daily hydration,994.76,2,home-kitchen
 nonstick-frying-pan,Nonstick Frying Pan,Everyday nonstick frying pan with ergonomic handle,1610.91,2,home-kitchen
 airtight-storage-container-set,Airtight Storage Container Set,Reusable containers for pantry and kitchen organization,817.14,40,home-kitchen
@@ -47,10 +47,10 @@ building-blocks-set,Building Blocks Set,Creative construction blocks for supervi
 family-board-game,Family Board Game,Easy-to-learn board game for family game nights,556.16,4,toys-games
 educational-puzzle-set,Educational Puzzle Set,Puzzle set designed for problem-solving practice,471.64,60,toys-games
 remote-control-car,Remote Control Car,Rechargeable remote control toy car,1715.26,100,toys-games
-reusable-food-storage-bags,Reusable Food Storage Bags,Washable reusable bags for kitchen storage,370.37,100,grocery-essentials
-microfiber-cleaning-cloths,Microfiber Cleaning Cloths,Multi-purpose cloths for household cleaning,288.79,7,grocery-essentials
-lunch-box-set,Lunch Box Set,Reusable lunch containers for school and office,997.13,4,grocery-essentials
-laundry-storage-basket,Laundry Storage Basket,Lightweight basket for laundry organization,857.57,2,grocery-essentials
+reusable-food-storage-bags,Reusable Food Storage Bags,Washable reusable bags for kitchen storage,370.37,100,home-kitchen
+microfiber-cleaning-cloths,Microfiber Cleaning Cloths,Multi-purpose cloths for household cleaning,288.79,7,home-kitchen
+lunch-box-set,Lunch Box Set,Reusable lunch containers for school and office,997.13,4,home-kitchen
+laundry-storage-basket,Laundry Storage Basket,Lightweight basket for laundry organization,857.57,2,home-kitchen
 electric-kettle-1-5l,Electric Kettle 1.5L,Electric kettle for boiling water at home or office,1705.94,2,home-appliances
 mixer-grinder,Mixer Grinder,Kitchen mixer grinder for everyday food preparation,2457.52,4,home-appliances
 table-fan,Table Fan,Compact table fan for personal cooling,2624.74,25,home-appliances
@@ -76,4 +76,147 @@ gaming-headset,Gaming Headset,Over-ear headset with microphone for gaming,1971.4
 fitness-band,Fitness Band,Activity band for steps and everyday fitness tracking,1890.54,18,wearables
 smart-watch,Smart Watch,Smart watch with notifications and activity features,9089.41,12,wearables
 digital-sports-watch,Digital Sports Watch,Lightweight digital watch for everyday use,858.18,7,wearables
-demo-laptop,Demo Laptop,A demo laptop for our e-commerce platform,75000.00,10,laptops
+demo-laptop,Demo Laptop,A demo laptop for our e-commerce platform,75000.00,10,computers-accessories
+wi-fi-smart-plug-16a,Wi-Fi Smart Plug 16A,Control connected appliances with scheduled switching and a Wi-Fi connection.,899.00,15,electronics
+digital-alarm-clock-with-led-display,Digital Alarm Clock with LED Display,"Bedside clock with a clear LED display, adjustable brightness and alarm settings.",649.00,20,electronics
+portable-mini-projector,Portable Mini Projector,Compact projector with HDMI input for movies and presentations in dim rooms.,6999.00,25,electronics
+universal-travel-adapter,Universal Travel Adapter,Multi-region travel adapter with USB charging ports for personal electronics.,1299.00,30,electronics
+rechargeable-emergency-lantern,Rechargeable Emergency Lantern,Portable LED lantern with a carry handle and rechargeable battery.,799.00,35,electronics
+digital-kitchen-timer,Digital Kitchen Timer,Compact countdown timer with a magnetic back and audible alerts.,349.00,40,electronics
+indoor-wi-fi-security-camera,Indoor Wi-Fi Security Camera,"Indoor camera with live viewing, motion alerts and a tabletop mounting base.",2199.00,45,electronics
+wireless-doorbell-kit,Wireless Doorbell Kit,Doorbell receiver and push button with selectable chimes for home entrances.,599.00,50,electronics
+rechargeable-aa-battery-pack,Rechargeable AA Battery Pack,Four rechargeable AA batteries supplied with a compatible charging unit.,999.00,15,electronics
+hdmi-cable-2-metres,HDMI Cable 2 Metres,Two-metre HDMI cable for connecting compatible displays and media devices.,399.00,20,electronics
+digital-multimeter,Digital Multimeter,"Handheld meter for checking voltage, resistance and electrical continuity.",749.00,25,electronics
+motion-sensor-night-light,Motion Sensor Night Light,Battery-powered light for cupboards and hallways with motion-triggered illumination.,449.00,30,electronics
+27-inch-ips-monitor,27-inch IPS Monitor,Full HD IPS desktop display with HDMI input and an adjustable tilt stand.,12999.00,35,computers-accessories
+external-hard-drive-2tb,External Hard Drive 2TB,Portable USB hard drive with 2TB capacity for backups and file storage.,6499.00,40,computers-accessories
+foldable-mobile-phone-stand,Foldable Mobile Phone Stand,Adjustable folding stand for hands-free video calls and desk viewing.,299.00,45,mobiles-accessories
+magnetic-car-charger-15w,Magnetic Car Charger 15W,Vent-mounted wireless charging holder for compatible phones and magnetic cases.,1499.00,50,mobiles-accessories
+usb-c-to-usb-c-cable-2-metres,USB-C to USB-C Cable 2 Metres,Two-metre charging and data cable with reinforced connectors.,399.00,15,mobiles-accessories
+waterproof-phone-pouch,Waterproof Phone Pouch,Clear sealed phone pouch with neck strap for splash protection during travel.,249.00,20,mobiles-accessories
+mobile-screen-cleaning-kit,Mobile Screen Cleaning Kit,Microfibre cloth and cleaning accessories for phone screens and cases.,199.00,25,mobiles-accessories
+3-in-1-retractable-charging-cable,3-in-1 Retractable Charging Cable,Compact retractable cable with multiple connectors for everyday charging.,549.00,30,mobiles-accessories
+linen-blend-casual-shirt,Linen Blend Casual Shirt,Breathable button-front shirt with a regular fit for everyday casual wear.,1199.00,35,fashion
+cotton-polo-t-shirt,Cotton Polo T-Shirt,Short-sleeve cotton polo with a ribbed collar and two-button placket.,699.00,40,fashion
+slim-fit-chino-trousers,Slim Fit Chino Trousers,Stretch cotton chinos with front pockets and a tapered everyday fit.,1399.00,45,fashion
+floral-printed-kurta,Floral Printed Kurta,Lightweight printed kurta with three-quarter sleeves for casual occasions.,899.00,50,fashion
+straight-fit-cotton-palazzo,Straight Fit Cotton Palazzo,Comfortable straight-leg palazzo trousers with an elasticated waist.,649.00,15,fashion
+denim-casual-jacket,Denim Casual Jacket,Button-front denim jacket with chest pockets and a regular fit.,1799.00,20,fashion
+lightweight-hooded-sweatshirt,Lightweight Hooded Sweatshirt,Soft hooded sweatshirt with a front kangaroo pocket and ribbed cuffs.,1299.00,25,fashion
+canvas-slip-on-sneakers,Canvas Slip-On Sneakers,Everyday canvas shoes with slip-on construction and flexible soles.,999.00,30,fashion
+woven-leather-belt,Woven Leather Belt,Adjustable woven belt with a metal buckle for casual outfits.,599.00,35,fashion
+cotton-printed-scarf,Cotton Printed Scarf,Soft printed scarf for lightweight layering and everyday styling.,399.00,40,fashion
+bamboo-chopping-board,Bamboo Chopping Board,Durable bamboo food preparation board with a hanging hole.,599.00,45,home-kitchen
+silicone-cooking-utensil-set,Silicone Cooking Utensil Set,Heat-resistant cooking tools with comfortable handles for everyday meal preparation.,799.00,50,home-kitchen
+stainless-steel-cutlery-set,Stainless Steel Cutlery Set,"Coordinated spoons, forks and knives for a six-person dining table.",999.00,15,home-kitchen
+glass-spice-jar-set,Glass Spice Jar Set,Six clear spice jars with lids and a compact countertop storage rack.,699.00,20,home-kitchen
+python-programming-starter-guide,Python Programming Starter Guide,"Introductory programming guide covering variables, loops, functions and practical exercises.",499.00,25,books
+sql-practice-workbook,SQL Practice Workbook,"Hands-on workbook covering database queries, joins and aggregation exercises.",449.00,30,books
+web-design-basics,Web Design Basics,"Beginner reference covering HTML structure, CSS layouts and responsive design.",599.00,35,books
+everyday-indian-cooking,Everyday Indian Cooking,"Recipe collection with home-style meals, pantry guides and preparation tips.",699.00,40,books
+world-history-illustrated,World History Illustrated,"Illustrated overview of world civilizations, major events and historical timelines.",899.00,45,books
+mindful-habits-journal,Mindful Habits Journal,Guided journal with daily reflection prompts and habit tracking pages.,349.00,50,books
+nature-discovery-for-children,Nature Discovery for Children,"Illustrated introduction to plants, animals and outdoor observation for young readers.",399.00,15,books
+practical-personal-budgeting,Practical Personal Budgeting,"Accessible workbook for tracking expenses, setting savings goals and planning a budget.",449.00,20,books
+gentle-foaming-face-wash-150ml,Gentle Foaming Face Wash 150ml,Daily rinse-off face wash with a light foaming texture for personal skincare routines.,299.00,25,beauty-personal-care
+hydrating-body-wash-250ml,Hydrating Body Wash 250ml,Liquid body cleanser with a fresh fragrance for daily shower use.,349.00,30,beauty-personal-care
+nourishing-hair-conditioner-200ml,Nourishing Hair Conditioner 200ml,Rinse-out conditioner that helps detangle hair and improve manageability.,299.00,35,beauty-personal-care
+daily-care-shampoo-250ml,Daily Care Shampoo 250ml,Everyday shampoo for cleansing hair and scalp as part of a regular care routine.,329.00,40,beauty-personal-care
+lip-balm-duo,Lip Balm Duo,Two portable lip balms with a smooth finish for everyday moisture care.,199.00,45,beauty-personal-care
+manicure-grooming-kit,Manicure Grooming Kit,"Compact nail care kit with clippers, a nail file and storage case.",499.00,50,beauty-personal-care
+makeup-brush-set,Makeup Brush Set,Assorted face and eye makeup brushes supplied with a travel pouch.,699.00,15,beauty-personal-care
+wide-tooth-detangling-comb,Wide Tooth Detangling Comb,Wide-tooth comb with a comfortable handle for gentle hair detangling.,149.00,20,beauty-personal-care
+hand-cream-set-3-pack,Hand Cream Set 3 Pack,Three travel-size hand creams for convenient everyday moisturising.,399.00,25,beauty-personal-care
+resistance-band-set,Resistance Band Set,Five exercise bands with handles and a carry pouch for variable-resistance workouts.,799.00,30,sports-fitness
+foam-roller-33cm,Foam Roller 33cm,Textured foam roller for stretching and warm-up routines.,649.00,35,sports-fitness
+cricket-tennis-ball-pack,Cricket Tennis Ball Pack,Pack of six tennis-style cricket balls for recreational play.,299.00,40,sports-fitness
+football-size-5,Football Size 5,Standard size-five recreational football for practice and casual matches.,899.00,45,sports-fitness
+table-tennis-bat-set,Table Tennis Bat Set,Two table tennis bats and three balls for beginner practice.,699.00,50,sports-fitness
+adjustable-hand-grip-trainer,Adjustable Hand Grip Trainer,Handheld grip trainer with adjustable resistance for progressive exercise.,349.00,15,sports-fitness
+push-up-bar-pair,Push-Up Bar Pair,Two stable push-up handles with non-slip grips for floor workouts.,499.00,20,sports-fitness
+swimming-goggles,Swimming Goggles,Adjustable swim goggles with a flexible strap and protective storage pouch.,449.00,25,sports-fitness
+wooden-shape-sorting-box,Wooden Shape Sorting Box,Colourful wooden sorting toy with matching shapes for supervised play.,599.00,30,toys-games
+die-cast-vehicle-set,Die-Cast Vehicle Set,Set of miniature metal-bodied toy vehicles for imaginative play.,499.00,35,toys-games
+kids-art-and-craft-kit,Kids Art and Craft Kit,"Assorted paper, colours and craft accessories for creative activities.",799.00,40,toys-games
+magnetic-drawing-board,Magnetic Drawing Board,Reusable drawing board with a stylus and sliding eraser.,449.00,45,toys-games
+junior-chess-set,Junior Chess Set,Foldable chess board with a full set of pieces for learning and practice.,599.00,50,toys-games
+animal-figurine-collection,Animal Figurine Collection,Assorted animal figures for imaginative scenes and storytelling.,699.00,15,toys-games
+soft-plush-teddy-bear,Soft Plush Teddy Bear,Soft fabric teddy bear with stitched details for cuddles and play.,649.00,20,toys-games
+domino-tile-set,Domino Tile Set,Classic domino tiles supplied in a storage box for family games.,349.00,25,toys-games
+kids-science-experiment-kit,Kids Science Experiment Kit,Beginner science activities with materials and instructions for adult-supervised experiments.,999.00,30,toys-games
+two-slice-pop-up-toaster,Two-Slice Pop-Up Toaster,Countertop toaster with adjustable browning and a removable crumb tray.,1499.00,35,home-appliances
+electric-rice-cooker-18l,Electric Rice Cooker 1.8L,Rice cooker with a removable cooking pot and keep-warm setting.,2199.00,40,home-appliances
+dry-iron-1000w,Dry Iron 1000W,Lightweight electric iron with temperature control for everyday garment care.,899.00,45,home-appliances
+handheld-garment-steamer,Handheld Garment Steamer,Portable fabric steamer with a refillable water tank for garment refreshing.,1799.00,50,home-appliances
+compact-vacuum-cleaner,Compact Vacuum Cleaner,Home vacuum cleaner with reusable dust collection and basic cleaning attachments.,3499.00,15,home-appliances
+induction-cooktop-1800w,Induction Cooktop 1800W,Countertop induction hob with power settings for compatible cookware.,2499.00,20,home-appliances
+hand-blender-250w,Hand Blender 250W,Immersion blender for soups and sauces with an easy-grip handle.,1199.00,25,home-appliances
+electric-sandwich-maker,Electric Sandwich Maker,Compact sandwich maker with non-stick plates and a locking handle.,1599.00,30,home-appliances
+personal-air-cooler,Personal Air Cooler,Small-room evaporative cooler with adjustable fan settings and a refillable tank.,2999.00,35,home-appliances
+foldable-laptop-table,Foldable Laptop Table,Portable folding table with a flat surface for working or reading.,1299.00,40,furniture
+two-tier-bedside-table,Two-Tier Bedside Table,Compact bedside table with an open storage shelf for daily essentials.,2499.00,45,furniture
+four-shelf-shoe-rack,Four-Shelf Shoe Rack,Freestanding shoe organiser with four open shelves for entryway storage.,1799.00,50,furniture
+upholstered-dining-chair,Upholstered Dining Chair,Padded dining chair with a fabric seat and sturdy support legs.,3499.00,15,furniture
+compact-coffee-table,Compact Coffee Table,Low-profile living room table with a lower shelf for books and accessories.,3999.00,20,furniture
+wall-mounted-display-shelf,Wall Mounted Display Shelf,Set of wall shelves with mounting hardware for small decorative items.,1499.00,25,furniture
+multipurpose-storage-cabinet,Multipurpose Storage Cabinet,Freestanding cabinet with doors and internal shelving for household storage.,5999.00,30,furniture
+fabric-storage-ottoman,Fabric Storage Ottoman,Padded footrest with an internal compartment for lightweight household items.,1999.00,35,furniture
+adjustable-bar-stool,Adjustable Bar Stool,Height-adjustable stool with a footrest for counter-height seating.,4499.00,40,furniture
+folding-balcony-chair,Folding Balcony Chair,Foldable outdoor-style chair for covered balconies and compact seating areas.,2299.00,45,furniture
+car-microfibre-wash-mitt,Car Microfibre Wash Mitt,Soft wash mitt for hand-washing vehicle body panels with suitable car shampoo.,299.00,50,automotive
+portable-tyre-inflator,Portable Tyre Inflator,Compact vehicle-powered tyre inflator with a pressure display and storage pouch.,2499.00,15,automotive
+car-sunshade-pair,Car Sunshade Pair,Foldable window sunshades for reducing direct sunlight inside parked vehicles.,499.00,20,automotive
+car-boot-organiser,Car Boot Organiser,Foldable boot organiser with divided compartments for everyday vehicle storage.,899.00,25,automotive
+motorcycle-rain-cover,Motorcycle Rain Cover,Lightweight motorcycle cover with an elasticated hem for outdoor storage.,699.00,30,automotive
+car-seat-gap-organiser,Car Seat Gap Organiser,Slim organiser for keeping small items within reach beside a car seat.,399.00,35,automotive
+vehicle-dashboard-duster,Vehicle Dashboard Duster,Soft dashboard duster for dry cleaning interior vehicle surfaces.,249.00,40,automotive
+car-air-freshener-vent-clip,Car Air Freshener Vent Clip,Compact vent-mounted fragrance accessory for vehicle interiors.,199.00,45,automotive
+motorcycle-chain-cleaning-brush,Motorcycle Chain Cleaning Brush,Multi-sided brush for cleaning motorcycle chains during routine maintenance.,299.00,50,automotive
+car-emergency-tool-kit,Car Emergency Tool Kit,"Portable kit with basic hand tools, gloves and a storage case.",1499.00,15,automotive
+a4-printer-paper-500-sheets,A4 Printer Paper 500 Sheets,Ream of A4 plain paper for everyday printing and photocopying.,349.00,20,office-products
+desktop-stapler-with-staples,Desktop Stapler with Staples,Office stapler with a starter supply of staples for routine paperwork.,249.00,25,office-products
+sticky-notes-colour-pack,Sticky Notes Colour Pack,Assorted sticky note pads for reminders and temporary page markers.,199.00,30,office-products
+lever-arch-file-set,Lever Arch File Set,Set of document files with lever mechanisms and spine labels.,599.00,35,office-products
+whiteboard-60-x-45cm,Whiteboard 60 x 45cm,"Wall-mountable dry-erase board for notes, planning and presentations.",899.00,40,office-products
+whiteboard-marker-pack,Whiteboard Marker Pack,Assorted dry-erase markers for use on compatible whiteboard surfaces.,249.00,45,office-products
+scientific-calculator,Scientific Calculator,"Non-programmable calculator for arithmetic, trigonometry and scientific calculations.",999.00,50,office-products
+paper-shredder-compact,Paper Shredder Compact,Compact paper shredder with a removable waste bin for home-office use.,3499.00,15,office-products
+metal-bookend-pair,Metal Bookend Pair,Two metal bookends for supporting books and files on a shelf.,399.00,20,office-products
+document-tray-three-tier,Document Tray Three Tier,Stacked desktop trays for organising incoming papers and active documents.,699.00,25,office-products
+water-resistant-daypack-20l,Water Resistant Daypack 20L,Compact daypack with padded shoulder straps and zipped everyday storage.,1299.00,30,bags-luggage
+weekender-travel-tote,Weekender Travel Tote,Spacious zip-top tote with shoulder straps for short trips and daily use.,999.00,35,bags-luggage
+crossbody-sling-bag,Crossbody Sling Bag,Small crossbody bag with an adjustable strap and internal storage pockets.,699.00,40,bags-luggage
+packing-cube-set,Packing Cube Set,Zipped travel organisers in assorted sizes for clothing and small essentials.,799.00,45,bags-luggage
+laptop-messenger-bag-14-inch,Laptop Messenger Bag 14-inch,Shoulder bag with a padded compartment for laptops up to 14 inches.,1499.00,50,bags-luggage
+foldable-shopping-tote,Foldable Shopping Tote,Reusable shopping tote that folds into a small storage pouch.,249.00,15,bags-luggage
+travel-toiletry-bag,Travel Toiletry Bag,Zipped wash bag with compartments for travel-size personal care items.,499.00,20,bags-luggage
+soft-shell-check-in-suitcase,Soft Shell Check-In Suitcase,Wheeled travel suitcase with telescopic handle and internal packing straps.,3999.00,25,bags-luggage
+waist-pack-with-adjustable-belt,Waist Pack with Adjustable Belt,Compact waist bag with zipped compartments for walking and travel.,599.00,30,bags-luggage
+true-wireless-earbuds,True Wireless Earbuds,Wireless in-ear earbuds with a charging case and touch playback controls.,1799.00,35,audio
+compact-tv-soundbar,Compact TV Soundbar,Slim stereo soundbar with wired input and Bluetooth connectivity.,3999.00,40,audio
+portable-fm-radio,Portable FM Radio,"Portable radio with FM tuning, a speaker and a telescopic antenna.",899.00,45,audio
+usb-desktop-speakers,USB Desktop Speakers,Pair of compact USB-powered desktop speakers with volume control.,999.00,50,audio
+clip-on-lavalier-microphone,Clip-On Lavalier Microphone,Wired clip-on microphone for recording voice on compatible devices.,649.00,15,audio
+wired-over-ear-headphones,Wired Over-Ear Headphones,Over-ear headphones with a wired audio connection and padded ear cushions.,1199.00,20,audio
+bluetooth-neckband-earphones,Bluetooth Neckband Earphones,Wireless neckband earphones with in-line controls for everyday listening.,1299.00,25,audio
+portable-karaoke-speaker,Portable Karaoke Speaker,Rechargeable speaker with a handheld microphone for home karaoke sessions.,2999.00,30,audio
+rgb-gaming-keyboard,RGB Gaming Keyboard,Wired keyboard with illuminated keys and dedicated gaming-oriented controls.,2499.00,35,gaming
+programmable-gaming-mouse,Programmable Gaming Mouse,Wired mouse with adjustable sensitivity and configurable buttons.,1499.00,40,gaming
+racing-steering-wheel-controller,Racing Steering Wheel Controller,USB steering wheel and pedal set for compatible racing games.,7999.00,45,gaming
+controller-charging-dock,Controller Charging Dock,Dual controller charging stand for supported rechargeable game controllers.,1299.00,50,gaming
+rgb-headset-stand,RGB Headset Stand,Desk headset stand with decorative lighting and cable organisation.,999.00,15,gaming
+handheld-console-carry-case,Handheld Console Carry Case,Protective travel case with internal storage for compatible handheld consoles.,899.00,20,gaming
+game-controller-grip-covers,Game Controller Grip Covers,Textured controller grip covers for compatible thumbsticks and handles.,349.00,25,gaming
+gaming-laptop-cooling-pad,Gaming Laptop Cooling Pad,Ventilated laptop stand with powered cooling fans for compatible laptops.,1799.00,30,gaming
+arcade-fight-stick-usb,Arcade Fight Stick USB,USB arcade-style joystick and button controller for compatible games.,4499.00,35,gaming
+gaming-desk-mat-xxl,Gaming Desk Mat XXL,Extended desk mat with a stitched edge for keyboard and mouse placement.,799.00,40,gaming
+round-dial-bluetooth-watch,Round Dial Bluetooth Watch,Round-screen watch with phone notifications and everyday activity tracking.,2499.00,45,wearables
+kids-digital-watch,Kids Digital Watch,Lightweight digital wristwatch with a clear time display and adjustable strap.,599.00,50,wearables
+classic-metal-strap-watch,Classic Metal Strap Watch,Analog wristwatch with a metal bracelet and a simple everyday dial.,1999.00,15,wearables
+minimal-leather-strap-watch,Minimal Leather Strap Watch,Slim analog watch with a leather-style strap and classic hour markers.,1499.00,20,wearables
+pedometer-activity-tracker,Pedometer Activity Tracker,Compact wearable step counter for basic daily activity tracking.,799.00,25,wearables
+gps-running-watch,GPS Running Watch,Sports watch with GPS route recording and training activity modes.,6999.00,30,wearables
+silicone-watch-strap-22mm,Silicone Watch Strap 22mm,Replacement silicone strap for watches that use standard 22mm fittings.,299.00,35,wearables
+woven-watch-strap-20mm,Woven Watch Strap 20mm,Adjustable woven replacement strap for compatible 20mm watch fittings.,399.00,40,wearables
+watch-storage-case,Watch Storage Case,Protective storage case with padded compartments for wristwatches.,899.00,45,wearables

@@ -16,14 +16,14 @@ async function main() {
         }
     });
 
-    const laptops = await prisma.category.upsert({
+    const computers = await prisma.category.upsert({
         where: {
-            slug: "laptops"
+            slug: "computers-accessories"
         },
         update: {},
         create: {
-            name: "Laptops",
-            slug: "laptops"
+            name: "Computers & Accessories",
+            slug: "computers-accessories"
         }
     });
 
@@ -38,13 +38,13 @@ async function main() {
             description: "A demo laptop for our e-commerce platform",
             price: 75000,
             stock: 10,
-            categoryId: laptops.id
+            categoryId: computers.id
         }
     });
 
     console.log("Created categories:");
     console.log(electronics);
-    console.log(laptops);
+    console.log(computers);
 
     console.log("Created product:");
     console.log(product);
