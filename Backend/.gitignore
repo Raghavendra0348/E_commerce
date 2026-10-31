@@ -56,3 +56,6 @@ desktop.ini
 *.swo
 *~
 *.bak
+
+# Locally collected product images and manifests (do not commit)
+downloads/products/
