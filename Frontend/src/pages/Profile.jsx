@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -83,7 +84,7 @@ export default function Profile() {
       <div className="mx-auto max-w-5xl px-4 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]">Your Account</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]"><T>{"Your Account"}</T></h1>
           <p className="text-sm text-[#565959] mt-0.5">
             Manage your personal profile, credentials, and saved addresses
           </p>
@@ -100,7 +101,7 @@ export default function Profile() {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                Your Orders
+                <T>{"Your Orders"}</T>
               </h3>
               <p className="text-xs text-[#565959] truncate">Track, return, or buy again</p>
             </div>
@@ -116,7 +117,7 @@ export default function Profile() {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                Your Addresses
+                <T>{"Your Addresses"}</T>
               </h3>
               <p className="text-xs text-[#565959] truncate">Edit addresses for orders</p>
             </div>
@@ -132,7 +133,7 @@ export default function Profile() {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                Your Wishlist
+                <T>{"Your Wishlist"}</T>
               </h3>
               <p className="text-xs text-[#565959] truncate">View saved items</p>
             </div>
@@ -155,7 +156,7 @@ export default function Profile() {
             />
 
             {/* Session Management Card */}
-            <div className="bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-3">
+            <div className="account-form-panel bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-3">
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-[#067D62]" />
                 <h3 className="text-sm font-semibold text-[#0F1111]">Active Sessions</h3>

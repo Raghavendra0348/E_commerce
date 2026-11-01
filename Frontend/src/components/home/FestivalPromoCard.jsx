@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { useCategories } from "@/hooks/useCategories";
@@ -22,9 +23,9 @@ export default function FestivalPromoCard({ card }) {
   return (
     <Link id={`festival-card-${card.slug}`} className={`festival-slide festival-promo-card festival-promo-${card.tone}`} to={href} aria-label={`Shop ${card.label}`}>
       <div className="festival-promo-copy">
-        <h2>{card.title}</h2>
-        <p>{card.subtitle}</p>
-        <span className="festival-promo-eyebrow"><Sparkles size={14} aria-hidden="true" />{card.label}</span>
+        <h2><T>{card.title}</T></h2>
+        <p><T>{card.subtitle}</T></p>
+        <span className="festival-promo-eyebrow"><Sparkles size={14} aria-hidden="true" /><T>{card.label}</T></span>
       </div>
       <div className="festival-promo-products" aria-label={`${card.label} preview`}>
         {isLoading ? [0, 1, 2].map(index => <Skeleton key={index} className="festival-promo-product" />) : products.length ? products.map(product => <div className="festival-promo-product" key={product.id}><ProductImage src={product.images?.[0]?.url || product.imageUrl} alt={product.name} loading="lazy" /></div>) : <div className="festival-promo-empty"><Sparkles size={42} aria-hidden="true" /><span>Explore the collection</span></div>}

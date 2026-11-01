@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { SORT_OPTIONS } from "@/lib/constants";
 import {
   DropdownMenu,
@@ -15,7 +16,7 @@ export default function ProductSort({ value, onChange }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="sm" className="gap-1.5 whitespace-nowrap">
-          Sort: {current.label}
+          <T>{"Sort"}</T>: <T>{current.label}</T>
           <ChevronDown className="h-3.5 w-3.5" />
         </Button>
       </DropdownMenuTrigger>
@@ -26,7 +27,7 @@ export default function ProductSort({ value, onChange }) {
             onClick={() => onChange(opt.value)}
             className="flex items-center justify-between"
           >
-            {opt.label}
+            <T>{opt.label}</T>
             {opt.value === value && <Check className="h-4 w-4 text-[#FF9900]" />}
           </DropdownMenuItem>
         ))}

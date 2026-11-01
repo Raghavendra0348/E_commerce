@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Plus, Check, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -45,7 +46,7 @@ export default function AddressSelector({
             onClick={onAddNew}
             className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
           >
-            Add Address
+            <T>{"Add Address"}</T>
           </Button>
         </div>
       ) : (

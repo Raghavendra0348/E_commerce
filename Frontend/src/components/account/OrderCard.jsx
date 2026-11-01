@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { Link } from "react-router-dom";
 import { Clock, CheckCircle, Package, Truck, XCircle, RotateCcw, ChevronRight } from "lucide-react";
@@ -36,10 +37,10 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#D5D9D9] shadow-2xs overflow-hidden">
+    <div id={`order-card-${order.id}`} className="account-order-card min-w-0 bg-white rounded-lg border border-[#D5D9D9] shadow-2xs overflow-hidden">
       {/* Header Ribbon */}
       <div className="bg-[#F0F2F2] border-b border-[#D5D9D9] px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-y-3 text-xs text-[#565959]">
-        <div className="flex items-center gap-6 sm:gap-10">
+        <div className="grid min-w-0 grid-cols-2 sm:flex items-start sm:items-center gap-3 sm:gap-10">
           <div>
             <span className="block uppercase text-[10px] font-semibold tracking-wider text-[#565959]">
               Order Placed
@@ -48,7 +49,7 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
           </div>
           <div>
             <span className="block uppercase text-[10px] font-semibold tracking-wider text-[#565959]">
-              Total
+              <T>{"Total"}</T>
             </span>
             <span className="font-semibold text-[#0F1111]">{formatPrice(order.totalAmount)}</span>
           </div>
@@ -56,7 +57,7 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
             <span className="block uppercase text-[10px] font-semibold tracking-wider text-[#565959]">
               Ship To
             </span>
-            <span className="font-medium text-[#0F1111]">
+            <span className="font-medium text-[#0F1111] break-words">
               {order.shippingAddress?.name || "Customer"}
             </span>
           </div>
@@ -70,7 +71,7 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
             to={`/account/orders/${order.id}`}
             className="text-[#007185] hover:text-[#C7511F] hover:underline font-medium"
           >
-            View order details
+            <T>{"View order details"}</T>
           </Link>
         </div>
       </div>
@@ -78,10 +79,10 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
       {/* Body */}
       <div className="p-4 sm:p-6 space-y-4">
         {/* Status Pill */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border", statusCfg.color)}>
             <StatusIcon className="h-3.5 w-3.5" />
-            {statusCfg.label}
+            <T>{statusCfg.label}</T>
           </span>
           {order.paymentMethod === "COD" && (
             <span className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded border border-gray-200">
@@ -125,7 +126,7 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
                 </div>
               </div>
 
-              <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+              <div className="flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
                 {onBuyAgain && (
                   <Button
                     variant="outline"
@@ -135,7 +136,7 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
                     className="text-xs h-8 border-[#FF9900] bg-[#FFF8E7] hover:bg-[#FFE5B4] text-[#0F1111] font-medium"
                   >
                     <RotateCcw className="h-3 w-3 mr-1 text-[#FF9900]" />
-                    {isBuyingAgainId === item.id ? "Adding..." : "Buy it again"}
+                    <T>{isBuyingAgainId === item.id ? "Adding..." : "Buy it again"}</T>
                   </Button>
                 )}
 

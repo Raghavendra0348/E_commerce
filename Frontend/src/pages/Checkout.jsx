@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -28,13 +29,22 @@ export default function Checkout() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useAuthStore();
-  const { cart, items, subtotal, itemCount, fetchCart } = useCart();
+  const { items: liveItems, subtotal: liveSubtotal, itemCount: liveItemCount, isLoading: cartLoading, fetchCart } = useCart();
 
   const [currentStep, setCurrentStep] = useState(0); // 0 = Address, 1 = Payment, 2 = Review
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [savingAddress, setSavingAddress] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("ONLINE"); // ONLINE or COD
+  const [reviewCart, setReviewCart] = useState(null);
+  const [pendingOrder, setPendingOrder] = useState(null);
+  const items = currentStep === 2 && reviewCart ? reviewCart.items : liveItems;
+  const subtotal = pendingOrder ? Number(pendingOrder.totalAmount) : currentStep === 2 && reviewCart ? reviewCart.subtotal : liveSubtotal;
+  const itemCount = currentStep === 2 && reviewCart ? reviewCart.itemCount : liveItemCount;
+  const reviewOrder = () => {
+    setReviewCart({ items: liveItems, subtotal: liveSubtotal, itemCount: liveItemCount });
+    setCurrentStep(2);
+  };
 
   // Fetch saved addresses
   const { data: addresses = [], isLoading: addressesLoading } = useQuery({
@@ -74,7 +84,10 @@ export default function Checkout() {
   const selectedAddress = addresses.find((a) => a.id === selectedAddressId);
 
   // If cart is empty, redirect
-  if (!items || items.length === 0) {
+  if (cartLoading && liveItems.length === 0 && !reviewCart) {
+    return <div id="checkout-loading" role="status" className="p-12 text-center">Loading your cart...</div>;
+  }
+  if ((!items || items.length === 0) && !pendingOrder) {
     return (
       <div className="min-h-[70vh] bg-[#EAEDED] py-12 px-4 flex items-center justify-center">
         <div className="bg-white rounded-lg border border-[#D5D9D9] p-8 max-w-md w-full text-center space-y-4 shadow-xs">
@@ -87,7 +100,7 @@ export default function Checkout() {
             asChild
             className="w-full bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
           >
-            <Link to="/products">Browse Products</Link>
+            <Link to="/products"><T>{"Browse Products"}</T></Link>
           </Button>
         </div>
       </div>
@@ -100,7 +113,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEDED]">
+    <div id="checkout-page" className="checkout-page min-h-screen bg-[#EAEDED]">
       {/* Checkout Minimal Top Header */}
       <header className="bg-[#131921] text-white py-3 px-4 border-b border-white/10">
         <div className="mx-auto max-w-[1200px] flex items-center justify-between">
@@ -162,7 +175,7 @@ export default function Checkout() {
                       }}
                       className="bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] font-bold text-xs border border-[#FCD200]"
                     >
-                      Use this address & Continue
+                      <T>{"Use this address & Continue"}</T>
                     </Button>
                   </div>
                 )}
@@ -172,22 +185,22 @@ export default function Checkout() {
             {/* ─── STEP 1: Payment Method ─────────────────────────────────── */}
             {currentStep === 1 && (
               <div className="space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-[#D5D9D9]">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[#D5D9D9]">
                   <h2 className="text-base font-bold text-[#0F1111] flex items-center gap-2">
                     <CreditCard className="h-5 w-5 text-[#FF9900]" />
-                    Select a payment method
+                    <T>{"Select a payment method"}</T>
                   </h2>
                   <button
                     onClick={() => setCurrentStep(0)}
                     className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline flex items-center gap-0.5"
                   >
-                    <ChevronLeft className="h-3.5 w-3.5" /> Change Address
+                    <ChevronLeft className="h-3.5 w-3.5" /> <T>{"Change Address"}</T>
                   </button>
                 </div>
 
                 {/* Selected Address Preview */}
-                <div className="bg-white rounded-lg border border-[#D5D9D9] p-3 text-xs text-[#565959] flex items-center justify-between">
-                  <div>
+                <div className="bg-white rounded-lg border border-[#D5D9D9] p-3 text-xs text-[#565959] flex items-start justify-between gap-2">
+                  <div className="min-w-0 break-words">
                     <span className="font-semibold text-[#0F1111]">
                       Shipping to: {selectedAddress?.name}
                     </span>{" "}
@@ -198,7 +211,7 @@ export default function Checkout() {
                     onClick={() => setCurrentStep(0)}
                     className="text-[#007185] hover:text-[#C7511F] hover:underline font-medium ml-2"
                   >
-                    Change
+                    <T>{"Change"}</T>
                   </button>
                 </div>
 
@@ -264,12 +277,12 @@ export default function Checkout() {
                   </label>
                 </div>
 
-                <div className="pt-2 flex items-center gap-3">
+                <div className="checkout-step-actions pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <Button
-                    onClick={() => setCurrentStep(2)}
+                    onClick={reviewOrder}
                     className="bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] font-bold text-xs border border-[#FCD200]"
                   >
-                    Use this payment method & Continue
+                    <T>{"Use this payment method & Continue"}</T>
                   </Button>
                   <Button
                     variant="outline"
@@ -277,7 +290,7 @@ export default function Checkout() {
                     onClick={() => setCurrentStep(0)}
                     className="text-xs"
                   >
-                    Back
+                    <T>{"Back"}</T>
                   </Button>
                 </div>
               </div>
@@ -286,15 +299,16 @@ export default function Checkout() {
             {/* ─── STEP 2: Review & Place Order ───────────────────────────── */}
             {currentStep === 2 && (
               <div className="space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-[#D5D9D9]">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-[#D5D9D9]">
                   <h2 className="text-base font-bold text-[#0F1111]">
-                    Review your order & place it
+                    <T>{"Review your order & place it"}</T>
                   </h2>
                   <button
+                    disabled={!!pendingOrder}
                     onClick={() => setCurrentStep(1)}
                     className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline flex items-center gap-0.5"
                   >
-                    <ChevronLeft className="h-3.5 w-3.5" /> Back to Payment
+                    <ChevronLeft className="h-3.5 w-3.5" /> <T>{"Back to Payment"}</T>
                   </button>
                 </div>
 
@@ -302,8 +316,8 @@ export default function Checkout() {
                   items={items}
                   shippingAddress={selectedAddress}
                   paymentMethod={paymentMethod}
-                  onEditAddress={() => setCurrentStep(0)}
-                  onEditPayment={() => setCurrentStep(1)}
+                  onEditAddress={pendingOrder ? undefined : () => setCurrentStep(0)}
+                  onEditPayment={pendingOrder ? undefined : () => setCurrentStep(1)}
                 />
               </div>
             )}
@@ -311,8 +325,8 @@ export default function Checkout() {
 
           {/* Right Column: Order Summary & Place Order CTA */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg border border-[#D5D9D9] p-5 space-y-4 shadow-xs sticky top-20">
-              <h3 className="text-sm font-bold text-[#0F1111]">Order Summary</h3>
+            <div className="checkout-summary min-w-0 bg-white rounded-lg border border-[#D5D9D9] p-4 sm:p-5 space-y-4 shadow-xs lg:sticky lg:top-20">
+              <h3 className="text-sm font-bold text-[#0F1111]"><T>{"Order Summary"}</T></h3>
 
               <div className="space-y-2 text-xs text-[#0F1111]">
                 <div className="flex justify-between">
@@ -324,13 +338,13 @@ export default function Checkout() {
 
                 <div className="flex justify-between">
                   <span className="text-[#565959]">Delivery / Shipping:</span>
-                  <span className="text-[#067D62] font-semibold">FREE</span>
+                  <span className="text-[#067D62] font-semibold"><T>{"FREE"}</T></span>
                 </div>
 
                 <Separator className="my-2" />
 
                 <div className="flex justify-between text-base font-bold text-[#B12704]">
-                  <span>Order Total:</span>
+                  <span><T>{"Order Total:"}</T></span>
                   <span>{formatPrice(subtotal)}</span>
                 </div>
               </div>
@@ -339,6 +353,8 @@ export default function Checkout() {
               {currentStep === 2 ? (
                 <div className="pt-2">
                   <PaymentButton
+                    existingOrder={pendingOrder}
+                    onOrderCreated={setPendingOrder}
                     addressId={selectedAddressId}
                     paymentMethod={paymentMethod}
                     user={user}
@@ -359,12 +375,12 @@ export default function Checkout() {
                       }
                       setCurrentStep(1);
                     } else if (currentStep === 1) {
-                      setCurrentStep(2);
+                      reviewOrder();
                     }
                   }}
                   className="w-full bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] font-bold text-xs border border-[#FCD200]"
                 >
-                  Continue
+                  <T>{"Continue"}</T>
                 </Button>
               )}
 

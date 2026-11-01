@@ -20,8 +20,8 @@ export default function StarRating({
   const stars = Array.from({ length: maxStars }, (_, i) => i + 1);
 
   return (
-    <div className="flex items-center gap-1">
-      <div className="flex items-center">
+    <div className="flex min-w-0 flex-wrap items-center gap-1">
+      <div className="flex shrink-0 items-center">
         {stars.map((star) => (
           <button
             key={star}

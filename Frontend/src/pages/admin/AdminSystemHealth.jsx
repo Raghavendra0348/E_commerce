@@ -99,7 +99,7 @@ export default function AdminSystemHealth() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-[#D5D9D9]">
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <h1 className="text-2xl font-bold text-[#0F1111]">
               System Health & SRE Observability
             </h1>
@@ -128,7 +128,7 @@ export default function AdminSystemHealth() {
         </div>
 
         {/* Polling & Manual Controls */}
-        <div className="flex items-center gap-3 self-start sm:self-auto">
+        <div className="flex flex-wrap items-center gap-3 self-start sm:self-auto">
           <label className="flex items-center gap-2 text-xs font-semibold text-[#565959] cursor-pointer select-none">
             <input
               type="checkbox"
@@ -265,7 +265,7 @@ export default function AdminSystemHealth() {
 
       {/* SRE Reliability Matrix Table */}
       <div className="bg-white border border-[#D5D9D9] rounded-lg shadow-xs overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#D5D9D9] flex items-center justify-between">
+        <div className="px-4 sm:px-5 py-4 border-b border-[#D5D9D9] flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="font-bold text-base text-[#0F1111]">
               Production Service Level Objectives (SLOs)
@@ -281,7 +281,7 @@ export default function AdminSystemHealth() {
           )}
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" role="region" aria-label="Service health metrics, scroll horizontally for more columns" tabIndex={0}>
           <table className="w-full text-left text-sm">
             <thead className="bg-[#F0F2F2] text-xs font-bold uppercase tracking-wider text-[#0F1111] border-b border-[#D5D9D9]">
               <tr>
@@ -374,7 +374,7 @@ export default function AdminSystemHealth() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button
               size="sm"
               variant="outline"
@@ -397,7 +397,7 @@ export default function AdminSystemHealth() {
 
         {probeResult ? (
           <div className="mt-4 p-4 rounded-md bg-[#0F1111] text-[#00FF66] font-mono text-xs overflow-x-auto">
-            <div className="flex items-center justify-between text-white/70 pb-2 mb-2 border-b border-white/10">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-white/70 pb-2 mb-2 border-b border-white/10">
               <span className="font-bold text-[#FF9900]">
                 {probeResult.endpoint}
               </span>

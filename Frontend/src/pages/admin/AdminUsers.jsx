@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -153,7 +154,7 @@ export default function AdminUsers() {
                   onClick={() => setRoleModalUser(null)}
                   className="text-xs"
                 >
-                  Cancel
+                  <T>{"Cancel"}</T>
                 </Button>
                 <Button
                   size="sm"

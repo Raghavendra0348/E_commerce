@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +18,7 @@ export default function ProductCard({ product, variant = "default" }) {
   const [isWishlisting, setIsWishlisting] = useState(false);
   const [wishlisted, setWishlisted] = useState(false);
   const { isAuthenticated } = useAuthStore();
-  const { fetchCart, setDrawerOpen } = useCartStore();
+  const { fetchCart } = useCartStore();
   const navigate = useNavigate();
 
   const isOutOfStock = product.stock === 0;
@@ -36,7 +37,6 @@ export default function ProductCard({ product, variant = "default" }) {
     try {
       await api.post("/cart/items", { productId: product.id, quantity: 1 });
       await fetchCart();
-      setDrawerOpen(true);
       toast.success(`Added to cart`, {
         description: product.name,
       });
@@ -80,14 +80,14 @@ export default function ProductCard({ product, variant = "default" }) {
       id={`product-card-${product.id}`}
       className={cn(
         variant === "catalog" && "catalog-product-card",
-        "group relative rounded-lg border border-[#EDEDED] bg-white overflow-hidden",
+        "site-product-card group relative rounded-lg border border-[#EDEDED] bg-white overflow-hidden",
         "transition-all duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] hover:-translate-y-0.5"
       )}
     >
       {/* Out of stock badge */}
       {isOutOfStock && (
         <div className="absolute top-2 left-2 z-10">
-          <Badge variant="danger">Out of Stock</Badge>
+          <Badge variant="danger"><T>{"Out of Stock"}</T></Badge>
         </div>
       )}
 
@@ -95,7 +95,7 @@ export default function ProductCard({ product, variant = "default" }) {
       <button
         onClick={handleWishlist}
         disabled={isWishlisting}
-        className="absolute top-2 right-2 z-10 rounded-full bg-white/80 p-1.5 shadow-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity hover:bg-white"
+        className="absolute top-2 right-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 shadow-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity hover:bg-white"
         aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
       >
         {wishlisted ? (
@@ -145,7 +145,7 @@ export default function ProductCard({ product, variant = "default" }) {
           size={variant === "catalog" ? "xl" : "sm"}
         />
 
-        {variant === "catalog" && <p className="catalog-availability">{isOutOfStock ? "Currently unavailable" : "Available to order"}</p>}
+        {variant === "catalog" && <p className="catalog-availability"><T>{isOutOfStock ? "Currently unavailable" : "Available to order"}</T></p>}
         {/* Low stock warning */}
         {product.stock > 0 && product.stock <= 5 && (
           <p className="text-xs text-[#CC0C39] font-medium">
@@ -155,6 +155,7 @@ export default function ProductCard({ product, variant = "default" }) {
 
         {/* Add to Cart */}
         <Button
+          type="button"
           size="sm"
           variant={variant === "catalog" ? "buynow" : "default"}
           className="product-card-cart w-full mt-1"
@@ -169,12 +170,12 @@ export default function ProductCard({ product, variant = "default" }) {
           {isAddingToCart ? (
             <span className="flex items-center gap-2">
               <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-[#0F1111]/30 border-t-[#0F1111]" />
-              Adding...
+              <T>{"Adding..."}</T>
             </span>
           ) : (
             <span className="flex items-center gap-1.5">
               {variant !== "catalog" && <ShoppingCart className="h-3.5 w-3.5" />}
-              {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+              <T>{isOutOfStock ? "Out of Stock" : "Add to Cart"}</T>
             </span>
           )}
         </Button>

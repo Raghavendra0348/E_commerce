@@ -12,7 +12,7 @@ const getProductReviews = async (productId, query = {}) => {
     const product = await prisma.product.findUnique({ where: { id: productId } });
     if (!product) throw ApiError.notFound("Product not found");
 
-    const [total, reviews, aggregate] = await Promise.all([
+    const [total, reviews, aggregate, distribution] = await Promise.all([
         prisma.review.count({ where: { productId } }),
         prisma.review.findMany({
             where: { productId }, skip, take: limit, orderBy: { createdAt: "desc" },
@@ -22,13 +22,15 @@ const getProductReviews = async (productId, query = {}) => {
             where:  { productId },
             _avg:   { rating: true },
             _count: { rating: true }
-        })
+        }),
+        prisma.review.groupBy({ by: ["rating"], where: { productId }, _count: { _all: true } })
     ]);
 
     return {
         reviews,
         averageRating: parseFloat((aggregate._avg.rating || 0).toFixed(1)),
         totalReviews:  aggregate._count.rating,
+        ratingDistribution: Object.fromEntries(distribution.map(row => [row.rating, row._count._all])),
         pagination:    { page, limit, total, totalPages: Math.ceil(total / limit) }
     };
 };
@@ -62,4 +64,8 @@ const deleteReview = async (userId, reviewId, isAdmin = false) => {
     await prisma.review.delete({ where: { id: reviewId } });
 };
 
-module.exports = { getProductReviews, createReview, deleteReview };
+const getUserReview = async (userId, productId) => prisma.review.findUnique({
+    where: { userId_productId: { userId, productId } }
+});
+
+module.exports = { getProductReviews, createReview, deleteReview, getUserReview };

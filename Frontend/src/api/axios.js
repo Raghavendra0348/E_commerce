@@ -2,6 +2,7 @@ import { isRateLimited, recordRateLimit, rateLimitError } from "@/lib/rateLimit"
 import { notifyServerChange } from "@/lib/dataSync";
 import axios from "axios";
 import { useAuthStore } from "@/store/useAuthStore";
+import { getSessionRevision } from "@/lib/session";
 
 const api = axios.create({
   baseURL: "/api",
@@ -47,6 +48,7 @@ api.interceptors.response.use(
   async (error) => {
     recordRateLimit(error);
     const originalRequest = error.config;
+    if (!originalRequest) return Promise.reject(error);
 
     // Do not attempt refresh on auth endpoints or if already retried
     const isAuthEndpoint =
@@ -75,11 +77,13 @@ api.interceptors.response.use(
 
       originalRequest._retry = true;
       isRefreshing = true;
+      const sessionRevision = getSessionRevision();
 
       try {
         const { data } = await axios.post("/api/auth/refresh", {
           refreshToken,
         });
+        if (sessionRevision !== getSessionRevision()) throw new Error("Session changed during refresh");
 
         const newAccessToken = data?.data?.accessToken;
         const newRefreshToken = data?.data?.refreshToken || refreshToken;
@@ -98,6 +102,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshErr) {
         processQueue(refreshErr, null);
+        if (sessionRevision !== getSessionRevision()) return Promise.reject(refreshErr);
         useAuthStore.getState().logout();
         // Redirect to login if in browser
         if (typeof window !== "undefined" && !window.location.pathname.startsWith("/login")) {

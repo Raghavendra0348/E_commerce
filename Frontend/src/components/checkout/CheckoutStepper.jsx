@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -9,15 +10,15 @@ const STEPS = [
 
 export default function CheckoutStepper({ currentStep = 0 }) {
   return (
-    <div className="w-full py-4">
-      <div className="flex items-center justify-center max-w-xl mx-auto px-4">
+    <div id="checkout-progress" className="checkout-progress w-full py-4">
+      <div className="grid grid-cols-3 max-w-xl mx-auto px-3 sm:px-4">
         {STEPS.map((step, idx) => {
           const isDone = idx < currentStep;
           const isActive = idx === currentStep;
 
           return (
-            <div key={step.index} className="flex items-center flex-1 last:flex-none">
-              <div className="flex flex-col items-center">
+            <div key={step.index} className="relative flex min-w-0 justify-center" aria-current={isActive ? "step" : undefined}>
+              <div className="relative z-10 flex w-full min-w-0 flex-col items-center px-1">
                 <div
                   className={cn(
                     "h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition-all shadow-xs",
@@ -32,7 +33,7 @@ export default function CheckoutStepper({ currentStep = 0 }) {
                 </div>
                 <span
                   className={cn(
-                    "text-[11px] sm:text-xs mt-1.5 font-semibold text-center whitespace-nowrap",
+                    "text-[11px] sm:text-xs mt-1.5 font-semibold text-center leading-tight max-w-[100px]",
                     isActive
                       ? "text-[#0F1111]"
                       : isDone
@@ -40,14 +41,14 @@ export default function CheckoutStepper({ currentStep = 0 }) {
                       : "text-[#888C8C]"
                   )}
                 >
-                  {step.title}
+                  <T>{step.title}</T>
                 </span>
               </div>
 
               {idx < STEPS.length - 1 && (
                 <div
                   className={cn(
-                    "h-0.5 flex-1 mx-2 sm:mx-4 mb-5 transition-colors",
+                    "absolute top-4 left-[calc(50%+20px)] w-[calc(100%-40px)] h-0.5 transition-colors",
                     isDone ? "bg-[#067D62]" : "bg-[#D5D9D9]"
                   )}
                 />

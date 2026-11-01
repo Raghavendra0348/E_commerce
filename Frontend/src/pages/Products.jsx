@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Button } from "@/components/ui/button";
 import { useSearchParams, Link } from "react-router-dom";
 import { X } from "lucide-react";
@@ -123,9 +124,9 @@ export default function Products() {
       <div className="catalog-container px-4 py-2">
         {/* Breadcrumb */}
         <nav className="text-xs text-[#565959] mb-2 flex items-center gap-1 flex-wrap">
-          <Link to="/" className="hover:text-[#C7511F] hover:underline">Home</Link>
+          <Link to="/" className="hover:text-[#C7511F] hover:underline"><T>{"Home"}</T></Link>
           <span>›</span>
-          <Link to="/products" className="hover:text-[#C7511F] hover:underline">Products</Link>
+          <Link to="/products" className="hover:text-[#C7511F] hover:underline"><T>{"Products"}</T></Link>
           {activeCategoryName && (
             <>
               <span>›</span>
@@ -179,7 +180,7 @@ export default function Products() {
                 onClick={f.onRemove || (() => updateParam(f.key, undefined))}
                 className="flex items-center gap-1 rounded-full border border-[#D5D9D9] bg-white px-3 py-1 text-xs text-[#0F1111] hover:border-[#CC0C39] hover:text-[#CC0C39] transition-colors"
               >
-                {f.label}
+                <T>{f.label}</T>
                 <X className="h-3 w-3" />
               </button>
             ))}
@@ -187,7 +188,7 @@ export default function Products() {
               onClick={handleClearAll}
               className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline px-2"
             >
-              Clear all
+              <T>{"Clear all"}</T>
             </button>
           </div>
         )}
@@ -195,7 +196,7 @@ export default function Products() {
 
             {error && <div role="alert" className="rounded border border-[#e7c46c] bg-[#fff8e5] p-4 mb-3 text-sm">
               {error.response?.status === 429 ? "Too many requests. Products will retry automatically after the server cooldown." : "Products could not be loaded. Check that the backend server is running."}
-              {error.response?.status !== 429 && <Button variant="link" size="sm" onClick={() => refetch()}>Try again</Button>}
+              {error.response?.status !== 429 && <Button variant="link" size="sm" onClick={() => refetch()}><T>{"Try again"}</T></Button>}
             </div>}
             {(!error || products.length > 0) && <ProductGrid
               products={products}

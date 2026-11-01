@@ -26,4 +26,11 @@ const deleteReview = async (req, res, next) => {
     } catch (error) { next(error); }
 };
 
-module.exports = { getProductReviews, createReview, deleteReview };
+const getMyReview = async (req, res, next) => {
+    try {
+        const review = await reviewService.getUserReview(req.user.userId, parseInt(req.params.id, 10));
+        return success(res, 200, "Your review fetched successfully", review);
+    } catch (error) { next(error); }
+};
+
+module.exports = { getProductReviews, createReview, deleteReview, getMyReview };

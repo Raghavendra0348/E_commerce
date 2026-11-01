@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -111,7 +112,7 @@ export default function ProductFormDialog({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label htmlFor="prodCategory" className="text-xs font-semibold">
-                Category
+                <T>{"Category"}</T>
               </Label>
               <select
                 id="prodCategory"
@@ -215,7 +216,7 @@ export default function ProductFormDialog({
               onClick={() => onOpenChange(false)}
               className="text-xs"
             >
-              Cancel
+              <T>{"Cancel"}</T>
             </Button>
             <Button
               type="submit"

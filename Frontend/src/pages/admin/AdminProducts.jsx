@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -178,7 +179,7 @@ export default function AdminProducts() {
             }}
             className="w-full text-xs h-9 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-[#0F1111] focus:outline-none focus:ring-1 focus:ring-[#FF9900]"
           >
-            <option value="">All Categories</option>
+            <option value=""><T>{"All Categories"}</T></option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -238,7 +239,7 @@ export default function AdminProducts() {
               onClick={() => setDeleteModalOpen(false)}
               className="text-xs"
             >
-              Cancel
+              <T>{"Cancel"}</T>
             </Button>
             <Button
               size="sm"

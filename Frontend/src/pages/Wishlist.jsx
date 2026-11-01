@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { Heart, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,13 +10,13 @@ export default function Wishlist() {
   const { products, isLoading, removeFromWishlist } = useWishlist();
 
   return (
-    <div className="min-h-screen bg-[#EAEDED] py-6 sm:py-8">
+    <div id="wishlist-page" className="wishlist-page min-h-screen bg-[#EAEDED] py-6 sm:py-8">
       <div className="mx-auto max-w-[1500px] px-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <Heart className="h-6 w-6 text-[#CC0C39] fill-[#CC0C39]" />
-            <h1 className="text-2xl font-bold text-[#0F1111]">Your Wishlist</h1>
+            <h1 className="text-2xl font-bold text-[#0F1111]"><T>{"Your Wishlist"}</T></h1>
             {!isLoading && (
               <span className="text-sm text-[#565959]">
                 ({products.length} {products.length === 1 ? "item" : "items"})
@@ -41,7 +42,7 @@ export default function Wishlist() {
               asChild
               className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
             >
-              <Link to="/products">Explore Products</Link>
+              <Link to="/products"><T>{"Explore Products"}</T></Link>
             </Button>
           </div>
         ) : (
@@ -52,7 +53,7 @@ export default function Wishlist() {
                 {/* Remove from wishlist overlay */}
                 <button
                   onClick={() => removeFromWishlist(product.id)}
-                  className="absolute top-2 right-2 z-20 rounded-full bg-white/95 p-1.5 shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white text-[#CC0C39]"
+                  className="absolute top-2 right-2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity hover:bg-white text-[#CC0C39]"
                   title="Remove from wishlist"
                   aria-label="Remove from wishlist"
                 >

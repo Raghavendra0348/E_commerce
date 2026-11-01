@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { useNavigate, Link } from "react-router-dom";
 import { CheckCircle, Package, MapPin, Clock } from "lucide-react";
@@ -9,11 +10,12 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatPrice } from "@/lib/utils";
 import api from "@/api/axios";
+import { paymentLabel } from "@/lib/orderPayment";
 
 export default function OrderSuccess() {
   const { id } = useParams();
 
-  const { data: order, isLoading } = useQuery({
+  const { data: order, isLoading, error, refetch } = useQuery({
     queryKey: ["order", id],
     queryFn: async () => {
       const res = await api.get(`/orders/${id}`);
@@ -40,6 +42,23 @@ export default function OrderSuccess() {
     );
   }
 
+  if (error || !order) {
+    return <div id="order-confirmation-error" role="alert" className="mx-auto max-w-2xl p-8 space-y-4">
+      <h1 className="text-xl font-bold">Unable to load this order</h1>
+      <p>We could not confirm the order status. Check your orders before placing another order.</p>
+      <Button onClick={() => refetch()}><T>{"Try again"}</T></Button>
+      <Link to="/account/orders" className="block text-[#007185]"><T>{"View My Orders"}</T></Link>
+    </div>;
+  }
+
+  if (!["CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED"].includes(order.status)) {
+    return <div id="order-confirmation-status" className="mx-auto max-w-2xl p-8 space-y-4">
+      <h1 className="text-xl font-bold">{order.status === "CANCELLED" ? "Order cancelled" : "Order awaiting confirmation"}</h1>
+      <p>{paymentLabel(order)}</p>
+      <Button asChild><Link to={`/account/orders/${order.id}`}><T>{"View order details"}</T></Link></Button>
+    </div>;
+  }
+
   return (
     <div className="min-h-screen bg-[#EAEDED] py-8">
       <div className="mx-auto max-w-2xl px-4 space-y-5">
@@ -51,7 +70,7 @@ export default function OrderSuccess() {
               <CheckCircle className="h-12 w-12 text-[#067D62]" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-[#0F1111]">Order Placed Successfully!</h1>
+          <h1 className="text-2xl font-bold text-[#0F1111]"><T>{"Order Placed Successfully!"}</T></h1>
           <p className="text-[#565959] text-sm">
             Thank you for your purchase. Your order has been confirmed.
           </p>
@@ -71,9 +90,7 @@ export default function OrderSuccess() {
               Estimated Delivery: {deliveryStr}
             </p>
             <p className="text-sm text-[#565959] mt-0.5">
-              {order?.paymentMethod === "COD"
-                ? "Payment: Cash on Delivery"
-                : "Payment: Paid Online ✓"}
+              {paymentLabel(order)}
             </p>
           </div>
         </div>
@@ -89,7 +106,7 @@ export default function OrderSuccess() {
               {order.items.map((item) => (
                 <li key={item.id} className="flex gap-3 py-3">
                   <ProductImage
-                    src={item.product?.imageUrl || "/product-placeholder.svg"}
+                    src={item.product?.images?.[0]?.url || item.product?.imageUrl || "/product-placeholder.svg"}
                     alt={item.product?.name}
                     onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/product-placeholder.svg"; }}
                     className="h-16 w-16 rounded border border-[#EDEDED] object-contain bg-white p-1 shrink-0"
@@ -138,10 +155,10 @@ export default function OrderSuccess() {
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3">
           <Button asChild className="flex-1">
-            <Link to="/account/orders">View My Orders</Link>
+            <Link to="/account/orders"><T>{"View My Orders"}</T></Link>
           </Button>
           <Button variant="secondary" asChild className="flex-1">
-            <Link to="/products">Continue Shopping</Link>
+            <Link to="/products"><T>{"Continue Shopping"}</T></Link>
           </Button>
         </div>
 

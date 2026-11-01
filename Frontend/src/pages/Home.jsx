@@ -1,3 +1,5 @@
+import { T } from "@/components/common/Translation";
+import FestiveCollections from "@/components/home/FestiveCollections";
 import FestivalPromoCard, { EXTRA_FESTIVAL_CARDS } from "@/components/home/FestivalPromoCard";
 import HomeDiscoveryPanels from "@/components/home/HomeDiscoveryPanels";
 import useEmblaCarousel from "embla-carousel-react";
@@ -138,7 +140,7 @@ function CategoryRow() {
                       />
                     </div>
                     <span className="text-xs text-[#0F1111] font-medium text-center max-w-[76px] sm:max-w-[84px] leading-tight line-clamp-2 group-hover:text-[#C7511F]">
-                      {cat.name}
+                      <T>{cat.name}</T>
                     </span>
                   </Link>
                 );
@@ -158,12 +160,12 @@ function ProductRow({ title, params, seeAllHref }) {
     <section id={`home-row-${title.toLowerCase().replaceAll(" ", "-")}`} className="home-product-row bg-white py-5">
       <div className="mx-auto max-w-[1500px] px-4">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-[#0F1111]">{title}</h2>
+          <h2 className="text-lg font-bold text-[#0F1111]"><T>{title}</T></h2>
           <Link
             to={seeAllHref}
             className="text-sm text-[#007185] hover:text-[#C7511F] hover:underline flex items-center gap-1"
           >
-            See all <Arrow className="h-3.5 w-3.5" />
+            <T>{"See all"}</T> <Arrow className="h-3.5 w-3.5" />
           </Link>
         </div>
         {error && <p role="alert" className="text-sm text-[#565959] mb-3">{error.response?.status === 429 ? "Products are temporarily rate-limited. Automatic updates resume after the server cooldown." : "Products could not be loaded. Check that the backend is running."}</p>}
@@ -200,7 +202,7 @@ function PromoBanner() {
           to="/products"
           className="shrink-0 rounded-lg bg-[#FF9900] hover:bg-[#E68A00] px-6 py-2.5 text-sm font-semibold text-[#0F1111] transition-colors"
         >
-          Shop Now
+          <T>{"Shop Now"}</T>
         </Link>
       </div>
     </section>
@@ -215,6 +217,7 @@ export default function Home() {
     <div id="storefront-home" className="min-h-screen festival-home">
       {/* Hero Banner */}
       <HeroBanner />
+      <FestiveCollections />
       <HomeDiscoveryPanels />
 
       {/* Category Row */}

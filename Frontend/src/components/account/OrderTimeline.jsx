@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Clock, CheckCircle, Package, Truck, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -34,10 +35,10 @@ export default function OrderTimeline({ status, paymentStatus }) {
   }
 
   return (
-    <div className="py-4">
-      <div className="relative flex items-center justify-between">
+    <div id="order-tracking-timeline" className="order-tracking-timeline py-4">
+      <div className="relative grid grid-cols-5 gap-1">
         {/* Connecting track line */}
-        <div className="absolute top-4 left-6 right-6 h-1 bg-[#EDEDED] -z-0">
+        <div className="absolute top-4 left-[10%] right-[10%] h-1 bg-[#EDEDED] -z-0">
           <div
             className="h-full bg-[#067D62] transition-all duration-500"
             style={{
@@ -52,7 +53,7 @@ export default function OrderTimeline({ status, paymentStatus }) {
           const StepIcon = step.icon;
 
           return (
-            <div key={step.key} className="flex flex-col items-center z-10 text-center">
+            <div key={step.key} className="flex min-w-0 flex-col items-center z-10 text-center" aria-current={isCurrent ? "step" : undefined}>
               <div
                 className={cn(
                   "h-8 w-8 rounded-full flex items-center justify-center transition-colors shadow-2xs",
@@ -65,11 +66,11 @@ export default function OrderTimeline({ status, paymentStatus }) {
               </div>
               <span
                 className={cn(
-                  "text-[11px] sm:text-xs mt-2 font-medium max-w-[70px] sm:max-w-none leading-tight",
+                  "text-[10px] sm:text-xs mt-2 font-medium max-w-full leading-tight break-words",
                   isCurrent ? "font-bold text-[#0F1111]" : isDone ? "text-[#067D62]" : "text-[#888C8C]"
                 )}
               >
-                {step.label}
+                <T>{step.label}</T>
               </span>
             </div>
           );

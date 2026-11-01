@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { cn } from "@/lib/utils";
 
 const STATUS_CONFIG = {
@@ -25,7 +26,7 @@ export default function OrderStatusBadge({ status, className }) {
         className
       )}
     >
-      {config.label}
+      <T>{config.label}</T>
     </span>
   );
 }

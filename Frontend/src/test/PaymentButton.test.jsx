@@ -47,4 +47,13 @@ describe("Razorpay checkout contract", () => {
     await waitFor(() => expect(paymentService.createOrder).toHaveBeenCalledTimes(2));
     expect(orderService.placeOrder).toHaveBeenCalledTimes(1);
   });
+  it("resumes an existing order after remounting without creating another order", async () => {
+    await openCheckout({ addressId: undefined, existingOrder: { id: 42, totalAmount: 499 } });
+    expect(orderService.placeOrder).not.toHaveBeenCalled();
+    expect(paymentService.createOrder).toHaveBeenCalledWith(42);
+    act(() => options.modal.ondismiss());
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(paymentService.createOrder).toHaveBeenCalledTimes(2));
+    expect(orderService.placeOrder).not.toHaveBeenCalled();
+  });
 });

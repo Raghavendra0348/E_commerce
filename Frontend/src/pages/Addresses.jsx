@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -60,14 +61,14 @@ export default function Addresses() {
         {/* Breadcrumb */}
         <div className="flex items-center gap-1.5 text-xs text-[#565959]">
           <Link to="/account/profile" className="hover:text-[#C7511F] hover:underline">
-            Your Account
+            <T>{"Your Account"}</T>
           </Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-[#0F1111] font-semibold">Your Addresses</span>
+          <span className="text-[#0F1111] font-semibold"><T>{"Your Addresses"}</T></span>
         </div>
 
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]">Your Addresses</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]"><T>{"Your Addresses"}</T></h1>
           <p className="text-sm text-[#565959] mt-0.5">
             Manage saved shipping addresses for orders and deliveries
           </p>

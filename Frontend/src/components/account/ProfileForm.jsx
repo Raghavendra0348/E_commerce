@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,7 +50,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
+    <div className="account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
       <div className="flex items-center justify-between pb-3 border-b border-[#EDEDED]">
         <div className="flex items-center gap-2">
           <User className="h-5 w-5 text-[#FF9900]" />
@@ -73,7 +74,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
         <div className="space-y-4 text-xs">
           <div>
             <span className="font-semibold text-[#565959] uppercase tracking-wider block">
-              Full Name
+              <T>{"Full Name"}</T>
             </span>
             <p className="text-sm font-semibold text-[#0F1111] mt-0.5">
               {user?.name || "Not set"}
@@ -82,7 +83,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
 
           <div>
             <span className="font-semibold text-[#565959] uppercase tracking-wider block">
-              Email Address
+              <T>{"Email Address"}</T>
             </span>
             <div className="flex items-center gap-2 mt-0.5">
               <p className="text-sm font-semibold text-[#0F1111]">{user?.email}</p>
@@ -116,7 +117,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
         <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
           <div>
             <Label htmlFor="profName" className="text-xs font-semibold text-[#0F1111]">
-              Full Name
+              <T>{"Full Name"}</T>
             </Label>
             <Input
               id="profName"
@@ -150,7 +151,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
               disabled={isSaving}
               className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
             >
-              {isSaving ? "Saving..." : "Save Changes"}
+              <T>{isSaving ? "Saving..." : "Save Changes"}</T>
             </Button>
             <Button
               type="button"
@@ -159,7 +160,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
               onClick={() => setIsEditing(false)}
               className="text-xs"
             >
-              Cancel
+              <T>{"Cancel"}</T>
             </Button>
           </div>
         </form>

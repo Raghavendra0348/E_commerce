@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState, useEffect } from "react";
 import { X, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useCategories } from "@/hooks/useCategories";
@@ -30,13 +33,13 @@ function FilterContent({ filters, onFilterChange, onClear }) {
     <div className="catalog-filter-content space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-[#0F1111]">Filters</h3>
+        <h3 className="font-semibold text-[#0F1111]"><T>{"Filters"}</T></h3>
         {hasFilters && (
           <button
             onClick={onClear}
             className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline"
           >
-            Clear all
+            <T>{"Clear all"}</T>
           </button>
         )}
       </div>
@@ -45,7 +48,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
 
       {/* Category */}
       <div className="space-y-2">
-        <h4 className="text-sm font-semibold text-[#0F1111]">Category</h4>
+        <h4 className="text-sm font-semibold text-[#0F1111]"><T>{"Category"}</T></h4>
         <ul className="space-y-1.5">
           <li>
             <button
@@ -57,7 +60,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
                   : "text-[#007185]"
               )}
             >
-              All Categories
+              <T>{"All Categories"}</T>
             </button>
           </li>
           {categories.map((cat) => (
@@ -82,7 +85,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
 
       {/* Price Range */}
       <div className="space-y-3">
-        <h4 className="text-sm font-semibold text-[#0F1111]">Price Range</h4>
+        <h4 className="text-sm font-semibold text-[#0F1111]"><T>{"Price Range"}</T></h4>
         <div className="flex gap-2 items-center">
           <div className="relative flex-1">
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-[#565959]">₹</span>
@@ -109,7 +112,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
           </div>
         </div>
         <Button size="sm" variant="secondary" className="w-full" onClick={applyPrice}>
-          Apply
+          <T>{"Apply"}</T>
         </Button>
       </div>
 
@@ -117,7 +120,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
 
       {/* Availability */}
       <div className="space-y-2">
-        <h4 className="text-sm font-semibold text-[#0F1111]">Availability</h4>
+        <h4 className="text-sm font-semibold text-[#0F1111]"><T>{"Availability"}</T></h4>
         <label className="flex items-center gap-2 cursor-pointer group">
           <input
             type="checkbox"
@@ -126,7 +129,7 @@ function FilterContent({ filters, onFilterChange, onClear }) {
             className="h-4 w-4 accent-[#FF9900] cursor-pointer"
           />
           <span className="text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-            In Stock Only
+            <T>{"In Stock Only"}</T>
           </span>
         </label>
       </div>
@@ -153,18 +156,20 @@ export default function ProductFilters({ filters, onFilterChange, onClear, mode 
         <SheetTrigger asChild>
           <Button variant="secondary" size="sm" className="lg:hidden gap-1.5">
             <SlidersHorizontal className="h-4 w-4" />
-            Filters
+            <T>{"Filters"}</T>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-80">
+        <SheetContent id="mobile-product-filters" side="left" className="w-80 overflow-y-auto">
           <SheetHeader className="mb-4">
-            <SheetTitle>Filters</SheetTitle>
+            <SheetTitle><T>{"Filters"}</T></SheetTitle>
+            <SheetDescription>Choose categories, price and availability.</SheetDescription>
           </SheetHeader>
           <FilterContent
             filters={filters}
             onFilterChange={onFilterChange}
             onClear={onClear}
           />
+          <SheetClose asChild><Button className="mt-6 w-full"><T>{"Show results"}</T></Button></SheetClose>
         </SheetContent>
       </Sheet>}
     </>

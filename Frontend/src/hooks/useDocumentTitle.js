@@ -1,12 +1,14 @@
 import { useEffect } from "react";
+import { useTranslation } from "./useTranslation";
 
 const BASE_TITLE = "Amazon.in: Online Shopping India - Best Deals & Fast Delivery";
 
 export function useDocumentTitle(title, retainOnUnmount = false) {
+  const { t } = useTranslation();
   useEffect(() => {
     const prevTitle = document.title;
     if (title) {
-      document.title = `${title} | Amazon.in`;
+      document.title = `${t(title)} | Amazon.in`;
     } else {
       document.title = BASE_TITLE;
     }
@@ -16,7 +18,7 @@ export function useDocumentTitle(title, retainOnUnmount = false) {
         document.title = prevTitle;
       }
     };
-  }, [title, retainOnUnmount]);
+  }, [title, retainOnUnmount, t]);
 }
 
 export default useDocumentTitle;

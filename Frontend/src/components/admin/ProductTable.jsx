@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { Package, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,13 +42,13 @@ export default function ProductTable({
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" role="region" aria-label="Product inventory, scroll horizontally for more columns" tabIndex={0}>
         <table className="w-full text-left text-xs">
           <thead className="bg-[#F0F2F2] text-[#565959] uppercase font-semibold border-b border-gray-200">
             <tr>
               <th className="px-4 py-3">Product</th>
-              <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Price</th>
+              <th className="px-4 py-3"><T>{"Category"}</T></th>
+              <th className="px-4 py-3"><T>{"Price"}</T></th>
               <th className="px-4 py-3">Stock</th>
               <th className="px-4 py-3">Rating</th>
               <th className="px-4 py-3 text-right">Actions</th>

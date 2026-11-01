@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -123,7 +124,7 @@ export default function AdminOrders() {
                 : "border-transparent text-[#565959] hover:text-[#0F1111]"
             )}
           >
-            {tab.label}
+            <T>{tab.label}</T>
           </button>
         ))}
       </div>
@@ -154,7 +155,7 @@ export default function AdminOrders() {
           {viewingOrder && (
             <div className="space-y-4">
               <DialogHeader>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <DialogTitle className="text-lg font-bold text-[#0F1111]">
                     Order #{viewingOrder.id}
                   </DialogTitle>
@@ -227,7 +228,7 @@ export default function AdminOrders() {
                 </div>
                 <div className="text-right">
                   <span className="text-[#565959] block text-[10px] uppercase font-bold">
-                    Total
+                    <T>{"Total"}</T>
                   </span>
                   <span className="text-base font-bold text-[#B12704]">
                     {formatPrice(viewingOrder.totalAmount)}
@@ -237,9 +238,9 @@ export default function AdminOrders() {
 
               {/* Allowed status actions inside modal */}
               {ALLOWED_ORDER_TRANSITIONS[viewingOrder.status]?.length > 0 && (
-                <div className="pt-2 border-t flex items-center justify-between">
+                <div className="pt-2 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <span className="text-xs text-[#565959]">Advance order to:</span>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {ALLOWED_ORDER_TRANSITIONS[viewingOrder.status].map((nxt) => (
                       <Button
                         key={nxt}

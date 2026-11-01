@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { Plus, Pencil, Trash2, Phone, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -137,7 +138,7 @@ export default function AddressBook({
             <Plus className="h-6 w-6" />
           </div>
           <h3 className="font-bold text-base text-[#0F1111] group-hover:text-[#C7511F]">
-            Add Address
+            <T>{"Add Address"}</T>
           </h3>
           <p className="text-xs text-[#565959] mt-1">Add a new delivery address</p>
         </button>
@@ -173,7 +174,7 @@ export default function AddressBook({
                 onClick={() => openEdit(addr)}
                 className="text-xs h-8 flex-1 border-[#D5D9D9]"
               >
-                <Pencil className="h-3 w-3 mr-1" /> Edit
+                <Pencil className="h-3 w-3 mr-1" /> <T>{"Edit"}</T>
               </Button>
               <Button
                 variant="outline"
@@ -181,7 +182,7 @@ export default function AddressBook({
                 onClick={() => setDeletingId(addr.id)}
                 className="text-xs h-8 flex-1 border-[#D5D9D9] text-[#CC0C39] hover:bg-[#CC0C39]/10 hover:border-[#CC0C39]"
               >
-                <Trash2 className="h-3 w-3 mr-1" /> Delete
+                <Trash2 className="h-3 w-3 mr-1" /> <T>{"Delete"}</T>
               </Button>
             </div>
           </div>
@@ -202,7 +203,7 @@ export default function AddressBook({
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 mt-2">
             <div>
-              <Label htmlFor="bName" className="text-xs font-semibold">Full Name</Label>
+              <Label htmlFor="bName" className="text-xs font-semibold"><T>{"Full Name"}</T></Label>
               <Input id="bName" {...register("name")} className="mt-1" />
               {errors.name && <p className="text-xs text-[#CC0C39] mt-0.5">{errors.name.message}</p>}
             </div>
@@ -226,7 +227,7 @@ export default function AddressBook({
                 {errors.city && <p className="text-xs text-[#CC0C39] mt-0.5">{errors.city.message}</p>}
               </div>
               <div>
-                <Label htmlFor="bState" className="text-xs font-semibold">State</Label>
+                <Label htmlFor="bState" className="text-xs font-semibold"><T>{"State"}</T></Label>
                 <Input id="bState" {...register("state")} className="mt-1" />
                 {errors.state && <p className="text-xs text-[#CC0C39] mt-0.5">{errors.state.message}</p>}
               </div>
@@ -239,17 +240,17 @@ export default function AddressBook({
                 {errors.postalCode && <p className="text-xs text-[#CC0C39] mt-0.5">{errors.postalCode.message}</p>}
               </div>
               <div>
-                <Label htmlFor="bCountry" className="text-xs font-semibold">Country</Label>
+                <Label htmlFor="bCountry" className="text-xs font-semibold"><T>{"Country"}</T></Label>
                 <Input id="bCountry" {...register("country")} disabled value="India" className="mt-1 bg-gray-50" />
               </div>
             </div>
 
             <DialogFooter className="pt-3">
               <Button type="button" variant="outline" size="sm" onClick={() => setModalOpen(false)} className="text-xs">
-                Cancel
+                <T>{"Cancel"}</T>
               </Button>
               <Button type="submit" size="sm" disabled={submitting} className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs">
-                {submitting ? "Saving..." : editingAddress ? "Save Changes" : "Add Address"}
+                <T>{submitting ? "Saving..." : editingAddress ? "Save Changes" : "Add Address"}</T>
               </Button>
             </DialogFooter>
           </form>
@@ -273,7 +274,7 @@ export default function AddressBook({
               Keep Address
             </Button>
             <Button size="sm" onClick={handleDelete} className="bg-[#CC0C39] hover:bg-[#A00A2D] text-white text-xs font-semibold">
-              Delete
+              <T>{"Delete"}</T>
             </Button>
           </DialogFooter>
         </DialogContent>

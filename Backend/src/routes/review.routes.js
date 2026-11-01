@@ -7,6 +7,7 @@ const { createReviewSchema, reviewIdSchema } = require("../validators/review.val
 
 // Public: anyone can read reviews
 router.get("/products/:id/reviews", reviewController.getProductReviews);
+router.get("/products/:id/reviews/mine", authenticate, validate(reviewIdSchema), reviewController.getMyReview);
 
 // Auth required: submit or delete
 router.post("/products/:id/reviews", authenticate, validate(createReviewSchema), reviewController.createReview);

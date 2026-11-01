@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import {
@@ -121,7 +122,7 @@ export default function AdminDashboard() {
 
       {/* Order Status Breakdown */}
       <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 shadow-xs">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="text-base font-bold text-[#0F1111]">Order Pipeline Status</h2>
             <p className="text-xs text-[#565959] mt-0.5">Current order distribution across fulfillment stages</p>
@@ -144,7 +145,7 @@ export default function AdminDashboard() {
                 <span
                   className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold border uppercase tracking-wider ${st.color}`}
                 >
-                  {st.label}
+                  <T>{st.label}</T>
                 </span>
                 <p className="text-xl font-bold text-[#0F1111]">
                   {statsLoading ? "—" : count}

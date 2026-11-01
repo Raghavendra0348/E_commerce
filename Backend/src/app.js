@@ -28,6 +28,7 @@ const paymentRoutes = require("./routes/payment.routes");
 const webhookRoutes = require("./routes/webhook.routes");
 const adminRoutes = require("./routes/admin.routes");
 const reviewRoutes = require("./routes/review.routes");
+const locationRoutes = require("./routes/location.routes");
 
 // 1. Correlation ID attached to every request
 app.use(requestId);
@@ -72,6 +73,7 @@ app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 app.use("/api/database", databaseRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/locations", locationRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart",      cartRoutes);
 app.use("/api/wishlist",  wishlistRoutes);

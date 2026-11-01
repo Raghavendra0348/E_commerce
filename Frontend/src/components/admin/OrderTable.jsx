@@ -42,7 +42,7 @@ export default function OrderTable({
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" role="region" aria-label="Order fulfillment, scroll horizontally for more columns" tabIndex={0}>
         <table className="w-full text-left text-xs">
           <thead className="bg-[#F0F2F2] text-[#565959] uppercase font-semibold border-b border-gray-200">
             <tr>

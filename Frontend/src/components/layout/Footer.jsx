@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 
@@ -47,7 +48,7 @@ export default function Footer() {
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="block w-full bg-[#37475A] py-3 text-center text-sm text-white hover:bg-[#485769] transition-colors"
       >
-        Back to top
+        <T>{"Back to top"}</T>
       </button>
 
       {/* Main footer links */}
@@ -55,7 +56,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="mb-3 text-sm font-bold text-white">{section.title}</h3>
+              <h3 className="mb-3 text-sm font-bold text-white"><T>{section.title}</T></h3>
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.label}>
@@ -63,7 +64,7 @@ export default function Footer() {
                       to={link.href}
                       className="text-sm text-[#CCCCCC] hover:text-white transition-colors"
                     >
-                      {link.label}
+                      <T>{link.label}</T>
                     </Link>
                   </li>
                 ))}

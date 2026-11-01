@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
@@ -20,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import ProductImageGallery from "@/components/product/ProductImageGallery";
 import ReviewList from "@/components/product/ReviewList";
 import RelatedProducts from "@/components/product/RelatedProducts";
+import ProductDetailsContent from "@/components/product/ProductDetailsContent";
 import ProductCard from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import StarRating from "@/components/common/StarRating";
@@ -64,7 +66,7 @@ export default function ProductDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
-  const { fetchCart, setDrawerOpen } = useCartStore();
+  const { fetchCart } = useCartStore();
 
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -76,11 +78,12 @@ export default function ProductDetail() {
   useDocumentTitle(product?.name ? `${product.name} - Buy Online` : "Product Details");
 
   // Related products from same category
-  const { data: relatedData } = useProducts({
-    categoryId: product?.category?.id,
+  const categoryId = product?.category?.id || product?.categoryId;
+  const { data: relatedData, isLoading: relatedLoading, error: relatedError, refetch: refetchRelated } = useProducts({
+    categoryId,
     limit: 8,
-  });
-  const related = (relatedData?.products || []).filter((p) => p.id !== product?.id);
+  }, { enabled: !!categoryId });
+  const related = categoryId ? (relatedData?.products || []).filter((p) => p.id !== product?.id) : [];
 
   if (isLoading) return <ProductDetailSkeleton />;
 
@@ -91,7 +94,7 @@ export default function ProductDetail() {
         <h1 className="text-2xl font-bold text-[#0F1111]">Product not found</h1>
         <p className="text-[#565959]">The product you're looking for doesn't exist or has been removed.</p>
         <Button asChild>
-          <Link to="/products">Browse Products</Link>
+          <Link to="/products"><T>{"Browse Products"}</T></Link>
         </Button>
       </div>
     );
@@ -108,7 +111,7 @@ export default function ProductDetail() {
     ? [{ id: 0, url: product.imageUrl }]
     : [];
 
-  const handleAddToCart = async (openDrawer = true) => {
+  const handleAddToCart = async () => {
     if (!isAuthenticated) {
       toast.info("Please sign in to add items to cart");
       navigate(`/login?redirect=/products/${slug}`);
@@ -118,7 +121,6 @@ export default function ProductDetail() {
     try {
       await api.post("/cart/items", { productId: product.id, quantity });
       await fetchCart();
-      if (openDrawer) setDrawerOpen(true);
       toast.success("Added to cart", { description: product.name });
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to add to cart");
@@ -168,9 +170,9 @@ export default function ProductDetail() {
 
         {/* Breadcrumb */}
         <nav className="text-xs text-[#565959] mb-4 flex items-center gap-1 flex-wrap">
-          <Link to="/" className="hover:text-[#C7511F] hover:underline">Home</Link>
+          <Link to="/" className="hover:text-[#C7511F] hover:underline"><T>{"Home"}</T></Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to="/products" className="hover:text-[#C7511F] hover:underline">Products</Link>
+          <Link to="/products" className="hover:text-[#C7511F] hover:underline"><T>{"Products"}</T></Link>
           {product.category && (
             <>
               <ChevronRight className="h-3 w-3" />
@@ -230,27 +232,9 @@ export default function ProductDetail() {
               size="xl"
             />
 
-            {/* Meta info */}
-            <dl className="space-y-1.5 text-sm">
-              {product.category && (
-                <div className="flex gap-2">
-                  <dt className="text-[#565959] w-24 shrink-0">Category:</dt>
-                  <dd>
-                    <Link
-                      to={`/products?categoryId=${product.category.id}`}
-                      className="text-[#007185] hover:text-[#C7511F] hover:underline"
-                    >
-                      {product.category.name}
-                    </Link>
-                  </dd>
-                </div>
-              )}
-              <div className="flex gap-2">
-                <dt className="text-[#565959] w-24 shrink-0">Product ID:</dt>
-                <dd className="text-[#0F1111]">#{product.id}</dd>
-              </div>
-            </dl>
+           
             {product.description && <section className="detail-about"><h2>About this item</h2><p>{product.description}</p></section>}
+            <ProductDetailsContent product={product} related={categoryId ? related : []} isLoading={!!categoryId && relatedLoading} error={categoryId ? relatedError : null} onRetry={refetchRelated} />
           </div>
           <aside id="product-purchase-panel" className="detail-purchase-panel" aria-label="Purchase options">
             <PriceDisplay price={product.price} size="lg" />
@@ -260,7 +244,7 @@ export default function ProductDetail() {
               {isOutOfStock ? (
                 <>
                   <XCircle className="h-4 w-4 text-[#CC0C39]" />
-                  <span className="text-sm font-semibold text-[#CC0C39]">Out of Stock</span>
+                  <span className="text-sm font-semibold text-[#CC0C39]"><T>{"Out of Stock"}</T></span>
                 </>
               ) : isLowStock ? (
                 <>
@@ -272,7 +256,7 @@ export default function ProductDetail() {
               ) : (
                 <>
                   <CheckCircle className="h-4 w-4 text-[#067D62]" />
-                  <span className="text-sm font-semibold text-[#067D62]">In Stock</span>
+                  <span className="text-sm font-semibold text-[#067D62]"><T>{"In Stock"}</T></span>
                 </>
               )}
             </div>
@@ -282,7 +266,7 @@ export default function ProductDetail() {
             {/* Quantity selector */}
             {!isOutOfStock && (
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-[#0F1111]">Quantity:</span>
+                <span className="text-sm font-medium text-[#0F1111]"><T>{"Quantity:"}</T></span>
                 <div className="flex items-center rounded border border-[#D5D9D9] overflow-hidden">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -310,22 +294,23 @@ export default function ProductDetail() {
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 pt-1">
               <Button
+                type="button"
                 variant="buynow"
                 size="sm"
                 className="detail-add-cart w-full"
-                onClick={() => handleAddToCart(true)}
+                onClick={handleAddToCart}
                 disabled={isOutOfStock || isAddingToCart}
                 id="add-to-cart-btn"
               >
                 {isAddingToCart ? (
                   <span className="flex items-center gap-2">
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#0F1111]/30 border-t-[#0F1111]" />
-                    Adding...
+                    <T>{"Adding..."}</T>
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <ShoppingCart className="h-5 w-5" />
-                    Add to Cart
+                    <T>{"Add to Cart"}</T>
                   </span>
                 )}
               </Button>
@@ -343,7 +328,7 @@ export default function ProductDetail() {
                 ) : (
                   <span className="flex items-center gap-2">
                     <Zap className="h-5 w-5" />
-                    Buy Now
+                    <T>{"Buy Now"}</T>
                   </span>
                 )}
               </Button>
@@ -359,12 +344,12 @@ export default function ProductDetail() {
                 {wishlisted ? (
                   <span className="flex items-center gap-2 text-[#CC0C39]">
                     <Heart className="h-5 w-5 fill-[#CC0C39]" />
-                    Saved to Wishlist
+                    <T>{"Saved to Wishlist"}</T>
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <Heart className="h-5 w-5" />
-                    Add to Wishlist
+                    <T>{"Add to Wishlist"}</T>
                   </span>
                 )}
               </Button>
@@ -386,7 +371,7 @@ export default function ProductDetail() {
         </section>
 
         {/* Related Products */}
-        <RelatedProducts products={related} />
+        <RelatedProducts products={related.slice(3)} title="More to explore" />
 
       </div>
     </div>

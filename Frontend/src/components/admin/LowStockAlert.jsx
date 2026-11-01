@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { AlertTriangle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { formatPrice } from "@/lib/utils";
 export default function LowStockAlert({ lowStock = [], isLoading = false }) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4 shadow-xs">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded bg-[#FFF8E7] text-[#B7791F]">
             <AlertTriangle className="h-4 w-4" />
@@ -35,13 +36,13 @@ export default function LowStockAlert({ lowStock = [], isLoading = false }) {
           ✅ All products currently maintain healthy inventory levels (&gt;10 units in stock).
         </div>
       ) : (
-        <div className="overflow-x-auto rounded border border-gray-200">
+        <div className="overflow-x-auto rounded border border-gray-200" role="region" aria-label="Low stock inventory, scroll horizontally for more columns" tabIndex={0}>
           <table className="w-full text-left text-xs">
             <thead className="bg-[#F0F2F2] text-[#565959] uppercase font-semibold border-b border-gray-200">
               <tr>
                 <th className="px-4 py-3">Product Name</th>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3">Price</th>
+                <th className="px-4 py-3"><T>{"Category"}</T></th>
+                <th className="px-4 py-3"><T>{"Price"}</T></th>
                 <th className="px-4 py-3">Stock Left</th>
                 <th className="px-4 py-3 text-right">Action</th>
               </tr>
@@ -66,7 +67,7 @@ export default function LowStockAlert({ lowStock = [], isLoading = false }) {
                           : "bg-[#FFF8E7] text-[#B7791F]"
                       }`}
                     >
-                      {prod.stock === 0 ? "Out of Stock" : `${prod.stock} units`}
+                      <T>{prod.stock === 0 ? "Out of Stock" : `${prod.stock} units`}</T>
                     </span>
                   </td>
                   <td className="px-4 py-3 text-right">

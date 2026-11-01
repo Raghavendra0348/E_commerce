@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,16 +50,16 @@ export default function PasswordForm({ onSave, isSaving = false }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
+    <div className="account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
       <div className="flex items-center gap-2 pb-3 border-b border-[#EDEDED]">
         <KeyRound className="h-5 w-5 text-[#FF9900]" />
-        <h2 className="text-base sm:text-lg font-bold text-[#0F1111]">Change Password</h2>
+        <h2 className="text-base sm:text-lg font-bold text-[#0F1111]"><T>{"Change Password"}</T></h2>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5">
         <div>
           <Label htmlFor="currPw" className="text-xs font-semibold text-[#0F1111]">
-            Current Password
+            <T>{"Current Password"}</T>
           </Label>
           <div className="relative mt-1">
             <Input
@@ -83,7 +84,7 @@ export default function PasswordForm({ onSave, isSaving = false }) {
 
         <div>
           <Label htmlFor="newPw" className="text-xs font-semibold text-[#0F1111]">
-            New Password
+            <T>{"New Password"}</T>
           </Label>
           <div className="relative mt-1">
             <Input
@@ -137,7 +138,7 @@ export default function PasswordForm({ onSave, isSaving = false }) {
             disabled={isSaving}
             className="w-full bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
           >
-            {isSaving ? "Updating Password..." : "Update Password"}
+            <T>{isSaving ? "Updating Password..." : "Update Password"}</T>
           </Button>
         </div>
       </form>

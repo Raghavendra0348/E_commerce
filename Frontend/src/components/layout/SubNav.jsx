@@ -1,7 +1,9 @@
+import { T } from "@/components/common/Translation";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Tag, Zap, Smartphone, Shirt, Home, Tv, Dumbbell, BookOpen, Baby, Car, ChevronRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/api/axios";
+import MobileCategoryTabs from "./MobileCategoryTabs";
 
 const STATIC_CATEGORIES = [
   { name: "Today's Deals", href: "/products?sort=newest", icon: Tag },
@@ -16,7 +18,7 @@ const STATIC_CATEGORIES = [
   { name: "Automotive", href: "/products?category=automotive", icon: Car },
 ];
 
-export default function SubNav() {
+export default function SubNav({ showMobileCategories = true }) {
   const navigate = useNavigate();
 
   const { data: categories } = useQuery({
@@ -37,10 +39,12 @@ export default function SubNav() {
 
   return (
     <nav
-      className="bg-[#232F3E]"
+      className="storefront-category-nav bg-[#232F3E]"
+      data-mobile-visible={showMobileCategories}
       aria-label="Category navigation"
     >
-      <div className="mx-auto max-w-[1500px] px-2">
+      {showMobileCategories && <MobileCategoryTabs categories={categories || []} />}
+      <div className="desktop-category-links mx-auto max-w-[1500px] px-2">
         <ul className="flex items-center overflow-x-auto no-scrollbar">
           {/* All menu trigger */}
           <li className="flex-shrink-0">
@@ -49,7 +53,7 @@ export default function SubNav() {
               className="flex items-center gap-1.5 px-3 py-2.5 text-sm text-white font-semibold hover:bg-white/10 hover:outline hover:outline-1 hover:outline-white rounded transition-colors whitespace-nowrap"
             >
               <Menu className="h-4 w-4" />
-              All
+              <T>{"All"}</T>
             </Link>
           </li>
 
@@ -59,7 +63,7 @@ export default function SubNav() {
                 to={item.href}
                 className="flex items-center px-3 py-2.5 text-sm text-white hover:bg-white/10 hover:outline hover:outline-1 hover:outline-white rounded transition-colors whitespace-nowrap"
               >
-                {item.name}
+                <T>{item.name}</T>
               </Link>
             </li>
           ))}

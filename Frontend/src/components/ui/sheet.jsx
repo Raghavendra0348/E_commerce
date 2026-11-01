@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import * as React from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
@@ -43,12 +44,13 @@ function SheetContent({ side = "right", className, children, ...props }) {
     <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
+        data-slot="sheet-content"
         className={cn(sheetVariants({ side }), className)}
         {...props}
       >
-        <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FF9900]">
+        <SheetPrimitive.Close className="absolute right-2 top-2 flex h-10 w-10 items-center justify-center rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#FF9900]">
           <X className="h-4 w-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only"><T>{"Close"}</T></span>
         </SheetPrimitive.Close>
         {children}
       </SheetPrimitive.Content>
@@ -58,7 +60,7 @@ function SheetContent({ side = "right", className, children, ...props }) {
 
 function SheetHeader({ className, ...props }) {
   return (
-    <div className={cn("flex flex-col space-y-2 text-left", className)} {...props} />
+    <div className={cn("flex min-w-0 flex-col space-y-2 pr-8 text-left", className)} {...props} />
   );
 }
 

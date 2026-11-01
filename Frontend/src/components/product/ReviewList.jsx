@@ -1,9 +1,12 @@
+import { T } from "@/components/common/Translation";
 import { toast } from "sonner";
 import { Trash2, User } from "lucide-react";
 import StarRating from "@/components/common/StarRating";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useProductReviews, useDeleteReview } from "@/hooks/useProducts";
+import { useProductReviews, useDeleteReview, useMyProductReview } from "@/hooks/useProducts";
+import { useState, useEffect } from "react";
+import Pagination from "@/components/common/Pagination";
 import ReviewForm from "./ReviewForm";
 import { cn } from "@/lib/utils";
 
@@ -24,14 +27,20 @@ function RatingBar({ star, count, total }) {
 }
 
 export default function ReviewList({ productId, avgRating, reviewCount }) {
-  const { data, isLoading, isError, refetch } = useProductReviews(productId);
+  const [page, setPage] = useState(1);
+  useEffect(() => { setPage(1); }, [productId]);
+  const { data, isLoading, isError, refetch } = useProductReviews(productId, page);
+  const { data: ownReview, isPending: ownReviewLoading, isError: ownReviewError, refetch: refetchOwnReview } = useMyProductReview(productId);
+  useEffect(() => {
+    if (data?.pagination && page > Math.max(1, data.pagination.totalPages)) setPage(Math.max(1, data.pagination.totalPages));
+  }, [data, page]);
   const reviews = Array.isArray(data) ? data : Array.isArray(data?.reviews) ? data.reviews : [];
   const rating = Number(data?.averageRating ?? avgRating) || 0;
   const totalRatings = Number(data?.totalReviews ?? reviewCount) || reviews.length;
   const { user, isAuthenticated } = useAuthStore();
   const { mutateAsync: deleteReview } = useDeleteReview(productId);
 
-  const alreadyReviewed = isAuthenticated && reviews.some((r) => r.user?.id === user?.id);
+  const alreadyReviewed = isAuthenticated && (!!ownReview || reviews.some((r) => r.user?.id === user?.id));
 
   const handleDelete = async (reviewId) => {
     if (!confirm("Delete this review?")) return;
@@ -46,7 +55,7 @@ export default function ReviewList({ productId, avgRating, reviewCount }) {
   // Calculate distribution
   const distribution = [5, 4, 3, 2, 1].map((star) => ({
     star,
-    count: reviews.filter((r) => r.rating === star).length,
+    count: data?.ratingDistribution?.[star] || 0,
   }));
 
   if (isLoading) {
@@ -64,7 +73,7 @@ export default function ReviewList({ productId, avgRating, reviewCount }) {
   }
 
   if (isError) {
-    return <div id="product-reviews-error" role="alert" className="text-sm text-[#565959]">Reviews could not be loaded. <button onClick={() => refetch()} className="text-[#007185] underline">Try again</button></div>;
+    return <div id="product-reviews-error" role="alert" className="text-sm text-[#565959]">Reviews could not be loaded. <button onClick={() => refetch()} className="text-[#007185] underline"><T>{"Try again"}</T></button></div>;
   }
 
   return (
@@ -83,11 +92,11 @@ export default function ReviewList({ productId, avgRating, reviewCount }) {
             </span>
           </div>
           {/* Distribution bars */}
-          <div className="flex-1 space-y-1.5">
+          {data?.ratingDistribution && <div className="flex-1 space-y-1.5">
             {distribution.map(({ star, count }) => (
-              <RatingBar key={star} star={star} count={count} total={reviews.length} />
+              <RatingBar key={star} star={star} count={count} total={totalRatings} />
             ))}
-          </div>
+          </div>}
         </div>
       )}
 
@@ -113,13 +122,13 @@ export default function ReviewList({ productId, avgRating, reviewCount }) {
                 key={review.id}
                 className="rounded-lg border border-[#EDEDED] bg-white p-4 space-y-2"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
                     {/* Avatar */}
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#232F3E] text-white text-xs font-semibold shrink-0">
                       {initials || <User className="h-4 w-4" />}
                     </div>
-                    <div>
+                    <div className="min-w-0 break-words">
                       <p className="text-sm font-medium text-[#0F1111]">
                         {review.user?.name || "Anonymous"}
                       </p>
@@ -157,10 +166,11 @@ export default function ReviewList({ productId, avgRating, reviewCount }) {
       )}
 
       {/* Review Form */}
-      <ReviewForm
+      <Pagination page={page} totalPages={data?.pagination?.totalPages || 1} onPageChange={setPage} />
+      {isAuthenticated && ownReviewError ? <p role="alert">Could not check your existing review. <button onClick={() => refetchOwnReview()} className="underline"><T>{"Try again"}</T></button></p> : isAuthenticated && ownReviewLoading ? <p role="status">Checking your review...</p> : <ReviewForm
         productId={productId}
         alreadyReviewed={alreadyReviewed}
-      />
+      />}
     </div>
   );
 }

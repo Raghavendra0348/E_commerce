@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -49,7 +50,7 @@ export default function CartDrawer() {
         <SheetHeader className="px-5 py-4 border-b border-[#EDEDED]">
           <SheetTitle className="flex items-center gap-2 text-base font-bold text-[#0F1111]">
             <ShoppingBag className="h-5 w-5 text-[#FF9900]" />
-            Your Shopping Cart
+            <T>{"Your Shopping Cart"}</T>
             {itemCount > 0 && (
               <span className="text-xs font-normal text-[#565959]">
                 ({itemCount} {itemCount === 1 ? "item" : "items"})
@@ -69,7 +70,7 @@ export default function CartDrawer() {
               <p className="text-[#0F1111] font-semibold">Sign in to view your cart</p>
               <p className="text-sm text-[#565959]">Your items await!</p>
               <Button asChild onClick={() => setDrawerOpen(false)}>
-                <Link to="/login?redirect=/cart">Sign In</Link>
+                <Link to="/login?redirect=/cart"><T>{"Sign In"}</T></Link>
               </Button>
             </div>
           ) : items.length === 0 ? (
@@ -80,7 +81,7 @@ export default function CartDrawer() {
                 Looks like you haven't added anything yet.
               </p>
               <Button asChild onClick={() => setDrawerOpen(false)}>
-                <Link to="/products">Start Shopping</Link>
+                <Link to="/products"><T>{"Start Shopping"}</T></Link>
               </Button>
             </div>
           ) : (
@@ -113,7 +114,7 @@ export default function CartDrawer() {
               size="lg"
               onClick={handleCheckout}
             >
-              Proceed to Checkout
+              <T>{"Proceed to Checkout"}</T>
             </Button>
             <Button
               variant="outline"
@@ -121,7 +122,7 @@ export default function CartDrawer() {
               asChild
               onClick={() => setDrawerOpen(false)}
             >
-              <Link to="/cart">View Shopping Cart</Link>
+              <Link to="/cart"><T>{"View Shopping Cart"}</T></Link>
             </Button>
           </div>
         )}

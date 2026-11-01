@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -54,10 +55,13 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
 
       <div>
         <Label htmlFor="chkPhone" className="text-xs font-semibold text-[#0F1111]">
-          Mobile Number
+          <T>{"Mobile Number"}</T>
         </Label>
         <Input
           id="chkPhone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel-national"
           {...register("phone")}
           placeholder="10-digit mobile number without +91"
           className="mt-1"
@@ -86,7 +90,7 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
       <div className="grid grid-cols-2 gap-3">
         <div>
           <Label htmlFor="chkCity" className="text-xs font-semibold text-[#0F1111]">
-            Town / City
+            <T>{"Town / City"}</T>
           </Label>
           <Input
             id="chkCity"
@@ -101,7 +105,7 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
 
         <div>
           <Label htmlFor="chkState" className="text-xs font-semibold text-[#0F1111]">
-            State
+            <T>{"State"}</T>
           </Label>
           <Input
             id="chkState"
@@ -122,6 +126,8 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
           </Label>
           <Input
             id="chkPostal"
+            inputMode="numeric"
+            autoComplete="postal-code"
             {...register("postalCode")}
             placeholder="e.g. 560001"
             className="mt-1"
@@ -133,7 +139,7 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
 
         <div>
           <Label htmlFor="chkCountry" className="text-xs font-semibold text-[#0F1111]">
-            Country
+            <T>{"Country"}</T>
           </Label>
           <Input
             id="chkCountry"
@@ -161,7 +167,7 @@ export default function AddressForm({ onSubmit, onCancel, isSubmitting = false }
             onClick={onCancel}
             className="text-xs"
           >
-            Cancel
+            <T>{"Cancel"}</T>
           </Button>
         )}
       </div>

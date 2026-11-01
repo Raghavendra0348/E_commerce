@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -12,12 +13,12 @@ export default function NotFound() {
       <p className="text-[#565959] mb-6 max-w-sm">
         We're sorry. The Web address you entered is not a functioning page on our site.
       </p>
-      <div className="flex gap-3">
+      <div className="flex w-full max-w-sm flex-col sm:flex-row justify-center gap-3">
         <Button asChild>
           <Link to="/">Go to Amazon.in Homepage</Link>
         </Button>
         <Button variant="secondary" asChild>
-          <Link to="/products">Browse Products</Link>
+          <Link to="/products"><T>{"Browse Products"}</T></Link>
         </Button>
       </div>
     </div>

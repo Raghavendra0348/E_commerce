@@ -1,0 +1,102 @@
+/* App-like phone storefront; desktop navigation and layout stay intact. */
+.mobile-bottom-navigation, .mobile-category-tabs { display: none; }
+.navbar-mobile-back { display: none; }
+.mobile-amazon-mark { display: none; }
+
+@media (max-width: 767px) {
+  .storefront-shell { padding-bottom: calc(72px + env(safe-area-inset-bottom)); background: white; }
+  #storefront-navbar { background: linear-gradient(180deg, #ff792b 0%, #ff9c68 70%, #ffb28c 100%); padding-top: max(6px, env(safe-area-inset-top)); }
+  #storefront-navbar > div:first-child { background: transparent; box-shadow: none !important; }
+  #storefront-navbar .navbar-main { min-height: 0; padding: 0 12px 10px; gap: 0; align-items: center; }
+  #storefront-navbar .navbar-main > button:first-child,
+  #storefront-navbar .navbar-main > a,
+  #storefront-navbar .navbar-main > .navbar-account { display: none; }
+  #storefront-navbar .navbar-main > .navbar-logo { display: flex; order: 1; flex: 0 0 40px; height: 46px; min-height: 0; margin: 0 8px 0 0; padding: 0; background: transparent; border-radius: 6px; }
+  #storefront-navbar .navbar-logo .desktop-amazon-logo { display: none; }
+  #storefront-navbar .navbar-logo .mobile-amazon-mark { display: block; width: 40px; height: 46px; object-fit: contain; border-radius: 5px; }
+  #storefront-navbar .navbar-main > .navbar-mobile-back { display: flex; order: 0; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 44px; margin-right: 2px; color: #131921; border-radius: 999px; }
+  .navbar-mobile-back > svg { width: 23px; height: 23px; }
+  #storefront-navbar #navbar-search { display: flex; flex: 1 1 0; width: auto; min-width: 0; order: 3; height: 46px; margin: 0; border-radius: 999px; background: white; box-shadow: 0 1px 3px #00000016; }
+  #storefront-navbar .navbar-search-category { display: none; }
+  #storefront-navbar .navbar-search-field { order: 1; }
+  #storefront-navbar #navbar-search input { padding: 0 14px 0 2px; border-radius: 0 999px 999px 0; background: transparent; font-size: 16px; }
+  #storefront-navbar #navbar-search > button { order: 0; width: 46px; border-radius: 999px 0 0 999px; background: transparent; color: #131921; }
+  #storefront-navbar #navbar-search > button svg { width: 24px; height: 24px; }
+  #storefront-navbar .search-suggestions-panel { left: -46px; right: 0; margin-top: 5px; border-radius: 12px; }
+  #storefront-navbar .navbar-location-row { margin: 0 12px 6px; border-radius: 999px; padding: 0 4px 0 0; min-height: 42px; background: #ffdac4; color: #171717; }
+  #storefront-navbar .navbar-mobile-location { min-height: 42px; padding: 8px 12px; background: transparent; color: #171717; border-radius: 999px; font-size: 13px; }
+  #storefront-navbar .navbar-mobile-location > svg:first-child { width: 21px; height: 21px; }
+  #storefront-navbar .navbar-location-row .language-selector { display: flex; min-height: 36px; color: #171717; border-radius: 999px; background: #ffffff55; padding-inline: 8px; }
+  .storefront-category-nav { background: #ffb28c; color: #171717; }
+  .storefront-category-nav[data-mobile-visible="false"] { display: none; }
+  #storefront-navbar[data-mobile-layout="compact"], #storefront-navbar[data-mobile-layout="catalog"] { background: white; border-bottom: 1px solid #e3e6e6; }
+  #storefront-navbar[data-mobile-layout="compact"] .navbar-main { flex-wrap: nowrap; padding: 0 10px 4px; min-height: 48px; }
+  #storefront-navbar[data-mobile-layout="catalog"] .navbar-main { padding-top: 0; }
+  #storefront-navbar:not([data-mobile-layout="home"]) .navbar-logo { margin-bottom: 0; background: transparent; }
+  #storefront-navbar[data-mobile-layout="compact"] #navbar-search,
+  #storefront-navbar:not([data-mobile-layout="home"]) .navbar-location-row { display: none; }
+  #storefront-navbar:not([data-mobile-layout="home"]) .navbar-main > .language-selector { display: flex; order: 2; min-height: 40px; margin-left: auto; color: #131921; }
+  #storefront-navbar[data-mobile-layout="catalog"] .navbar-main > .language-selector { display: none; }
+  #storefront-navbar[data-mobile-layout="catalog"] #navbar-search { border: 1px solid #d5d9d9; background: #f5f6f6; box-shadow: none; }
+  .desktop-category-links { display: none; }
+  .mobile-category-tabs { display: flex; gap: 5px; width: 100%; padding: 2px 12px 0; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .mobile-category-tabs::-webkit-scrollbar { display: none; }
+  .storefront-category-nav .mobile-category-tab { position: relative; display: flex; flex: 0 0 66px; min-width: 0; min-height: 0; flex-direction: column; align-items: center; justify-content: flex-start; gap: 5px; padding: 6px 3px 2px; color: #171717; text-align: center; text-decoration: none; }
+  .mobile-category-tab > svg { width: 29px; height: 29px; flex-shrink: 0; }
+  .mobile-category-tab > span { max-width: 78px; font-size: 11px; line-height: 1.2; }
+  .mobile-category-tab.is-active > span { font-weight: 700; }
+  .mobile-category-tab.is-active::after { content: ""; flex-shrink: 0; width: calc(100% - 16px); height: 3px; border-radius: 3px; background: #151515; }
+  .mobile-bottom-navigation { position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); min-height: 72px; padding: 4px max(5px, env(safe-area-inset-right)) max(5px, env(safe-area-inset-bottom)) max(5px, env(safe-area-inset-left)); background: #fff; border-top: 1px solid #d5d9d9; box-shadow: 0 -3px 12px #00000008; }
+  .mobile-bottom-tab { position: relative; display: flex; min-width: 0; min-height: 62px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 7px 2px 3px; color: #131921; text-decoration: none; cursor: pointer; }
+  .mobile-bottom-tab > span:last-child { font-size: 11px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
+  .mobile-bottom-tab.is-active::before { content: ""; position: absolute; top: -4px; left: calc(50% - 18px); width: 36px; height: 4px; border-radius: 0 0 5px 5px; background: #131921; }
+  .mobile-bottom-tab.is-active > span:last-child { font-weight: 700; }
+  .mobile-bottom-icon { position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 30px; }
+  .mobile-bottom-icon > svg { width: 27px; height: 27px; }
+  .mobile-cart-count { position: absolute; top: -5px; right: -9px; display: grid; place-items: center; min-width: 19px; height: 19px; padding: 0 4px; border-radius: 999px; background: #ff9900; color: #131921; font-size: 10px; font-weight: 700; border: 2px solid white; }
+  .mobile-bottom-tab:focus-visible, .mobile-category-tab:focus-visible { outline: 2px solid #c45500; outline-offset: -3px; border-radius: 8px; }
+  .festival-home { padding-top: 8px; background: linear-gradient(#ffb28c, white 220px); }
+  .festival-carousel { padding-inline: 14px; }
+  .festival-track { gap: 10px; }
+  .festival-slide { flex-basis: min(78vw, 340px); border-radius: 20px; }
+  .festival-arrow { display: none; }
+  .home-category-section { display: none; }
+  .festive-collections, .discovery-grid { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(82vw, 340px); gap: 12px; margin-block: 14px; padding: 0 14px 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .festive-collections::-webkit-scrollbar, .discovery-grid::-webkit-scrollbar { display: none; }
+  .festive-collection, .discovery-panel { scroll-snap-align: start; }
+  .discovery-panel { border: 1px solid #e0e0e0; border-radius: 18px; padding: 18px 15px; }
+  .discovery-heading h2 { font-size: 20px; }
+  .home-product-row { margin-inline: 0; border-top: 1px solid #eee; }
+  .detail-page #reviews { scroll-margin-top: 140px; }
+  .detail-container { padding-top: 12px; }
+  .detail-page .detail-gallery-slide { height: clamp(230px, 70vw, 330px); padding: 8px; }
+  .detail-page .detail-main-grid { gap: 16px; }
+  [data-sonner-toaster][data-y-position="bottom"] { bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 359px) {
+  #storefront-navbar .navbar-main { padding-inline: 10px; }
+  #storefront-navbar .navbar-location-row { margin-inline: 10px; }
+  #storefront-navbar .navbar-mobile-location { font-size: 12px; }
+  .storefront-category-nav .mobile-category-tab { flex-basis: 61px; }
+  .mobile-bottom-tab > span:last-child { font-size: 10px; }
+}
+
+/* Dark mobile header. */
+.mobile-header-account { display: none; }
+@media (max-width: 767px) {
+  #storefront-navbar[data-mobile-layout="home"] { background: #131d27; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-main { padding: 7px 10px 9px; flex-wrap: wrap; row-gap: 9px; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-main > .navbar-logo { flex: 1 1 auto; height: 40px; margin: 0; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-logo .desktop-amazon-logo { display: flex; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-logo .mobile-amazon-mark { display: none; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-main > .mobile-header-account { display: flex; align-items: center; justify-content: center; order: 2; width: 44px; height: 40px; color: white; }
+  .mobile-header-account svg { width: 29px; height: 29px; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-main > .navbar-cart { display: flex; order: 3; height: 40px; width: 44px; align-items: center; justify-content: center; padding: 0; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-cart > span { display: none; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-cart .relative > span { left: 19px; top: -6px; display: grid; place-items: center; min-width: 20px; height: 20px; padding: 2px; border-radius: 999px; background: #ff9900; color: white; font-size: 12px; }
+  #storefront-navbar[data-mobile-layout="home"] #navbar-search { flex: 1 0 100%; order: 4; height: 46px; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-location-row { margin: 0; padding: 0 4px; border-radius: 0; background: #232f3e; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-mobile-location { color: white; border-radius: 0; }
+  #storefront-navbar[data-mobile-layout="home"] .navbar-location-row .language-selector { background: transparent; color: white; }
+}

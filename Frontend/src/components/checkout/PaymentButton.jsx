@@ -27,13 +27,15 @@ export default function PaymentButton({
   amount = 0,
   onSuccess,
   onError,
+  existingOrder = null,
+  onOrderCreated,
 }) {
   const [loading, setLoading] = useState(false);
   const pendingOrder = useRef(null);
   const attemptInProgress = useRef(false);
 
   const handlePlaceOrder = async () => {
-    if (!addressId) {
+    if (!addressId && !existingOrder) {
       toast.error("Please select a delivery address");
       return;
     }
@@ -44,14 +46,17 @@ export default function PaymentButton({
 
     try {
       // 1. Place order in backend transaction
-      let order = pendingOrder.current?.order;
-      if (order && (pendingOrder.current.addressId !== addressId || pendingOrder.current.paymentMethod !== paymentMethod)) {
+      let order = existingOrder || pendingOrder.current?.order;
+      if (!existingOrder && order && (pendingOrder.current.addressId !== addressId || pendingOrder.current.paymentMethod !== paymentMethod)) {
         throw new Error("An order was already created. Open your orders to review it before changing checkout details.");
       }
       if (!order) {
         const orderRes = await orderService.placeOrder({ addressId, paymentMethod });
         order = orderRes.data?.data;
-        if (order) pendingOrder.current = { order, addressId, paymentMethod };
+        if (order) {
+          pendingOrder.current = { order, addressId, paymentMethod };
+          onOrderCreated?.(order);
+        }
       }
       if (!order) {
         throw new Error("Order creation failed");
@@ -60,7 +65,7 @@ export default function PaymentButton({
       // If COD, we are done! Order is placed directly.
       if (paymentMethod === "COD") {
         toast.success("Order placed successfully with Cash on Delivery!");
-        if (onSuccess) onSuccess(order.id);
+        if (onSuccess) await onSuccess(order.id);
         attemptInProgress.current = false;
         setLoading(false);
         return;
@@ -111,7 +116,7 @@ export default function PaymentButton({
             });
 
             toast.success("Payment verified! Order placed successfully.");
-            if (onSuccess) onSuccess(order.id);
+            if (onSuccess) await onSuccess(order.id);
           } catch (verifyErr) {
             toast.error(
               verifyErr.response?.data?.message || verifyErr.message || "Payment verification failed"
@@ -152,23 +157,23 @@ export default function PaymentButton({
   return (
     <Button
       size="lg"
-      disabled={loading || !addressId}
+      disabled={loading || (!addressId && !existingOrder)}
       onClick={handlePlaceOrder}
-      className="w-full bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] font-bold text-sm shadow-xs border border-[#FCD200]"
+      className="checkout-payment-button w-full min-w-0 h-auto min-h-11 whitespace-normal px-3 py-3 bg-[#FFD814] hover:bg-[#F7CA00] text-[#0F1111] font-bold text-sm shadow-xs border border-[#FCD200]"
     >
       {loading ? (
-        <span className="flex items-center gap-2">
+        <span className="flex min-w-0 items-center justify-center gap-2">
           <Loader2 className="h-4 w-4 animate-spin text-[#0F1111]" />
           Processing Order...
         </span>
       ) : paymentMethod === "COD" ? (
-        <span className="flex items-center gap-2">
-          <Banknote className="h-4 w-4" />
+        <span className="flex min-w-0 items-center justify-center gap-2">
+          <Banknote className="h-4 w-4 shrink-0" />
           Place Order with Cash on Delivery ({formatPrice(amount)})
         </span>
       ) : (
-        <span className="flex items-center gap-2">
-          <CreditCard className="h-4 w-4" />
+        <span className="flex min-w-0 items-center justify-center gap-2">
+          <CreditCard className="h-4 w-4 shrink-0" />
           Pay & Place Order ({formatPrice(amount)})
         </span>
       )}

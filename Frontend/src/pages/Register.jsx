@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -83,7 +84,7 @@ export default function Register() {
 
       {/* Card */}
       <div className="w-full max-w-sm rounded-lg border border-[#D5D9D9] bg-white px-7 py-5">
-        <h1 className="mb-1 text-xl font-semibold text-[#0F1111]">Create account</h1>
+        <h1 className="mb-1 text-xl font-semibold text-[#0F1111]"><T>{"Create account"}</T></h1>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-3 mt-4">
           {/* Root error */}
@@ -96,7 +97,7 @@ export default function Register() {
 
           {/* Name */}
           <div className="space-y-1">
-            <Label htmlFor="name">Your name</Label>
+            <Label htmlFor="name"><T>{"Your name"}</T></Label>
             <Input
               id="name"
               type="text"
@@ -150,7 +151,7 @@ export default function Register() {
 
           {/* Password */}
           <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password"><T>{"Password"}</T></Label>
             <div className="relative">
               <Input
                 id="password"
@@ -199,7 +200,7 @@ export default function Register() {
 
           {/* Submit */}
           <Button type="submit" className="w-full mt-1" disabled={isLoading}>
-            {isLoading ? "Creating account..." : "Create your Amazon account"}
+            <T>{isLoading ? "Creating account..." : "Create your Amazon account"}</T>
           </Button>
         </form>
 

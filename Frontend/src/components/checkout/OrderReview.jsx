@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { Link } from "react-router-dom";
 import { Truck, MapPin, CreditCard, CheckCircle2 } from "lucide-react";
@@ -63,7 +64,7 @@ export default function OrderReview({
               onClick={onEditAddress}
               className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline font-medium shrink-0"
             >
-              Change
+              <T>{"Change"}</T>
             </button>
           )}
         </div>
@@ -72,12 +73,12 @@ export default function OrderReview({
         <div className="bg-white rounded-lg border border-[#D5D9D9] p-4 flex justify-between items-start text-xs">
           <div className="space-y-1">
             <div className="flex items-center gap-1.5 font-bold uppercase text-[10px] text-[#565959]">
-              <CreditCard className="h-3.5 w-3.5 text-[#FF9900]" /> Payment Method
+              <CreditCard className="h-3.5 w-3.5 text-[#FF9900]" /> <T>{"Payment Method"}</T>
             </div>
             <p className="font-bold text-[#0F1111]">
-              {paymentMethod === "COD"
+              <T>{paymentMethod === "COD"
                 ? "Cash on Delivery (COD)"
-                : "Online Payment (Razorpay / UPI / Cards)"}
+                : "Online Payment (Razorpay / UPI / Cards)"}</T>
             </p>
             <p className="text-[#565959] text-[11px]">
               {paymentMethod === "COD"
@@ -90,7 +91,7 @@ export default function OrderReview({
               onClick={onEditPayment}
               className="text-xs text-[#007185] hover:text-[#C7511F] hover:underline font-medium shrink-0"
             >
-              Change
+              <T>{"Change"}</T>
             </button>
           )}
         </div>
@@ -121,9 +122,9 @@ export default function OrderReview({
                 >
                   {item.product?.name}
                 </Link>
-                <p className="text-[#067D62] text-[11px] font-medium">In Stock</p>
+                <p className="text-[#067D62] text-[11px] font-medium"><T>{"In Stock"}</T></p>
                 <p className="text-[#565959]">
-                  Quantity: <strong className="text-[#0F1111]">{item.quantity}</strong>
+                  <T>{"Quantity:"}</T> <strong className="text-[#0F1111]">{item.quantity}</strong>
                 </p>
               </div>
 

@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,7 +52,7 @@ export default function ReviewForm({ productId, onSuccess, alreadyReviewed }) {
       <div className="rounded-lg border border-[#EDEDED] bg-[#F5F5F5] p-5 text-center">
         <p className="text-sm text-[#565959]">
           <a href="/login" className="text-[#007185] hover:text-[#C7511F] hover:underline font-medium">
-            Sign in
+            <T>{"Sign in"}</T>
           </a>{" "}
           to write a customer review.
         </p>

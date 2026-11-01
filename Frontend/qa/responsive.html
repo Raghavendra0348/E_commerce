@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Responsive layout checks</title>
+<style>body{font:14px system-ui;margin:20px;color:#131921}button{padding:12px 20px;cursor:pointer}iframe{display:block;border:1px solid #aaa;height:850px;margin-top:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere}.pass{color:#08704e}.fail{color:#b12704}</style></head>
+<body><h1>Responsive layout checks</h1><p>Sample data only. Checks document overflow and elements outside the viewport. Scrolling inside carousels and tables is intentional.</p><button id="run">Run all layouts</button><p id="status" role="status">Ready</p><pre id="failures"></pre><div id="preview"></div><ol id="results"></ol>
+<script type="module">
+const routes = ["/", "/products", "/products/sample-product-1-0", "/cart", "/wishlist", "/checkout", "/login", "/register", "/order-success/42", "/account/profile", "/account/addresses", "/account/orders", "/account/orders/42", "/admin/dashboard", "/admin/products", "/admin/orders", "/admin/users", "/admin/system", "/page-not-found"];
+const extras = [{ route: "/cart", action: "cart-drawer" }, { route: "/checkout", action: "checkout-payment" }, { route: "/checkout", action: "checkout-review" }, { route: "/account/addresses", action: "address-dialog" }, { route: "/admin/products", action: "product-dialog" }, { route: "/admin/dashboard", action: "admin-menu" }];
+const cases = routes.map(route => ({route})).concat(extras);
+const widths = [320, 375, 390, 430, 768, 1280];
+const status = document.querySelector("#status"), preview = document.querySelector("#preview"), results = document.querySelector("#results"), failures = document.querySelector("#failures");
+window.layoutResults = [];
+let resolveCase;
+window.addEventListener("message", event => {
+  if (event.origin !== location.origin || event.source !== preview.querySelector("iframe")?.contentWindow || event.data?.type !== "responsive-report") return;
+  resolveCase?.(event.data);
+});
+document.querySelector("#run").onclick = async event => {
+  event.target.disabled = true; results.replaceChildren(); failures.textContent = ""; window.layoutResults = [];
+  for (const width of widths) for (const item of cases) {
+    status.textContent = `Checking ${width}px ${item.route} ${item.action || ""}`;
+    const frame = document.createElement("iframe"); frame.width = width; frame.title = `${width}px ${item.route}`;
+    const query = new URLSearchParams(item); frame.src = `/qa/case.html?${query}`;
+    const report = await new Promise(resolve => {
+      const timer = setTimeout(() => resolve({ ...item, viewport: width, pass: false, error: "Fixture load timed out" }), 12000);
+      resolveCase = value => { clearTimeout(timer); resolve(value); };
+      preview.replaceChildren(frame);
+    });
+    window.layoutResults.push(report);
+    const row = document.createElement("li"); row.className = report.pass ? "pass" : "fail"; row.textContent = `${report.pass ? "PASS" : "FAIL"} ${width}px ${item.route} ${item.action || ""}`; results.append(row);
+    if (!report.pass) failures.textContent += JSON.stringify(report) + "\n";
+  }
+  const passed = window.layoutResults.filter(result => result.pass).length;
+  status.textContent = `${passed}/${window.layoutResults.length} layouts passed`;
+  event.target.disabled = false;
+};
+</script></body></html>

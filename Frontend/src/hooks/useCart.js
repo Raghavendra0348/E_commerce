@@ -22,7 +22,6 @@ export function useCart() {
     }
     try {
       await store.addItem(productId, quantity);
-      store.openDrawer();
       toast.success(productName ? `Added "${productName}" to cart` : "Added to cart");
       return true;
     } catch (err) {

@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Users, Shield, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -30,13 +31,13 @@ export default function UserTable({
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto" role="region" aria-label="User directory, scroll horizontally for more columns" tabIndex={0}>
         <table className="w-full text-left text-xs">
           <thead className="bg-[#F0F2F2] text-[#565959] uppercase font-semibold border-b border-gray-200">
             <tr>
               <th className="px-4 py-3">User ID</th>
               <th className="px-4 py-3">Customer Name</th>
-              <th className="px-4 py-3">Email Address</th>
+              <th className="px-4 py-3"><T>{"Email Address"}</T></th>
               <th className="px-4 py-3">Phone</th>
               <th className="px-4 py-3">Role</th>
               <th className="px-4 py-3">Joined Date</th>

@@ -124,11 +124,19 @@ const getUserOrders = async (userId, query = {}) => {
     const page  = Math.max(1, parseInt(query.page, 10) || 1);
     const limit = Math.min(100, Math.max(1, parseInt(query.limit, 10) || 10));
     const skip  = (page - 1) * limit;
+    const where = { userId };
+    if (query.status) {
+        const statuses = String(query.status).split(",");
+        if (!statuses.every(status => Object.hasOwn(ALLOWED_ORDER_TRANSITIONS, status))) {
+            throw ApiError.badRequest("Invalid order status filter");
+        }
+        where.status = { in: statuses };
+    }
 
     const [total, orders] = await Promise.all([
-        prisma.order.count({ where: { userId } }),
+        prisma.order.count({ where }),
         prisma.order.findMany({
-            where: { userId }, skip, take: limit, orderBy: { createdAt: "desc" },
+            where, skip, take: limit, orderBy: { createdAt: "desc" },
             include: {
                 items: {
                     include: {

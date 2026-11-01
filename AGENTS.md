@@ -242,3 +242,86 @@ docker compose up -d --build
 - Vite now forwards client IP headers to 127.0.0.1:5000; Express trusts only loopback proxies in development. Production proxy trust and rate limits remain unchanged.
 - Catalog and homepage product rows now surface API/rate-limit errors instead of silently rendering empty product areas.
 - Verified 3 proxy tests, 33 frontend tests and production build. Restart development servers and rescan the QR when using the updated network configuration.
+
+## Frontend bug fixes - 2026-11-01
+
+- Fixed all nine reviewed issues: account cache/cart isolation, checkout payment retry recovery, status-aware order confirmation, COD provider labels, memory-only access tokens with session restoration, functional mobile navigation, navbar URL state resets, server-side order status filtering and paginated reviews with full-product rating counts and independent own-review detection.
+- Added GET /api/products/:id/reviews/mine (authenticated), ratingDistribution on public review responses, and comma-separated status filtering on the user order history endpoint. Restart backend after updating; no database migration is needed.
+- Verified 51 frontend tests, 18 backend tests, frontend production build, and lint for changed backend files. Repository-wide backend lint remains blocked by pre-existing image-script errors and a catalog-script warning. No real payment was made.
+- Details: docs/FRONTEND_BUG_FIXES.md.
+## Festive homepage collections - 2026-11-01
+
+- Added a new section below the homepage hero inspired by the supplied reference: four rounded gold-gradient panels, each with a 2x2 image grid, chevron heading links, product captions and live INR price ribbons.
+- Uses existing Home & Kitchen, Fashion, Office Products and Beauty & Personal Care catalog data and images; product/category links remain functional without introducing unsupported cashback or discount claims.
+- Responsive layout uses four desktop columns, two tablet columns and one phone column, with image fallbacks, loading skeletons and retryable API errors. Product requests share existing query keys and wait for category resolution.
+- Verified production build and all 51 frontend tests.
+## Add-to-cart browsing behavior - 2026-11-01
+
+- Removed automatic cart-drawer opening from product cards, product details and the shared addItem hook. Adding an item now updates the cart/count and shows a success toast while keeping the current page visible, including on phones where the drawer previously covered the screen.
+- Explicit cart links remain available and Buy Now still goes to checkout. Added five regression tests for default/catalog cards, product details, buy-again and Buy Now.
+- Verified 56 frontend tests and the production build.
+## Live navbar search suggestions - 2026-11-01
+
+- Added NavbarSearch with an Amazon-style white autocomplete panel, search icons, bold completion text, hover/keyboard selection and a dimmed backdrop. Suggestions use live product names and honor the selected category.
+- Searches start at two characters after 350ms debounce, are cached for one minute, use cancellation signals and avoid background polling/retries. Old-query results are hidden while typing; normal submission remains available on empty/error responses.
+- Supports Up/Down arrows, Enter, Escape, touch/click selection, outside dismissal and mobile-sized scrolling. Kept the previous search bar styling and category controls.
+- Production build passes; six autocomplete regression tests cover debounce/deduplication, category-aware selection, keyboard navigation, dismissal, API errors and stale responses.
+## Verified delivery PIN selection - 2026-11-01
+
+- Location selection now validates 6-digit Indian PIN codes against the postal lookup provider through GET /api/locations/pincode/:pincode. City/district and state fill automatically; Apply stays disabled until lookup succeeds. City shortcuts use the same lookup and do not commit a hardcoded location.
+- Removed the arbitrary India fallback and guessed default delivery location. Navbar persists only verified selections; old unverified saved locations require re-selection. Postal validation does not claim courier serviceability.
+- Added a bounded 24-hour server cache, in-flight request deduplication, 8-second upstream timeout and retryable provider errors. Frontend uses 300ms debounce, cancellation signals, read-only resolved fields and stale-response protection. City is the postal provider's District field, labeled City / district in the selector.
+- Provider: https://api.postalpincode.in/pincode/<PIN>. Live service smoke test for 560001 resolved Bangalore, Karnataka. Backend restart loads the new route; no migration or new dependency is needed.
+- Verified 67 frontend tests, 23 backend tests, production build and lint for the new backend files.
+## Working interface languages - 2026-11-01
+
+- Replaced the label-only language selector with shared persistent selection for EN, HI, TA, TE, KN, ML, BN and MR. Added desktop, phone and admin selectors with correctly encoded native language names.
+- Added reactive React translations for supported navigation, category names, search placeholder, common controls, homepage collection headings, checkout/account/order labels and forms. Language changes preserve route, query and cart state; preferences restore on reload and synchronize across tabs. Document language metadata and common page titles follow the preference.
+- English is the fallback for untranslated copy; catalog names/descriptions, reviews, addresses, API errors and text embedded in artwork are not automatically translated. Coverage and extension instructions: docs/LOCALIZATION.md. No new library or external translation service is required.
+- Preserved the current PIN-only location modal, including the removed city-shortcut UI; updated its regression test to verify a restored PIN instead.
+- Verified 74 frontend tests and production build, including language persistence, all translation rows, live selection, return to English, storage failures and cross-tab updates.
+## Product detail content density - 2026-11-01
+
+- Filled the product-info column beneath About this item with real category/availability/rating details and three compact related-product cards with images, prices and links. Additional recommendations remain below reviews without repeating those three items.
+- Related queries wait for a known category; product itself is excluded. Added loading/error states and stacked recommendation rows on phones. No invented product specifications, warranty, shipping or sales claims were added.
+- Product-details headings support the existing interface languages. Verified production build and all 74 frontend tests.
+## App-style phone storefront - 2026-11-01
+
+- Updated phone layouts (<=767px) to follow the supplied mobile reference: orange/peach header, white pill search with leading submit icon, rounded verified-delivery strip, outlined icon category tabs and rounded swipeable hero/collection cards.
+- Added fixed Home, You, Wishlist, Cart and Browse bottom navigation with route-aware active indicators, live cart count, safe-area spacing and working guest sign-in destinations. Browse opens the existing category/account drawer, including admin access when appropriate.
+- Pay, Fresh, Bazaar and Deals Live shortcuts were omitted as requested. Kept existing features rather than adding nonfunctional wallet, Prime, voice/camera or assistant controls. Desktop styles remain separate.
+- Language selection and live search suggestions remain functional on phones; suggestions align to the full search pill and notifications sit above the bottom bar. Details and shared layout respect bottom-navigation clearance.
+- Verified production build and 78 frontend tests, including real category IDs, active tabs, cart counts, guest/account destinations and Browse drawer navigation.
+## Mobile header alignment and page scope - 2026-11-01
+
+- Restored the Amazon logo in the phone header and tightened brand/search/delivery/category spacing. Category tabs and the large orange header are now homepage-only on phones.
+- Cart, product details, checkout and account pages use a compact white logo/back/language header; the catalog retains a compact search row. Desktop navigation remains available as before.
+- Added back-navigation with sensible direct-entry fallbacks and reduced unnecessary product-gallery vertical spacing on phones. Verified 81 frontend tests and production build.
+## Mobile logo and fixed English region - 2026-11-01
+
+- Placed a compact lowercase Amazon-style a/smile mark immediately before the mobile search field; retained the full desktop wordmark and compact non-home navigation.
+- Replaced interactive language menus with static Indian flag/EN badges. Removed the language preference store and cross-tab switching; storefront labels and document locale stay English (en-IN), including with legacy saved preferences.
+- Verified 77 frontend tests and the production build. Updated language regression coverage for static badges and ignored legacy preferences; browser visual verification was not performed.
+## Mobile category underline spacing - 2026-11-01
+
+- Moved the active category underline into the flex flow, five pixels below its label, and removed excess minimum height/bottom padding from mobile tabs.
+- Verified production build. Desktop navigation is unaffected.
+## Mobile a mark sizing correction - 2026-11-01
+
+- Removed obsolete full-wordmark span sizing from phone CSS: its last-child selector overrode the compact a mark to 12px. The mark now uses its intended 48px font and 40px smile width.
+- Verified production build.
+## Mobile logo image - 2026-11-01
+
+- Replaced the text/vector mobile a mark with the user-selected existing /a_logo.jpg asset, contained in the 40x46px space beside search. Retained the accessible homepage link and desktop logo.
+- Verified production build.
+## Dark phone storefront reference - 2026-11-01
+
+- Updated the phone home header to a full Amazon wordmark, account/cart actions, a separate pill search row and dark delivery strip; static India/EN remains available without language switching.
+- Added local catalog photo category circles, a compact kitchen hero with a working catalog link, two-column home product sections and a Shop by category section; retained live catalog prices and avoided unverified discounts/delivery claims.
+- Phone bottom navigation now has Home, You, Cart and Menu. Other collections remain further down the home page, and non-home compact headers remain route-aware.
+- Verified 77 frontend tests and production build. Live phone/browser visual verification was not performed.
+## Header-only phone refinement - 2026-11-01
+
+- User clarified that existing desktop banner artwork and homepage sections must remain on phone. Removed the replacement phone kitchen hero, reordered/two-card-only rows and category-photo changes; restored the original festival carousel, collections and full horizontal product rows with their responsive styling.
+- Kept only the dark mobile header redesign from the reference, including full wordmark, account/cart actions and separate search/delivery rows. Restored the prior five-item bottom navigation.
+- Verified 77 frontend tests and production build after restoration.

@@ -1,10 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "@/api/axios";
+import { useAuthStore } from "@/store/useAuthStore";
 
 /**
  * Paginated product list with filters/sort
  */
-export function useProducts(params = {}) {
+export function useProducts(params = {}, { enabled = true } = {}) {
   // Remove empty/null params before sending
   const cleanParams = Object.fromEntries(
     Object.entries(params).filter(([, v]) => v !== "" && v !== null && v !== undefined)
@@ -12,6 +13,7 @@ export function useProducts(params = {}) {
 
   return useQuery({
     queryKey: ["products", cleanParams],
+    enabled,
     queryFn: async () => {
       const { sortBy, sortOrder, ...requestParams } = cleanParams;
       if (sortBy) requestParams.sort = sortBy;
@@ -52,21 +54,31 @@ export function useProduct(slug) {
 /**
  * Product reviews
  */
-export function useProductReviews(productId) {
+export function useProductReviews(productId, page = 1) {
   return useQuery({
-    queryKey: ["reviews", productId],
+    queryKey: ["reviews", productId, page],
     queryFn: async () => {
-      const res = await api.get(`/products/${productId}/reviews`);
+      const res = await api.get(`/products/${productId}/reviews`, { params: { page, limit: 10 } });
       const payload = res.data?.data;
       return {
         reviews: Array.isArray(payload) ? payload : Array.isArray(payload?.reviews) ? payload.reviews : [],
         averageRating: Number(payload?.averageRating) || 0,
         totalReviews: Number(payload?.totalReviews) || (Array.isArray(payload) ? payload.length : 0),
         pagination: payload?.pagination || null,
+        ratingDistribution: payload?.ratingDistribution || null,
       };
     },
     enabled: !!productId,
     staleTime: 1000 * 60 * 2,
+  });
+}
+
+export function useMyProductReview(productId) {
+  const { user, isAuthenticated } = useAuthStore();
+  return useQuery({
+    queryKey: ["myReview", productId, user?.id],
+    queryFn: async () => (await api.get(`/products/${productId}/reviews/mine`)).data?.data || null,
+    enabled: !!productId && isAuthenticated,
   });
 }
 
@@ -79,6 +91,7 @@ export function useSubmitReview(productId) {
     mutationFn: (data) => api.post(`/products/${productId}/reviews`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
+      queryClient.invalidateQueries({ queryKey: ["myReview", productId] });
       queryClient.invalidateQueries({ queryKey: ["product"] });
     },
   });
@@ -93,6 +106,7 @@ export function useDeleteReview(productId) {
     mutationFn: (reviewId) => api.delete(`/reviews/${reviewId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["reviews", productId] });
+      queryClient.invalidateQueries({ queryKey: ["myReview", productId] });
     },
   });
 }

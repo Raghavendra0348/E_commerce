@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -61,7 +62,7 @@ export default function Login() {
 
       {/* Card */}
       <div className="w-full max-w-sm rounded-lg border border-[#D5D9D9] bg-white px-7 py-5">
-        <h1 className="mb-4 text-xl font-semibold text-[#0F1111]">Sign in</h1>
+        <h1 className="mb-4 text-xl font-semibold text-[#0F1111]"><T>{"Sign in"}</T></h1>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
           {/* Root error */}
@@ -74,7 +75,7 @@ export default function Login() {
 
           {/* Email */}
           <div className="space-y-1">
-            <Label htmlFor="email">Email or mobile phone number</Label>
+            <Label htmlFor="email"><T>{"Email or mobile phone number"}</T></Label>
             <Input
               id="email"
               type="email"
@@ -91,7 +92,7 @@ export default function Login() {
           {/* Password */}
           <div className="space-y-1">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password"><T>{"Password"}</T></Label>
             </div>
             <div className="relative">
               <Input
@@ -121,7 +122,7 @@ export default function Login() {
             className="w-full"
             disabled={isLoading}
           >
-            {isLoading ? "Signing in..." : "Sign in"}
+            <T>{isLoading ? "Signing in..." : "Sign in"}</T>
           </Button>
         </form>
 
@@ -151,7 +152,7 @@ export default function Login() {
           <Link
             to={`/register${redirect !== "/" ? `?redirect=${encodeURIComponent(redirect)}` : ""}`}
           >
-            Create your Amazon account
+            <T>{"Create your Amazon account"}</T>
           </Link>
         </Button>
       </div>

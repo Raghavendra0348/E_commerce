@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import api from "@/api/axios";
+import { getSessionRevision, onSessionReset } from "@/lib/session";
 
 let cartFetchPromise = null;
 
@@ -16,20 +17,22 @@ export const useCartStore = create((set, get) => ({
 
   fetchCart: () => {
     if (cartFetchPromise) return cartFetchPromise;
+    const revision = getSessionRevision();
     cartFetchPromise = (async () => {
     try {
       set({ isLoading: true });
       const { data } = await api.get("/cart");
+      if (revision !== getSessionRevision()) return null;
       const cart = data?.data || null;
       const count =
         cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
       set({ cart, itemCount: count, isLoading: false });
       return cart;
     } catch {
-      set({ isLoading: false });
+      if (revision === getSessionRevision()) set({ isLoading: false });
       return null;
     }
-    })().finally(() => { cartFetchPromise = null; });
+    })().finally(() => { if (revision === getSessionRevision()) cartFetchPromise = null; });
     return cartFetchPromise;
   },
 
@@ -70,5 +73,10 @@ export const useCartStore = create((set, get) => ({
     }
   },
 
-  clearCartState: () => set({ cart: null, itemCount: 0 }),
+  clearCartState: () => set({ cart: null, itemCount: 0, isLoading: false, isDrawerOpen: false }),
 }));
+
+onSessionReset(() => {
+  cartFetchPromise = null;
+  useCartStore.getState().clearCartState();
+});

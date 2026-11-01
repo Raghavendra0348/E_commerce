@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -27,12 +28,16 @@ import { useOrder, useCancelOrder } from "@/hooks/useOrders";
 import { useCart } from "@/hooks/useCart";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { formatPrice, cn } from "@/lib/utils";
+import PaymentButton from "@/components/checkout/PaymentButton";
+import { useAuthStore } from "@/store/useAuthStore";
+import { isCashOnDelivery } from "@/lib/orderPayment";
 
 export default function OrderDetail() {
   const { id } = useParams();
+  const { user } = useAuthStore();
   useDocumentTitle(`Order #${id} Details`);
   const { addItem } = useCart();
-  const { data: order, isLoading, error } = useOrder(id);
+  const { data: order, isLoading, error, refetch } = useOrder(id);
   const cancelMutation = useCancelOrder();
 
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -104,13 +109,13 @@ export default function OrderDetail() {
       <div className="mx-auto max-w-4xl px-4 space-y-6">
         {/* Navigation & Print */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs text-[#565959]">
+          <div className="flex min-w-0 flex-wrap items-center gap-1.5 text-xs text-[#565959]">
             <Link to="/account/profile" className="hover:text-[#C7511F] hover:underline">
-              Your Account
+              <T>{"Your Account"}</T>
             </Link>
             <ChevronRight className="h-3 w-3" />
             <Link to="/account/orders" className="hover:text-[#C7511F] hover:underline">
-              Your Orders
+              <T>{"Your Orders"}</T>
             </Link>
             <ChevronRight className="h-3 w-3" />
             <span className="text-[#0F1111] font-semibold">Order #{order.id}</span>
@@ -128,7 +133,7 @@ export default function OrderDetail() {
         <div className="bg-white rounded-lg border border-[#D5D9D9] p-5 sm:p-6 space-y-4 shadow-2xs">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EDEDED] pb-4">
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-[#0F1111]">Order Details</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-[#0F1111]"><T>{"Order Details"}</T></h1>
               <p className="text-xs text-[#565959] mt-1">
                 Ordered on {formattedDate} <span className="mx-1">•</span> Order #{order.id}
               </p>
@@ -141,7 +146,7 @@ export default function OrderDetail() {
                 onClick={() => setCancelModalOpen(true)}
                 className="text-xs border-[#CC0C39] text-[#CC0C39] hover:bg-[#CC0C39]/10 self-start sm:self-auto"
               >
-                Cancel Order
+                <T>{"Cancel Order"}</T>
               </Button>
             )}
           </div>
@@ -151,6 +156,9 @@ export default function OrderDetail() {
             status={order.status}
             paymentStatus={order.paymentStatus}
           />
+          {order.status === "PENDING" && order.paymentStatus === "PENDING" && order.payment?.provider !== "COD" && (
+            <PaymentButton existingOrder={order} user={user} amount={Number(order.totalAmount)} onSuccess={() => refetch()} />
+          )}
         </div>
 
         {/* 3 Summary Cards */}
@@ -172,17 +180,17 @@ export default function OrderDetail() {
           {/* Payment Method */}
           <div className="bg-white rounded-lg border border-[#D5D9D9] p-4 space-y-2 shadow-2xs">
             <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#565959]">
-              <CreditCard className="h-4 w-4 text-[#FF9900]" /> Payment Method
+              <CreditCard className="h-4 w-4 text-[#FF9900]" /> <T>{"Payment Method"}</T>
             </div>
             <div className="text-xs text-[#0F1111] space-y-2 pt-1">
               <div>
                 <p className="font-semibold">
-                  {order.paymentMethod === "COD"
+                  <T>{isCashOnDelivery(order)
                     ? "Cash on Delivery (COD)"
-                    : "Online Payment (Razorpay)"}
+                    : "Online Payment (Razorpay)"}</T>
                 </p>
                 <p className="text-[11px] text-[#565959] mt-0.5">
-                  {order.paymentMethod === "COD"
+                  {isCashOnDelivery(order)
                     ? "Pay cash or scan QR on arrival"
                     : "Verified secure gateway transaction"}
                 </p>
@@ -213,7 +221,7 @@ export default function OrderDetail() {
           {/* Order Summary */}
           <div className="bg-white rounded-lg border border-[#D5D9D9] p-4 space-y-2 shadow-2xs">
             <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#565959]">
-              <FileText className="h-4 w-4 text-[#FF9900]" /> Order Summary
+              <FileText className="h-4 w-4 text-[#FF9900]" /> <T>{"Order Summary"}</T>
             </div>
             <div className="text-xs text-[#0F1111] space-y-1.5 pt-1">
               <div className="flex justify-between">
@@ -222,7 +230,7 @@ export default function OrderDetail() {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#565959]">Shipping & Handling:</span>
-                <span className="text-[#067D62] font-semibold">FREE</span>
+                <span className="text-[#067D62] font-semibold"><T>{"FREE"}</T></span>
               </div>
               <Separator className="my-1.5" />
               <div className="flex justify-between text-sm font-bold text-[#B12704]">
@@ -268,7 +276,7 @@ export default function OrderDetail() {
                       Price: <strong className="text-[#0F1111]">{formatPrice(item.price)}</strong>
                     </p>
                     <p className="text-xs text-[#565959]">
-                      Quantity: <strong className="text-[#0F1111]">{item.quantity}</strong>
+                      <T>{"Quantity:"}</T> <strong className="text-[#0F1111]">{item.quantity}</strong>
                     </p>
                     <p className="text-xs font-bold text-[#0F1111]">
                       Total: {formatPrice(item.price * item.quantity)}
@@ -285,7 +293,7 @@ export default function OrderDetail() {
                     className="text-xs border-[#FF9900] bg-[#FFF8E7] hover:bg-[#FFE5B4] text-[#0F1111] font-semibold"
                   >
                     <RotateCcw className="h-3 w-3 mr-1 text-[#FF9900]" />
-                    {buyingAgainId === item.id ? "Adding..." : "Buy it again"}
+                    <T>{buyingAgainId === item.id ? "Adding..." : "Buy it again"}</T>
                   </Button>
                 </div>
               </div>

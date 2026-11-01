@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -24,6 +25,9 @@ export default function AdminSidebar({
   open = true,
   onToggle,
   onLogout,
+  onNavigate,
+  showToggle = true,
+  className,
 }) {
   const location = useLocation();
 
@@ -31,7 +35,8 @@ export default function AdminSidebar({
     <aside
       className={cn(
         "flex flex-col bg-[#131921] text-white transition-all duration-200 select-none shrink-0",
-        open ? "w-60" : "w-16"
+        open ? "w-60" : "w-16",
+        className
       )}
     >
       {/* Logo & Toggle */}
@@ -44,13 +49,13 @@ export default function AdminSidebar({
             </span>
           </Link>
         )}
-        <button
+        {showToggle && <button
           onClick={onToggle}
           className="text-white/70 hover:text-white transition-colors p-1 rounded"
           aria-label="Toggle sidebar"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5 mx-auto" />}
-        </button>
+        </button>}
       </div>
 
       {/* Nav links */}
@@ -61,6 +66,7 @@ export default function AdminSidebar({
             <Link
               key={item.href}
               to={item.href}
+                onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-semibold transition-colors",
                 active
@@ -72,7 +78,7 @@ export default function AdminSidebar({
               <item.icon className="h-5 w-5 shrink-0" />
               {open && (
                 <span className="flex items-center justify-between flex-1">
-                  <span>{item.label}</span>
+                  <span><T>{item.label}</T></span>
                   {item.live && (
                     <span className="flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -90,11 +96,12 @@ export default function AdminSidebar({
       <div className="border-t border-white/10 p-2 space-y-1">
         <Link
           to="/"
+          onClick={onNavigate}
           className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-[#CCCCCC] hover:bg-white/10 hover:text-white transition-colors"
           title={!open ? "Back to Store" : undefined}
         >
           <Home className="h-5 w-5 shrink-0" />
-          {open && <span>Back to Store</span>}
+          {open && <span><T>{"Back to Store"}</T></span>}
         </Link>
         <button
           onClick={onLogout}
@@ -102,7 +109,7 @@ export default function AdminSidebar({
           title={!open ? "Sign Out" : undefined}
         >
           <LogOut className="h-5 w-5 shrink-0" />
-          {open && <span>Sign Out</span>}
+          {open && <span><T>{"Sign Out"}</T></span>}
         </button>
       </div>
     </aside>

@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Tag, Shirt, Armchair, Headphones, Package, ArrowRight } from "lucide-react";
@@ -42,7 +43,7 @@ function DiscoveryPanel({ panel, categories, categoriesLoading, categoriesError 
   const href = category ? `/products?categoryId=${category.id}` : "/products?sortBy=price&sortOrder=asc";
   return (
     <article id={`discovery-panel-${panel.id}`} className={`discovery-panel discovery-tone-${panel.tone}`}>
-      <div className="discovery-heading"><h2>{panel.title}</h2><p>{panel.subtitle}</p></div>
+      <div className="discovery-heading"><h2><T>{panel.title}</T></h2><p><T>{panel.subtitle}</T></p></div>
       <div className="discovery-products">
         {loading ? [0, 1, 2, 3].map(i => <div key={i} className="discovery-skeleton"><Skeleton className="aspect-[1.35] w-full rounded-sm" /><Skeleton className="h-3 w-full mt-2" /><Skeleton className="h-3 w-14 mt-2" /></div>) : products.map(product => <DiscoveryTile key={product.id} product={product} Icon={panel.icon} />)}
       </div>

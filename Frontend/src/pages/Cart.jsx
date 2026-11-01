@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, RefreshCw } from "lucide-react";
 import { useState } from "react";
@@ -98,7 +99,7 @@ export default function Cart() {
               asChild
               className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold"
             >
-              <Link to="/products">Explore Products</Link>
+              <Link to="/products"><T>{"Explore Products"}</T></Link>
             </Button>
           </div>
         ) : (
@@ -108,9 +109,9 @@ export default function Cart() {
               <div className="amazon-cart-items-panel">
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-[#DDD]">
-                  <h1 className="text-[28px] font-normal text-[#0F1111]">Shopping Cart</h1>
+                  <h1 className="text-[28px] font-normal text-[#0F1111]"><T>{"Shopping Cart"}</T></h1>
                   <span className="text-sm text-[#565959] self-end">
-                    Price
+                    <T>{"Price"}</T>
                   </span>
                 </div>
 
@@ -133,7 +134,7 @@ export default function Cart() {
                     onClick={handleClearCart}
                     className="text-xs text-[#007185] hover:text-[#CC0C39] hover:underline flex items-center gap-1 font-medium"
                   >
-                    <RefreshCw className="h-3 w-3" /> Clear cart
+                    <RefreshCw className="h-3 w-3" /> <T>{"Clear cart"}</T>
                   </button>
 
                   <p className="text-right text-base text-[#0F1111]">

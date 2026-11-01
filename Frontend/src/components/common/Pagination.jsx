@@ -1,3 +1,4 @@
+import { T } from "@/components/common/Translation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,7 +40,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
 
   return (
     <nav
-      className="flex items-center justify-center gap-1 py-6"
+      className="pagination-controls flex max-w-full flex-wrap items-center justify-center gap-1 py-6"
       aria-label="Pagination"
     >
       {/* Prev */}
@@ -51,7 +52,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
         aria-label="Previous page"
       >
         <ChevronLeft className="h-4 w-4" />
-        <span className="hidden sm:inline ml-1">Prev</span>
+        <span className="hidden sm:inline ml-1"><T>{"Prev"}</T></span>
       </Button>
 
       {/* Page numbers */}
@@ -88,7 +89,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
         disabled={page >= totalPages}
         aria-label="Next page"
       >
-        <span className="hidden sm:inline mr-1">Next</span>
+        <span className="hidden sm:inline mr-1"><T>{"Next"}</T></span>
         <ChevronRight className="h-4 w-4" />
       </Button>
     </nav>

@@ -3,13 +3,13 @@ import { isRateLimited } from "@/lib/rateLimit";
 export const DATA_CHANGE_EVENT = "storefront:data-changed";
 export const REFRESH_INTERVAL = 180_000;
 const resources = {
-  products: ["products", "product", "reviews", "adminProducts", "adminStats", "adminLowStock", "wishlist"],
+  products: ["products", "product", "searchSuggestions", "reviews", "myReview", "adminProducts", "adminStats", "adminLowStock", "wishlist"],
   categories: ["categories", "products", "product", "adminProducts"],
   orders: ["orders", "order", "adminOrders", "adminStats", "adminUserDetail", "products", "product", "adminProducts", "adminLowStock"],
   payments: ["orders", "order", "adminOrders", "adminStats", "adminUserDetail"],
   wishlist: ["wishlist"],
   addresses: ["addresses"],
-  reviews: ["reviews", "product", "products"],
+  reviews: ["reviews", "myReview", "product", "products"],
   admin: ["adminUsers", "adminUserDetail", "adminStats", "adminOrders", "orders", "order"],
   cart: [],
 };
