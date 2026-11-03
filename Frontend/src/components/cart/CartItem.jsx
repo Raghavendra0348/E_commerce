@@ -1,5 +1,6 @@
 import { T } from "@/components/common/Translation";
 import ProductImage from "@/components/common/ProductImage";
+import PriceDisplay from "@/components/common/PriceDisplay";
 import { Link } from "react-router-dom";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,15 @@ export default function CartItem({ item, onQuantityChange, onRemove, busy = fals
         <p className={cn("amazon-cart-stock", outOfStock ? "text-[#b12704]" : "text-[#007600]")}><T>{outOfStock ? "Currently unavailable" : product.stock <= 5 ? `Only ${product.stock} left in stock` : "In stock"}</T></p>
         {product.category?.name && <p className="amazon-cart-category">{product.category.name}</p>}
         <p className="amazon-cart-unit-price">{formatPrice(product.price)} each</p>
+        {!compact && (
+          <div className="amazon-cart-product-info">
+            {product.description && <p className="amazon-cart-description">{product.description}</p>}
+            <dl className="amazon-cart-facts">
+              <div><dt>Quantity</dt><dd>{item.quantity} {item.quantity === 1 ? "unit" : "units"}</dd></div>
+              <div><dt>Item subtotal</dt><dd>{formatPrice(Number(product.price) * item.quantity)}</dd></div>
+            </dl>
+          </div>
+        )}
         <div className="amazon-cart-item-actions">
           <div className="amazon-cart-quantity" role="group" aria-label={`Quantity for ${product.name}`}>
             <Button variant="ghost" size="icon" onClick={() => onQuantityChange(item.id, item.quantity - 1)} disabled={item.quantity <= 1 || busy || outOfStock} aria-label={`Decrease quantity of ${product.name}`}><Minus size={14} /></Button>
@@ -31,7 +41,12 @@ export default function CartItem({ item, onQuantityChange, onRemove, busy = fals
           {!compact && <Link to={`/products/${product.slug}`} className="amazon-cart-detail-link">View details</Link>}
         </div>
       </div>
-      <div className="amazon-cart-line-price">{formatPrice(Number(product.price) * item.quantity)}</div>
+      <div className="amazon-cart-line-price">
+        {compact ? formatPrice(Number(product.price) * item.quantity) : (
+          <PriceDisplay price={product.price} mrp={product.originalPrice} discountPercent={product.discountPercent} size="lg" />
+        )}
+        {!compact && item.quantity > 1 && <span className="amazon-cart-line-total">Item total: {formatPrice(Number(product.price) * item.quantity)}</span>}
+      </div>
     </li>
   );
 }

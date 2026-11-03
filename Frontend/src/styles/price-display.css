@@ -1,0 +1,22 @@
+.price-display { min-width: 0; text-align: left; }
+.price-display-main { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 8px; row-gap: 0; }
+.price-display-discount { color: #d3102e; font-size: 20px; font-weight: 300; line-height: 1.15; letter-spacing: -.3px; white-space: nowrap; }
+.price-display .price-display-amount { font-size: 30px; font-weight: 500; line-height: 1.2; letter-spacing: -.6px; white-space: nowrap; }
+.price-display-amount > span { font-size: 13px; }
+.price-display-original { margin-top: 5px; color: #565959; font-size: 13px; line-height: 1.4; font-weight: 400; }
+.price-display-savings { display: block; margin-top: 3px; color: #067d62; font-size: 12px; line-height: 1.4; font-weight: 400; }
+.price-display-sm .price-display-amount { font-size: 24px; }
+.price-display-lg .price-display-amount { font-size: 32px; }
+.price-display-xl .price-display-amount { font-size: 36px; }
+.amazon-cart-line-price .price-display-main { justify-content: flex-end; }
+.amazon-cart-line-price .price-display { text-align: right; }
+.amazon-cart-line-price .price-display-amount { font-size: 26px; }
+@media (max-width: 640px) {
+  .price-display .price-display-amount { font-size: 24px; }
+  .price-display .price-display-discount { font-size: 18px; font-weight: 300; }
+  .catalog-product-card .price-display-main { column-gap: 5px; }
+  .catalog-product-card .price-display-amount { font-size: 22px; }
+  .catalog-product-card .price-display-original { font-size: 11px; }
+  .amazon-cart-line-price .price-display { text-align: left; }
+  .amazon-cart-line-price .price-display-main { justify-content: flex-start; }
+}

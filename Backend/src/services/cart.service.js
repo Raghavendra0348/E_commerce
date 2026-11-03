@@ -23,7 +23,8 @@ const getCart = async (userId) => {
                 include: {
                     product: {
                         select: {
-                            id: true, name: true, slug: true, price: true, stock: true,
+                            id: true, name: true, slug: true, description: true, price: true, originalPrice: true, discountPercent: true, stock: true,
+                            category: { select: { name: true } },
                             images: { select: { url: true, altText: true }, take: 1 }
                         }
                     }

@@ -110,17 +110,3 @@ export function useDeleteReview(productId) {
     },
   });
 }
-
-/**
- * User wishlist
- */
-export function useWishlist() {
-  return useQuery({
-    queryKey: ["wishlist"],
-    queryFn: async () => {
-      const res = await api.get("/wishlist");
-      return res.data?.data?.items || [];
-    },
-    staleTime: 1000 * 60 * 5,
-  });
-}

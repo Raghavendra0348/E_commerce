@@ -1,13 +1,13 @@
 import { T } from "@/components/common/Translation";
 import { Link } from "react-router-dom";
-import { Heart, Trash2 } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/product/ProductCard";
+import { WishlistProductCard } from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import { useWishlist } from "@/hooks/useWishlist";
 
 export default function Wishlist() {
-  const { products, isLoading, removeFromWishlist } = useWishlist();
+  const { products, isLoading, error, refetch, removeFromWishlist, isRemoving } = useWishlist();
 
   return (
     <div id="wishlist-page" className="wishlist-page min-h-screen bg-[#EAEDED] py-6 sm:py-8">
@@ -31,6 +31,11 @@ export default function Wishlist() {
               <ProductCardSkeleton key={i} />
             ))}
           </div>
+        ) : error ? (
+          <div role="alert" className="rounded-lg bg-white p-8 text-center">
+            <p>We couldn't load your wishlist. Please try again.</p>
+            <Button variant="outline" onClick={() => refetch()}>Try again</Button>
+          </div>
         ) : products.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center bg-white rounded-lg border border-[#D5D9D9] p-8 max-w-xl mx-auto">
             <Heart className="h-16 w-16 text-[#EDEDED]" />
@@ -48,18 +53,7 @@ export default function Wishlist() {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
             {products.map((product) => (
-              <div key={product.id} className="relative group">
-                <ProductCard product={product} />
-                {/* Remove from wishlist overlay */}
-                <button
-                  onClick={() => removeFromWishlist(product.id)}
-                  className="absolute top-2 right-2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity hover:bg-white text-[#CC0C39]"
-                  title="Remove from wishlist"
-                  aria-label="Remove from wishlist"
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </button>
-              </div>
+              <WishlistProductCard key={product.id} product={product} onRemove={removeFromWishlist} busy={isRemoving} />
             ))}
           </div>
         )}

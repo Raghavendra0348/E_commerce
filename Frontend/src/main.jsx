@@ -10,6 +10,10 @@ import LanguageSync from "@/components/common/LanguageSync";
 import "./index.css";
 import "./styles/responsive.css";
 import "./styles/mobile-storefront.css";
+import "./styles/reference/amazon-in.tokens.css";
+import "./styles/amazon-reference.css";
+import "./styles/cart-reference.css";
+import "./styles/price-display.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,7 +27,7 @@ createRoot(document.getElementById("root")).render(
         position="bottom-right"
         toastOptions={{
           style: {
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Arial, sans-serif",
             fontSize: "14px",
           },
         }}

@@ -1,0 +1,3100 @@
+{
+  "createdAt": "2026-11-03T13:34:48.705Z",
+  "status": "applied",
+  "changes": [
+    {
+      "before": {
+        "id": 2,
+        "name": "Wireless Bluetooth Headphones",
+        "price": "4160.08",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4160.08,
+        "discountPercent": 24,
+        "price": 3161.66
+      }
+    },
+    {
+      "before": {
+        "id": 3,
+        "name": "Portable Bluetooth Speaker",
+        "price": "3146.12",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3146.12,
+        "discountPercent": 33,
+        "price": 2107.9
+      }
+    },
+    {
+      "before": {
+        "id": 4,
+        "name": "20000mAh Power Bank",
+        "price": "1333.82",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1333.82,
+        "discountPercent": 33,
+        "price": 893.66
+      }
+    },
+    {
+      "before": {
+        "id": 5,
+        "name": "USB-C Fast Charger",
+        "price": "1143.37",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1143.37,
+        "discountPercent": 12,
+        "price": 1006.17
+      }
+    },
+    {
+      "before": {
+        "id": 6,
+        "name": "Smart LED Desk Lamp",
+        "price": "764.18",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 764.18,
+        "discountPercent": 36,
+        "price": 489.08
+      }
+    },
+    {
+      "before": {
+        "id": 7,
+        "name": "USB-C Hub 7-in-1",
+        "price": "1384.81",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1384.81,
+        "discountPercent": 34,
+        "price": 913.97
+      }
+    },
+    {
+      "before": {
+        "id": 8,
+        "name": "Webcam Full HD",
+        "price": "1358.14",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1358.14,
+        "discountPercent": 29,
+        "price": 964.28
+      }
+    },
+    {
+      "before": {
+        "id": 9,
+        "name": "Wireless Mouse",
+        "price": "1021.42",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1021.42,
+        "discountPercent": 26,
+        "price": 755.85
+      }
+    },
+    {
+      "before": {
+        "id": 10,
+        "name": "Everyday Laptop 15",
+        "price": "49940.88",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 49940.88,
+        "discountPercent": 41,
+        "price": 29465.12
+      }
+    },
+    {
+      "before": {
+        "id": 11,
+        "name": "Mechanical Keyboard",
+        "price": "3386.84",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3386.84,
+        "discountPercent": 37,
+        "price": 2133.71
+      }
+    },
+    {
+      "before": {
+        "id": 12,
+        "name": "Laptop Stand Aluminium",
+        "price": "1800.75",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1800.75,
+        "discountPercent": 28,
+        "price": 1296.54
+      }
+    },
+    {
+      "before": {
+        "id": 13,
+        "name": "NVMe SSD 1TB",
+        "price": "9551.84",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 9551.84,
+        "discountPercent": 27,
+        "price": 6972.84
+      }
+    },
+    {
+      "before": {
+        "id": 14,
+        "name": "DDR5 Laptop RAM 16GB",
+        "price": "199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 199,
+        "discountPercent": 48,
+        "price": 103.48
+      }
+    },
+    {
+      "before": {
+        "id": 15,
+        "name": "USB-C Ethernet Adapter",
+        "price": "776.87",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 776.87,
+        "discountPercent": 50,
+        "price": 388.44
+      }
+    },
+    {
+      "before": {
+        "id": 16,
+        "name": "Laptop Sleeve 15-inch",
+        "price": "1260.49",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1260.49,
+        "discountPercent": 32,
+        "price": 857.13
+      }
+    },
+    {
+      "before": {
+        "id": 17,
+        "name": "Android Smartphone 128GB",
+        "price": "14860.89",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 14860.89,
+        "discountPercent": 29,
+        "price": 10551.23
+      }
+    },
+    {
+      "before": {
+        "id": 18,
+        "name": "Tempered Glass Screen Protector",
+        "price": "182.85",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 182.85,
+        "discountPercent": 35,
+        "price": 118.85
+      }
+    },
+    {
+      "before": {
+        "id": 19,
+        "name": "Silicone Phone Case",
+        "price": "561.24",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 561.24,
+        "discountPercent": 27,
+        "price": 409.71
+      }
+    },
+    {
+      "before": {
+        "id": 20,
+        "name": "Braided USB-C Cable",
+        "price": "59",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 59,
+        "discountPercent": 43,
+        "price": 33.63
+      }
+    },
+    {
+      "before": {
+        "id": 21,
+        "name": "Wireless Charging Stand",
+        "price": "1248.65",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1248.65,
+        "discountPercent": 10,
+        "price": 1123.79
+      }
+    },
+    {
+      "before": {
+        "id": 22,
+        "name": "Classic Cotton T-Shirt",
+        "price": "354.16",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 354.16,
+        "discountPercent": 25,
+        "price": 265.62
+      }
+    },
+    {
+      "before": {
+        "id": 23,
+        "name": "Regular Fit Jeans",
+        "price": "2226.05",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2226.05,
+        "discountPercent": 12,
+        "price": 1958.92
+      }
+    },
+    {
+      "before": {
+        "id": 24,
+        "name": "Running Shoes",
+        "price": "4575.17",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4575.17,
+        "discountPercent": 44,
+        "price": 2562.1
+      }
+    },
+    {
+      "before": {
+        "id": 25,
+        "name": "Analog Wrist Watch",
+        "price": "2646.53",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2646.53,
+        "discountPercent": 38,
+        "price": 1640.85
+      }
+    },
+    {
+      "before": {
+        "id": 26,
+        "name": "Everyday Backpack",
+        "price": "781.48",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 781.48,
+        "discountPercent": 26,
+        "price": 578.3
+      }
+    },
+    {
+      "before": {
+        "id": 27,
+        "name": "Stainless Steel Water Bottle",
+        "price": "994.76",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 994.76,
+        "discountPercent": 14,
+        "price": 855.49
+      }
+    },
+    {
+      "before": {
+        "id": 28,
+        "name": "Nonstick Frying Pan",
+        "price": "1610.91",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1610.91,
+        "discountPercent": 14,
+        "price": 1385.38
+      }
+    },
+    {
+      "before": {
+        "id": 29,
+        "name": "Airtight Storage Container Set",
+        "price": "817.14",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 817.14,
+        "discountPercent": 15,
+        "price": 694.57
+      }
+    },
+    {
+      "before": {
+        "id": 30,
+        "name": "Cotton Bedsheet Set",
+        "price": "1879.66",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1879.66,
+        "discountPercent": 38,
+        "price": 1165.39
+      }
+    },
+    {
+      "before": {
+        "id": 31,
+        "name": "Ceramic Coffee Mug Set",
+        "price": "412.86",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 412.86,
+        "discountPercent": 13,
+        "price": 359.19
+      }
+    },
+    {
+      "before": {
+        "id": 32,
+        "name": "JavaScript Fundamentals",
+        "price": "503.75",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 503.75,
+        "discountPercent": 16,
+        "price": 423.15
+      }
+    },
+    {
+      "before": {
+        "id": 33,
+        "name": "Data Structures and Algorithms",
+        "price": "1060.46",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1060.46,
+        "discountPercent": 27,
+        "price": 774.14
+      }
+    },
+    {
+      "before": {
+        "id": 34,
+        "name": "Clean Code Study Edition",
+        "price": "1147.22",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1147.22,
+        "discountPercent": 44,
+        "price": 642.44
+      }
+    },
+    {
+      "before": {
+        "id": 35,
+        "name": "The Illustrated Science Book",
+        "price": "566.07",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 566.07,
+        "discountPercent": 45,
+        "price": 311.34
+      }
+    },
+    {
+      "before": {
+        "id": 36,
+        "name": "Productivity Journal",
+        "price": "264.36",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 264.36,
+        "discountPercent": 25,
+        "price": 198.27
+      }
+    },
+    {
+      "before": {
+        "id": 37,
+        "name": "Daily Face Cleanser",
+        "price": "333.97",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 333.97,
+        "discountPercent": 44,
+        "price": 187.02
+      }
+    },
+    {
+      "before": {
+        "id": 38,
+        "name": "Moisturizing Lotion",
+        "price": "391.75",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 391.75,
+        "discountPercent": 13,
+        "price": 340.82
+      }
+    },
+    {
+      "before": {
+        "id": 39,
+        "name": "Electric Grooming Trimmer",
+        "price": "2668.99",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2668.99,
+        "discountPercent": 32,
+        "price": 1814.91
+      }
+    },
+    {
+      "before": {
+        "id": 40,
+        "name": "Hair Dryer Compact",
+        "price": "1188.38",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1188.38,
+        "discountPercent": 39,
+        "price": 724.91
+      }
+    },
+    {
+      "before": {
+        "id": 41,
+        "name": "Badminton Racket",
+        "price": "2550.61",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2550.61,
+        "discountPercent": 44,
+        "price": 1428.34
+      }
+    },
+    {
+      "before": {
+        "id": 42,
+        "name": "Yoga Mat 6mm",
+        "price": "766.74",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 766.74,
+        "discountPercent": 50,
+        "price": 383.37
+      }
+    },
+    {
+      "before": {
+        "id": 43,
+        "name": "Insulated Sports Bottle",
+        "price": "938.2",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 938.2,
+        "discountPercent": 41,
+        "price": 553.54
+      }
+    },
+    {
+      "before": {
+        "id": 44,
+        "name": "Adjustable Dumbbell Pair",
+        "price": "5504.47",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 5504.47,
+        "discountPercent": 15,
+        "price": 4678.8
+      }
+    },
+    {
+      "before": {
+        "id": 45,
+        "name": "Skipping Rope",
+        "price": "244.68",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 244.68,
+        "discountPercent": 43,
+        "price": 139.47
+      }
+    },
+    {
+      "before": {
+        "id": 46,
+        "name": "Building Blocks Set",
+        "price": "1092.45",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1092.45,
+        "discountPercent": 40,
+        "price": 655.47
+      }
+    },
+    {
+      "before": {
+        "id": 47,
+        "name": "Family Board Game",
+        "price": "556.16",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 556.16,
+        "discountPercent": 36,
+        "price": 355.94
+      }
+    },
+    {
+      "before": {
+        "id": 48,
+        "name": "Educational Puzzle Set",
+        "price": "471.64",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 471.64,
+        "discountPercent": 22,
+        "price": 367.88
+      }
+    },
+    {
+      "before": {
+        "id": 49,
+        "name": "Remote Control Car",
+        "price": "1715.26",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1715.26,
+        "discountPercent": 33,
+        "price": 1149.22
+      }
+    },
+    {
+      "before": {
+        "id": 50,
+        "name": "Reusable Food Storage Bags",
+        "price": "370.37",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 370.37,
+        "discountPercent": 18,
+        "price": 303.7
+      }
+    },
+    {
+      "before": {
+        "id": 51,
+        "name": "Microfiber Cleaning Cloths",
+        "price": "288.79",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 288.79,
+        "discountPercent": 35,
+        "price": 187.71
+      }
+    },
+    {
+      "before": {
+        "id": 52,
+        "name": "Lunch Box Set",
+        "price": "997.13",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 997.13,
+        "discountPercent": 44,
+        "price": 558.39
+      }
+    },
+    {
+      "before": {
+        "id": 53,
+        "name": "Laundry Storage Basket",
+        "price": "857.57",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 857.57,
+        "discountPercent": 43,
+        "price": 488.81
+      }
+    },
+    {
+      "before": {
+        "id": 54,
+        "name": "Electric Kettle 1.5L",
+        "price": "1705.94",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1705.94,
+        "discountPercent": 21,
+        "price": 1347.69
+      }
+    },
+    {
+      "before": {
+        "id": 55,
+        "name": "Mixer Grinder",
+        "price": "2457.52",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2457.52,
+        "discountPercent": 17,
+        "price": 2039.74
+      }
+    },
+    {
+      "before": {
+        "id": 56,
+        "name": "Table Fan",
+        "price": "2624.74",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2624.74,
+        "discountPercent": 49,
+        "price": 1338.62
+      }
+    },
+    {
+      "before": {
+        "id": 57,
+        "name": "Air Fryer 4L",
+        "price": "5981.05",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 5981.05,
+        "discountPercent": 49,
+        "price": 3050.34
+      }
+    },
+    {
+      "before": {
+        "id": 58,
+        "name": "Ergonomic Office Chair",
+        "price": "8815.19",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 8815.19,
+        "discountPercent": 18,
+        "price": 7228.46
+      }
+    },
+    {
+      "before": {
+        "id": 59,
+        "name": "Study Desk",
+        "price": "6173.69",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 6173.69,
+        "discountPercent": 35,
+        "price": 4012.9
+      }
+    },
+    {
+      "before": {
+        "id": 60,
+        "name": "Bookshelf 4 Tier",
+        "price": "4511.73",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4511.73,
+        "discountPercent": 44,
+        "price": 2526.57
+      }
+    },
+    {
+      "before": {
+        "id": 61,
+        "name": "Car Phone Mount",
+        "price": "775.2",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 775.2,
+        "discountPercent": 31,
+        "price": 534.89
+      }
+    },
+    {
+      "before": {
+        "id": 62,
+        "name": "Tyre Pressure Gauge",
+        "price": "608.03",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 608.03,
+        "discountPercent": 14,
+        "price": 522.91
+      }
+    },
+    {
+      "before": {
+        "id": 63,
+        "name": "Car Cleaning Kit",
+        "price": "1249.88",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1249.88,
+        "discountPercent": 30,
+        "price": 874.92
+      }
+    },
+    {
+      "before": {
+        "id": 64,
+        "name": "A5 Notebook Pack",
+        "price": "243.62",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 243.62,
+        "discountPercent": 28,
+        "price": 175.41
+      }
+    },
+    {
+      "before": {
+        "id": 65,
+        "name": "Gel Pen Set",
+        "price": "146.45",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 146.45,
+        "discountPercent": 32,
+        "price": 99.59
+      }
+    },
+    {
+      "before": {
+        "id": 66,
+        "name": "Desk Organizer",
+        "price": "868.98",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 868.98,
+        "discountPercent": 16,
+        "price": 729.94
+      }
+    },
+    {
+      "before": {
+        "id": 67,
+        "name": "Travel Duffel Bag",
+        "price": "2939.97",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2939.97,
+        "discountPercent": 29,
+        "price": 2087.38
+      }
+    },
+    {
+      "before": {
+        "id": 68,
+        "name": "Hard Shell Cabin Trolley",
+        "price": "4783.57",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4783.57,
+        "discountPercent": 42,
+        "price": 2774.47
+      }
+    },
+    {
+      "before": {
+        "id": 69,
+        "name": "Laptop Backpack 15-inch",
+        "price": "3175.3",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3175.3,
+        "discountPercent": 32,
+        "price": 2159.2
+      }
+    },
+    {
+      "before": {
+        "id": 70,
+        "name": "Wired In-Ear Earphones",
+        "price": "872.34",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 872.34,
+        "discountPercent": 41,
+        "price": 514.68
+      }
+    },
+    {
+      "before": {
+        "id": 71,
+        "name": "USB Podcast Microphone",
+        "price": "3630.4",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3630.4,
+        "discountPercent": 11,
+        "price": 3231.06
+      }
+    },
+    {
+      "before": {
+        "id": 72,
+        "name": "Over-Ear Studio Headphones",
+        "price": "3868.57",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3868.57,
+        "discountPercent": 49,
+        "price": 1972.97
+      }
+    },
+    {
+      "before": {
+        "id": 73,
+        "name": "Wireless Game Controller",
+        "price": "3386.83",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3386.83,
+        "discountPercent": 13,
+        "price": 2946.54
+      }
+    },
+    {
+      "before": {
+        "id": 74,
+        "name": "Gaming Mouse Pad XL",
+        "price": "1409.34",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1409.34,
+        "discountPercent": 39,
+        "price": 859.7
+      }
+    },
+    {
+      "before": {
+        "id": 75,
+        "name": "Gaming Headset",
+        "price": "1971.47",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1971.47,
+        "discountPercent": 41,
+        "price": 1163.17
+      }
+    },
+    {
+      "before": {
+        "id": 76,
+        "name": "Fitness Band",
+        "price": "1890.54",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1890.54,
+        "discountPercent": 28,
+        "price": 1361.19
+      }
+    },
+    {
+      "before": {
+        "id": 77,
+        "name": "Smart Watch",
+        "price": "9089.41",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 9089.41,
+        "discountPercent": 21,
+        "price": 7180.63
+      }
+    },
+    {
+      "before": {
+        "id": 78,
+        "name": "Digital Sports Watch",
+        "price": "858.18",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 858.18,
+        "discountPercent": 42,
+        "price": 497.74
+      }
+    },
+    {
+      "before": {
+        "id": 79,
+        "name": "Demo Laptop",
+        "price": "75000",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 75000,
+        "discountPercent": 27,
+        "price": 54750
+      }
+    },
+    {
+      "before": {
+        "id": 84,
+        "name": "Wi-Fi Smart Plug 16A",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 22,
+        "price": 701.22
+      }
+    },
+    {
+      "before": {
+        "id": 85,
+        "name": "Digital Alarm Clock with LED Display",
+        "price": "649",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 649,
+        "discountPercent": 47,
+        "price": 343.97
+      }
+    },
+    {
+      "before": {
+        "id": 86,
+        "name": "Portable Mini Projector",
+        "price": "6999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 6999,
+        "discountPercent": 29,
+        "price": 4969.29
+      }
+    },
+    {
+      "before": {
+        "id": 87,
+        "name": "Universal Travel Adapter",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 31,
+        "price": 896.31
+      }
+    },
+    {
+      "before": {
+        "id": 88,
+        "name": "Rechargeable Emergency Lantern",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 32,
+        "price": 543.32
+      }
+    },
+    {
+      "before": {
+        "id": 89,
+        "name": "Digital Kitchen Timer",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 12,
+        "price": 307.12
+      }
+    },
+    {
+      "before": {
+        "id": 90,
+        "name": "Indoor Wi-Fi Security Camera",
+        "price": "2199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2199,
+        "discountPercent": 34,
+        "price": 1451.34
+      }
+    },
+    {
+      "before": {
+        "id": 91,
+        "name": "Wireless Doorbell Kit",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 14,
+        "price": 515.14
+      }
+    },
+    {
+      "before": {
+        "id": 92,
+        "name": "Rechargeable AA Battery Pack",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 11,
+        "price": 889.11
+      }
+    },
+    {
+      "before": {
+        "id": 93,
+        "name": "HDMI Cable 2 Metres",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 19,
+        "price": 323.19
+      }
+    },
+    {
+      "before": {
+        "id": 94,
+        "name": "Digital Multimeter",
+        "price": "749",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 749,
+        "discountPercent": 19,
+        "price": 606.69
+      }
+    },
+    {
+      "before": {
+        "id": 95,
+        "name": "Motion Sensor Night Light",
+        "price": "449",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 449,
+        "discountPercent": 14,
+        "price": 386.14
+      }
+    },
+    {
+      "before": {
+        "id": 96,
+        "name": "27-inch IPS Monitor",
+        "price": "12999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 12999,
+        "discountPercent": 25,
+        "price": 9749.25
+      }
+    },
+    {
+      "before": {
+        "id": 97,
+        "name": "External Hard Drive 2TB",
+        "price": "6499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 6499,
+        "discountPercent": 44,
+        "price": 3639.44
+      }
+    },
+    {
+      "before": {
+        "id": 98,
+        "name": "Foldable Mobile Phone Stand",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 28,
+        "price": 215.28
+      }
+    },
+    {
+      "before": {
+        "id": 99,
+        "name": "Magnetic Car Charger 15W",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 45,
+        "price": 824.45
+      }
+    },
+    {
+      "before": {
+        "id": 100,
+        "name": "USB-C to USB-C Cable 2 Metres",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 46,
+        "price": 215.46
+      }
+    },
+    {
+      "before": {
+        "id": 101,
+        "name": "Waterproof Phone Pouch",
+        "price": "249",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 249,
+        "discountPercent": 38,
+        "price": 154.38
+      }
+    },
+    {
+      "before": {
+        "id": 102,
+        "name": "Mobile Screen Cleaning Kit",
+        "price": "199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 199,
+        "discountPercent": 25,
+        "price": 149.25
+      }
+    },
+    {
+      "before": {
+        "id": 103,
+        "name": "3-in-1 Retractable Charging Cable",
+        "price": "549",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 549,
+        "discountPercent": 37,
+        "price": 345.87
+      }
+    },
+    {
+      "before": {
+        "id": 104,
+        "name": "Linen Blend Casual Shirt",
+        "price": "1199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1199,
+        "discountPercent": 47,
+        "price": 635.47
+      }
+    },
+    {
+      "before": {
+        "id": 105,
+        "name": "Cotton Polo T-Shirt",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 34,
+        "price": 461.34
+      }
+    },
+    {
+      "before": {
+        "id": 106,
+        "name": "Slim Fit Chino Trousers",
+        "price": "1399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1399,
+        "discountPercent": 28,
+        "price": 1007.28
+      }
+    },
+    {
+      "before": {
+        "id": 107,
+        "name": "Floral Printed Kurta",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 39,
+        "price": 548.39
+      }
+    },
+    {
+      "before": {
+        "id": 108,
+        "name": "Straight Fit Cotton Palazzo",
+        "price": "649",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 649,
+        "discountPercent": 23,
+        "price": 499.73
+      }
+    },
+    {
+      "before": {
+        "id": 109,
+        "name": "Denim Casual Jacket",
+        "price": "1799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1799,
+        "discountPercent": 16,
+        "price": 1511.16
+      }
+    },
+    {
+      "before": {
+        "id": 110,
+        "name": "Lightweight Hooded Sweatshirt",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 28,
+        "price": 935.28
+      }
+    },
+    {
+      "before": {
+        "id": 111,
+        "name": "Canvas Slip-On Sneakers",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 19,
+        "price": 809.19
+      }
+    },
+    {
+      "before": {
+        "id": 112,
+        "name": "Woven Leather Belt",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 47,
+        "price": 317.47
+      }
+    },
+    {
+      "before": {
+        "id": 113,
+        "name": "Cotton Printed Scarf",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 35,
+        "price": 259.35
+      }
+    },
+    {
+      "before": {
+        "id": 114,
+        "name": "Bamboo Chopping Board",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 24,
+        "price": 455.24
+      }
+    },
+    {
+      "before": {
+        "id": 115,
+        "name": "Silicone Cooking Utensil Set",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 23,
+        "price": 615.23
+      }
+    },
+    {
+      "before": {
+        "id": 116,
+        "name": "Stainless Steel Cutlery Set",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 11,
+        "price": 889.11
+      }
+    },
+    {
+      "before": {
+        "id": 117,
+        "name": "Glass Spice Jar Set",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 34,
+        "price": 461.34
+      }
+    },
+    {
+      "before": {
+        "id": 118,
+        "name": "Python Programming Starter Guide",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 41,
+        "price": 294.41
+      }
+    },
+    {
+      "before": {
+        "id": 119,
+        "name": "SQL Practice Workbook",
+        "price": "449",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 449,
+        "discountPercent": 45,
+        "price": 246.95
+      }
+    },
+    {
+      "before": {
+        "id": 120,
+        "name": "Web Design Basics",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 14,
+        "price": 515.14
+      }
+    },
+    {
+      "before": {
+        "id": 121,
+        "name": "Everyday Indian Cooking",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 35,
+        "price": 454.35
+      }
+    },
+    {
+      "before": {
+        "id": 122,
+        "name": "World History Illustrated",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 45,
+        "price": 494.45
+      }
+    },
+    {
+      "before": {
+        "id": 123,
+        "name": "Mindful Habits Journal",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 48,
+        "price": 181.48
+      }
+    },
+    {
+      "before": {
+        "id": 124,
+        "name": "Nature Discovery for Children",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 11,
+        "price": 355.11
+      }
+    },
+    {
+      "before": {
+        "id": 125,
+        "name": "Practical Personal Budgeting",
+        "price": "449",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 449,
+        "discountPercent": 45,
+        "price": 246.95
+      }
+    },
+    {
+      "before": {
+        "id": 126,
+        "name": "Gentle Foaming Face Wash 150ml",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 17,
+        "price": 248.17
+      }
+    },
+    {
+      "before": {
+        "id": 127,
+        "name": "Hydrating Body Wash 250ml",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 21,
+        "price": 275.71
+      }
+    },
+    {
+      "before": {
+        "id": 128,
+        "name": "Nourishing Hair Conditioner 200ml",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 35,
+        "price": 194.35
+      }
+    },
+    {
+      "before": {
+        "id": 129,
+        "name": "Daily Care Shampoo 250ml",
+        "price": "329",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 329,
+        "discountPercent": 42,
+        "price": 190.82
+      }
+    },
+    {
+      "before": {
+        "id": 130,
+        "name": "Lip Balm Duo",
+        "price": "199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 199,
+        "discountPercent": 31,
+        "price": 137.31
+      }
+    },
+    {
+      "before": {
+        "id": 131,
+        "name": "Manicure Grooming Kit",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 44,
+        "price": 279.44
+      }
+    },
+    {
+      "before": {
+        "id": 132,
+        "name": "Makeup Brush Set",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 35,
+        "price": 454.35
+      }
+    },
+    {
+      "before": {
+        "id": 133,
+        "name": "Wide Tooth Detangling Comb",
+        "price": "149",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 149,
+        "discountPercent": 30,
+        "price": 104.3
+      }
+    },
+    {
+      "before": {
+        "id": 134,
+        "name": "Hand Cream Set 3 Pack",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 36,
+        "price": 255.36
+      }
+    },
+    {
+      "before": {
+        "id": 135,
+        "name": "Resistance Band Set",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 16,
+        "price": 671.16
+      }
+    },
+    {
+      "before": {
+        "id": 136,
+        "name": "Foam Roller 33cm",
+        "price": "649",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 649,
+        "discountPercent": 12,
+        "price": 571.12
+      }
+    },
+    {
+      "before": {
+        "id": 137,
+        "name": "Cricket Tennis Ball Pack",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 28,
+        "price": 215.28
+      }
+    },
+    {
+      "before": {
+        "id": 138,
+        "name": "Football Size 5",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 41,
+        "price": 530.41
+      }
+    },
+    {
+      "before": {
+        "id": 139,
+        "name": "Table Tennis Bat Set",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 32,
+        "price": 475.32
+      }
+    },
+    {
+      "before": {
+        "id": 140,
+        "name": "Adjustable Hand Grip Trainer",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 29,
+        "price": 247.79
+      }
+    },
+    {
+      "before": {
+        "id": 141,
+        "name": "Push-Up Bar Pair",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 15,
+        "price": 424.15
+      }
+    },
+    {
+      "before": {
+        "id": 142,
+        "name": "Swimming Goggles",
+        "price": "449",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 449,
+        "discountPercent": 24,
+        "price": 341.24
+      }
+    },
+    {
+      "before": {
+        "id": 143,
+        "name": "Wooden Shape Sorting Box",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 18,
+        "price": 491.18
+      }
+    },
+    {
+      "before": {
+        "id": 144,
+        "name": "Die-Cast Vehicle Set",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 38,
+        "price": 309.38
+      }
+    },
+    {
+      "before": {
+        "id": 145,
+        "name": "Kids Art and Craft Kit",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 11,
+        "price": 711.11
+      }
+    },
+    {
+      "before": {
+        "id": 146,
+        "name": "Magnetic Drawing Board",
+        "price": "449",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 449,
+        "discountPercent": 47,
+        "price": 237.97
+      }
+    },
+    {
+      "before": {
+        "id": 147,
+        "name": "Junior Chess Set",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 45,
+        "price": 329.45
+      }
+    },
+    {
+      "before": {
+        "id": 148,
+        "name": "Animal Figurine Collection",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 24,
+        "price": 531.24
+      }
+    },
+    {
+      "before": {
+        "id": 149,
+        "name": "Soft Plush Teddy Bear",
+        "price": "649",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 649,
+        "discountPercent": 21,
+        "price": 512.71
+      }
+    },
+    {
+      "before": {
+        "id": 150,
+        "name": "Domino Tile Set",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 25,
+        "price": 261.75
+      }
+    },
+    {
+      "before": {
+        "id": 151,
+        "name": "Kids Science Experiment Kit",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 34,
+        "price": 659.34
+      }
+    },
+    {
+      "before": {
+        "id": 152,
+        "name": "Two-Slice Pop-Up Toaster",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 21,
+        "price": 1184.21
+      }
+    },
+    {
+      "before": {
+        "id": 153,
+        "name": "Electric Rice Cooker 1.8L",
+        "price": "2199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2199,
+        "discountPercent": 24,
+        "price": 1671.24
+      }
+    },
+    {
+      "before": {
+        "id": 154,
+        "name": "Dry Iron 1000W",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 24,
+        "price": 683.24
+      }
+    },
+    {
+      "before": {
+        "id": 155,
+        "name": "Handheld Garment Steamer",
+        "price": "1799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1799,
+        "discountPercent": 11,
+        "price": 1601.11
+      }
+    },
+    {
+      "before": {
+        "id": 156,
+        "name": "Compact Vacuum Cleaner",
+        "price": "3499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3499,
+        "discountPercent": 33,
+        "price": 2344.33
+      }
+    },
+    {
+      "before": {
+        "id": 157,
+        "name": "Induction Cooktop 1800W",
+        "price": "2499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2499,
+        "discountPercent": 30,
+        "price": 1749.3
+      }
+    },
+    {
+      "before": {
+        "id": 158,
+        "name": "Hand Blender 250W",
+        "price": "1199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1199,
+        "discountPercent": 36,
+        "price": 767.36
+      }
+    },
+    {
+      "before": {
+        "id": 159,
+        "name": "Electric Sandwich Maker",
+        "price": "1599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1599,
+        "discountPercent": 26,
+        "price": 1183.26
+      }
+    },
+    {
+      "before": {
+        "id": 160,
+        "name": "Personal Air Cooler",
+        "price": "2999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2999,
+        "discountPercent": 11,
+        "price": 2669.11
+      }
+    },
+    {
+      "before": {
+        "id": 161,
+        "name": "Foldable Laptop Table",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 12,
+        "price": 1143.12
+      }
+    },
+    {
+      "before": {
+        "id": 162,
+        "name": "Two-Tier Bedside Table",
+        "price": "2499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2499,
+        "discountPercent": 40,
+        "price": 1499.4
+      }
+    },
+    {
+      "before": {
+        "id": 163,
+        "name": "Four-Shelf Shoe Rack",
+        "price": "1799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1799,
+        "discountPercent": 32,
+        "price": 1223.32
+      }
+    },
+    {
+      "before": {
+        "id": 164,
+        "name": "Upholstered Dining Chair",
+        "price": "3499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3499,
+        "discountPercent": 22,
+        "price": 2729.22
+      }
+    },
+    {
+      "before": {
+        "id": 165,
+        "name": "Compact Coffee Table",
+        "price": "3999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3999,
+        "discountPercent": 20,
+        "price": 3199.2
+      }
+    },
+    {
+      "before": {
+        "id": 166,
+        "name": "Wall Mounted Display Shelf",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 48,
+        "price": 779.48
+      }
+    },
+    {
+      "before": {
+        "id": 167,
+        "name": "Multipurpose Storage Cabinet",
+        "price": "5999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 5999,
+        "discountPercent": 23,
+        "price": 4619.23
+      }
+    },
+    {
+      "before": {
+        "id": 168,
+        "name": "Fabric Storage Ottoman",
+        "price": "1999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1999,
+        "discountPercent": 15,
+        "price": 1699.15
+      }
+    },
+    {
+      "before": {
+        "id": 169,
+        "name": "Adjustable Bar Stool",
+        "price": "4499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4499,
+        "discountPercent": 28,
+        "price": 3239.28
+      }
+    },
+    {
+      "before": {
+        "id": 170,
+        "name": "Folding Balcony Chair",
+        "price": "2299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2299,
+        "discountPercent": 48,
+        "price": 1195.48
+      }
+    },
+    {
+      "before": {
+        "id": 171,
+        "name": "Car Microfibre Wash Mitt",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 43,
+        "price": 170.43
+      }
+    },
+    {
+      "before": {
+        "id": 172,
+        "name": "Portable Tyre Inflator",
+        "price": "2499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2499,
+        "discountPercent": 25,
+        "price": 1874.25
+      }
+    },
+    {
+      "before": {
+        "id": 173,
+        "name": "Car Sunshade Pair",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 35,
+        "price": 324.35
+      }
+    },
+    {
+      "before": {
+        "id": 174,
+        "name": "Car Boot Organiser",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 21,
+        "price": 710.21
+      }
+    },
+    {
+      "before": {
+        "id": 175,
+        "name": "Motorcycle Rain Cover",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 28,
+        "price": 503.28
+      }
+    },
+    {
+      "before": {
+        "id": 176,
+        "name": "Car Seat Gap Organiser",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 27,
+        "price": 291.27
+      }
+    },
+    {
+      "before": {
+        "id": 177,
+        "name": "Vehicle Dashboard Duster",
+        "price": "249",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 249,
+        "discountPercent": 37,
+        "price": 156.87
+      }
+    },
+    {
+      "before": {
+        "id": 178,
+        "name": "Car Air Freshener Vent Clip",
+        "price": "199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 199,
+        "discountPercent": 49,
+        "price": 101.49
+      }
+    },
+    {
+      "before": {
+        "id": 179,
+        "name": "Motorcycle Chain Cleaning Brush",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 49,
+        "price": 152.49
+      }
+    },
+    {
+      "before": {
+        "id": 180,
+        "name": "Car Emergency Tool Kit",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 37,
+        "price": 944.37
+      }
+    },
+    {
+      "before": {
+        "id": 181,
+        "name": "A4 Printer Paper 500 Sheets",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 11,
+        "price": 310.61
+      }
+    },
+    {
+      "before": {
+        "id": 182,
+        "name": "Desktop Stapler with Staples",
+        "price": "249",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 249,
+        "discountPercent": 16,
+        "price": 209.16
+      }
+    },
+    {
+      "before": {
+        "id": 183,
+        "name": "Sticky Notes Colour Pack",
+        "price": "199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 199,
+        "discountPercent": 14,
+        "price": 171.14
+      }
+    },
+    {
+      "before": {
+        "id": 184,
+        "name": "Lever Arch File Set",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 43,
+        "price": 341.43
+      }
+    },
+    {
+      "before": {
+        "id": 185,
+        "name": "Whiteboard 60 x 45cm",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 19,
+        "price": 728.19
+      }
+    },
+    {
+      "before": {
+        "id": 186,
+        "name": "Whiteboard Marker Pack",
+        "price": "249",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 249,
+        "discountPercent": 49,
+        "price": 126.99
+      }
+    },
+    {
+      "before": {
+        "id": 187,
+        "name": "Scientific Calculator",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 12,
+        "price": 879.12
+      }
+    },
+    {
+      "before": {
+        "id": 188,
+        "name": "Paper Shredder Compact",
+        "price": "3499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3499,
+        "discountPercent": 46,
+        "price": 1889.46
+      }
+    },
+    {
+      "before": {
+        "id": 189,
+        "name": "Metal Bookend Pair",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 25,
+        "price": 299.25
+      }
+    },
+    {
+      "before": {
+        "id": 190,
+        "name": "Document Tray Three Tier",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 26,
+        "price": 517.26
+      }
+    },
+    {
+      "before": {
+        "id": 191,
+        "name": "Water Resistant Daypack 20L",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 25,
+        "price": 974.25
+      }
+    },
+    {
+      "before": {
+        "id": 192,
+        "name": "Weekender Travel Tote",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 21,
+        "price": 789.21
+      }
+    },
+    {
+      "before": {
+        "id": 193,
+        "name": "Crossbody Sling Bag",
+        "price": "699",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 699,
+        "discountPercent": 43,
+        "price": 398.43
+      }
+    },
+    {
+      "before": {
+        "id": 194,
+        "name": "Packing Cube Set",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 14,
+        "price": 687.14
+      }
+    },
+    {
+      "before": {
+        "id": 195,
+        "name": "Laptop Messenger Bag 14-inch",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 19,
+        "price": 1214.19
+      }
+    },
+    {
+      "before": {
+        "id": 196,
+        "name": "Foldable Shopping Tote",
+        "price": "249",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 249,
+        "discountPercent": 30,
+        "price": 174.3
+      }
+    },
+    {
+      "before": {
+        "id": 197,
+        "name": "Travel Toiletry Bag",
+        "price": "499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 499,
+        "discountPercent": 38,
+        "price": 309.38
+      }
+    },
+    {
+      "before": {
+        "id": 198,
+        "name": "Soft Shell Check-In Suitcase",
+        "price": "3999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3999,
+        "discountPercent": 10,
+        "price": 3599.1
+      }
+    },
+    {
+      "before": {
+        "id": 199,
+        "name": "Waist Pack with Adjustable Belt",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 47,
+        "price": 317.47
+      }
+    },
+    {
+      "before": {
+        "id": 200,
+        "name": "True Wireless Earbuds",
+        "price": "1799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1799,
+        "discountPercent": 36,
+        "price": 1151.36
+      }
+    },
+    {
+      "before": {
+        "id": 201,
+        "name": "Compact TV Soundbar",
+        "price": "3999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 3999,
+        "discountPercent": 48,
+        "price": 2079.48
+      }
+    },
+    {
+      "before": {
+        "id": 202,
+        "name": "Portable FM Radio",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 20,
+        "price": 719.2
+      }
+    },
+    {
+      "before": {
+        "id": 203,
+        "name": "USB Desktop Speakers",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 41,
+        "price": 589.41
+      }
+    },
+    {
+      "before": {
+        "id": 204,
+        "name": "Clip-On Lavalier Microphone",
+        "price": "649",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 649,
+        "discountPercent": 10,
+        "price": 584.1
+      }
+    },
+    {
+      "before": {
+        "id": 205,
+        "name": "Wired Over-Ear Headphones",
+        "price": "1199",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1199,
+        "discountPercent": 33,
+        "price": 803.33
+      }
+    },
+    {
+      "before": {
+        "id": 206,
+        "name": "Bluetooth Neckband Earphones",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 28,
+        "price": 935.28
+      }
+    },
+    {
+      "before": {
+        "id": 207,
+        "name": "Portable Karaoke Speaker",
+        "price": "2999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2999,
+        "discountPercent": 45,
+        "price": 1649.45
+      }
+    },
+    {
+      "before": {
+        "id": 208,
+        "name": "RGB Gaming Keyboard",
+        "price": "2499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2499,
+        "discountPercent": 23,
+        "price": 1924.23
+      }
+    },
+    {
+      "before": {
+        "id": 209,
+        "name": "Programmable Gaming Mouse",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 27,
+        "price": 1094.27
+      }
+    },
+    {
+      "before": {
+        "id": 210,
+        "name": "Racing Steering Wheel Controller",
+        "price": "7999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 7999,
+        "discountPercent": 27,
+        "price": 5839.27
+      }
+    },
+    {
+      "before": {
+        "id": 211,
+        "name": "Controller Charging Dock",
+        "price": "1299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1299,
+        "discountPercent": 44,
+        "price": 727.44
+      }
+    },
+    {
+      "before": {
+        "id": 212,
+        "name": "RGB Headset Stand",
+        "price": "999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 999,
+        "discountPercent": 42,
+        "price": 579.42
+      }
+    },
+    {
+      "before": {
+        "id": 213,
+        "name": "Handheld Console Carry Case",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 41,
+        "price": 530.41
+      }
+    },
+    {
+      "before": {
+        "id": 214,
+        "name": "Game Controller Grip Covers",
+        "price": "349",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 349,
+        "discountPercent": 15,
+        "price": 296.65
+      }
+    },
+    {
+      "before": {
+        "id": 215,
+        "name": "Gaming Laptop Cooling Pad",
+        "price": "1799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1799,
+        "discountPercent": 19,
+        "price": 1457.19
+      }
+    },
+    {
+      "before": {
+        "id": 216,
+        "name": "Arcade Fight Stick USB",
+        "price": "4499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 4499,
+        "discountPercent": 14,
+        "price": 3869.14
+      }
+    },
+    {
+      "before": {
+        "id": 217,
+        "name": "Gaming Desk Mat XXL",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 24,
+        "price": 607.24
+      }
+    },
+    {
+      "before": {
+        "id": 218,
+        "name": "Round Dial Bluetooth Watch",
+        "price": "2499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 2499,
+        "discountPercent": 13,
+        "price": 2174.13
+      }
+    },
+    {
+      "before": {
+        "id": 219,
+        "name": "Kids Digital Watch",
+        "price": "599",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 599,
+        "discountPercent": 34,
+        "price": 395.34
+      }
+    },
+    {
+      "before": {
+        "id": 220,
+        "name": "Classic Metal Strap Watch",
+        "price": "1999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1999,
+        "discountPercent": 17,
+        "price": 1659.17
+      }
+    },
+    {
+      "before": {
+        "id": 221,
+        "name": "Minimal Leather Strap Watch",
+        "price": "1499",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 1499,
+        "discountPercent": 50,
+        "price": 749.5
+      }
+    },
+    {
+      "before": {
+        "id": 222,
+        "name": "Pedometer Activity Tracker",
+        "price": "799",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 799,
+        "discountPercent": 47,
+        "price": 423.47
+      }
+    },
+    {
+      "before": {
+        "id": 223,
+        "name": "GPS Running Watch",
+        "price": "6999",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 6999,
+        "discountPercent": 20,
+        "price": 5599.2
+      }
+    },
+    {
+      "before": {
+        "id": 224,
+        "name": "Silicone Watch Strap 22mm",
+        "price": "299",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 299,
+        "discountPercent": 36,
+        "price": 191.36
+      }
+    },
+    {
+      "before": {
+        "id": 225,
+        "name": "Woven Watch Strap 20mm",
+        "price": "399",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 399,
+        "discountPercent": 49,
+        "price": 203.49
+      }
+    },
+    {
+      "before": {
+        "id": 226,
+        "name": "Watch Storage Case",
+        "price": "899",
+        "originalPrice": null,
+        "discountPercent": 0
+      },
+      "after": {
+        "originalPrice": 899,
+        "discountPercent": 39,
+        "price": 548.39
+      }
+    }
+  ]
+}

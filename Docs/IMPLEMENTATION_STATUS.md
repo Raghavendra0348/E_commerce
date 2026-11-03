@@ -155,3 +155,17 @@ All backend modules are verified, tested, and production-ready:
 | 2026-10-23 | Admin Modular Refactoring — StatCard, LowStockAlert, ProductTable, ProductFormDialog, OrderTable, OrderStatusBadge, UserTable                                                       | 100% Component Modularity & 0 build errors ✅           |
 | 2026-10-23 | Phase 6 Performance & Architecture — Route Code-Splitting, Manual Chunks (841kB -> <150kB), ErrorBoundary, useDocumentTitle, QuantitySelector, SearchBar, useAuth, useNetworkStatus | Production-hardened with 0 warnings & 0 build errors ✅ |
 | 2026-10-23 | Phase 6 SRE & DevOps Completion — Dual Health Probes, Admin System Health Dashboard, 23 Vitest Tests, Dockerfiles, docker-compose, CI Pipeline                                             | 100% Complete & Production-Ready ✅                      |
+
+
+## Frontend composition update on 2 November 2026
+
+Product cards now use explicit storefront, catalog and wishlist compositions. Shared cart actions, account-scoped wishlist queries and focused navbar components preserve the existing storefront while correcting wishlist response parsing and overlapping controls.
+
+Validation: 92 frontend tests across 26 files and the production build passed. Browser visual QA was unavailable because the browser host/native connection could not connect. Backend code was unchanged. See [the refactor explanation](FRONTEND_COMPOSITION_REFACTOR.md) for before-and-after behavior, event flows, file responsibilities and practical limits.
+
+
+## Amazon reference styling update on 2 November 2026
+
+Implemented the approved SiteStyleGuide Amazon.in desktop reference through shared tokens, compact navigation, narrow festival cards, white collection panels and a compact footer, with responsive adaptations for the existing customer pages. Removed the unused remote Inter font download.
+
+Verified 92 frontend tests, the production build and Playwright browser checks at 1440, 768, 390 and 320 px. Search, category drawer navigation, product links, guest sign-in return destinations, carousel controls and the footer were exercised. No horizontal page overflow was observed. See [implementation and verification notes](AMAZON_REFERENCE_REDESIGN.md).

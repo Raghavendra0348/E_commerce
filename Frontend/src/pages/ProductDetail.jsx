@@ -22,7 +22,6 @@ import ProductImageGallery from "@/components/product/ProductImageGallery";
 import ReviewList from "@/components/product/ReviewList";
 import RelatedProducts from "@/components/product/RelatedProducts";
 import ProductDetailsContent from "@/components/product/ProductDetailsContent";
-import ProductCard from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import StarRating from "@/components/common/StarRating";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -228,7 +227,8 @@ export default function ProductDetail() {
             {/* Price */}
             <PriceDisplay
               price={product.price}
-              mrp={product.mrp}
+              mrp={product.originalPrice ?? product.mrp}
+              discountPercent={product.discountPercent}
               size="xl"
             />
 

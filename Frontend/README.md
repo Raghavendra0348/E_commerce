@@ -1,6 +1,8 @@
 # Frontend development
 
-Start the backend on port 5000, then run `npm run dev` from this folder.
+To start both servers and automatically open the storefront in your browser, run `npm run dev` from the project root (one folder above this folder). Press Ctrl+C once to stop both.
+
+To start only the frontend, start the backend on port 5000 separately, then run `npm run dev` from this folder.
 
 Vite prints the local/network URLs and a terminal QR code. Scan it with your phone camera to open the storefront. Keep your phone and computer on the same Wi-Fi; use the Wi-Fi address if more than one network QR is printed. The QR uses Vite's actual port, including when 5173 is already occupied.
 

@@ -35,16 +35,16 @@ import {
 import { useProducts } from "@/hooks/useProducts";
 import { useCategories } from "@/hooks/useCategories";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import ProductCard from "@/components/product/ProductCard";
+import { StorefrontProductCard } from "@/components/product/ProductCard";
 import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
 import { cn } from "@/lib/utils";
 
 // ─── Hero Banner ─────────────────────────────────────────────────────────────
 const FESTIVAL_DEALS = [
-  { title: "Kitchen deals under \u20b9499", x: 11, href: "/products?search=kitchen&maxPrice=499" },
-  { title: "PC accessories starting \u20b9299", x: 483, href: "/products?search=keyboard&minPrice=299" },
-  { title: "Festive lights under \u20b9499", x: 954, href: "/products?search=light&maxPrice=499" },
-  { title: "Budget friendly earbuds", x: 1425, href: "/products?search=earbuds" },
+  { title: "Under ₹799", subtitle: "Home & kitchen essentials", image: "61veH18HX2L.jpg", color: "#bd1b30", href: "/products?search=kitchen&maxPrice=798.99" },
+  { title: "Under ₹1,999", subtitle: "Everyday denim & jeans", image: "denim-orange.png", color: "#e36b08", href: "/products?search=jeans&maxPrice=1998.99" },
+  { title: "Under ₹599", subtitle: "Kurtas & ethnic wear", image: "ethnic-green.png", color: "#006b4f", href: "/products?search=kurta&maxPrice=598.99" },
+  { title: "Under ₹999", subtitle: "Fashion & accessories", image: "fashion-purple.png", color: "#6b2690", href: "/products?categoryId=4&maxPrice=998.99" },
 ];
 function HeroBanner() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: true });
@@ -52,9 +52,18 @@ function HeroBanner() {
     <section id="festival-carousel" className="festival-carousel" aria-label="Festival offers" aria-roledescription="carousel">
       <div className="festival-viewport" ref={emblaRef}><div className="festival-track">
         {FESTIVAL_DEALS.map((deal, index) => (
-          <Link key={deal.title} to={deal.href} className="festival-slide" aria-label={"Shop " + deal.title}>
-            <div className="festival-art"><img src="/image%20copy.png" alt={deal.title} fetchPriority={index === 0 ? "high" : "auto"} draggable="false" style={{ left: (-deal.x / 460 * 100) + "%" }} /></div>
-          </Link>
+          <div key={deal.image} id={`festival-art-slide-${index}`} className="festival-slide festival-art-slide">
+            <Link to={deal.href} className="festival-card-link" aria-label={`Shop ${deal.subtitle} ${deal.title}`}>
+              <div className="festival-art festival-original-art" style={{ backgroundColor: deal.color }}>
+                <img src={`/banners/${deal.image}`} alt={deal.subtitle} width="855" height="1368" fetchPriority={index === 0 ? "high" : "auto"} draggable="false" />
+                <div className="festival-original-heading">
+                  <h2>{deal.title}</h2>
+                  <p>{deal.subtitle}</p>
+                  <div className="festival-service-row"><span>Secure<br />Checkout</span><span>Track<br />Orders</span></div>
+                </div>
+              </div>
+            </Link>
+          </div>
         ))}
         {EXTRA_FESTIVAL_CARDS.map(card => <FestivalPromoCard key={card.slug} card={card} />)}
       </div></div>
@@ -178,7 +187,7 @@ function ProductRow({ title, params, seeAllHref }) {
               ))
             : products.map((product) => (
                 <div key={product.id} className="w-44 shrink-0">
-                  <ProductCard product={product} />
+                  <StorefrontProductCard product={product} />
                 </div>
               ))}
         </div>

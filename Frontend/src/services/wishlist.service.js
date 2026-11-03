@@ -1,7 +1,7 @@
 import api from "@/api/axios";
 
 export const wishlistService = {
-  getWishlist: () => api.get("/wishlist"),
+  getWishlist: (config) => api.get("/wishlist", config),
   toggle: (productId) => api.post(`/wishlist/${productId}`),
   remove: (productId) => api.delete(`/wishlist/${productId}`),
 };

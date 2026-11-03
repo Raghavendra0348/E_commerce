@@ -1,4 +1,5 @@
 import phonePreviewQr from './scripts/phone-preview-qr.js'
+import devRequestLog from './scripts/dev-request-log.js'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -14,6 +15,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     phonePreviewQr(),
+    devRequestLog(),
   ],
   resolve: {
     alias: {

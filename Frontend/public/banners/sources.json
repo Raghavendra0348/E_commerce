@@ -1,0 +1,11 @@
+{
+  "sourcePage": "https://www.amazon.in/",
+  "downloadedOn": "2026-11-03",
+  "notes": "Original Amazon CDN festival artwork without embedded carousel arrows. Text headings rendered separately. Promotional copy inside these images belongs to the source artwork.",
+  "images": [
+    { "file": "61veH18HX2L.jpg", "subject": "Home and kitchen", "url": "https://m.media-amazon.com/images/I/61veH18HX2L.jpg" },
+    { "file": "71WvgJbpilL.jpg", "subject": "Denim", "url": "https://m.media-amazon.com/images/I/71WvgJbpilL.jpg" },
+    { "file": "71TQi3RWvfL.jpg", "subject": "Ethnic wear", "url": "https://m.media-amazon.com/images/I/71TQi3RWvfL.jpg" },
+    { "file": "618hRJpOS7L.jpg", "subject": "Fashion and accessories", "url": "https://m.media-amazon.com/images/I/618hRJpOS7L.jpg" }
+  ]
+}

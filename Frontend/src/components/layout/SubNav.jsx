@@ -1,73 +1,43 @@
-import { T } from "@/components/common/Translation";
-import { Link, useNavigate } from "react-router-dom";
-import { Menu, Tag, Zap, Smartphone, Shirt, Home, Tv, Dumbbell, BookOpen, Baby, Car, ChevronRight } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import api from "@/api/axios";
+import { Link } from "react-router-dom";
+import { Menu, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCategories } from "@/hooks/useCategories";
 import MobileCategoryTabs from "./MobileCategoryTabs";
 
-const STATIC_CATEGORIES = [
-  { name: "Today's Deals", href: "/products?sort=newest", icon: Tag },
-  { name: "Electronics", href: "/products?category=electronics", icon: Zap },
-  { name: "Mobiles", href: "/products?category=mobiles", icon: Smartphone },
-  { name: "Fashion", href: "/products?category=fashion", icon: Shirt },
-  { name: "Home & Kitchen", href: "/products?category=home", icon: Home },
-  { name: "TV & Appliances", href: "/products?category=tv", icon: Tv },
-  { name: "Sports", href: "/products?category=sports", icon: Dumbbell },
-  { name: "Books", href: "/products?category=books", icon: BookOpen },
-  { name: "Baby", href: "/products?category=baby", icon: Baby },
-  { name: "Automotive", href: "/products?category=automotive", icon: Car },
+const shoppingCategories = [
+  ["mobiles-accessories", "Mobiles"],
+  ["electronics", "Electronics"],
+  ["computers-accessories", "Computers"],
+  ["fashion", "Fashion"],
+  ["home-kitchen", "Home & Kitchen"],
+  ["books", "Books"],
+  ["audio", "Audio"],
+  ["home-appliances", "Appliances"],
+  ["gaming", "Gaming"],
 ];
 
-export default function SubNav({ showMobileCategories = true }) {
-  const navigate = useNavigate();
-
-  const { data: categories } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await api.get("/categories");
-      return res.data?.data || [];
-    },
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const navItems = categories?.length
-    ? categories.slice(0, 10).map((cat) => ({
-        name: cat.name,
-        href: `/products?categoryId=${cat.id}`,
-      }))
-    : STATIC_CATEGORIES;
-
+export default function SubNav({ showMobileCategories = true, onBrowse }) {
+  const { data: categories = [] } = useCategories();
   return (
-    <nav
-      className="storefront-category-nav bg-[#232F3E]"
-      data-mobile-visible={showMobileCategories}
-      aria-label="Category navigation"
-    >
-      {showMobileCategories && <MobileCategoryTabs categories={categories || []} />}
-      <div className="desktop-category-links mx-auto max-w-[1500px] px-2">
-        <ul className="flex items-center overflow-x-auto no-scrollbar">
-          {/* All menu trigger */}
-          <li className="flex-shrink-0">
-            <Link
-              to="/products"
-              className="flex items-center gap-1.5 px-3 py-2.5 text-sm text-white font-semibold hover:bg-white/10 hover:outline hover:outline-1 hover:outline-white rounded transition-colors whitespace-nowrap"
-            >
-              <Menu className="h-4 w-4" />
-              <T>{"All"}</T>
-            </Link>
+    <nav id="storefront-category-nav" className="storefront-category-nav" data-mobile-visible={showMobileCategories} aria-label="Category navigation">
+      {showMobileCategories && <MobileCategoryTabs categories={categories} />}
+      <div className="desktop-category-links">
+        <ul>
+          <li>
+            {onBrowse ? (
+              <Button variant="navbar" className="subnav-all" onClick={onBrowse} aria-label="Browse all categories">
+                <Menu size={19} aria-hidden="true" /> All
+              </Button>
+            ) : <Link to="/products" className="subnav-all"><Menu size={19} aria-hidden="true" /> All</Link>}
           </li>
-
-          {navItems.map((item, idx) => (
-            <li key={item.href || idx} className="flex-shrink-0">
-              <Link
-                to={item.href}
-                className="flex items-center px-3 py-2.5 text-sm text-white hover:bg-white/10 hover:outline hover:outline-1 hover:outline-white rounded transition-colors whitespace-nowrap"
-              >
-                <T>{item.name}</T>
-              </Link>
-            </li>
-          ))}
+          <li><Link to="/products?sortBy=price&sortOrder=asc">Today's Deals</Link></li>
+          {shoppingCategories.map(([slug, label]) => {
+            const category = categories.find(item => item.slug === slug);
+            return <li key={slug}><Link to={category ? `/products?categoryId=${category.id}` : `/products?search=${encodeURIComponent(label)}`}>{label}</Link></li>;
+          })}
+          <li><Link to="/products?sortBy=createdAt&sortOrder=desc">New Arrivals</Link></li>
         </ul>
+        <Link className="subnav-festival" to="/products"><Sparkles aria-hidden="true" /><span>Great Indian Festival</span></Link>
       </div>
     </nav>
   );

@@ -6,7 +6,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { translateChildren } from "@/components/common/Translation";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[5px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2162A1] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
   {
     variants: {
       variant: {
@@ -17,11 +17,11 @@ const buttonVariants = cva(
         buynow:
           "bg-[#FFD814] text-[#0F1111] hover:bg-[#F7CA00] shadow-sm",
         outline:
-          "border border-[#D5D9D9] bg-white text-[#007185] hover:bg-gray-50",
+          "border border-[#D5D9D9] bg-white text-[#2162A1] hover:bg-gray-50",
         ghost:
           "text-[#565959] hover:bg-gray-100 hover:text-[#0F1111]",
         link:
-          "text-[#007185] underline-offset-4 hover:underline hover:text-[#C7511F]",
+          "text-[#2162A1] underline-offset-4 hover:underline hover:text-[#C7511F]",
         danger:
           "bg-[#CC0C39] text-white hover:bg-[#a30930] shadow-sm",
         navbar:

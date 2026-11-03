@@ -1,0 +1,55 @@
+/* Spacious reference cart. Scoped to the page so the drawer stays compact. */
+.amazon-cart-page .amazon-cart-container { max-width: 1800px; }
+.amazon-cart-page .amazon-cart-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; }
+.amazon-cart-page .amazon-cart-items-panel { padding: 28px 30px 22px; }
+.amazon-cart-heading { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+.amazon-cart-heading h1 { grid-column: 1 / -1; font-size: 40px; font-weight: 400; line-height: 1.25; margin-bottom: 10px; }
+.amazon-cart-continue { color: #2162a1; font-size: 18px; margin-bottom: 28px; justify-self: start; }
+.amazon-cart-continue:hover { text-decoration: underline; }
+.amazon-cart-price-heading { grid-column: 2; align-self: end; font-size: 16px; color: #565959; }
+.amazon-cart-page .amazon-cart-item { grid-template-columns: minmax(140px, 23%) minmax(0, 1fr) 120px; gap: 22px; padding: 30px 0; min-height: 310px; }
+.amazon-cart-page .amazon-cart-image { width: 100%; height: 270px; aspect-ratio: auto; padding: 0 18px; }
+.amazon-cart-page .amazon-cart-product-title { font-size: 21px; line-height: 1.35; -webkit-line-clamp: 2; }
+.amazon-cart-page .amazon-cart-stock { font-size: 15px; margin-top: 8px; }
+.amazon-cart-page .amazon-cart-category { font-size: 15px; color: #0f1111; margin-top: 14px; }
+.amazon-cart-page .amazon-cart-unit-price { font-size: 14px; margin-top: 8px; }
+.amazon-cart-page .amazon-cart-line-price { grid-column: auto; text-align: right; font-size: 25px; line-height: 1.4; }
+.amazon-cart-line-total { display: block; color: #565959; font-size: 13px; font-weight: 400; margin-top: 7px; white-space: normal; }
+.amazon-cart-page .amazon-cart-item-actions { margin-top: 24px; gap: 14px; }
+.amazon-cart-page .amazon-cart-quantity { height: 44px; border-width: 4px; }
+.amazon-cart-page .amazon-cart-quantity button { width: 42px; height: 36px; }
+.amazon-cart-page .amazon-cart-quantity button svg { width: 21px; height: 21px; }
+.amazon-cart-page .amazon-cart-quantity span { min-width: 38px; font-size: 18px; }
+.amazon-cart-page .amazon-cart-delete, .amazon-cart-page .amazon-cart-detail-link { font-size: 15px; }
+.amazon-cart-page .amazon-cart-sidebar { width: min(100%, 360px); justify-self: end; }
+.amazon-cart-page .amazon-cart-summary { padding: 26px 22px; border: 1px solid #e3e6e6; border-radius: 8px; }
+.amazon-cart-page .amazon-cart-checkout { height: 42px; font-size: 15px; margin-top: 6px; }
+.amazon-cart-product-info { margin-top: 14px; }
+.amazon-cart-description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 14px; line-height: 1.6; color: #565959; }
+.amazon-cart-facts { display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 12px 14px; margin-top: 12px; background: #f7f8f8; border: 1px solid #eaeded; border-radius: 8px; }
+.amazon-cart-facts dt { font-size: 11px; color: #565959; margin-bottom: 3px; }
+.amazon-cart-facts dd { font-size: 14px; font-weight: 600; color: #0f1111; margin: 0; }
+@media (max-width: 1000px) {
+  .amazon-cart-page .amazon-cart-layout { grid-template-columns: minmax(0, 1fr); }
+  .amazon-cart-page .amazon-cart-item { grid-template-columns: 180px minmax(0, 1fr) 140px; gap: 18px; }
+  .amazon-cart-page .amazon-cart-product-title { font-size: 20px; }
+  .amazon-cart-page .amazon-cart-image { height: 220px; padding: 0; }
+}
+@media (max-width: 640px) {
+  .amazon-cart-page .amazon-cart-container { padding: 0 10px; }
+  .amazon-cart-page .amazon-cart-items-panel { padding: 20px 14px; }
+  .amazon-cart-heading h1 { font-size: 28px; }
+  .amazon-cart-continue { font-size: 14px; margin-bottom: 14px; }
+  .amazon-cart-price-heading { display: none; }
+  .amazon-cart-page .amazon-cart-item { grid-template-columns: 100px minmax(0, 1fr); gap: 12px; padding: 24px 0; min-height: 0; }
+  .amazon-cart-page .amazon-cart-image { height: 150px; grid-row: 1 / 3; }
+  .amazon-cart-page .amazon-cart-product-title { font-size: 16px; -webkit-line-clamp: 3; }
+  .amazon-cart-page .amazon-cart-stock, .amazon-cart-page .amazon-cart-category { font-size: 12px; }
+  .amazon-cart-page .amazon-cart-item-actions { gap: 10px; margin-top: 16px; }
+  .amazon-cart-page .amazon-cart-quantity { height: 36px; border-width: 3px; }
+  .amazon-cart-page .amazon-cart-quantity button { width: 28px; height: 30px; }
+  .amazon-cart-page .amazon-cart-quantity span { min-width: 24px; font-size: 14px; }
+  .amazon-cart-page .amazon-cart-delete, .amazon-cart-page .amazon-cart-detail-link { font-size: 12px; padding-left: 8px; }
+  .amazon-cart-page .amazon-cart-line-price { grid-column: 2; text-align: left; font-size: 20px; }
+  .amazon-cart-page .amazon-cart-sidebar { width: 100%; }
+}

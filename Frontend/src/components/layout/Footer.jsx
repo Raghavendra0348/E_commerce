@@ -1,95 +1,107 @@
-import { T } from "@/components/common/Translation";
+import { Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import AmazonLogo from "./AmazonLogo";
+import { Button } from "@/components/ui/button";
 
-const footerLinks = [
-  {
-    title: "Get to Know Us",
-    links: [
-      { label: "About Us", href: "/" },
-      { label: "Careers", href: "/" },
-      { label: "Press Releases", href: "/" },
-      { label: "Amazon Science", href: "/" },
-    ],
-  },
-  {
-    title: "Connect with Us",
-    links: [
-      { label: "Facebook", href: "/" },
-      { label: "Twitter", href: "/" },
-      { label: "Instagram", href: "/" },
-    ],
-  },
-  {
-    title: "Make Money with Us",
-    links: [
-      { label: "Sell on Amazon", href: "/" },
-      { label: "Sell under Amazon Accelerator", href: "/" },
-      { label: "Amazon Global Selling", href: "/" },
-    ],
-  },
-  {
-    title: "Let Us Help You",
-    links: [
-      { label: "COVID-19 and Amazon", href: "/" },
-      { label: "Your Account", href: "/account/profile" },
-      { label: "Returns Centre", href: "/account/orders" },
-      { label: "100% Purchase Protection", href: "/" },
-      { label: "Help", href: "/" },
-    ],
-  },
+const footerGroups = [
+  { title: "Get to Know Us", links: [
+    ["About Amazon", "https://www.aboutamazon.in/"],
+    ["Careers", "https://www.amazon.jobs/"],
+    ["Press Releases", "https://press.aboutamazon.in/"],
+    ["Amazon Science", "https://www.amazon.science/"],
+  ] },
+  { title: "Connect with Us", links: [
+    ["Facebook", "https://www.facebook.com/AmazonIN"],
+    ["Twitter", "https://twitter.com/AmazonIN"],
+    ["Instagram", "https://www.instagram.com/amazonin/"],
+  ] },
+  { title: "Make Money with Us", links: [
+    ["Sell on Amazon", "https://sell.amazon.in/"],
+    ["Sell under Amazon Accelerator", "https://accelerator.amazon.in/"],
+    ["Protect and Build Your Brand", "https://brandservices.amazon.in/"],
+    ["Amazon Global Selling", "https://sell.amazon.in/grow-your-business/amazon-global-selling.html"],
+    ["Supply to Amazon", "https://supply.amazon.com/"],
+    ["Become an Affiliate", "https://affiliate-program.amazon.in/"],
+    ["Fulfilment by Amazon", "https://services.amazon.in/services/fulfilment-by-amazon/benefits.html"],
+    ["Advertise Your Products", "https://advertising.amazon.com/"],
+    ["Amazon Pay on Merchants", "https://www.amazonpay.in/merchant"],
+  ] },
+  { title: "Let Us Help You", links: [
+    ["Your Account", "/account/profile"],
+    ["Returns Centre", "https://www.amazon.in/gp/css/returns/homepage.html"],
+    ["Recalls and Product Safety Alerts", "https://www.amazon.in/your-product-safety-alerts"],
+    ["100% Purchase Protection", "https://www.amazon.in/gp/help/customer/display.html?nodeId=201083470"],
+    ["Amazon App Download", "https://www.amazon.in/gp/browse.html?node=6967393031"],
+    ["Help", "https://www.amazon.in/gp/help/customer/display.html"],
+  ] },
 ];
 
-export default function Footer() {
-  return (
-    <footer className="bg-[#232F3E] text-white mt-auto">
-      {/* Back to top */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="block w-full bg-[#37475A] py-3 text-center text-sm text-white hover:bg-[#485769] transition-colors"
-      >
-        <T>{"Back to top"}</T>
-      </button>
+const services = [
+  ["AbeBooks", "Books, art & collectibles", "https://www.abebooks.com/"],
+  ["Amazon Web Services", "Scalable Cloud Computing Services", "https://aws.amazon.com/"],
+  ["Audible", "Download Audio Books", "https://www.audible.in/"],
+  ["IMDb", "Movies, TV & Celebrities", "https://www.imdb.com/"],
+  ["Shopbop", "Designer Fashion Brands", "https://www.shopbop.com/"],
+  ["Amazon Business", "Everything For Your Business", "https://business.amazon.in/"],
+  ["Amazon Music", "Stream millions of songs", "https://music.amazon.in/"],
+];
 
-      {/* Main footer links */}
-      <div className="mx-auto max-w-[1500px] px-4 py-10">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h3 className="mb-3 text-sm font-bold text-white"><T>{section.title}</T></h3>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-[#CCCCCC] hover:text-white transition-colors"
-                    >
-                      <T>{link.label}</T>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+function FooterLink({ href, children }) {
+  return href.startsWith("/")
+    ? <Link to={href}>{children}</Link>
+    : <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+}
+
+export default function Footer() {
+  const backToTop = () => window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+  });
+
+  return (
+    <footer id="storefront-footer" className="storefront-footer mt-auto">
+      <Button id="footer-back-to-top" variant="ghost" className="footer-back-to-top" onClick={backToTop}>
+        Back to top
+      </Button>
+      <nav id="footer-main-links" className="footer-main-links" aria-label="Footer navigation">
+        {footerGroups.map(({ title, links }) => (
+          <section key={title} className="footer-link-group" aria-label={title}>
+            <h2>{title}</h2>
+            <ul>{links.map(([label, href]) => (
+              <li key={label}><FooterLink href={href}>{label}</FooterLink></li>
+            ))}</ul>
+          </section>
+        ))}
+      </nav>
+      <div className="footer-region-row">
+        <Link to="/" className="footer-brand" aria-label="Amazon India Homepage">
+          <AmazonLogo className="footer-amazon-logo" />
+        </Link>
+        <div className="footer-region-badges">
+          <span className="footer-region-badge" aria-label="Interface language: English">
+            <Globe size={14} aria-hidden="true" /> English
+          </span>
+          <span className="footer-region-badge" aria-label="Shopping region: India">
+            <img src="/india_flag.jpg" width="18" height="12" alt="" /> India
+          </span>
         </div>
       </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-[#3A4553]">
-        <div className="mx-auto max-w-[1500px] px-4 py-6 flex flex-col items-center gap-3">
-          <div className="flex items-center gap-1">
-            <span className="text-white font-extrabold text-lg">amazon</span>
-            <span className="text-[#FF9900] font-extrabold text-lg">.in</span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4 text-xs text-[#CCCCCC]">
-            <Link to="/" className="hover:text-white">Conditions of Use & Sale</Link>
-            <Link to="/" className="hover:text-white">Privacy Notice</Link>
-            <Link to="/" className="hover:text-white">Interest-Based Ads</Link>
-          </div>
-          <p className="text-xs text-[#CCCCCC]">
-            © 2026 Amazon.in 
-          </p>
+      <nav id="footer-services" className="footer-services" aria-label="Amazon services">
+        <div className="footer-services-grid">
+          {services.map(([name, description, href]) => (
+            <a key={name} href={href} target="_blank" rel="noopener noreferrer">
+              <span>{name}</span><span>{description}</span>
+            </a>
+          ))}
         </div>
+      </nav>
+      <div className="footer-legal">
+        <nav aria-label="Footer legal links">
+          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200545940">Conditions of Use &amp; Sale</FooterLink>
+          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200534380">Privacy Notice</FooterLink>
+          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=202075050">Interest-Based Ads</FooterLink>
+        </nav>
+        <p>© {new Date().getFullYear()} E-commerce storefront</p>
       </div>
     </footer>
   );

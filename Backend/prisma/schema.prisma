@@ -64,6 +64,8 @@ model Product {
   slug        String   @unique
   description String
   price       Decimal  @db.Decimal(10, 2)
+  originalPrice Decimal? @db.Decimal(10, 2)
+  discountPercent Int @default(0)
   stock       Int      @default(0)
   categoryId  Int
   createdAt   DateTime @default(now())

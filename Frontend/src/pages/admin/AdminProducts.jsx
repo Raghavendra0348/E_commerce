@@ -92,6 +92,7 @@ export default function AdminProducts() {
         formData.append("name", values.name);
         formData.append("description", values.description);
         formData.append("price", String(values.price));
+        formData.append("discountPercent", String(values.discountPercent));
         formData.append("stock", String(values.stock));
         formData.append("categoryId", String(values.categoryId));
 
@@ -108,6 +109,7 @@ export default function AdminProducts() {
           name: values.name,
           description: values.description,
           price: values.price,
+          discountPercent: values.discountPercent,
           stock: values.stock,
           categoryId: values.categoryId,
         });

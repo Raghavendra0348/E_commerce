@@ -1,0 +1,298 @@
+{
+  "site": "amazon.in",
+  "source": "https://sitestyleguide.com/amazon.in",
+  "text": "#0F1111",
+  "background": "#FFFFFF",
+  "colours": [
+    {
+      "name": "White",
+      "hex": "#FFFFFF",
+      "rgb": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "Near Black",
+      "hex": "#0F1111",
+      "rgb": [
+        15,
+        17,
+        17
+      ]
+    },
+    {
+      "name": "Dark Grey",
+      "hex": "#555555",
+      "rgb": [
+        85,
+        85,
+        85
+      ]
+    },
+    {
+      "name": "Off White",
+      "hex": "#EEEEEE",
+      "rgb": [
+        238,
+        238,
+        238
+      ]
+    },
+    {
+      "name": "Sienna",
+      "hex": "#C7511F",
+      "rgb": [
+        199,
+        81,
+        31
+      ]
+    },
+    {
+      "name": "Deep Midnight Blue",
+      "hex": "#232F3E",
+      "rgb": [
+        35,
+        47,
+        62
+      ]
+    },
+    {
+      "name": "Deep Royal Blue",
+      "hex": "#2162A1",
+      "rgb": [
+        33,
+        98,
+        161
+      ]
+    },
+    {
+      "name": "Light Royal Blue",
+      "hex": "#0064F9",
+      "rgb": [
+        0,
+        100,
+        249
+      ]
+    },
+    {
+      "name": "Golden Rod",
+      "hex": "#EEBA37",
+      "rgb": [
+        238,
+        186,
+        55
+      ]
+    },
+    {
+      "name": "Crimson",
+      "hex": "#CC0C39",
+      "rgb": [
+        204,
+        12,
+        57
+      ]
+    },
+    {
+      "name": "Orange Red",
+      "hex": "#FF6200",
+      "rgb": [
+        255,
+        98,
+        0
+      ]
+    },
+    {
+      "name": "Orange",
+      "hex": "#FF9900",
+      "rgb": [
+        255,
+        153,
+        0
+      ]
+    },
+    {
+      "name": "Sea Green",
+      "hex": "#0B7B3C",
+      "rgb": [
+        11,
+        123,
+        60
+      ]
+    },
+    {
+      "name": "Fire Brick",
+      "hex": "#C10015",
+      "rgb": [
+        193,
+        0,
+        21
+      ]
+    },
+    {
+      "name": "Dodger Blue",
+      "hex": "#1C89E3",
+      "rgb": [
+        28,
+        137,
+        227
+      ]
+    },
+    {
+      "name": "Light Midnight Blue",
+      "hex": "#002F78",
+      "rgb": [
+        0,
+        47,
+        120
+      ]
+    }
+  ],
+  "fonts": [
+    {
+      "name": "Amazon Ember",
+      "stack": "\"Amazon Ember\"",
+      "weights": [
+        200,
+        400,
+        450,
+        500,
+        700
+      ],
+      "source": "Served from m.media-amazon.com",
+      "binaryProvidedByGuide": false
+    },
+    {
+      "name": "Arial",
+      "stack": "Arial",
+      "weights": [
+        700
+      ],
+      "source": "System font, or not loaded on this page",
+      "binaryProvidedByGuide": false
+    },
+    {
+      "name": "Amazon Ember Modern Display",
+      "stack": "\"Amazon Ember Modern Display\", \"Amazon Ember\", Arial, sans-serif",
+      "weights": [
+        400,
+        700
+      ],
+      "source": "Served from m.media-amazon.com",
+      "binaryProvidedByGuide": false
+    },
+    {
+      "name": "Amazon Ember Regular",
+      "stack": "Amazon Ember Regular, Amazon Ember, Arial",
+      "weights": [],
+      "source": "System font, or not loaded on this page",
+      "binaryProvidedByGuide": false
+    },
+    {
+      "name": "Amazon Ember Modern Text",
+      "stack": "'Amazon Ember Modern Text', 'Amazon Ember', Arial, sans-serif",
+      "weights": [
+        400,
+        500,
+        700
+      ],
+      "source": "Served from m.media-amazon.com",
+      "binaryProvidedByGuide": false
+    }
+  ],
+  "retrievedAt": "2026-11-02T10:20:15.350Z",
+  "variables": {
+    "text": "#0F1111",
+    "background": "#FFFFFF",
+    "colour-white": "#FFFFFF",
+    "colour-near-black": "#0F1111",
+    "colour-dark-grey": "#555555",
+    "colour-off-white": "#EEEEEE",
+    "colour-sienna": "#C7511F",
+    "colour-deep-midnight-blue": "#232F3E",
+    "colour-deep-royal-blue": "#2162A1",
+    "colour-light-royal-blue": "#0064F9",
+    "colour-golden-rod": "#EEBA37",
+    "colour-crimson": "#CC0C39",
+    "colour-orange-red": "#FF6200",
+    "colour-orange": "#FF9900",
+    "colour-sea-green": "#0B7B3C",
+    "colour-fire-brick": "#C10015",
+    "colour-dodger-blue": "#1C89E3",
+    "colour-light-midnight-blue": "#002F78",
+    "gradient-1": "linear-gradient(top,#f8e3ad,#EEBA37)",
+    "gradient-2": "linear-gradient(92.41deg,#003d32,#04734b)",
+    "gradient-3": "radial-gradient(transparent,rgba(0,0,0,.01),rgba(0,0,0,.03),rgba(0,0,0,.03))",
+    "font-headings": "'Amazon Ember'",
+    "font-body": "'Arial'",
+    "font-other": "'Amazon Ember Regular', 'Amazon Ember', 'Arial'",
+    "text-h1": "28px",
+    "leading-h1": "36px",
+    "text-h2": "24px",
+    "leading-h2": "32px",
+    "text-h3": "18px",
+    "leading-h3": "24px",
+    "text-h4": "18px",
+    "leading-h4": "24px",
+    "text-h5": "14px",
+    "leading-h5": "20px",
+    "text-h6": "12px",
+    "leading-h6": "16px",
+    "text-body": "14px",
+    "leading-body": "20px",
+    "text-p": "12px",
+    "leading-p": "12px",
+    "text-small": "0.75rem",
+    "text-button": "100%",
+    "leading-button": "normal",
+    "text-a": "13px",
+    "leading-a": "1",
+    "radius-1": "5px",
+    "radius-2": "4px",
+    "radius-3": "12px",
+    "radius-4": "8px",
+    "radius-5": "2px",
+    "radius-6": "50%",
+    "breakpoint-1": "359px",
+    "breakpoint-2": "360px",
+    "breakpoint-3": "1000px",
+    "breakpoint-4": "1025px",
+    "breakpoint-5": "1100px",
+    "breakpoint-6": "1280px",
+    "breakpoint-7": "1300px",
+    "breakpoint-8": "1700px",
+    "max-width-1": "1000px",
+    "max-width-2": "996px",
+    "max-width-3": "980px",
+    "max-width-4": "970px",
+    "max-width-5": "650px",
+    "max-width-6": "440px"
+  },
+  "shadows": [
+    "0 0 0 3px #2162a1,0 0 0 6px #fff",
+    "0 2px 5px 0 rgba(213,217,217,.5)",
+    "0 2px 5px 0 hsla(180,5%,84%,.5)",
+    "0 4px 4px rgba(0,0,0,.06)"
+  ],
+  "assets": [
+    {
+      "source": "https://sitestyleguide.com/media/amazon.in/972/logo.png",
+      "path": "Docs/reference/amazon-in-labelled-logo.png",
+      "sha256": "1aa712c5ade8780ff60c38074f2b84a1253ef46dbd55c62eae3eec0258591520",
+      "applied": false,
+      "reason": "Guide-labelled logo archived for visual review; never automatically applied to storefront branding."
+    },
+    {
+      "source": "https://sitestyleguide.com/media/amazon.in/972/icon-0.ico",
+      "path": "Frontend/public/brand/amazon-reference.ico",
+      "sha256": "5866636f18764cd66366ae6eb682e972b4eae1771512cd76b304b6dd3c0f1d2d",
+      "applied": true
+    }
+  ],
+  "limitations": [
+    "Unofficial desktop capture; breakpoint values do not specify grid column counts.",
+    "Guide font names are metadata, not downloadable Ember font files.",
+    "Shadows transcribed from the Elements section; token variables parsed from published CSS."
+  ]
+}

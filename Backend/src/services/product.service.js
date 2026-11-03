@@ -2,6 +2,7 @@ const prisma = require("../config/database");
 const ApiError = require("../utils/ApiError");
 const { generateSlug } = require("../utils/slug.utils");
 const { uploadImage, deleteImage } = require("../utils/cloudinary.utils");
+const { productPricing } = require("../utils/pricing.utils");
 
 /**
  * List products with pagination, search, and filters.
@@ -111,6 +112,7 @@ const getProductBySlug = async (slug) => {
  */
 const createProduct = async (body, files = []) => {
     const { name, description, price, stock, categoryId } = body;
+    const pricing = productPricing(body);
 
     // Verify category exists
     const category = await prisma.category.findUnique({ where: { id: categoryId } });
@@ -136,6 +138,7 @@ const createProduct = async (body, files = []) => {
             slug,
             description,
             price,
+            ...pricing,
             stock,
             categoryId,
             images: {
@@ -173,7 +176,9 @@ const updateProduct = async (id, body) => {
     }
 
     if (body.description !== undefined) data.description = body.description;
-    if (body.price !== undefined) data.price = body.price;
+    if (body.price !== undefined || body.discountPercent !== undefined) {
+        Object.assign(data, productPricing(body, product));
+    }
     if (body.stock !== undefined) data.stock = body.stock;
 
     if (body.categoryId !== undefined) {

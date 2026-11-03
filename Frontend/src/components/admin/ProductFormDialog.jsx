@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatPrice } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +20,7 @@ const productSchema = z.object({
   name: z.string().trim().min(2, "Product name must be at least 2 characters"),
   description: z.string().trim().min(5, "Description must be at least 5 characters"),
   price: z.coerce.number().positive("Price must be a positive amount"),
+  discountPercent: z.coerce.number().int().min(0).max(99),
   stock: z.coerce.number().int().nonnegative("Stock must be 0 or greater"),
   categoryId: z.coerce.number().int().positive("Category is required"),
 });
@@ -40,6 +42,7 @@ export default function ProductFormDialog({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(productSchema),
@@ -47,6 +50,7 @@ export default function ProductFormDialog({
       name: "",
       description: "",
       price: "",
+      discountPercent: 0,
       stock: 10,
       categoryId: "",
     },
@@ -58,7 +62,8 @@ export default function ProductFormDialog({
         reset({
           name: product.name || "",
           description: product.description || "",
-          price: product.price || "",
+          price: product.originalPrice ?? product.price ?? "",
+          discountPercent: product.discountPercent ?? 0,
           stock: product.stock ?? 10,
           categoryId: product.categoryId || product.category?.id || "",
         });
@@ -67,6 +72,7 @@ export default function ProductFormDialog({
           name: "",
           description: "",
           price: "",
+          discountPercent: 0,
           stock: 10,
           categoryId: categories[0]?.id || "",
         });
@@ -78,6 +84,9 @@ export default function ProductFormDialog({
   const handleFormSubmit = (data) => {
     onSubmit(data, selectedFiles);
   };
+  const originalPrice = Number(watch("price"));
+  const discountPercent = Number(watch("discountPercent"));
+  const previewPrice = Math.round(Math.round(originalPrice * 100) * (100 - discountPercent) / 100) / 100;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -133,7 +142,7 @@ export default function ProductFormDialog({
 
             <div>
               <Label htmlFor="prodPrice" className="text-xs font-semibold">
-                Price (₹)
+                Original price (₹)
               </Label>
               <Input
                 id="prodPrice"
@@ -149,6 +158,13 @@ export default function ProductFormDialog({
             </div>
           </div>
 
+          <div className="rounded-lg border border-[#D5D9D9] bg-[#F7F8F8] p-3 space-y-2">
+            <Label htmlFor="prodDiscount">Discount (%)</Label>
+            <Input id="prodDiscount" type="number" min="0" max="99" step="1" {...register("discountPercent")} />
+            {errors.discountPercent && <p className="text-xs text-[#CC0C39]">{errors.discountPercent.message}</p>}
+            <p className="text-xs text-[#565959]">Use 0 to remove the discount. Original price is the price before this discount.</p>
+            {originalPrice > 0 && discountPercent >= 0 && discountPercent <= 99 && <p className="text-sm">Selling price: <strong>{formatPrice(previewPrice)}</strong></p>}
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label htmlFor="prodStock" className="text-xs font-semibold">

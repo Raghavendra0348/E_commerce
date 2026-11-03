@@ -1,4 +1,4 @@
-import ProductCard from "@/components/product/ProductCard";
+import { StorefrontProductCard } from "@/components/product/ProductCard";
 
 export default function RelatedProducts({
   products = [],
@@ -12,7 +12,7 @@ export default function RelatedProducts({
       <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
         {products.map((prod) => (
           <div key={prod.id} className="w-48 shrink-0">
-            <ProductCard product={prod} />
+            <StorefrontProductCard product={prod} />
           </div>
         ))}
       </div>

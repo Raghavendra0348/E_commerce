@@ -108,9 +108,10 @@ export default function Cart() {
             <div className="amazon-cart-main space-y-4">
               <div className="amazon-cart-items-panel">
                 {/* Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-[#DDD]">
-                  <h1 className="text-[28px] font-normal text-[#0F1111]"><T>{"Shopping Cart"}</T></h1>
-                  <span className="text-sm text-[#565959] self-end">
+                <div className="amazon-cart-heading">
+                  <h1><T>{"Shopping Cart"}</T></h1>
+                  <Link to="/products" className="amazon-cart-continue">Continue shopping</Link>
+                  <span className="amazon-cart-price-heading">
                     <T>{"Price"}</T>
                   </span>
                 </div>

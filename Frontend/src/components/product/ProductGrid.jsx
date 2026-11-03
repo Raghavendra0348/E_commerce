@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import { CatalogProductCard } from "./ProductCard";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import EmptyState from "@/components/common/EmptyState";
 
@@ -36,7 +36,7 @@ export default function ProductGrid({
   return (
     <div className="catalog-product-grid grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} variant="catalog" />
+        <CatalogProductCard key={product.id} product={product} />
       ))}
     </div>
   );

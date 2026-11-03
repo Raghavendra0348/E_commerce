@@ -24,7 +24,7 @@ export default function PageLayout() {
       )}
 
       <Navbar onMobileMenuToggle={() => setMobileMenuOpen((v) => !v)} />
-      <SubNav showMobileCategories={pathname === "/"} />
+      <SubNav showMobileCategories={pathname === "/"} onBrowse={() => setMobileMenuOpen(true)} />
       <MobileMenu open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} />
 
       <main id="main-content" className="storefront-content w-full min-w-0 flex-1">

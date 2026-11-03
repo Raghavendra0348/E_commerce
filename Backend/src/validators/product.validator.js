@@ -1,7 +1,12 @@
 const { z } = require("zod");
+const discountSchema = z.union([z.string().min(1), z.number()])
+    .transform(Number)
+    .refine(val => Number.isInteger(val) && val >= 0 && val <= 99,
+        { message: "Discount must be a whole percentage from 0 to 99" });
 
 const createProductSchema = z.object({
     body: z.object({
+        discountPercent: discountSchema.optional().default(0),
         name: z.string({ required_error: "Product name is required" })
             .trim()
             .min(1, "Product name is required")
@@ -11,7 +16,7 @@ const createProductSchema = z.object({
             .min(1, "Description is required"),
         price: z
             .union([z.string(), z.number()])
-            .transform((val) => parseFloat(String(val)))
+            .transform((val) => Number(val))
             .refine((val) => !isNaN(val) && val > 0, {
                 message: "Price must be a positive number"
             }),
@@ -37,6 +42,7 @@ const updateProductSchema = z.object({
         id: z.string().regex(/^\d+$/, "Product ID must be a positive integer")
     }),
     body: z.object({
+        discountPercent: discountSchema.optional(),
         name: z.string()
             .trim()
             .min(1, "Product name cannot be empty")
@@ -48,7 +54,7 @@ const updateProductSchema = z.object({
             .optional(),
         price: z
             .union([z.string(), z.number()])
-            .transform((val) => parseFloat(String(val)))
+            .transform((val) => Number(val))
             .refine((val) => !isNaN(val) && val > 0, {
                 message: "Price must be a positive number"
             })

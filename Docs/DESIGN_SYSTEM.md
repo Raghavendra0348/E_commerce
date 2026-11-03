@@ -2,6 +2,8 @@
 
 > **Aesthetic:** Amazon.in-inspired — clean, white-background storefront with the signature dark navbar, orange CTAs, and structured product grids. Familiar, trustworthy, conversion-optimized.
 
+> **Active reference update on 2 November 2026:** Customer-facing styling now follows the [SiteStyleGuide Amazon.in capture](https://sitestyleguide.com/amazon.in) from 31 October 2026. Shared reference tokens and responsive overrides live in `Frontend/src/styles/amazon-reference.css`, imported after the existing responsive styles. See [the implementation notes](AMAZON_REFERENCE_REDESIGN.md) for the mapping and visual checks.
+
 ---
 
 ## 1. Color Palette
@@ -12,7 +14,7 @@
 --color-amazon-orange-hover: #E68A00     ← Button hover
 --color-amazon-dark:       #131921       ← Top navbar background
 --color-amazon-dark-alt:   #232F3E       ← Sub-navigation, footer background
---color-amazon-blue:       #007185       ← Links, secondary actions
+--color-amazon-blue:       #2162A1       ← Links, secondary actions
 --color-amazon-blue-hover: #C7511F       ← Link hover (Amazon signature)
 ```
 
@@ -51,17 +53,14 @@
 
 ### Font Stack
 ```css
-/* Primary — Product titles, body text */
-font-family: "Amazon Ember", "Arial", sans-serif;
+/* Body — installed Arial supplies the actual default face */
+font-family: Arial, "Amazon Ember Modern Text", "Amazon Ember", sans-serif;
 
-/* Since Amazon Ember is proprietary, use this fallback: */
-font-family: "Inter", "Segoe UI", "Arial", sans-serif;
+/* Headings — use an available Ember face, otherwise Arial */
+font-family: "Amazon Ember Modern Display", "Amazon Ember", Arial, sans-serif;
 ```
 
-**Google Fonts import:**
-```
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-```
+No remote font import is required. Ember font files are not bundled; Arial supplies the fallback on devices without those faces.
 
 ### Type Scale
 

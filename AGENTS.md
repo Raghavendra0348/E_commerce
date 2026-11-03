@@ -1,5 +1,9 @@
 # ðŸ›’ E-Commerce Project â€” Antigravity Agent Memory & Guidelines
 
+Give brief, beginner-friendly progress updates while working.
+Explain what youâ€™re doing, what happened, and what comes next.
+Explain command errors in plain English.
+
 > **Notice to any AI Agent:** This file serves as the permanent, single source of truth for the architecture, implementation state, and pending work across any Google account, machine, or session. Always consult this document before writing code or proposing architectural changes.
 
 ---
@@ -145,40 +149,40 @@ docker compose up -d --build
 ```
 
 
-## Category cleanup — 2026-10-31
+## Category cleanup ï¿½ 2026-10-31
 
 - Live database now has 17 categories and 78 products; no products were deleted.
 - Merged `laptops` into `computers-accessories` and `grocery-essentials` into `home-kitchen` (all existing grocery entries were household products).
 - Reassigned audio devices, computer peripherals, mobile chargers, a backpack and an analog watch to their specific existing categories; 14 products moved overall.
 - Updated both seed sources. Repeatable cleanup: `node Backend/scripts/cleanup-categories.js` previews, `--apply` applies transactionally and writes a category/product-assignment backup under `Backend/prisma/`.
 
-## Catalog expansion — 2026-10-31
+## Catalog expansion ï¿½ 2026-10-31
 
 - Live catalog and `products.csv` now contain 221 products: 13 products in each of 17 categories.
 - Added 143 products with descriptions, INR prices and stock. No image records were added; existing 78 products and their images were verified unchanged.
 - Preview expansion with `node Backend/scripts/expand-catalog.js`; use `--apply` to insert missing candidates and synchronize seed CSV/manifest. Repeat runs add no duplicates.
 
-## Storefront refinement — 2026-10-31
+## Storefront refinement ï¿½ 2026-10-31
 
 - Replaced large orange discovery panels with compact white 2x2 product collections, live category links/prices and responsive layouts over an Amazon-style gray canvas.
 - Added local product fallback artwork and category-specific missing-image states; retained the supplied festive hero artwork.
 - Fixed frontend `sortBy`/`sortOrder` translation to backend `sort`/`order` so value collections actually sort by price.
 - Verified production build and 13 frontend tests. Browser visual QA unavailable because the browser access host/native pipe could not connect.
 
-## Cart redesign — 2026-10-31
+## Cart redesign ï¿½ 2026-10-31
 
 - Added Amazon-style wide white cart rows, larger thumbnails, yellow quantity pills and a compact checkout sidebar with a rounded yellow CTA.
 - Matched the sliding drawer, added local image fallback handling, removed the non-persisted gift checkbox and unverified delivery/purchase-protection promises from the summary.
 - Verified build and 15 frontend tests, including item quantity/remove callbacks and stock limits. Browser visual verification remains unavailable in this session.
 
-## Checkout and image resilience — 2026-10-31
+## Checkout and image resilience ï¿½ 2026-10-31
 
 - Corrected Razorpay Checkout `order_id` to use backend `razorpayOrderId`; validate setup and callback completeness before verification without changing backend signature checks.
 - Prevent duplicate concurrent clicks and reuse the pending application order during same-component payment retries; release busy state after verification errors.
 - Product image components now show "Images coming soon" for absent/placeholder/broken images and skip the reported dead loopback image ports. Existing image data is preserved.
 - Build and 22 frontend tests pass, including checkout ID/callback tests and image fallback tests. No real payment was made. The source of the reported loopback PNG requests was not found in app source or database; requests from injected/third-party scripts require browser Initiator inspection if they persist.
 
-## Automatic data updates — 2026-10-31
+## Automatic data updates ï¿½ 2026-10-31
 
 - Added successful-write notifications to the Axios client and resource-scoped query invalidation so admin saves refresh relevant storefront/order/review data without reloading the page.
 - Added same-origin BroadcastChannel change notifications for open tabs (resource names only), plus visible-page query polling every 20 seconds and refresh on mount/focus/reconnect.
@@ -186,7 +190,7 @@ docker compose up -d --build
 - Polling detects other-session and direct database changes; this is background refetching rather than server-pushed instant updates.
 - Production build and 27 frontend tests pass, including active-query refresh after save, cross-tab notifications, ignored read/auth requests and timer cleanup.
 
-## Rate-limit correction — 2026-10-31
+## Rate-limit correction ï¿½ 2026-10-31
 
 - Reduced background polling to 180 seconds to fit the existing general API limit of 100 requests per 15 minutes per IP; saved changes still invalidate related views immediately.
 - Restored stale-only focus/mount/reconnect query refreshes, throttled cart focus checks and deduplicated overlapping cart fetches.
@@ -325,3 +329,143 @@ docker compose up -d --build
 - User clarified that existing desktop banner artwork and homepage sections must remain on phone. Removed the replacement phone kitchen hero, reordered/two-card-only rows and category-photo changes; restored the original festival carousel, collections and full horizontal product rows with their responsive styling.
 - Kept only the dark mobile header redesign from the reference, including full wordmark, account/cart actions and separate search/delivery rows. Restored the prior five-item bottom navigation.
 - Verified 77 frontend tests and production build after restoration.
+## Frontend composition refactor - 2026-11-02
+
+- Applied the project-installed vercel-composition-patterns skill. Product cards now compose shared parts through local React 19 product context, with explicit storefront, catalog and wishlist layouts and unique rendered root IDs.
+- Card cart actions reuse the existing cart store through useProductCartAction; pending clicks, product sign-in destinations, toast feedback and browsing without opening the drawer are retained.
+- Unified wishlist data in useWishlist, corrected the backend array response mapping and removed the unused duplicate hook in useProducts. Account-scoped queries deduplicate reads; confirmed mutations synchronize visible hearts, ignore old-session completions and support retryable errors. Wishlist cards render one remove control.
+- Split navbar account, cart and delivery components. Focused store subscriptions keep cart/account updates from rerendering search; a shared delivery hook retains verified PIN selection. Existing responsive CSS, header order, festival artwork and homepage sections are preserved.
+- Verified 92 frontend tests (including 15 new composition regressions), production build and whitespace checks. Browser visual QA was unavailable because the browser host/native connection could not connect. No backend changes, migration, new application dependency or real payment.
+- Explanation and event-flow diagrams: docs/FRONTEND_COMPOSITION_REFACTOR.md.
+
+## One command development startup - 2026-11-02
+
+- Added root package.json and scripts/dev.mjs. Run npm run dev from E_commerce (the parent of Frontend and Backend) to launch the existing backend nodemon and frontend Vite servers together and request automatic browser opening with Vite --open. No new dependency or root npm install is needed.
+- Child processes use each application's own working directory. Ctrl+C stops the launched process trees; existing unrelated servers are not terminated. Vite resolves the browser URL after listening, retaining port fallback, LAN QR output and existing API/upload proxies.
+- Individual Frontend and Backend development scripts are unchanged. Setup and usage: root README.md and Frontend/README.md.
+- Verified root npm run dev startup, frontend HTTP 200, backend liveness HTTP 200, proxied liveness HTTP 200, the browser-open URL using a temporary BROWSER test hook, and Ctrl+C shutdown with both test ports released. No production browser window was needed for this smoke check.
+
+## Colored development request logs - 2026-11-02
+
+- Root npm run dev now prefixes frontend output in cyan and backend output in magenta, including stderr. Complete-line handling retains warning/error styling and leaves terminal QR rows untouched. Vite clear-screen is disabled in the combined terminal. NO_COLOR and FORCE_COLOR are respected.
+- Added a serve-only Vite request logger showing method, path, HTTP status and duration, without frontend query strings. Proxied API calls appear once per server hop; production/backend file logging is unchanged.
+- Verified production build, live HTTP 200 requests, cyan/magenta ANSI labels, QR output and test-server shutdown on separate ports. Preserved the existing backend process on port 5000. Restart the root dev command to load the updated launcher.
+
+## SiteStyleGuide reference redesign - 2026-11-02
+
+- Implemented the user-approved Amazon.in reference styling from https://sitestyleguide.com/amazon.in (31 October capture). Added shared color, gradient, type, radius, shadow and layout-inventory tokens in Frontend/src/styles/amazon-reference.css, imported last. Arial is the body font; removed unused Google Fonts Inter requests and kept available Ember faces as heading fallbacks.
+- Matched the compact 60px desktop header and approximately 268x429px festival cards at 1440px. Kept existing artwork and live collections, with white panels, restrained gold prices and aligned product-row actions. Embedded artwork arrows now trigger real carousel actions.
+- Category navigation uses real IDs and valid sort/search parameters; All opens the existing drawer. Delivery PIN selection, static English/India region, search suggestions, account, cart and phone bottom navigation remain functional.
+- Replaced large footer link columns with the reference's Back to top strip, centered brand/English/India row and dark legal section. Customer catalog/detail/cart/input/button styling shares the new visual system.
+- Verified 92 frontend tests, production build, whitespace checks and Playwright browser QA at 1440/768/390/320px, including search, category drawer navigation, product links, guest cart redirect, carousel arrows and footer. No horizontal page overflow observed. Existing user dev servers were left running.
+- Reference is a partially loaded desktop homepage capture; other pages are adaptations and existing artwork/Arial rendering differ from it. No application dependency, backend code, database migration or real payment was added. Details: docs/AMAZON_REFERENCE_REDESIGN.md. QA captures: output/playwright/ (ignored).
+
+## Festival card alignment - 2026-11-02
+
+- Replaced percentage-based promo-card rows with content-sized heading/footer rows and a flexible image panel. Reserved two-line heading/subtitle space, prevented footer controls shrinking and left clearance above the decorative lights.
+- Verified all four promo cards at 320px: consistent 8px image gaps and 22px bottom clearance without footer overflow. Desktop and phone screenshots: output/playwright/festival-alignment-*.png. All 92 frontend tests and production build pass.
+
+## Scraped reference tokens and favicon - 2026-11-02
+
+- Added dependency-free scripts/scrape-amazon-reference.mjs to extract the public guide JSON/CSS into Docs/reference/amazon-in.json and Frontend/src/styles/reference/amazon-in.tokens.css (16 colors, 65 variables, five font-stack records). Runtime Amazon variables now alias the imported tokens.
+- Applied the local reference ICO, heading defaults, exact focus shadow and adaptive 2/3/4/5-column catalog grid. Guide-labelled logo is actually delivery/returns artwork; archived it without replacing the existing wordmark. Ember binary files are not supplied by the guide; Arial fallback remains active.
+- Verified 92 tests, production build and browser grid geometry at 320/390/1000/1280/1700px with zero horizontal overflow. Report: Docs/AMAZON_STYLE_GUIDE_IMPORT.md. No new dependency or backend changes.
+
+## Four desktop festival cards - 2026-11-02
+
+- Desktop festival carousel now fits four complete cards using calc((100% - 24px) / 4) with three 8px gaps. Existing tablet and phone sizing remains.
+- Verified desktop geometry at 1000/1440/1920px, retained phone sizing at 390px, zero horizontal overflow and passing production build. Screenshot: output/playwright/four-cards-desktop.png. This replaces the earlier five-card reference sizing.
+
+## Gold collection backgrounds - 2026-11-02
+
+- Applied the user-reference gold gradient (#e6bd50 / #fff1a0 / #e0b947) to the four festive collection panels below the carousel. Shared discovery panels retain their existing style.
+- Verified all four computed backgrounds and desktop screenshot output/playwright/gold-collection-panels.png; production build passes.
+
+## Reference footer expansion - 2026-11-02
+
+- Rebuilt the shared footer with four desktop link groups, centered Amazon wordmark and static English/India badges, seven service links on a darker surface and retained Back to top/legal rows. Narrow screens use two columns without horizontal overflow.
+- Your Account uses /account/profile; external reference, social, seller, service and legal links open their destinations in a new tab. Replaced previous homepage-only legal placeholders with the corresponding Amazon destinations; these are external Amazon resources.
+- Verified 92 frontend tests, production build, four desktop groups/seven services, 33 nonempty link targets and phone layout at 320px. Screenshots: output/playwright/footer-reference-final.png and footer-reference-phone.png.
+
+## Gold discovery grids - 2026-11-02
+
+- Extended the same gold gradient to the four discovery panels (everyday, style, furniture and audio). Preserved current collection corner-radius edits and all content/layout behavior.
+- Verified all four computed backgrounds in the browser and passing production build. Screenshot: output/playwright/gold-discovery-grids.png.
+
+## Gold grid corner radius - 2026-11-02
+
+- Increased discovery-grid corners to 24px, matching festive collections. Updated the phone override to retain 24px corners for both gold grid sections. Production build passes.
+
+## Catalog Buy Now action - 2026-11-02
+
+- Added an orange Buy Now button immediately after Add to Cart on catalog product cards. It adds one unit through the existing cart store and opens the existing checkout, including the current cart. Guests return through the selected product sign-in destination.
+- Lifted card actions into shared local React context so both buttons share a pending guard; stock limits, duplicate clicks, failed writes, retry and stale-account completions are handled without opening the cart drawer. Existing storefront/wishlist card layouts retain their current actions.
+- Verified 98 frontend tests (six new purchase regressions), production build, desktop/320px phone placement and guest sign-in navigation. No real order/payment was placed. QA: output/playwright/grid-buy-*.png.
+
+## Catalog product information - 2026-11-02
+
+- Added category labels, stored descriptions and Product details links to all catalog cards through ProductCardParts.Summary. Descriptions clamp to four lines, full content remains on the existing detail route, and phone layouts retain both purchase actions.
+- Read-only database audit and public API pagination verified descriptions/categories for all 221 products in 17 categories. No database writes, migration or invented specifications were necessary.
+- Verified 100 frontend tests, production build, desktop and 320px phone QA with no horizontal overflow. Report: Docs/PRODUCT_GRID_INFORMATION.md. Screenshots: output/playwright/product-info-*.png.
+
+## Shopping cart reference layout - 2026-11-03
+
+- Updated cart page with spacious white rows, larger images/titles, right-aligned unit prices and item totals, yellow quantity pills and responsive phone styling. Checkout summary follows the list except on very wide screens; drawer remains compact.
+- Retained live inventory, quantity/delete and checkout actions. Reference-only gift, delivery, discount and subscription claims were not added.
+- Production build passes; 99/100 frontend tests pass, including cart controls. Unrelated existing ProductCard test fails because Electronics category text is missing. Browser visual QA was not performed.
+
+
+## Cart sidebar and product information - 2026-11-03
+- Checkout summary now sits beside cart rows above 1000px and stacks below on smaller screens. Added description and compact quantity/subtotal panels, retaining drawer styling.
+- Cart API now includes stored product descriptions and category names; no migration needed. Production build and both cart-control tests pass; backend syntax check passes. Browser visual QA not performed.
+
+
+## Product discounts - 2026-11-03
+- Added originalPrice and discountPercent (0-99) with migration applied locally and regenerated Prisma client. Admin product forms now edit original price/discount and preview the selling price; existing products remain at 0%.
+- Persisted price remains the selling price so sorting, filters, cart, checkout and payment calculations use it consistently. API write price means original price; backend calculates the selling price. Past orders retain purchase snapshots.
+- Grid cards, wishlist/storefront cards, details and cart show original/selling prices, percentage and savings. Restored catalog category labels. Build, 29 backend tests and frontend suite/regression checks pass; browser fixture checks at 1440/320px show no horizontal overflow. No real payment or permanent product discount was created.
+- Contract and verification: Docs/PRODUCT_DISCOUNTS.md.
+
+
+## Applied catalog discounts - 2026-11-03
+- After explicit user confirmation, assigned random integer discounts from 10% through 50% to all 221 products. Original prices were preserved; selling prices calculated in paise through productPricing and all saved values verified.
+- Transactional script: Backend/scripts/apply-random-discounts.js (--apply to write, default read-only preview). Existing discounts are skipped on repeat runs; preview now reports zero eligible products.
+- Recovery report: Backend/prisma/pricing-backups/2026-11-03T13-34-48-704Z-random-discounts.json. Live catalog API verified original price, selling price and percentage for the displayed Wearables products. No order or payment created.
+
+
+## Discount price reference styling - 2026-11-03
+- Restyled shared PriceDisplay with large thin red negative percentages beside the selling price and crossed-out original prices beneath, following the supplied reference. Retained savings and original-price wording because stored prices are not verified manufacturer MRPs.
+- Responsive shared styling covers catalog/storefront/wishlist cards, details and cart without changing saved discounts/prices. All 103 frontend tests pass.
+
+
+## Smaller discount typography - 2026-11-03
+- Reduced discount percentages to 20px desktop and 18px phone with light 300 weight; removed variant/cart overrides that enlarged them. Selling-price sizing is unchanged. CSS whitespace check passed.
+
+
+## Stacked catalog purchase buttons - 2026-11-03
+- Catalog Add to Cart and Buy Now now stack as full-width yellow/orange pill buttons at every viewport, with regular-weight text, 12px spacing and 46px desktop/44px phone heights. Existing purchase actions are unchanged. CSS whitespace check passed.
+
+
+## Compact catalog card spacing - 2026-11-03
+- Slightly reduced catalog body padding/gaps, reserved title height, description/link spacing and purchase divider padding. Stacked button gap is now 8px. Retained font sizes and button heights. CSS whitespace check passed.
+
+
+## Further catalog spacing reduction - 2026-11-03
+- Removed reserved title minimum height; tightened body padding, summary gaps, purchase padding and button gap (6px). Font sizes and button heights retained. CSS whitespace check passed.
+
+
+## Clean Amazon carousel artwork - 2026-11-03
+- Replaced screenshot slices with four standalone original Amazon CDN festival images (home/kitchen, denim, ethnic wear and fashion). Full images use normal sizing; no embedded arrows or screenshot offsets. Removed obsolete transparent artwork hotspots; retained working carousel buttons and swipe navigation.
+- Sources retained in Frontend/public/banners/sources.json; heading overlays match pictured categories and links use the existing catalog. Old screenshot is no longer referenced by the hero.
+- Build and all 103 frontend tests pass. Browser QA via temporary production preview verified four loaded images and no overflow at 1440px/390px. Screenshots: output/playwright/clean-amazon-banners-*.png. Backend was unavailable in preview, so live product data was not verified in this visual check.
+
+
+## Alternating festival banner colors - 2026-11-03
+- Carousel now uses red, saffron orange, emerald green and royal purple in order. Kept original red home/kitchen artwork; added three built-in imagegen color edits as sibling PNGs under Frontend/public/banners. Original Amazon JPGs remain preserved.
+- Visually inspected edited assets and verified production build/changed-file whitespace checks. Updated Home.jsx to use the distinct files and matching fallback backgrounds. Asset paths, source distinction and prompt set: Docs/BANNER_COLOR_VARIANTS.md.
+
+
+## Reference price headings on banners - 2026-11-03
+- Added large Under-price headlines, category subtitles and split Secure Checkout / Track Orders text rows with vertical separators to all four colored hero cards.
+- Read-only catalog checks verified products for kitchen under 799, denim under 1999, kurta under 599 and Fashion under 999. Matching links include price filters; replaced empty fashion keyword search with verified category 4. Did not claim unconfigured free delivery/returns. Production build and whitespace checks pass.
+

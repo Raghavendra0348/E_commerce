@@ -70,4 +70,6 @@ desktop.ini
 # ── Tool & Knowledge Graph Artifacts ──
 graphify-out/
 uv-extracted/
+.playwright-cli/
+output/playwright/
 *.zip
