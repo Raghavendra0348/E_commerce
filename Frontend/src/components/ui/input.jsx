@@ -1,6 +1,6 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
-import { useTranslation } from "@/hooks/useTranslation";
+import { cn } from "../../lib/utils";
+import { useTranslation } from "../../hooks/useTranslation";
 
 function Input({ className, type, ...props }) {
   const { t } = useTranslation();

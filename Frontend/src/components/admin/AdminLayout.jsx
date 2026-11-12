@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -12,12 +12,12 @@ import {
   Activity,
 } from "lucide-react";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/useAuthStore";
+import { cn } from "../../lib/utils";
+import { useAuthStore } from "../../store/useAuthStore";
 import { toast } from "sonner";
-import LanguageSelector from "@/components/layout/LanguageSelector";
+import LanguageSelector from "../layout/LanguageSelector";
 import AdminSidebar from "./AdminSidebar";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "../ui/sheet";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -52,8 +52,8 @@ export default function AdminLayout() {
         {/* Logo + toggle */}
         <div className="flex h-16 items-center justify-between px-4 border-b border-white/10">
           {sidebarOpen && (
-            <span className="font-extrabold text-lg">
-              amazon<span className="text-[#FF9900]">.in</span>
+            <span className="flex items-center gap-2">
+              <img src="/original_logo_white.svg" alt="Amazon.in" className="brand-logo admin-brand-logo" />
               <span className="ml-2 text-xs text-[#BBBFBF] font-normal">Admin</span>
             </span>
           )}

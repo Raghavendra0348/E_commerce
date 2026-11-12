@@ -1,9 +1,9 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../common/Translation";
+import ProductImage from "../common/ProductImage";
 import { Package, Pencil, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { formatPrice, cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { formatPrice, cn } from "../../lib/utils";
 
 export default function ProductTable({
   products = [],

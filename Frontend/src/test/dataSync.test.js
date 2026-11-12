@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { QueryClient, QueryObserver } from "@tanstack/react-query";
 import { waitFor } from "@testing-library/react";
-import { notifyServerChange, startDataSync, REFRESH_INTERVAL } from "@/lib/dataSync";
+import { notifyServerChange, startDataSync, REFRESH_INTERVAL } from "../lib/dataSync";
 let stop, unsubscribe, client;
 afterEach(() => { stop?.(); unsubscribe?.(); client?.clear(); stop = undefined; unsubscribe = undefined; vi.useRealTimers(); vi.unstubAllGlobals(); });
 function setup(options = {}) {

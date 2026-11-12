@@ -4,7 +4,7 @@ const paymentController = require("../controllers/payment.controller");
 const authenticate      = require("../middleware/auth.middleware");
 const authorizeAdmin    = require("../middleware/admin.middleware");
 const validate          = require("../middleware/validate.middleware");
-const { createOrderSchema, verifyPaymentSchema } = require("../validators/payment.validator");
+const { createOrderSchema, verifyPaymentSchema, paymentOrderParamsSchema } = require("../validators/payment.validator");
 
 router.use(authenticate);
 
@@ -14,6 +14,7 @@ router.get("/order/:orderId", paymentController.getPayment);
 
 // Admin: initiate a Razorpay refund for a cancelled paid order
 // Final REFUNDED/REFUND_FAILED state is set by the Razorpay webhook (POST /api/webhooks/razorpay)
-router.post("/orders/:orderId/refund", authorizeAdmin, paymentController.initiateRefund);
+router.post("/orders/:orderId/refund", authorizeAdmin, validate(paymentOrderParamsSchema), paymentController.initiateRefund);
+router.post("/orders/:orderId/collect-cod", authorizeAdmin, validate(paymentOrderParamsSchema), paymentController.collectCod);
 
 module.exports = router;

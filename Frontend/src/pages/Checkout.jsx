@@ -1,4 +1,5 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
+import AmazonLogo from "../components/layout/AmazonLogo";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,25 +12,29 @@ import {
   ChevronLeft,
   ShoppingBag,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCart } from "@/hooks/useCart";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { addressService } from "@/services";
-import CheckoutStepper from "@/components/checkout/CheckoutStepper";
-import AddressSelector from "@/components/checkout/AddressSelector";
-import AddressForm from "@/components/checkout/AddressForm";
-import OrderReview from "@/components/checkout/OrderReview";
-import PaymentButton from "@/components/checkout/PaymentButton";
-import { formatPrice, cn } from "@/lib/utils";
+import { Button } from "../components/ui/button";
+import { Separator } from "../components/ui/separator";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCart } from "../hooks/useCart";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { addressService } from "../services";
+import CheckoutStepper from "../components/checkout/CheckoutStepper";
+import AddressSelector from "../components/checkout/AddressSelector";
+import AddressForm from "../components/checkout/AddressForm";
+import OrderReview from "../components/checkout/OrderReview";
+import PaymentButton from "../components/checkout/PaymentButton";
+import { formatPrice, cn } from "../lib/utils";
 
 export default function Checkout() {
   useDocumentTitle("Amazon.in Checkout");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useAuthStore();
-  const { items: liveItems, subtotal: liveSubtotal, itemCount: liveItemCount, isLoading: cartLoading, fetchCart } = useCart();
+  const cart = useCart();
+  const { isLoading: cartLoading, fetchCart } = cart;
+  const liveItems = cart.selectedItems ?? cart.items;
+  const liveSubtotal = cart.selectedSubtotal ?? cart.subtotal;
+  const liveItemCount = cart.selectedItemCount ?? cart.itemCount;
 
   const [currentStep, setCurrentStep] = useState(0); // 0 = Address, 1 = Payment, 2 = Review
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -92,15 +97,15 @@ export default function Checkout() {
       <div className="min-h-[70vh] bg-[#EAEDED] py-12 px-4 flex items-center justify-center">
         <div className="bg-white rounded-lg border border-[#D5D9D9] p-8 max-w-md w-full text-center space-y-4 shadow-xs">
           <ShoppingBag className="h-16 w-16 text-gray-300 mx-auto" />
-          <h2 className="text-xl font-bold text-[#0F1111]">Your cart is currently empty</h2>
+          <h2 className="text-xl font-bold text-[#0F1111]">No products selected for checkout</h2>
           <p className="text-xs text-[#565959]">
-            Add items to your cart before proceeding to checkout.
+            Select products in your cart before proceeding to checkout.
           </p>
           <Button
             asChild
             className="w-full bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs"
           >
-            <Link to="/products"><T>{"Browse Products"}</T></Link>
+            <Link to="/cart">Return to cart</Link>
           </Button>
         </div>
       </div>
@@ -117,8 +122,8 @@ export default function Checkout() {
       {/* Checkout Minimal Top Header */}
       <header className="bg-[#131921] text-white py-3 px-4 border-b border-white/10">
         <div className="mx-auto max-w-[1200px] flex items-center justify-between">
-          <Link to="/" className="flex items-center text-xl font-bold">
-            amazon<span className="text-[#FF9900]">.in</span>
+          <Link to="/" className="flex items-center">
+            <AmazonLogo className="checkout-brand-logo" tone="white" />
           </Link>
           <div className="flex items-center gap-1.5 text-xs text-gray-300">
             <Lock className="h-3.5 w-3.5 text-[#067D62]" />
@@ -355,6 +360,7 @@ export default function Checkout() {
                   <PaymentButton
                     existingOrder={pendingOrder}
                     onOrderCreated={setPendingOrder}
+                    cartItemIds={items.map(item => item.id)}
                     addressId={selectedAddressId}
                     paymentMethod={paymentMethod}
                     user={user}

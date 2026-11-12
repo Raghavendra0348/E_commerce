@@ -1,16 +1,16 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../components/common/Translation";
+import ProductImage from "../components/common/ProductImage";
 import { useNavigate, Link } from "react-router-dom";
 import { CheckCircle, Package, MapPin, Clock } from "lucide-react";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
-import { formatPrice } from "@/lib/utils";
-import api from "@/api/axios";
-import { paymentLabel } from "@/lib/orderPayment";
+import { Button } from "../components/ui/button";
+import { Separator } from "../components/ui/separator";
+import { Skeleton } from "../components/ui/skeleton";
+import { formatPrice } from "../lib/utils";
+import api from "../api/axios";
+import { paymentLabel } from "../lib/orderPayment";
 
 export default function OrderSuccess() {
   const { id } = useParams();

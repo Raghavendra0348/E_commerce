@@ -3,8 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import SubNav from "./SubNav";
 import Footer from "./Footer";
-import CartDrawer from "@/components/cart/CartDrawer";
-import { useNetworkStatus } from "@/hooks/useNetworkStatus";
+import { useNetworkStatus } from "../../hooks/useNetworkStatus";
 import { WifiOff } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import MobileBottomNav from "./MobileBottomNav";
@@ -33,8 +32,6 @@ export default function PageLayout() {
 
       <Footer />
 
-      {/* Sliding cart drawer */}
-      <CartDrawer />
       <MobileBottomNav onBrowse={() => setMobileMenuOpen(true)} browseOpen={mobileMenuOpen} />
     </div>
   );

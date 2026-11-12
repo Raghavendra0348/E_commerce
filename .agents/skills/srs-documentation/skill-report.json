@@ -1,0 +1,595 @@
+{
+  "schema_version": "2.0",
+  "meta": {
+    "generated_at": "2026-07-06T11:33:47.212Z",
+    "slug": "doubleslashse-srs-documentation",
+    "source_url": "https://github.com/DoubleslashSE/claude-workflows/tree/main/Plugins/business-analyst/skills/srs-documentation",
+    "source_ref": "main",
+    "model": "codex",
+    "analysis_version": "3.0.0",
+    "source_type": "community",
+    "content_hash": "49d847fdbb7d37c1d0c1338a288d83cd271d7e2e271c01a73e8b4941f1b5daf6",
+    "tree_hash": "56708f9a219b2edfd3fa64f83cba079a8884088e3358db884a71370d1397e3ad",
+    "provenance": {
+      "model_requested": "gpt-5.5:high",
+      "model_effective": "codex:gpt-5.5:high",
+      "fallback_chain": [
+        {
+          "agent": "codex",
+          "model": "gpt-5.5",
+          "effort": "high",
+          "outcome": "success"
+        }
+      ],
+      "analysis_version": "3.0.0"
+    }
+  },
+  "skill": {
+    "name": "srs-documentation",
+    "description": "Create Software Requirements Specification documents using the IEEE 830 structure, formal requirement guidance, reusable templates, and validation checklists.",
+    "summary": "Create IEEE 830 Software Requirements Specification documents with templates and validation checklists.",
+    "icon": "📦",
+    "version": "1.0.0",
+    "author": "DoubleslashSE",
+    "license": "MIT",
+    "tags": [
+      "srs",
+      "requirements",
+      "ieee-830",
+      "business-analysis",
+      "documentation"
+    ],
+    "supported_tools": [
+      "claude",
+      "codex",
+      "claude-code"
+    ],
+    "risk_factors": [
+      "external_commands"
+    ],
+    "category": "documentation"
+  },
+  "security_audit": {
+    "risk_level": "safe",
+    "is_blocked": false,
+    "safe_to_publish": true,
+    "analysis_status": "ok",
+    "summary": "All static findings were adjudicated as false positives. The blocker hits are ordinary requirements checklist text, and the external command hits are markdown fences around examples and ID conventions. No prompt injection or malicious intent was found.",
+    "remediation": [],
+    "risk_factor_evidence": [
+      {
+        "factor": "external_commands",
+        "evidence": [
+          {
+            "file": "SKILL.md",
+            "line_start": 177,
+            "line_end": 180
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 180,
+            "line_end": 183
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 183,
+            "line_end": 185
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 185,
+            "line_end": 190
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 190,
+            "line_end": 195
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 195,
+            "line_end": 198
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 198,
+            "line_end": 204
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 204,
+            "line_end": 207
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 207,
+            "line_end": 211
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 211,
+            "line_end": 234
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 234,
+            "line_end": 240
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 240,
+            "line_end": 243
+          },
+          {
+            "file": "SKILL.md",
+            "line_start": 243,
+            "line_end": 247
+          }
+        ]
+      }
+    ],
+    "static_findings": [
+      {
+        "id": "blocker:checklists.md:221:system-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "System reconnaissance",
+        "file": "checklists.md",
+        "line_start": 221,
+        "line_end": 223,
+        "snippet": "- [ ] All cross-references valid"
+      },
+      {
+        "id": "blocker:checklists.md:98:network-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "Network reconnaissance",
+        "file": "checklists.md",
+        "line_start": 98,
+        "line_end": 99,
+        "snippet": "- [ ] Delivers value to user or business"
+      },
+      {
+        "id": "blocker:checklists.md:134:network-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "Network reconnaissance",
+        "file": "checklists.md",
+        "line_start": 134,
+        "line_end": 135,
+        "snippet": "### Completeness"
+      },
+      {
+        "id": "blocker:checklists.md:218:network-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "Network reconnaissance",
+        "file": "checklists.md",
+        "line_start": 218,
+        "line_end": 219,
+        "snippet": "### Completeness"
+      },
+      {
+        "id": "blocker:checklists.md:223:network-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "Network reconnaissance",
+        "file": "checklists.md",
+        "line_start": 223,
+        "line_end": 224,
+        "snippet": "### Correctness"
+      },
+      {
+        "id": "external_commands:SKILL.md:177:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 177,
+        "line_end": 180,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:180:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 180,
+        "line_end": 183,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:183:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 183,
+        "line_end": 185,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:185:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 185,
+        "line_end": 190,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:190:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 190,
+        "line_end": 195,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:195:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 195,
+        "line_end": 198,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:198:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 198,
+        "line_end": 204,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:204:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 204,
+        "line_end": 207,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:207:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 207,
+        "line_end": 211,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:211:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 211,
+        "line_end": 234,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:234:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 234,
+        "line_end": 240,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:240:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 240,
+        "line_end": 243,
+        "snippet": "```"
+      },
+      {
+        "id": "external_commands:SKILL.md:243:ruby-shell-backtick-execution",
+        "category": "external_commands",
+        "severity": "medium",
+        "pattern": "Ruby/shell backtick execution",
+        "file": "SKILL.md",
+        "line_start": 243,
+        "line_end": 247,
+        "snippet": "```markdown"
+      },
+      {
+        "id": "blocker:SKILL.md:88:network-reconnaissance",
+        "category": "blocker",
+        "severity": "low",
+        "pattern": "Network reconnaissance",
+        "file": "SKILL.md",
+        "line_start": 88,
+        "line_end": 89,
+        "snippet": "- User class"
+      }
+    ],
+    "finding_verdicts": [
+      {
+        "id": "blocker:checklists.md:221:system-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.97,
+        "reason": "The cited text is a document quality checklist item about validating cross-references. It does not request system enumeration, host discovery, or other reconnaissance behavior."
+      },
+      {
+        "id": "blocker:checklists.md:98:network-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.97,
+        "reason": "The cited line is part of an INVEST user story checklist about business value. It contains no network scanning, target discovery, or data collection instruction."
+      },
+      {
+        "id": "blocker:checklists.md:134:network-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.96,
+        "reason": "The finding points to a Completeness heading in a functional requirement checklist. The surrounding bullets concern inputs, outputs, error handling, and edge cases, not network reconnaissance."
+      },
+      {
+        "id": "blocker:checklists.md:218:network-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.96,
+        "reason": "The cited heading begins a document completeness checklist. The surrounding text checks template completion and TBD items, not network discovery or probing."
+      },
+      {
+        "id": "blocker:checklists.md:223:network-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.96,
+        "reason": "The cited heading begins a correctness checklist for contradictions, duplicates, and reference accuracy. It does not instruct network reconnaissance."
+      },
+      {
+        "id": "external_commands:SKILL.md:177:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The lines are a fenced markdown example of a well-written requirement. They do not contain shell commands, Ruby backticks, or executable instructions."
+      },
+      {
+        "id": "external_commands:SKILL.md:180:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The finding is triggered by markdown fence syntax around prose. The example is a bad requirement sentence, not command execution."
+      },
+      {
+        "id": "external_commands:SKILL.md:183:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "This is a markdown code fence for a plain-language requirement example. No external process, shell metacharacters, or dynamic execution path is present."
+      },
+      {
+        "id": "external_commands:SKILL.md:185:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The cited area closes a markdown example and introduces requirement ID conventions. It is documentation text, not executable Ruby or shell syntax."
+      },
+      {
+        "id": "external_commands:SKILL.md:190:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The fenced block lists functional requirement ID prefixes such as FR-XXX. It is a formatting convention and cannot execute commands."
+      },
+      {
+        "id": "external_commands:SKILL.md:195:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The cited markdown fence surrounds non-functional requirement ID examples. The content is static documentation with no external command invocation."
+      },
+      {
+        "id": "external_commands:SKILL.md:198:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The fenced block lists NFR identifier conventions for performance, security, reliability, usability, and maintainability. It is not Ruby or shell execution."
+      },
+      {
+        "id": "external_commands:SKILL.md:204:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The finding points to markdown syntax near constraint ID examples. It contains no command, interpreter call, or user-controlled execution."
+      },
+      {
+        "id": "external_commands:SKILL.md:207:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The fenced block lists constraint identifiers such as CON-XXX. These are requirement labels and not executable commands."
+      },
+      {
+        "id": "external_commands:SKILL.md:211:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The cited range covers the end of a markdown fence and priority tables. This is static SRS guidance and has no shell execution behavior."
+      },
+      {
+        "id": "external_commands:SKILL.md:234:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The fenced block shows section numbering for document formatting. It is an example layout and does not invoke external commands."
+      },
+      {
+        "id": "external_commands:SKILL.md:240:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The cited area transitions from a formatting example to a markdown table example. The backticks are markdown fences, not Ruby or shell execution."
+      },
+      {
+        "id": "external_commands:SKILL.md:243:ruby-shell-backtick-execution",
+        "verdict": "false_positive",
+        "confidence": 0.98,
+        "reason": "The fenced markdown block contains a sample requirement table. It is documentation content and does not execute commands or process user input."
+      },
+      {
+        "id": "blocker:SKILL.md:88:network-reconnaissance",
+        "verdict": "false_positive",
+        "confidence": 0.97,
+        "reason": "The cited line is a functional requirement organization option named user class. It has no relationship to network enumeration, probing, or reconnaissance."
+      }
+    ],
+    "semantic_findings": [],
+    "critical_findings": [],
+    "high_findings": [],
+    "medium_findings": [],
+    "low_findings": [],
+    "dangerous_patterns": [],
+    "files_scanned": 3,
+    "total_lines": 958,
+    "audit_model": "codex",
+    "audited_at": "2026-07-06T11:33:47.212Z",
+    "agent_auto_install_policy": "allowed",
+    "manual_install_policy": "allowed"
+  },
+  "content": {
+    "user_title": "Create IEEE 830 SRS Documentation",
+    "value_statement": "Requirements teams need consistent SRS documents that are complete, traceable, and testable. This skill provides an IEEE 830 structure, templates, and validation checklists.",
+    "seo_keywords": [
+      "Claude",
+      "Codex",
+      "Claude Code",
+      "SRS documentation",
+      "IEEE 830",
+      "software requirements specification",
+      "requirements template",
+      "functional requirements",
+      "non-functional requirements",
+      "traceability matrix"
+    ],
+    "actual_capabilities": [
+      "Guides creation of IEEE 830 SRS sections from introduction through appendices.",
+      "Provides a reusable template for scope, interfaces, requirements, constraints, and sign-off.",
+      "Defines ID conventions for functional requirements, non-functional requirements, and constraints.",
+      "Applies writing guidance for clear, verifiable requirement statements.",
+      "Includes SMART, INVEST, traceability, and document quality checklists.",
+      "Supports requirement-to-test and business objective traceability matrices."
+    ],
+    "limitations": [
+      "Does not interview stakeholders or discover requirements by itself.",
+      "Does not validate technical feasibility against a live system.",
+      "Requires project details before producing a useful final SRS.",
+      "May need changes for organization-specific standards or regulated domains."
+    ],
+    "use_cases": [
+      {
+        "title": "Draft a Formal SRS",
+        "description": "Turn stakeholder notes into a structured IEEE 830 Software Requirements Specification.",
+        "target_user": "Business analyst"
+      },
+      {
+        "title": "Standardize Feature Requirements",
+        "description": "Convert feature ideas into prioritized, testable functional and non-functional requirements.",
+        "target_user": "Product manager"
+      },
+      {
+        "title": "Prepare Test Traceability",
+        "description": "Map requirements to business objectives and planned test cases before approval.",
+        "target_user": "QA lead"
+      }
+    ],
+    "prompt_templates": [
+      {
+        "title": "Draft a Basic SRS",
+        "scenario": "Beginner request for a new requirements document.",
+        "prompt": "Use the srs-documentation skill to create an IEEE 830 SRS for [project]. Ask for missing scope, stakeholders, constraints, and requirements before drafting."
+      },
+      {
+        "title": "Improve Requirement Statements",
+        "scenario": "Intermediate cleanup of rough requirements.",
+        "prompt": "Review these requirements with the SRS writing guidelines. Rewrite vague items into testable shall statements with IDs, priority, source, and acceptance criteria: [requirements]."
+      },
+      {
+        "title": "Compile a Requirements Package",
+        "scenario": "Advanced document generation from mixed notes.",
+        "prompt": "Compile these stakeholder notes into an SRS using template.md. Include functional requirements, non-functional requirements, assumptions, dependencies, glossary, and open issues: [notes]."
+      },
+      {
+        "title": "Validate and Trace an SRS",
+        "scenario": "Advanced audit before stakeholder review.",
+        "prompt": "Audit this SRS against checklists.md. Produce a gap list, quality score, traceability matrix, unresolved risks, and recommended revisions: [SRS]."
+      }
+    ],
+    "output_examples": [
+      {
+        "input": "Create an SRS outline for a customer support portal.",
+        "output": "An IEEE 830 outline with purpose, scope, product perspective, user classes, interfaces, requirements sections, glossary, and traceability appendices."
+      },
+      {
+        "input": "Rewrite vague checkout requirements into testable statements.",
+        "output": [
+          "Requirement statements with stable IDs and shall language.",
+          "Priorities, sources, inputs, outputs, error handling, and acceptance criteria.",
+          "Notes for any missing stakeholder or measurement details."
+        ]
+      },
+      {
+        "input": "Review this draft SRS for approval readiness.",
+        "output": "A checklist-based review covering completeness, SMART quality, traceability, document consistency, open issues, and recommended revisions."
+      }
+    ],
+    "best_practices": [
+      "Provide stakeholder goals, constraints, user classes, and known integrations before drafting.",
+      "Assign stable IDs, priorities, sources, and acceptance criteria to every requirement.",
+      "Run the validation checklists before requesting stakeholder approval."
+    ],
+    "anti_patterns": [
+      "Treating vague product goals as final requirements.",
+      "Mixing implementation design decisions into requirement statements too early.",
+      "Leaving TBD items, duplicate IDs, or missing sources in the final SRS."
+    ],
+    "faq": [
+      {
+        "question": "What standard does this skill follow?",
+        "answer": "It follows the IEEE 830 Software Requirements Specification structure."
+      },
+      {
+        "question": "Can it create a complete SRS from short notes?",
+        "answer": "It can draft a structure, but useful output requires scope, stakeholders, constraints, and requirements."
+      },
+      {
+        "question": "Does it cover non-functional requirements?",
+        "answer": "Yes. It includes performance, security, reliability, usability, and maintainability requirement sections."
+      },
+      {
+        "question": "Can it help with traceability?",
+        "answer": "Yes. It includes traceability matrices for business objectives, requirements, dependencies, and test cases."
+      },
+      {
+        "question": "Is this only for business analysts?",
+        "answer": "No. Product managers, architects, QA teams, and delivery leads can also use it."
+      },
+      {
+        "question": "Does it execute commands or scan systems?",
+        "answer": "No. The skill provides documentation guidance, templates, and checklists."
+      }
+    ]
+  },
+  "file_structure": [
+    {
+      "name": "checklists.md",
+      "type": "file",
+      "path": "checklists.md",
+      "lines": 286
+    },
+    {
+      "name": "SKILL.md",
+      "type": "file",
+      "path": "SKILL.md",
+      "lines": 269
+    },
+    {
+      "name": "template.md",
+      "type": "file",
+      "path": "template.md",
+      "lines": 403
+    }
+  ]
+}

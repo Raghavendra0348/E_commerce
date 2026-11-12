@@ -1,11 +1,11 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChevronRight } from "lucide-react";
-import AddressBook from "@/components/account/AddressBook";
-import { addressService } from "@/services";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import AddressBook from "../components/account/AddressBook";
+import { addressService } from "../services";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function Addresses() {
   useDocumentTitle("Your Addresses");

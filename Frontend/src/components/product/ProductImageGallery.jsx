@@ -1,8 +1,8 @@
-import ProductImage from "@/components/common/ProductImage";
+import ProductImage from "../common/ProductImage";
 import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export default function ProductImageGallery({ images = [], productName = "" }) {
   const allImages = images.length > 0 ? images : [{ id: 0, url: "/product-placeholder.svg" }];

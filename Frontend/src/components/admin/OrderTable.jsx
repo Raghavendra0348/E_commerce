@@ -1,8 +1,8 @@
 import { ShoppingBag, Eye } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
 import OrderStatusBadge from "./OrderStatusBadge";
-import { formatPrice, cn } from "@/lib/utils";
+import { formatPrice, cn } from "../../lib/utils";
 
 export const ALLOWED_ORDER_TRANSITIONS = {
   PENDING: ["CONFIRMED", "CANCELLED"],
@@ -93,7 +93,7 @@ export default function OrderTable({
                   <td className="px-4 py-3">
                     <div className="space-y-0.5">
                       <span className="font-medium text-[#0F1111] block">
-                        {ord.paymentMethod === "COD" ? "COD" : "Online"}
+                        {ord.payment?.provider === "COD" ? "COD" : "Online"}
                       </span>
                       <span
                         className={cn(

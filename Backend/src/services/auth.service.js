@@ -63,8 +63,8 @@ const register = async ({ name, email, password, phone }, metadata = {}) => {
         }
     });
 
-    const accessToken = generateAccessToken(user.id, user.role);
-    const refreshToken = generateRefreshToken(user.id);
+    const accessToken = generateAccessToken(user.id, user.role, user.tokenVersion);
+    const refreshToken = generateRefreshToken(user.id, user.tokenVersion);
     await saveRefreshToken(user.id, refreshToken, metadata);
 
     return {
@@ -89,8 +89,8 @@ const login = async ({ email, password }, metadata = {}) => {
         throw ApiError.unauthorized("Invalid email or password");
     }
 
-    const accessToken = generateAccessToken(user.id, user.role);
-    const refreshToken = generateRefreshToken(user.id);
+    const accessToken = generateAccessToken(user.id, user.role, user.tokenVersion);
+    const refreshToken = generateRefreshToken(user.id, user.tokenVersion);
     await saveRefreshToken(user.id, refreshToken, metadata);
 
     return {
@@ -129,15 +129,16 @@ const refreshSession = async (refreshToken, metadata = {}) => {
     // Reuse detection: If token exists but was already revoked, someone may have compromised it!
     if (tokenRecord && tokenRecord.revokedAt) {
         // Invalidate all sessions for this user for security
-        await prisma.refreshToken.updateMany({
-            where: { userId: tokenRecord.userId },
-            data: { revokedAt: new Date() }
-        });
+        await logoutAll(tokenRecord.userId);
         throw ApiError.unauthorized("Suspicious token reuse detected. All active sessions invalidated.");
     }
 
     if (!tokenRecord || tokenRecord.userId !== decoded.userId) {
         throw ApiError.unauthorized("Invalid refresh token");
+    }
+
+    if ((decoded.tokenVersion ?? 0) !== tokenRecord.user.tokenVersion) {
+        throw ApiError.unauthorized("Session has been revoked. Please sign in again.");
     }
 
     if (new Date() > new Date(tokenRecord.expiresAt)) {
@@ -151,16 +152,13 @@ const refreshSession = async (refreshToken, metadata = {}) => {
     });
 
     if (revocationResult.count === 0) {
-        await prisma.refreshToken.updateMany({
-            where: { userId: tokenRecord.userId },
-            data: { revokedAt: new Date() }
-        });
+        await logoutAll(tokenRecord.userId);
         throw ApiError.unauthorized("Suspicious concurrent token rotation detected. Sessions invalidated.");
     }
 
     // Issue new pair
-    const newAccessToken = generateAccessToken(tokenRecord.user.id, tokenRecord.user.role);
-    const newRefreshToken = generateRefreshToken(tokenRecord.user.id);
+    const newAccessToken = generateAccessToken(tokenRecord.user.id, tokenRecord.user.role, tokenRecord.user.tokenVersion);
+    const newRefreshToken = generateRefreshToken(tokenRecord.user.id, tokenRecord.user.tokenVersion);
     await saveRefreshToken(tokenRecord.user.id, newRefreshToken, metadata);
 
     return {
@@ -191,10 +189,13 @@ const logout = async (refreshToken) => {
  * Log out all sessions for a user by revoking all their refresh tokens.
  */
 const logoutAll = async (userId) => {
-    await prisma.refreshToken.updateMany({
-        where: { userId, revokedAt: null },
-        data: { revokedAt: new Date() }
-    });
+    await prisma.$transaction([
+        prisma.user.update({ where: { id: userId }, data: { tokenVersion: { increment: 1 } } }),
+        prisma.refreshToken.updateMany({
+            where: { userId, revokedAt: null },
+            data: { revokedAt: new Date() }
+        })
+    ]);
 };
 
 /**
@@ -261,7 +262,7 @@ const changePassword = async (userId, currentPassword, newPassword) => {
     await prisma.$transaction([
         prisma.user.update({
             where: { id: userId },
-            data: { password: hashedPassword }
+            data: { password: hashedPassword, tokenVersion: { increment: 1 } }
         }),
         prisma.refreshToken.updateMany({
             where: { userId, revokedAt: null },

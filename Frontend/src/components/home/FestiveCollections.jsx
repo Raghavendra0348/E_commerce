@@ -1,18 +1,17 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { useCategories } from "@/hooks/useCategories";
-import { useProducts } from "@/hooks/useProducts";
-import ProductImage from "@/components/common/ProductImage";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/utils";
+import { useCategories } from "../../hooks/useCategories";
+import { useProducts } from "../../hooks/useProducts";
+import ProductImage from "../common/ProductImage";
+import { Skeleton } from "../ui/skeleton";
+import { Button } from "../ui/button";
+import { formatPrice } from "../../lib/utils";
 
 const collections = [
   { slug: "home-kitchen", title: "Festive finds | Make yourself at home", search: "home" },
   { slug: "fashion", title: "Fashion & accessories | Celebrate in style", search: "fashion" },
   { slug: "office-products", title: "Work essentials | Everyday favourites", search: "office" },
-  { slug: "beauty-personal-care", title: "Beauty & grooming | Upgrade your routine", search: "beauty" },
 ];
 
 function FestiveCollection({ collection, category, categoriesLoading, categoriesError, retryCategories }) {

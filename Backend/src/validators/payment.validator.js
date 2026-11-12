@@ -15,4 +15,5 @@ const verifyPaymentSchema = z.object({
     })
 });
 
-module.exports = { createOrderSchema, verifyPaymentSchema };
+const paymentOrderParamsSchema = z.object({ params: z.object({ orderId: z.string().regex(/^[1-9]\d*$/) }) });
+module.exports = { createOrderSchema, verifyPaymentSchema, paymentOrderParamsSchema };

@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LocationModal from "@/components/layout/LocationModal";
-import api from "@/api/axios";
+import LocationModal from "../components/layout/LocationModal";
+import api from "../api/axios";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
 let client;
 const bangalore = { pincode: "560001", city: "Bangalore", state: "Karnataka", country: "India" };
 beforeEach(() => { api.get.mockResolvedValue({ data: { data: bangalore } }); });

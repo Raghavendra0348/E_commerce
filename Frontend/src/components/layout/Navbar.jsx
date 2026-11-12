@@ -7,7 +7,7 @@ import NavbarSearch from "./NavbarSearch";
 import { NavbarAccountMenu, NavbarMobileAccountLink, NavbarOrdersLink } from "./NavbarAccount";
 import NavbarCartLink from "./NavbarCartLink";
 import { NavbarDesktopDelivery, NavbarMobileDelivery } from "./NavbarDelivery";
-import { useDeliveryLocation } from "@/hooks/useDeliveryLocation";
+import { useDeliveryLocation } from "../../hooks/useDeliveryLocation";
 
 export default function Navbar({ onMobileMenuToggle }) {
   const { deliveryLocation, locationModalOpen, setLocationModalOpen, handleLocationSelect } = useDeliveryLocation();
@@ -42,8 +42,8 @@ export default function Navbar({ onMobileMenuToggle }) {
             className="navbar-logo flex items-center hover:outline hover:outline-1 hover:outline-white hover:rounded-[2px] px-2 py-1.5 shrink-0 transition-none"
             aria-label="Amazon India Homepage"
           >
-            <AmazonLogo className="desktop-amazon-logo" />
-            <img className="mobile-amazon-mark" src="/a_logo.jpg" alt="" aria-hidden="true" />
+            <AmazonLogo className="desktop-amazon-logo" tone="white" />
+            <AmazonLogo className="mobile-amazon-logo" tone={mobileLayout === "home" ? "white" : "dark"} />
           </Link>
 
           <NavbarDesktopDelivery deliveryLocation={deliveryLocation} onOpen={() => setLocationModalOpen(true)} />

@@ -263,24 +263,23 @@ const deleteProductImage = async (productId, imageId) => {
  * Delete a product and all its images.
  */
 const deleteProduct = async (id) => {
-    const product = await prisma.product.findUnique({
-        where: { id },
-        include: { images: true, orderItems: { take: 1 } }
+    const product = await prisma.$transaction(async tx => {
+        await tx.$queryRaw`SELECT "id" FROM "Product" WHERE "id" = ${id} FOR UPDATE`;
+        const existing = await tx.product.findUnique({ where: { id }, include: { images: true, orderItems: { take: 1 } } });
+        if (!existing) throw ApiError.notFound("Product not found");
+        if (existing.orderItems.length) {
+            throw ApiError.badRequest("Cannot delete product because it is linked to past customer orders. Set stock to 0 to retire it instead.");
+        }
+        await tx.cartItem.deleteMany({ where: { productId: id } });
+        await tx.wishlist.deleteMany({ where: { productId: id } });
+        await tx.product.delete({ where: { id } });
+        return existing;
     });
 
-    if (!product) {
-        throw ApiError.notFound("Product not found");
-    }
-
-    if (product.orderItems && product.orderItems.length > 0) {
-        throw ApiError.badRequest(
-            "Cannot delete product because it is linked to past customer orders. Set stock to 0 to retire it instead."
-        );
-    }
-
-    // Delete images from Cloudinary / local in parallel
+    // External cleanup only runs after the database commit succeeds.
     await Promise.allSettled(
-        product.images.map((img) => {
+        product.images.map(async (img) => {
+            if (await prisma.productImage.count({ where: { url: img.url } })) return;
             let publicId = null;
             if (img.url.includes("cloudinary.com")) {
                 const parts = img.url.split("/upload/");
@@ -292,8 +291,6 @@ const deleteProduct = async (id) => {
         })
     );
 
-    // Cascade deletes ProductImage rows automatically (onDelete: Cascade in schema)
-    await prisma.product.delete({ where: { id } });
 };
 
 module.exports = {

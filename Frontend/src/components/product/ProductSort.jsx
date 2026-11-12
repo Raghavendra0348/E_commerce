@@ -1,12 +1,12 @@
-import { T } from "@/components/common/Translation";
-import { SORT_OPTIONS } from "@/lib/constants";
+import { T } from "../common/Translation";
+import { SORT_OPTIONS } from "../../lib/constants";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 import { ChevronDown, Check } from "lucide-react";
 
 export default function ProductSort({ value, onChange }) {

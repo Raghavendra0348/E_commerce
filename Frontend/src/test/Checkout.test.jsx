@@ -2,13 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Checkout from "@/pages/Checkout";
-import { orderService, paymentService, addressService } from "@/services";
+import Checkout from "../pages/Checkout";
+import { orderService, paymentService, addressService } from "../services";
 
 let cart, options, client;
-vi.mock("@/hooks/useCart", () => ({ useCart: () => cart }));
-vi.mock("@/services", () => ({ addressService: { getAll: vi.fn() }, orderService: { placeOrder: vi.fn() }, paymentService: { createOrder: vi.fn(), verify: vi.fn() } }));
-vi.mock("@/components/checkout/AddressSelector", () => ({ default: ({ onProceed, selectedId }) => <button disabled={!selectedId} onClick={onProceed}>Choose address</button> }));
+vi.mock("../hooks/useCart", () => ({ useCart: () => cart }));
+vi.mock("../services", () => ({ addressService: { getAll: vi.fn() }, orderService: { placeOrder: vi.fn() }, paymentService: { createOrder: vi.fn(), verify: vi.fn() } }));
+vi.mock("../components/checkout/AddressSelector", () => ({ default: ({ onProceed, selectedId }) => <button disabled={!selectedId} onClick={onProceed}>Choose address</button> }));
 beforeEach(() => {
   cart = { items: [{ id: 1, quantity: 1, product: { id: 1, name: "Product", price: 499 } }], subtotal: 499, itemCount: 1, isLoading: false, fetchCart: vi.fn() };
   addressService.getAll.mockResolvedValue({ data: { data: [{ id: 5 }] } });
@@ -36,4 +36,21 @@ describe("checkout cart refresh", () => {
     await waitFor(() => expect(paymentService.createOrder).toHaveBeenCalledTimes(2));
     expect(orderService.placeOrder).toHaveBeenCalledTimes(1);
   });
+});
+
+it("sends only selected cart items to order creation", async () => {
+  cart = { ...cart, selectedItems: cart.items, selectedSubtotal: 499, selectedItemCount: 1, items: [...cart.items, { id: 2, quantity: 2, product: { id: 2, name: "Unselected", price: 100 } }] };
+  render(<QueryClientProvider client={client}><MemoryRouter><Checkout /></MemoryRouter></QueryClientProvider>);
+  await waitFor(() => expect(screen.getByRole("button", { name: "Choose address" })).not.toBeDisabled());
+  fireEvent.click(screen.getByRole("button", { name: "Choose address" }));
+  fireEvent.click(screen.getByRole("button", { name: /Use this payment method/ }));
+  expect(screen.queryByText("Unselected")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: /Pay & Place Order/ }));
+  await waitFor(() => expect(orderService.placeOrder).toHaveBeenCalledWith({ addressId: 5, paymentMethod: "ONLINE", cartItemIds: [1], checkoutKey: expect.any(String) }));
+});
+it("blocks checkout when no items are selected", () => {
+  cart = { ...cart, selectedItems: [], selectedSubtotal: 0, selectedItemCount: 0 };
+  render(<QueryClientProvider client={client}><MemoryRouter><Checkout /></MemoryRouter></QueryClientProvider>);
+  expect(screen.getByText("No products selected for checkout")).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: /Pay & Place Order/ })).not.toBeInTheDocument();
 });

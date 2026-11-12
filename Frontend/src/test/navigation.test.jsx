@@ -1,15 +1,14 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useLocation, useNavigate } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import PageLayout from "@/components/layout/PageLayout";
-import { useAuthStore } from "@/store/useAuthStore";
+import Navbar from "../components/layout/Navbar";
+import PageLayout from "../components/layout/PageLayout";
+import { useAuthStore } from "../store/useAuthStore";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-vi.mock("@/hooks/useCategories", () => ({ useCategories: () => ({ data: [{ id: 4, name: "Books" }] }) }));
-vi.mock("@/components/layout/SubNav", () => ({ default: () => null }));
-vi.mock("@/components/layout/Footer", () => ({ default: () => null }));
-vi.mock("@/components/cart/CartDrawer", () => ({ default: () => null }));
+vi.mock("../hooks/useCategories", () => ({ useCategories: () => ({ data: [{ id: 4, name: "Books" }] }) }));
+vi.mock("../components/layout/SubNav", () => ({ default: () => null }));
+vi.mock("../components/layout/Footer", () => ({ default: () => null }));
 let client;
 function show(children, initialEntries) {
   client = new QueryClient({ defaultOptions: { queries: { retry: false } } });

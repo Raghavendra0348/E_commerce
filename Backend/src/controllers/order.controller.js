@@ -3,8 +3,8 @@ const { success, paginated } = require("../utils/response.utils");
 
 const placeOrder = async (req, res, next) => {
     try {
-        const { addressId, paymentMethod } = req.body;
-        const order = await orderService.placeOrder(req.user.userId, addressId, paymentMethod);
+        const { addressId, paymentMethod, cartItemIds, checkoutKey } = req.body;
+        const order = await orderService.placeOrder(req.user.userId, addressId, paymentMethod, cartItemIds, checkoutKey);
         return success(res, 201, "Order placed successfully", order);
     } catch (error) { next(error); }
 };

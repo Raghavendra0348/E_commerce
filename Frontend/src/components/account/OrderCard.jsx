@@ -1,9 +1,9 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../common/Translation";
+import ProductImage from "../common/ProductImage";
 import { Link } from "react-router-dom";
 import { Clock, CheckCircle, Package, Truck, XCircle, RotateCcw, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { formatPrice, cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { formatPrice, cn } from "../../lib/utils";
 
 const STATUS_CONFIG = {
   PENDING: { label: "Order Placed", color: "bg-[#FFF8E7] text-[#B7791F] border-[#F6E05E]", icon: Clock },
@@ -37,10 +37,10 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
   };
 
   return (
-    <div id={`order-card-${order.id}`} className="account-order-card min-w-0 bg-white rounded-lg border border-[#D5D9D9] shadow-2xs overflow-hidden">
+    <div id={`order-card-${order.id}`} className="account-order-card orders-order-card min-w-0 bg-white rounded-lg border border-[#D5D9D9] shadow-2xs overflow-hidden">
       {/* Header Ribbon */}
-      <div className="bg-[#F0F2F2] border-b border-[#D5D9D9] px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-y-3 text-xs text-[#565959]">
-        <div className="grid min-w-0 grid-cols-2 sm:flex items-start sm:items-center gap-3 sm:gap-10">
+      <div className="orders-order-head bg-[#F0F2F2] border-b border-[#D5D9D9] px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-y-3 text-xs text-[#565959]">
+        <div className="orders-order-meta grid min-w-0 grid-cols-2 sm:flex items-start sm:items-center gap-3 sm:gap-10">
           <div>
             <span className="block uppercase text-[10px] font-semibold tracking-wider text-[#565959]">
               Order Placed
@@ -52,14 +52,6 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
               <T>{"Total"}</T>
             </span>
             <span className="font-semibold text-[#0F1111]">{formatPrice(order.totalAmount)}</span>
-          </div>
-          <div>
-            <span className="block uppercase text-[10px] font-semibold tracking-wider text-[#565959]">
-              Ship To
-            </span>
-            <span className="font-medium text-[#0F1111] break-words">
-              {order.shippingAddress?.name || "Customer"}
-            </span>
           </div>
         </div>
 
@@ -77,14 +69,14 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
       </div>
 
       {/* Body */}
-      <div className="p-4 sm:p-6 space-y-4">
+      <div className="orders-order-body p-4 sm:p-6 space-y-4">
         {/* Status Pill */}
         <div className="flex flex-wrap items-center gap-2">
           <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border", statusCfg.color)}>
             <StatusIcon className="h-3.5 w-3.5" />
             <T>{statusCfg.label}</T>
           </span>
-          {order.paymentMethod === "COD" && (
+          {order.payment?.provider === "COD" && (
             <span className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded border border-gray-200">
               Cash on Delivery
             </span>
@@ -96,10 +88,10 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
           {order.items?.map((item) => (
             <div
               key={item.id}
-              className="py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="orders-line-item py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               <div className="flex items-start gap-4 flex-1 min-w-0">
-                <Link to={`/products/${item.product?.slug || ""}`} className="shrink-0">
+                <Link to={`/products/${item.product?.slug || ""}`} className="orders-line-image shrink-0">
                   <ProductImage
                     src={getProductImage(item)}
                     alt={item.product?.name || "Product"}
@@ -126,14 +118,14 @@ export default function OrderCard({ order, onBuyAgain, isBuyingAgainId }) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                <div className="orders-line-actions flex flex-wrap sm:flex-col items-center sm:items-end gap-2 shrink-0">
                 {onBuyAgain && (
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => onBuyAgain(item)}
                     disabled={isBuyingAgainId === item.id}
-                    className="text-xs h-8 border-[#FF9900] bg-[#FFF8E7] hover:bg-[#FFE5B4] text-[#0F1111] font-medium"
+                    className="orders-buy-again text-xs h-8 border-[#FF9900] bg-[#FFF8E7] hover:bg-[#FFE5B4] text-[#0F1111] font-medium"
                   >
                     <RotateCcw className="h-3 w-3 mr-1 text-[#FF9900]" />
                     <T>{isBuyingAgainId === item.id ? "Adding..." : "Buy it again"}</T>

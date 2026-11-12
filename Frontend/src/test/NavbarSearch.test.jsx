@@ -2,11 +2,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import NavbarSearch from "@/components/layout/NavbarSearch";
-import api from "@/api/axios";
+import NavbarSearch from "../components/layout/NavbarSearch";
+import api from "../api/axios";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
-vi.mock("@/hooks/useCategories", () => ({ useCategories: () => ({ data: [{ id: 4, name: "Electronics" }] }) }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../hooks/useCategories", () => ({ useCategories: () => ({ data: [{ id: 4, name: "Electronics" }] }) }));
 let client;
 function CurrentLocation() { const location = useLocation(); return <output aria-label="Current location">{location.pathname + location.search}</output>; }
 function show() {

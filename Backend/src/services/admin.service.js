@@ -69,7 +69,7 @@ const updateUserRole = async (targetId, role) => {
 
     return prisma.user.update({
         where:  { id: targetId },
-        data:   { role },
+        data:   { role, ...(user.role !== role ? { tokenVersion: { increment: 1 } } : {}) },
         select: { id: true, name: true, email: true, role: true }
     });
 };

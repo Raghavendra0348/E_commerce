@@ -1,21 +1,25 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, RefreshCw } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCart } from "@/hooks/useCart";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import CartItem from "@/components/cart/CartItem";
-import CartSummary from "@/components/cart/CartSummary";
-import { formatPrice } from "@/lib/utils";
+import { Button } from "../components/ui/button";
+import { Skeleton } from "../components/ui/skeleton";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCart } from "../hooks/useCart";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import CartItem from "../components/cart/CartItem";
+import CartSummary from "../components/cart/CartSummary";
+import { formatPrice } from "../lib/utils";
 
 export default function Cart() {
   const {
     items,
     itemCount,
-    subtotal,
+    selectedItems,
+    selectedSubtotal: subtotal,
+    selectedItemCount,
+    setItemSelected,
+    setAllItemsSelected,
     isLoading,
     updateQuantity,
     removeItem,
@@ -116,15 +120,22 @@ export default function Cart() {
                   </span>
                 </div>
 
+                <label className="flex items-center gap-2 py-3 text-sm cursor-pointer">
+                  <input type="checkbox" className="h-5 w-5 accent-[#007185]" checked={selectedItems.length === items.length} ref={node => { if (node) node.indeterminate = selectedItems.length > 0 && selectedItems.length < items.length; }} onChange={event => setAllItemsSelected(event.target.checked)} />
+                  Select all ({selectedItems.length} of {items.length} products selected)
+                </label>
+                <p className="text-xs text-[#565959] pb-2">Unchecked products stay in your cart for later.</p>
                 {/* Items list */}
                 <ul className="divide-y divide-[#EDEDED]">
                   {items.map((item) => (
                     <CartItem
                       key={item.id}
                       item={item}
+                      selected={selectedItems.some(selected => selected.id === item.id)}
+                      onSelectionChange={setItemSelected}
                       onQuantityChange={handleQuantityChange}
                       onRemove={handleRemove}
-                      busy={busyItemId === item.id}
+                      busy={busyItemId === (item.productId ?? item.product?.id)}
                     />
                   ))}
                 </ul>
@@ -139,7 +150,7 @@ export default function Cart() {
                   </button>
 
                   <p className="text-right text-base text-[#0F1111]">
-                    Subtotal ({itemCount} {itemCount === 1 ? "item" : "items"}):{" "}
+                    Subtotal ({selectedItemCount} selected {selectedItemCount === 1 ? "item" : "items"}):{" "}
                     <span className="font-bold text-lg text-[#0F1111] ml-1">
                       {formatPrice(subtotal)}
                     </span>
@@ -152,7 +163,7 @@ export default function Cart() {
             <div className="amazon-cart-sidebar">
               <CartSummary
                 subtotal={subtotal}
-                itemCount={itemCount}
+                itemCount={selectedItemCount}
                 onCheckout={() => navigate("/checkout")}
               />
             </div>

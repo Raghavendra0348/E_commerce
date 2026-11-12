@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { queryClient } from "@/lib/queryClient";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import api from "@/api/axios";
+import { queryClient } from "../lib/queryClient";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import api from "../api/axios";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
 afterEach(() => { useAuthStore.getState().logout(); vi.clearAllMocks(); });
 
 describe("account isolation", () => {

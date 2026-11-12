@@ -1,5 +1,5 @@
-import { T } from "@/components/common/Translation";
-import { cn } from "@/lib/utils";
+import { T } from "../common/Translation";
+import { cn } from "../../lib/utils";
 
 const STATUS_CONFIG = {
   PENDING: { label: "Pending", color: "bg-[#FFF8E7] text-[#B7791F] border-[#F6E05E]" },

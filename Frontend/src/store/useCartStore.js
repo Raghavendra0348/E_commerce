@@ -1,11 +1,14 @@
 import { create } from "zustand";
-import api from "@/api/axios";
-import { getSessionRevision, onSessionReset } from "@/lib/session";
+import api from "../api/axios";
+import { getSessionRevision, onSessionReset } from "../lib/session";
 
 let cartFetchPromise = null;
 
 export const useCartStore = create((set, get) => ({
   cart: null,
+  excludedItemIds: [],
+  setItemSelected: (id, selected) => set(state => ({ excludedItemIds: selected ? state.excludedItemIds.filter(value => value !== id) : [...new Set([...state.excludedItemIds, id])] })),
+  setAllItemsSelected: (selected) => set(state => ({ excludedItemIds: selected ? [] : (state.cart?.items || []).map(item => item.id) })),
   itemCount: 0,
   isLoading: false,
   isDrawerOpen: false,
@@ -26,7 +29,7 @@ export const useCartStore = create((set, get) => ({
       const cart = data?.data || null;
       const count =
         cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
-      set({ cart, itemCount: count, isLoading: false });
+      set(state => ({ cart, itemCount: count, isLoading: false, excludedItemIds: state.excludedItemIds.filter(id => cart?.items?.some(item => item.id === id)) }));
       return cart;
     } catch {
       if (revision === getSessionRevision()) set({ isLoading: false });
@@ -67,13 +70,13 @@ export const useCartStore = create((set, get) => ({
   clearCart: async () => {
     try {
       await api.delete("/cart");
-      set({ cart: null, itemCount: 0 });
+      set({ cart: null, itemCount: 0, excludedItemIds: [] });
     } catch (err) {
       throw err;
     }
   },
 
-  clearCartState: () => set({ cart: null, itemCount: 0, isLoading: false, isDrawerOpen: false }),
+  clearCartState: () => set({ excludedItemIds: [], cart: null, itemCount: 0, isLoading: false, isDrawerOpen: false }),
 }));
 
 onSessionReset(() => {

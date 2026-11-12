@@ -2,10 +2,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import OrderSuccess from "@/pages/OrderSuccess";
-import api from "@/api/axios";
+import OrderSuccess from "../pages/OrderSuccess";
+import api from "../api/axios";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
 let client;
 afterEach(() => { cleanup(); client?.clear(); vi.clearAllMocks(); });
 function show(order, error) {

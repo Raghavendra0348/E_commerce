@@ -1,8 +1,8 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Plus, Check, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { cn } from "../../lib/utils";
 
 export default function AddressSelector({
   addresses = [],

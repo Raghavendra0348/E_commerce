@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../../components/common/Translation";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import {
@@ -9,12 +9,12 @@ import {
   ArrowRight,
   RefreshCw,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { adminService } from "@/services";
-import { formatPrice } from "@/lib/utils";
-import StatCard from "@/components/admin/StatCard";
-import LowStockAlert from "@/components/admin/LowStockAlert";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { Button } from "../../components/ui/button";
+import { adminService } from "../../services";
+import { formatPrice } from "../../lib/utils";
+import StatCard from "../../components/admin/StatCard";
+import LowStockAlert from "../../components/admin/LowStockAlert";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export default function AdminDashboard() {
   useDocumentTitle("Admin Dashboard");

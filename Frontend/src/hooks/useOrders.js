@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { orderService } from "@/services";
+import { orderService } from "../services";
 import { toast } from "sonner";
 
 export function useOrders(params = { page: 1, limit: 10 }) {

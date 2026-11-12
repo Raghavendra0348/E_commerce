@@ -1,6 +1,6 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Clock, CheckCircle, Package, Truck, XCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const TRACKER_STEPS = [
   { key: "PENDING", label: "Ordered", icon: Clock },
@@ -12,7 +12,7 @@ const TRACKER_STEPS = [
 
 const STEP_ORDER = ["PENDING", "CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED"];
 
-export default function OrderTimeline({ status, paymentStatus }) {
+export default function OrderTimeline({ status, paymentStatus, refundStatus }) {
   const isCancelled = status === "CANCELLED";
   const currentStepIndex = STEP_ORDER.indexOf(status);
 
@@ -25,8 +25,10 @@ export default function OrderTimeline({ status, paymentStatus }) {
           <p className="text-xs text-[#565959] mt-0.5">
             {paymentStatus === "REFUNDED"
               ? "Your refund has been completed."
+              : paymentStatus === "REFUND_FAILED"
+              ? "The refund attempt failed. An administrator can retry it."
               : paymentStatus === "REFUND_PENDING"
-              ? "Your refund is being processed to your original payment method."
+              ? refundStatus ? "A refund request is awaiting gateway confirmation." : "A refund is due. Awaiting administrator submission."
               : "Items have been returned to inventory."}
           </p>
         </div>

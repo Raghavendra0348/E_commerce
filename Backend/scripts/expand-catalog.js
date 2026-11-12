@@ -204,7 +204,11 @@ async function main() {
       if (needed) throw new Error(`Insufficient candidates for ${category.slug}: need ${needed} more`);
     }
     if (apply) {
-      for (const { categorySlug, ...data } of additions) await tx.product.create({ data });
+      for (const addition of additions) {
+        const data = { ...addition };
+        delete data.categorySlug;
+        await tx.product.create({ data });
+      }
       const counts = await tx.category.findMany({ select: { slug: true, _count: { select: { products: true } } } });
       if (counts.some(c => c._count.products < target)) throw new Error('Category target verification failed');
     }

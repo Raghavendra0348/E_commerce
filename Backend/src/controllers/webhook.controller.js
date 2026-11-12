@@ -1,5 +1,6 @@
 const paymentService = require("../services/payment.service");
 const logger          = require("../config/logger");
+const ApiError = require("../utils/ApiError");
 
 /**
  * POST /api/webhooks/razorpay
@@ -10,9 +11,8 @@ const logger          = require("../config/logger");
  * It is mounted in app.js BEFORE the express.json() body parser,
  * using express.raw({ type: "application/json" }) on this path only.
  *
- * Razorpay expects HTTP 200 for all deliveries. Non-2xx responses trigger
- * automatic retries, which can cause duplicate processing. We always
- * respond 200 and log errors internally.
+ * Acknowledge only successfully processed events. Transient failures return
+ * 503 so the provider can retry; payment reconciliation is idempotent.
  */
 const handleRazorpayWebhook = async (req, res) => {
     const signature = req.headers["x-razorpay-signature"];
@@ -20,8 +20,7 @@ const handleRazorpayWebhook = async (req, res) => {
 
     if (!signature) {
         logger.warn({ msg: "Razorpay webhook: missing X-Razorpay-Signature header" });
-        // Still return 200 to avoid Razorpay retrying with the same (unsigned) request
-        return res.status(200).json({ received: true });
+        return res.status(400).json({ received: false, message: "Webhook signature is required" });
     }
 
     try {
@@ -34,8 +33,10 @@ const handleRazorpayWebhook = async (req, res) => {
             msg:   "Razorpay webhook processing error",
             error: err?.message || err
         });
-        // Return 200 even on error: signature failures are logged and dropped;
-        // transient DB errors should not cause Razorpay to flood with retries.
+        const invalidRequest = err instanceof ApiError && err.statusCode >= 400 && err.statusCode < 500;
+        if (invalidRequest) return res.status(err.statusCode).json({ received: false, message: err.message });
+        res.set("Retry-After", "30");
+        return res.status(503).json({ received: false, message: "Webhook processing is temporarily unavailable" });
     }
 
     return res.status(200).json({ received: true });

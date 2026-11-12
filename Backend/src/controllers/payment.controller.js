@@ -32,8 +32,15 @@ const initiateRefund = async (req, res, next) => {
     try {
         const orderId = parseInt(req.params.orderId, 10);
         const refund  = await paymentService.initiateRefund(req.user.userId, orderId);
-        return success(res, 200, "Refund submitted to Razorpay. Final status will be updated via webhook.", refund);
+        return success(res, 200, "Refund request status updated", refund);
     } catch (error) { next(error); }
 };
 
-module.exports = { createOrder, verifyPayment, getPayment, initiateRefund };
+const collectCod = async (req, res, next) => {
+    try {
+        const order = await paymentService.collectCod(req.user.userId, Number(req.params.orderId));
+        return success(res, 200, "Cash collection recorded", order);
+    } catch (error) { next(error); }
+};
+
+module.exports = { createOrder, verifyPayment, getPayment, initiateRefund, collectCod };

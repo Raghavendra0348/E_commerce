@@ -1,9 +1,10 @@
-import { T } from "@/components/common/Translation";
-import FestiveCollections from "@/components/home/FestiveCollections";
-import FestivalPromoCard, { EXTRA_FESTIVAL_CARDS } from "@/components/home/FestivalPromoCard";
-import HomeDiscoveryPanels from "@/components/home/HomeDiscoveryPanels";
+import { T } from "../components/common/Translation";
+import FestivalPromoCard, { EXTRA_FESTIVAL_CARDS } from "../components/home/FestivalPromoCard";
+import HomeDiscoveryPanels from "../components/home/HomeDiscoveryPanels";
+import RecommendedDeals from "../components/home/RecommendedDeals";
+import HomePhotoDiscovery from "../components/home/HomePhotoDiscovery";
 import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import {
   ChevronLeft,
@@ -32,12 +33,12 @@ import {
   Watch,
   Baby,
 } from "lucide-react";
-import { useProducts } from "@/hooks/useProducts";
-import { useCategories } from "@/hooks/useCategories";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { StorefrontProductCard } from "@/components/product/ProductCard";
-import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
-import { cn } from "@/lib/utils";
+import { useProducts } from "../hooks/useProducts";
+import { useCategories } from "../hooks/useCategories";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import HomeProductCard, { HomeProductCardSkeleton } from "../components/home/HomeProductCard";
+import { cn } from "../lib/utils";
+import "../styles/home-product-cards.css";
 
 // ─── Hero Banner ─────────────────────────────────────────────────────────────
 const FESTIVAL_DEALS = [
@@ -178,16 +179,16 @@ function ProductRow({ title, params, seeAllHref }) {
           </Link>
         </div>
         {error && <p role="alert" className="text-sm text-[#565959] mb-3">{error.response?.status === 429 ? "Products are temporarily rate-limited. Automatic updates resume after the server cooldown." : "Products could not be loaded. Check that the backend is running."}</p>}
-        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+        <div className="home-product-rail no-scrollbar" aria-busy={isLoading}>
           {isLoading
             ? Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="w-44 shrink-0">
-                  <ProductCardSkeleton />
+                <div key={i} className="home-product-slot">
+                  <HomeProductCardSkeleton />
                 </div>
               ))
             : products.map((product) => (
-                <div key={product.id} className="w-44 shrink-0">
-                  <StorefrontProductCard product={product} />
+                <div key={product.id} className="home-product-slot">
+                  <HomeProductCard product={product} />
                 </div>
               ))}
         </div>
@@ -197,26 +198,7 @@ function ProductRow({ title, params, seeAllHref }) {
 }
 
 // ─── Promo Banner ─────────────────────────────────────────────────────────────
-function PromoBanner() {
-  return (
-    <section className="bg-gradient-to-r from-[#131921] to-[#232F3E]">
-      <div className="mx-auto max-w-[1500px] px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-center sm:text-left">
-          <p className="text-[#FF9900] text-sm font-semibold mb-1">More to discover</p>
-          <h2 className="text-white text-xl font-bold">
-            Find your next favourite across every category
-          </h2>
-        </div>
-        <Link
-          to="/products"
-          className="shrink-0 rounded-lg bg-[#FF9900] hover:bg-[#E68A00] px-6 py-2.5 text-sm font-semibold text-[#0F1111] transition-colors"
-        >
-          <T>{"Shop Now"}</T>
-        </Link>
-      </div>
-    </section>
-  );
-}
+
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Home() {
@@ -226,7 +208,8 @@ export default function Home() {
     <div id="storefront-home" className="min-h-screen festival-home">
       {/* Hero Banner */}
       <HeroBanner />
-      <FestiveCollections />
+      <RecommendedDeals />
+      <HomePhotoDiscovery />
       <HomeDiscoveryPanels />
 
       {/* Category Row */}
@@ -240,7 +223,7 @@ export default function Home() {
       />
 
       {/* Promo Banner */}
-      <PromoBanner />
+
 
       {/* New Arrivals */}
       <ProductRow

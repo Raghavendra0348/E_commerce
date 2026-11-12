@@ -1,4 +1,4 @@
-import { StorefrontProductCard } from "@/components/product/ProductCard";
+import { StorefrontProductCard } from "./ProductCard";
 
 export default function RelatedProducts({
   products = [],

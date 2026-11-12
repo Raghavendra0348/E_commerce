@@ -14,6 +14,8 @@ node_modules/
 *.env
 **/.env
 **/.env.*
+!.env.example
+!**/.env.example
 
 # ── Build & Framework Outputs ──
 dist/
@@ -23,7 +25,8 @@ out/
 .cache/
 .vite/
 */.vite/
-
+.turbo/
+*.tsbuildinfo
 
 # ── Logs & Debugging ──
 logs/
@@ -33,8 +36,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+vitest-*.log
 
-# ── Uploads & Media ──
+# ── Uploads & Media Fallbacks ──
 uploads/*
 !uploads/.gitkeep
 **/uploads/*
@@ -48,28 +52,38 @@ uploads/*
 prisma/migrations/*.sql.bak
 **/prisma/migrations/*.sql.bak
 
-# ── Testing & Coverage ──
+# ── Testing, Coverage & Playwright ──
 coverage/
 */coverage/
 .nyc_output/
+test-results/
+playwright-report/
+blob-report/
+.playwright-cli/
+output/
 
-# ── Linter & Cache ──
+# ── Linter & Tooling Cache ──
 .eslintcache
 
 # ── OS & Editor Artifacts ──
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon?
 Thumbs.db
+ehthumbs.db
 desktop.ini
 .vscode/
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
 *~
 *.bak
+*.tmp
+*.temp
 
-# ── Tool & Knowledge Graph Artifacts ──
+# ── Generated Tool & Automation Artifacts ──
 graphify-out/
 uv-extracted/
-.playwright-cli/
-output/playwright/
 *.zip

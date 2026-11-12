@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { toast } from "sonner";
 import { ShieldCheck, CreditCard, Banknote, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { orderService, paymentService } from "@/services";
-import { formatPrice } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { orderService, paymentService } from "../../services";
+import { formatPrice } from "../../lib/utils";
+import { createCheckoutKey } from "../../lib/checkout";
 
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -22,6 +23,7 @@ const loadRazorpayScript = () => {
 
 export default function PaymentButton({
   addressId,
+  cartItemIds,
   paymentMethod = "ONLINE",
   user,
   amount = 0,
@@ -33,6 +35,7 @@ export default function PaymentButton({
   const [loading, setLoading] = useState(false);
   const pendingOrder = useRef(null);
   const attemptInProgress = useRef(false);
+  const checkoutKey = useRef(null);
 
   const handlePlaceOrder = async () => {
     if (!addressId && !existingOrder) {
@@ -51,7 +54,8 @@ export default function PaymentButton({
         throw new Error("An order was already created. Open your orders to review it before changing checkout details.");
       }
       if (!order) {
-        const orderRes = await orderService.placeOrder({ addressId, paymentMethod });
+        checkoutKey.current ||= createCheckoutKey();
+        const orderRes = await orderService.placeOrder({ addressId, paymentMethod, checkoutKey: checkoutKey.current, ...(cartItemIds ? { cartItemIds } : {}) });
         order = orderRes.data?.data;
         if (order) {
           pendingOrder.current = { order, addressId, paymentMethod };
@@ -108,14 +112,18 @@ export default function PaymentButton({
               throw new Error("Payment response is incomplete or does not match your order. Check your order status before paying again.");
             }
             // Verify HMAC signature in backend
-            await paymentService.verify({
+            const verification = await paymentService.verify({
               orderId: order.id,
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
             });
 
-            toast.success("Payment verified! Order placed successfully.");
+            if (verification.data?.data?.status?.startsWith("REFUND")) {
+              toast.info("Payment received for a cancelled order. Check your order details for the refund status.");
+            } else {
+              toast.success("Payment verified! Order placed successfully.");
+            }
             if (onSuccess) await onSuccess(order.id);
           } catch (verifyErr) {
             toast.error(

@@ -1,10 +1,10 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { WishlistProductCard } from "@/components/product/ProductCard";
-import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
-import { useWishlist } from "@/hooks/useWishlist";
+import { Button } from "../components/ui/button";
+import { WishlistProductCard } from "../components/product/ProductCard";
+import ProductCardSkeleton from "../components/product/ProductCardSkeleton";
+import { useWishlist } from "../hooks/useWishlist";
 
 export default function Wishlist() {
   const { products, isLoading, error, refetch, removeFromWishlist, isRemoving } = useWishlist();

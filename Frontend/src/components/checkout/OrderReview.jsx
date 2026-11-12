@@ -1,9 +1,9 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../common/Translation";
+import ProductImage from "../common/ProductImage";
 import { Link } from "react-router-dom";
 import { Truck, MapPin, CreditCard, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { formatPrice } from "../../lib/utils";
 
 export default function OrderReview({
   items = [],

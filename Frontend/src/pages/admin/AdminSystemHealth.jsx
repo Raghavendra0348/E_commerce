@@ -14,10 +14,10 @@ import {
   Radio,
   ExternalLink,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { adminService } from "@/services";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { cn } from "@/lib/utils";
+import { Button } from "../../components/ui/button";
+import { adminService } from "../../services";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { cn } from "../../lib/utils";
 
 function formatUptime(seconds) {
   if (!seconds || seconds <= 0) return "0s";

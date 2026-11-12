@@ -2,9 +2,9 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
-import SubNav from "@/components/layout/SubNav";
+import SubNav from "../components/layout/SubNav";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn().mockResolvedValue({ data: { data: [] } }) } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn().mockResolvedValue({ data: { data: [] } }) } }));
 let client;
 afterEach(() => { cleanup(); client?.clear(); });
 describe("homepage-only mobile categories", () => {

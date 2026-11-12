@@ -1,15 +1,16 @@
 import { createContext, use, useId } from "react";
 import { Link } from "react-router-dom";
 import { Heart, RefreshCw, ShoppingCart, Trash2 } from "lucide-react";
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
-import StarRating from "@/components/common/StarRating";
-import PriceDisplay from "@/components/common/PriceDisplay";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { useProductCartAction } from "@/hooks/useProductCartAction";
-import { useWishlist } from "@/hooks/useWishlist";
+import { T } from "../common/Translation";
+import ProductImage from "../common/ProductImage";
+import NotifyStockButton from "./NotifyStockButton";
+import StarRating from "../common/StarRating";
+import PriceDisplay from "../common/PriceDisplay";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { cn } from "../../lib/utils";
+import { useProductCartAction } from "../../hooks/useProductCartAction";
+import { useWishlist } from "../../hooks/useWishlist";
 
 const ProductContext = createContext(null);
 const ProductActionsContext = createContext(null);
@@ -113,11 +114,12 @@ function AddToCart({ variant = "default", children }) {
   const product = useProduct();
   const { addToCart, isAdding, isPending } = use(ProductActionsContext);
   const unavailable = product.stock <= 0;
+  if (unavailable) return <NotifyStockButton product={product} className="product-card-cart w-full mt-1" />;
   return (
     <Button
       type="button" size="sm" variant={variant} className="product-card-cart w-full mt-1"
-      onClick={addToCart} disabled={unavailable || isPending}
-      aria-label={unavailable ? `${product.name} is out of stock` : `Add ${product.name} to cart`}
+      onClick={addToCart} disabled={isPending}
+      aria-label={`Add ${product.name} to cart`}
     >
       {isAdding ? (
         <span className="flex items-center gap-2">
@@ -126,7 +128,7 @@ function AddToCart({ variant = "default", children }) {
         </span>
       ) : (
         <span className="flex items-center gap-1.5">
-          {children}<T>{unavailable ? "Out of Stock" : "Add to Cart"}</T>
+          {children}<T>{"Add to Cart"}</T>
         </span>
       )}
     </Button>
@@ -136,6 +138,7 @@ function AddToCart({ variant = "default", children }) {
 function BuyNow() {
   const product = useProduct();
   const { buyNow, isBuying, isPending } = use(ProductActionsContext);
+  if (product.stock <= 0) return null;
   return (
     <Button
       type="button" size="sm" className="product-card-buy w-full rounded-full"

@@ -1,10 +1,10 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 const addressSchema = z.object({
   name: z.string().trim().min(2, "Full name required (min 2 characters)"),

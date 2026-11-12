@@ -1,0 +1,18 @@
+erDiagram
+  direction TB
+  User ||--o| Cart : " "
+  User ||--o{ Address : " "
+  User ||--o{ Order : " "
+  User ||--o{ Wishlist : " "
+  User ||--o{ Review : " "
+  User ||--o{ RefreshToken : " "
+  Category ||--o{ Product : " "
+  Product ||--o{ ProductImage : " "
+  Product ||--o{ CartItem : " "
+  Product ||--o{ OrderItem : " "
+  Product ||--o{ Wishlist : " "
+  Product ||--o{ Review : " "
+  Cart ||--o{ CartItem : " "
+  Order ||--o{ OrderItem : " "
+  Order ||--o| Payment : " "
+  Payment ||--o{ RefundAttempt : " "

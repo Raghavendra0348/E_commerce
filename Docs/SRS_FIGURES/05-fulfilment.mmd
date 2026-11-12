@@ -1,0 +1,13 @@
+stateDiagram-v2
+  direction TB
+  [*] --> PENDING: Online order created
+  [*] --> CONFIRMED: COD order created
+  PENDING --> CONFIRMED: Verified payment / permitted confirmation
+  CONFIRMED --> PROCESSING: Administrator
+  PROCESSING --> SHIPPED: Administrator
+  SHIPPED --> DELIVERED: Administrator
+  PENDING --> CANCELLED: Customer or administrator
+  CONFIRMED --> CANCELLED: Customer or administrator
+  PROCESSING --> CANCELLED: Administrator only
+  DELIVERED --> [*]
+  CANCELLED --> [*]

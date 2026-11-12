@@ -1,0 +1,12 @@
+flowchart TB
+  customer["Customer browser"] --> frontend["React / Vite frontend"]
+  admin["Administrator browser"] --> frontend
+  frontend <-->|"HTTP JSON / HTTPS in production"| backend["Node.js / Express backend"]
+  backend <--> prisma["Prisma ORM"]
+  prisma <--> database[("PostgreSQL database")]
+  backend <--> razorpay["Razorpay API"]
+  razorpay -->|"Signed webhook"| backend
+  frontend <-->|"Checkout interaction"| razorpay
+  backend <--> cloudinary["Cloudinary image storage"]
+  backend <--> local["Local image storage"]
+  backend <-->|"PIN lookup"| postal["Postal PIN provider"]

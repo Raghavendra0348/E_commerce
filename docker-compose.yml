@@ -31,17 +31,24 @@ services:
       NODE_ENV: production
       PORT: 5000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-ecommerce}?schema=public
-      JWT_SECRET: ${JWT_SECRET:-super_secure_jwt_secret_for_production_auth_key}
-      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-super_secure_refresh_secret_production_key}
-      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-rzp_test_mock_key}
-      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-rzp_test_mock_secret}
+      JWT_SECRET: ${JWT_SECRET:?Set a unique random JWT_SECRET of at least 32 characters}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?Set a different random JWT_REFRESH_SECRET of at least 32 characters}
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:?Set RAZORPAY_KEY_ID}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:?Set RAZORPAY_KEY_SECRET}
+      RAZORPAY_WEBHOOK_SECRET: ${RAZORPAY_WEBHOOK_SECRET:?Set RAZORPAY_WEBHOOK_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost}
+      TRUSTED_PROXY_IPS: "${FRONTEND_PROXY_IP:-172.28.67.10}/32"
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
     ports:
-      - "5000:5000"
+      - "127.0.0.1:5000:5000"
     depends_on:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:5000/api/health/live || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5000/api/health/ready || exit 1"]
+      start_period: 45s
       interval: 10s
       timeout: 5s
       retries: 3
@@ -56,7 +63,17 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    networks:
+      default:
+        ipv4_address: ${FRONTEND_PROXY_IP:-172.28.67.10}
 
 volumes:
   postgres_data:
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${COMPOSE_SUBNET:-172.28.67.0/24}

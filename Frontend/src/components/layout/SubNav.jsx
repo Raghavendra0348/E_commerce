@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Menu, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useCategories } from "@/hooks/useCategories";
+import { Button } from "../ui/button";
+import { useCategories } from "../../hooks/useCategories";
 import MobileCategoryTabs from "./MobileCategoryTabs";
 
 const shoppingCategories = [

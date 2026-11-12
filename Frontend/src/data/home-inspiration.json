@@ -1,0 +1,107 @@
+[
+  {
+    "key": "headphones",
+    "label": "Shop headphones",
+    "search": "headphones",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794498995/ecommerce/home/inspiration/headphones.jpg",
+    "sourceUrl": "https://unsplash.com/photos/flatlay-photography-of-wireless-headphones-PDX_a_82obo"
+  },
+  {
+    "key": "shoes",
+    "label": "Shop shoes",
+    "search": "shoes",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794498999/ecommerce/home/inspiration/shoes.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-pair-of-blue-and-white-sneakers-on-a-pink-background-4ceNsJCbCdw"
+  },
+  {
+    "key": "backpacks",
+    "label": "Shop backpacks",
+    "search": "backpack",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499003/ecommerce/home/inspiration/backpacks.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-black-leather-backpack-on-a-yellow-background-iFelMiWMuO4"
+  },
+  {
+    "key": "watches",
+    "label": "Shop watches",
+    "search": "watch",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499097/ecommerce/home/inspiration/watches.jpg",
+    "sourceUrl": "https://unsplash.com/photos/round-black-analog-watch-JCp35SbaEFs"
+  },
+  {
+    "key": "laptops",
+    "label": "Shop laptops",
+    "search": "laptop",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499140/ecommerce/home/inspiration/laptops.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-white-apple-laptop-sitting-on-top-of-a-table-qnhuX2HKETk"
+  },
+  {
+    "key": "keyboards",
+    "label": "Shop keyboards",
+    "search": "keyboard",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499159/ecommerce/home/inspiration/keyboards.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-computer-keyboard-sitting-on-top-of-a-wooden-table-4GzqVNX0TCQ"
+  },
+  {
+    "key": "mice",
+    "label": "Shop computer mice",
+    "search": "mouse",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499163/ecommerce/home/inspiration/mice.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-black-mouse-sitting-on-top-of-a-white-table-O5CZSXxT8NE"
+  },
+  {
+    "key": "mugs",
+    "label": "Shop coffee mugs",
+    "search": "mug",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499173/ecommerce/home/inspiration/mugs.jpg",
+    "sourceUrl": "https://unsplash.com/photos/white-ceramic-mug-with-black-liquid-on-table-5xaNUSVc_7M"
+  },
+  {
+    "key": "speakers",
+    "label": "Shop speakers",
+    "search": "speaker",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499193/ecommerce/home/inspiration/speakers.jpg",
+    "sourceUrl": "https://unsplash.com/photos/black-and-gray-speaker-with-blue-light-wtresIcJJPg"
+  },
+  {
+    "key": "shirts",
+    "label": "Shop T-shirts",
+    "search": "t-shirt",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499209/ecommerce/home/inspiration/shirts.jpg",
+    "sourceUrl": "https://unsplash.com/photos/white-crew-neck-t-shirt-acn5ERAeSb4"
+  },
+  {
+    "key": "lamps",
+    "label": "Shop lamps",
+    "search": "lamp",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499218/ecommerce/home/inspiration/lamps.jpg",
+    "sourceUrl": "https://unsplash.com/photos/lamp-on-a-table-with-dramatic-sunlight-4wCZCx3aKow"
+  },
+  {
+    "key": "chairs",
+    "label": "Shop chairs",
+    "search": "chair",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499225/ecommerce/home/inspiration/chairs.jpg",
+    "sourceUrl": "https://unsplash.com/photos/white-plastic-chair-beside-yellow-wall-9ugEWNX03dE"
+  },
+  {
+    "key": "bottles",
+    "label": "Shop water bottles",
+    "search": "bottle",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499234/ecommerce/home/inspiration/bottles.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-bottle-of-water-next-to-a-notebook-and-pen-MjbtS4ZegAU"
+  },
+  {
+    "key": "phones",
+    "label": "Shop smartphones",
+    "search": "smartphone",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499256/ecommerce/home/inspiration/phones.jpg",
+    "sourceUrl": "https://unsplash.com/photos/black-and-silver-smartphone-on-black-table-sV0REElYqgk"
+  },
+  {
+    "key": "skincare",
+    "label": "Shop body lotions",
+    "search": "lotion",
+    "url": "https://res.cloudinary.com/iuvdfgle/image/upload/v1794499262/ecommerce/home/inspiration/skincare.jpg",
+    "sourceUrl": "https://unsplash.com/photos/a-hand-holding-a-bottle-of-medicine-HPWejWzJ9Nk"
+  }
+]

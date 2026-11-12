@@ -1,9 +1,9 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useState, useEffect } from "react";
 import { X, SlidersHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -12,9 +12,9 @@ import {
   SheetTrigger,
   SheetClose,
   SheetDescription,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { useCategories } from "@/hooks/useCategories";
+} from "../ui/sheet";
+import { cn } from "../../lib/utils";
+import { useCategories } from "../../hooks/useCategories";
 
 function FilterContent({ filters, onFilterChange, onClear }) {
   const { data: categories = [] } = useCategories();

@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import { getSessionRevision } from "@/lib/session";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import { getSessionRevision } from "../lib/session";
 
 // A card shares pending state across its cart and checkout actions.
 export function useProductCartAction(product) {

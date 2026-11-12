@@ -1,5 +1,5 @@
-import { useAuthStore } from "@/store/useAuthStore";
-import { authService } from "@/services/auth.service";
+import { useAuthStore } from "../store/useAuthStore";
+import { authService } from "../services/auth.service";
 
 export function useAuth() {
   const { user, accessToken, refreshToken, setAuth, logout: storeLogout } = useAuthStore();

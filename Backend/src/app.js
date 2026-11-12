@@ -13,7 +13,7 @@ const errorHandler = require("./middleware/error.middleware");
 const ApiError = require("./utils/ApiError");
 
 const app = express();
-require("./config/developmentProxy")(app, env.NODE_ENV);
+require("./config/developmentProxy")(app, env.NODE_ENV, env.TRUSTED_PROXY_IPS);
 
 const healthroutes = require("./routes/health.routes");
 const databaseRoutes = require("./routes/database.routes");

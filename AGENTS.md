@@ -1,5 +1,18 @@
 # 🛒 E-Commerce Project — Antigravity Agent Memory & Guidelines
 
+## SRS working draft — 2026-11-07
+
+- Installed the requested `srs-documentation` skill under `.agents/skills/srs-documentation` using the marketplace skills command for Codex.
+- College-submission content is in `Docs/SRS_DRAFT.md` (version 0.3), with next steps in `Docs/SRS_WORK_PLAN.md`.
+- The draft has 39 functional requirements, 12 quality requirements, 12 use cases, interface/data requirements and acceptance mappings. It is not an approved submission or a record of completed acceptance testing.
+- Student/college details, required diagrams, agreed quality/recovery targets and final Word/PDF formatting remain pending.
+
+## SRS faculty edition — 2026-11-12
+
+- Shortened `Docs/SRS_FINAL.md` to version 0.5; `Docs/SRS_FINAL.pdf` is verified at 35 pages, including cover, contents and five diagrams.
+- Retained all 39 functional statements, 12 quality requirements, seven interfaces, 12 use cases and 51 acceptance mappings. Preserved the original draft and archived the longer edition in `Docs/SRS_ARCHIVE/SRS_FULL_REVIEW_EDITION.md`.
+- Document validation and limitations are recorded in `Docs/SRS_DESIGN_REVIEW.md`. The editable DOCX export remains unverified because the available renderer requires missing LibreOffice; the 35-page guarantee applies to PDF only. Academic approval and application acceptance testing remain pending.
+
 Give brief, beginner-friendly progress updates while working.
 Explain what you’re doing, what happened, and what comes next.
 Explain command errors in plain English.
@@ -469,3 +482,45 @@ docker compose up -d --build
 - Added large Under-price headlines, category subtitles and split Secure Checkout / Track Orders text rows with vertical separators to all four colored hero cards.
 - Read-only catalog checks verified products for kitchen under 799, denim under 1999, kurta under 599 and Fashion under 999. Matching links include price filters; replaced empty fashion keyword search with verified category 4. Did not claim unconfigured free delivery/returns. Production build and whitespace checks pass.
 
+
+## Selected cart checkout - 2026-11-03
+
+- Added per-product checkout checkboxes in the full cart and drawer, plus Select all with partial-selection indication on the cart page. All products start selected; unchecked products stay in the cart. Checkout buttons disable when nothing is selected.
+- Shared cart selection updates selected quantities/subtotals and checkout review. Selection survives cart refreshes and route navigation in the current session, resets on reload/session reset, and does not change the navbar's total cart count.
+- POST /api/orders accepts optional cartItemIds. Validates nonempty unique positive IDs belonging to the user's cart, calculates prices and reserves stock for selected items only, and deletes only purchased cart rows. Omitting IDs retains existing whole-cart API behavior. No migration or dependency required; restart backend to load changes.
+- Verified 107 frontend tests, 31 backend tests, production build, changed backend-file lint and whitespace checks. Database integration coverage confirms selected totals/stock and preservation of unchecked out-of-stock items. No real payment or browser visual verification performed.
+
+## Relative frontend imports - 2026-11-04
+
+- User prefers relative imports (./ and ../) instead of the @/ alias. Converted 525 references across 135 frontend source/test files, including lazy imports and test mocks. Use relative imports for future frontend code; this preference supersedes the earlier alias convention.
+- Retained alias configuration for editor/component-generator compatibility.
+
+## Security and checkout audit fixes 1–10 - 2026-11-04
+
+- Removed public production JWT defaults; production requires distinct signing secrets of at least 32 characters. Added backend/frontend Docker ignore rules and restricted backend image copies to runtime source; Compose now explicitly supplies provider/webhook settings.
+- Axios captures each request's originating session synchronously, rejects old-account responses/retries and scopes refresh queues to the session. Cart quantity/delete actions use product IDs; selected checkout still uses cart-row IDs.
+- Added User.tokenVersion for immediate all-session revocation on role/password/logout-all changes and refresh-token theft detection. Authentication checks the current database role/version on every protected request.
+- Checkout now locks cart/rows inside its transaction and supports optional per-user checkoutKey replay protection with request hashes. Customer/admin cancellation and payment/fulfilment updates share an order-row lock, preventing duplicate restock and cancelled-order reopening.
+- Payment setup reuses one gateway order; immutable razorpayOrderId/razorpayPaymentId fields retain IDs across retries/captures. Late payments on cancelled orders enter REFUND_PENDING without changing fulfilment or stock. Refund submission remains a separate workflow.
+- Webhooks acknowledge successful processing only; transient failures return 503 for provider retries and invalid signatures return 400. Completed refund state is protected from delayed failure events.
+- Applied additive migration 20261104150000_security_checkout_payment_hardening locally and regenerated Prisma. Restart backend/dev servers to load the updated client/code. Other databases must apply migrations before using this version.
+- Verified 116 frontend tests, 58 backend tests (36 new regressions total), frontend production build, schema validation and lint for changed backend files/new tests. Repository-wide lint retains four pre-existing image-script errors and one warning. No Docker runtime was available and no real payment/refund was made; test fixtures were removed and the catalog remains at 221 products.
+- Details, per-bug explanations, test coverage and deployment instructions: Docs/BUG_FIXES_01_TO_10.md. Original review: Docs/BUG_AUDIT_2026-11-04.md.
+
+## Audit fixes 11–20 - 2026-11-07
+
+- Product deletion resolves cart/wishlist references transactionally, protects order history, and cleans up external images only after commit; shared image URLs are preserved.
+- Production proxy trust uses validated explicit TRUSTED_PROXY_IPS. Compose pins the Nginx proxy address, binds the API host port to loopback, gates startup on readiness, and retains required webhook-secret wiring.
+- Docker starts through Backend/src/start.js, which deploys Prisma migrations before loading the API and fails closed on migration errors. CI provisions PostgreSQL 18, dummy provider/signing settings and migrations. CI/Docker use Node 24; full backend lint now passes without warnings.
+- Shared refresh rotation uses Web Locks or an atomic IndexedDB fallback with no expiring lease. Tokens are reread/persisted under the lock; storage events synchronize account/logout changes. Profile writes cannot overwrite shared credentials. A crashed IndexedDB lock owner requires a fresh sign-in; access tokens remain memory-only.
+- Added admin-only delivered-COD cash collection with audit metadata and idempotent PAID synchronization. Added explicit admin refund submission/status/retry controls and accurate customer refund wording.
+- RefundAttempt retains immutable idempotency keys, attempt history and provider IDs. Uncertain outcomes reuse the same request; confirmed failure permits a new attempt. Provider responses and signed webhooks reconcile order/payment states without older failures regressing newer attempts.
+- Applied migration 20261104170000_refund_attempts_and_cod_collection locally and regenerated Prisma. Restart development servers. Other databases must deploy migrations before using this code; Docker startup now performs that step.
+- Verified 82 backend tests, 131 frontend tests, production build, schema validation, clean full backend lint and whitespace checks. The complete backend suite also passed on a fresh temporary schema with CI settings. Real Edge two-tab checks passed Web Locks, IndexedDB fallback, token sequencing and shared logout with mocked APIs. Docker/hosted CI were not executed; no real payment/refund/media deletion was made.
+- Explanation, tests, deployment details and admin workflow: Docs/BUG_FIXES_11_TO_20.md.
+
+## Skullet product-grid trial - 2026-11-07
+
+- User approved adding Skullet; pinned frontend dependency to 0.0.3. Only the catalog ProductGrid now uses its measured skeleton with a scoped light/shimmer theme and existing CatalogProductCard layouts. Other skeleton implementations remain in place.
+- Uses local inert sample products/inline SVG during loading, preserves actual card actions and the empty state, and adds no artificial API delay. Sample shapes approximate content; shorter result pages and variable copy can change grid height on reveal. It does not cover the pre-JavaScript startup blank screen.
+- Verified 134 frontend tests, production build and real Edge loading/reveal screenshots at 1440/390px with mocked API responses and no overflow. Products route adds about 20 kB gzip. Local guide and verification details: Docs/SKULLET_PRODUCT_GRID.md.

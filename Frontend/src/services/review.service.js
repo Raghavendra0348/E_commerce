@@ -1,4 +1,4 @@
-import api from "@/api/axios";
+import api from "../api/axios";
 
 export const reviewService = {
   getProductReviews: (productId, params) => api.get(`/reviews/${productId}`, { params }),

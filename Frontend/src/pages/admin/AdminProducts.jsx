@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../../components/common/Translation";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -7,9 +7,9 @@ import {
   Search,
   AlertTriangle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Pagination from "@/components/common/Pagination";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import Pagination from "../../components/common/Pagination";
 import {
   Dialog,
   DialogContent,
@@ -17,10 +17,10 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { productService, categoryService } from "@/services";
-import ProductTable from "@/components/admin/ProductTable";
-import ProductFormDialog from "@/components/admin/ProductFormDialog";
+} from "../../components/ui/dialog";
+import { productService, categoryService } from "../../services";
+import ProductTable from "../../components/admin/ProductTable";
+import ProductFormDialog from "../../components/admin/ProductFormDialog";
 
 export default function AdminProducts() {
   const queryClient = useQueryClient();

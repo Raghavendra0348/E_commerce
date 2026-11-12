@@ -1,6 +1,6 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { CheckCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const STEPS = [
   { index: 0, title: "Delivery Address" },

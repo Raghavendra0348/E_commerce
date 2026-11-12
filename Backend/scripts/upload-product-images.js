@@ -105,14 +105,14 @@ async function main() {
   try {
     directories = await fs.readdir(DOWNLOAD_ROOT, { withFileTypes: true });
   } catch (error) {
-    if (error.code === "ENOENT") throw new Error("No local image collection found. Run npm run images:download first.");
+    if (error.code === "ENOENT") throw new Error("No local image collection found. Run npm run images:download first.", { cause: error });
     throw error;
   }
   const manifests = [];
   for (const item of directories) {
     if (!item.isDirectory()) continue;
     const filePath = path.join(DOWNLOAD_ROOT, item.name, "manifest.json");
-    try { await fs.access(filePath); manifests.push(filePath); } catch {}
+    try { await fs.access(filePath); manifests.push(filePath); } catch { /* Non-product directories do not have manifests. */ }
   }
   if (!manifests.length) throw new Error("No manifests found. Run npm run images:download first.");
   console.log("Found " + manifests.length + " product manifest(s). Uploading pending images sequentially.");

@@ -1,6 +1,6 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 export default function NotFound() {
   return (

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import api from "@/api/axios";
+import api from "../api/axios";
 import { useDebounce } from "./useDebounce";
 
 export function usePincodeLocation(pincode, enabled = true) {

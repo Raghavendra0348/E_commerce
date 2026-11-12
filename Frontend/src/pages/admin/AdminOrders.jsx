@@ -1,5 +1,5 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../../components/common/Translation";
+import ProductImage from "../../components/common/ProductImage";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -7,19 +7,19 @@ import {
   RefreshCw,
   MapPin,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Pagination from "@/components/common/Pagination";
+import { Button } from "../../components/ui/button";
+import Pagination from "../../components/common/Pagination";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { orderService } from "@/services";
-import { formatPrice, cn } from "@/lib/utils";
-import OrderTable, { ALLOWED_ORDER_TRANSITIONS } from "@/components/admin/OrderTable";
-import OrderStatusBadge, { STATUS_CONFIG } from "@/components/admin/OrderStatusBadge";
+} from "../../components/ui/dialog";
+import { orderService, paymentService } from "../../services";
+import { formatPrice, cn } from "../../lib/utils";
+import OrderTable, { ALLOWED_ORDER_TRANSITIONS } from "../../components/admin/OrderTable";
+import OrderStatusBadge, { STATUS_CONFIG } from "../../components/admin/OrderStatusBadge";
 
 export default function AdminOrders() {
   const queryClient = useQueryClient();
@@ -51,16 +51,41 @@ export default function AdminOrders() {
   const orders = data?.orders || [];
   const pagination = data?.pagination || { totalPages: 1 };
 
+  const refreshOrders = async (orderId) => {
+    await Promise.all(["adminOrders", "adminStats", "orders", "order"].map(key =>
+      queryClient.invalidateQueries({ queryKey: [key] })
+    ));
+    const result = await refetch();
+    const updated = result.data?.orders.find(order => order.id === orderId);
+    setViewingOrder(current => current?.id === orderId ? updated || null : current);
+  };
+
+  const handlePaymentAction = async (order, collectCash = false) => {
+    const attempt = order.payment?.refunds?.[0];
+    const isNewRefund = !attempt || attempt.status === "FAILED";
+    const message = collectCash
+      ? `Confirm that ${formatPrice(order.totalAmount)} cash was received for order #${order.id}?`
+      : `Submit a full refund of ${formatPrice(order.totalAmount)} for order #${order.id}?`;
+    if ((collectCash || isNewRefund) && !window.confirm(message)) return;
+    setUpdatingId(order.id);
+    try {
+      if (collectCash) await paymentService.collectCod(order.id);
+      else await paymentService.refund(order.id);
+      toast.success(collectCash ? "Cash collection recorded" : "Refund status updated");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Unable to update payment");
+    } finally {
+      await refreshOrders(order.id);
+      setUpdatingId(null);
+    }
+  };
+
   const handleStatusChange = async (orderId, newStatus) => {
     setUpdatingId(orderId);
     try {
       await orderService.updateStatus(orderId, newStatus);
       toast.success(`Order #${orderId} moved to ${newStatus}`);
-      queryClient.invalidateQueries({ queryKey: ["adminOrders"] });
-      queryClient.invalidateQueries({ queryKey: ["adminStats"] });
-      if (viewingOrder && viewingOrder.id === orderId) {
-        setViewingOrder({ ...viewingOrder, status: newStatus });
-      }
+      await refreshOrders(orderId);
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to update status");
     } finally {
@@ -81,7 +106,7 @@ export default function AdminOrders() {
   };
 
   return (
-    <div className="space-y-6">
+    <div id="admin-orders-page" className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -222,7 +247,7 @@ export default function AdminOrders() {
               <div className="bg-[#FFF8E7] border border-[#F6E05E] rounded-lg p-3.5 flex items-center justify-between text-xs">
                 <div>
                   <span className="text-[#565959] block">
-                    Payment: <strong>{viewingOrder.paymentMethod}</strong> (
+                    Payment: <strong>{viewingOrder.payment?.provider === "COD" ? "Cash on delivery" : "Online"}</strong> (
                     {viewingOrder.paymentStatus})
                   </span>
                 </div>
@@ -234,6 +259,24 @@ export default function AdminOrders() {
                     {formatPrice(viewingOrder.totalAmount)}
                   </span>
                 </div>
+              </div>
+
+              <div className="text-xs space-y-2" aria-live="polite">
+                {viewingOrder.payment?.cashCollectedAt && (
+                  <p>Cash collected on {new Date(viewingOrder.payment.cashCollectedAt).toLocaleString("en-IN")}</p>
+                )}
+                {viewingOrder.payment?.refunds?.[0] && (
+                  <p>Refund attempt {viewingOrder.payment.refunds[0].attemptNumber}: {viewingOrder.payment.refunds[0].status}.
+                    {" "}{viewingOrder.payment.refunds[0].failureReason}</p>
+                )}
+                {viewingOrder.status === "DELIVERED" && viewingOrder.payment?.provider === "COD" && viewingOrder.paymentStatus === "PENDING" && (
+                  <Button disabled={updatingId === viewingOrder.id} onClick={() => handlePaymentAction(viewingOrder, true)}>Record cash collected</Button>
+                )}
+                {viewingOrder.status === "CANCELLED" && viewingOrder.payment?.provider === "razorpay" && ["PAID", "REFUND_PENDING", "REFUND_FAILED"].includes(viewingOrder.paymentStatus) && (
+                  <Button disabled={updatingId === viewingOrder.id} onClick={() => handlePaymentAction(viewingOrder)}>
+                    {!viewingOrder.payment.refunds?.[0] ? "Submit refund" : viewingOrder.payment.refunds[0].status === "FAILED" ? "Retry refund" : "Check refund status"}
+                  </Button>
+                )}
               </div>
 
               {/* Allowed status actions inside modal */}

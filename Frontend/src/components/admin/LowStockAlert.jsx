@@ -1,9 +1,9 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Link } from "react-router-dom";
 import { AlertTriangle, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { formatPrice } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { formatPrice } from "../../lib/utils";
 
 export default function LowStockAlert({ lowStock = [], isLoading = false }) {
   return (

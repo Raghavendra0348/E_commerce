@@ -1,5 +1,5 @@
-# Multi-stage Dockerfile for Backend (Node.js 20+ / Express 5 / Prisma)
-FROM node:20-alpine AS base
+# Backend runtime (Node.js 24 / Express 5 / Prisma)
+FROM node:24-alpine AS base
 WORKDIR /app
 
 # Install OpenSSL for Prisma
@@ -10,8 +10,8 @@ COPY package*.json ./
 COPY prisma ./prisma/
 RUN npm ci
 
-# Copy application source
-COPY . .
+# Only runtime source is copied; local environment files never enter the image.
+COPY src ./src/
 
 # Generate Prisma Client
 RUN npx prisma generate
@@ -23,4 +23,4 @@ ENV PORT=5000
 ENV NODE_ENV=production
 
 # Start production server
-CMD ["node", "src/server.js"]
+CMD ["node", "src/start.js"]

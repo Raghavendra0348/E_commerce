@@ -1,5 +1,5 @@
-import { useCartStore } from "@/store/useCartStore";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -9,6 +9,9 @@ export function useCart() {
   const navigate = useNavigate();
 
   const items = store.cart?.items || [];
+  const selectedItems = items.filter(item => !store.excludedItemIds.includes(item.id));
+  const selectedItemCount = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+  const selectedSubtotal = selectedItems.reduce((sum, item) => sum + item.quantity * Number(item.product?.price || 0), 0);
   const subtotal = items.reduce(
     (sum, item) => sum + item.quantity * (item.product?.price || 0),
     0
@@ -63,6 +66,11 @@ export function useCart() {
   };
 
   return {
+    selectedItems,
+    selectedItemCount,
+    selectedSubtotal,
+    setItemSelected: store.setItemSelected,
+    setAllItemsSelected: store.setAllItemsSelected,
     cart: store.cart,
     items,
     itemCount: store.itemCount,

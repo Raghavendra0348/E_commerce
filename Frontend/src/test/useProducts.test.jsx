@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import api from "@/api/axios";
-import { useProducts } from "@/hooks/useProducts";
+import api from "../api/axios";
+import { useProducts } from "../hooks/useProducts";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
 
 describe("catalog API sorting", () => {
   it("sends the backend sort and order fields while preserving category filters", async () => {

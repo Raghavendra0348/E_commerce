@@ -1,0 +1,17 @@
+[
+  { "key": "headphones", "label": "Shop headphones", "search": "headphones", "photo": "photo-1505740420928-5e560c06d30e", "sourceUrl": "https://unsplash.com/photos/flatlay-photography-of-wireless-headphones-PDX_a_82obo" },
+  { "key": "shoes", "label": "Shop shoes", "search": "shoes", "photo": "photo-1706550630964-5e7bda0d7740", "sourceUrl": "https://unsplash.com/photos/a-pair-of-blue-and-white-sneakers-on-a-pink-background-4ceNsJCbCdw" },
+  { "key": "backpacks", "label": "Shop backpacks", "search": "backpack", "photo": "photo-1680039211156-66c721b87625", "sourceUrl": "https://unsplash.com/photos/a-black-leather-backpack-on-a-yellow-background-iFelMiWMuO4" },
+  { "key": "watches", "label": "Shop watches", "search": "watch", "photo": "photo-1575845321082-53eb3a76db9e", "sourceUrl": "https://unsplash.com/photos/round-black-analog-watch-JCp35SbaEFs" },
+  { "key": "laptops", "label": "Shop laptops", "search": "laptop", "photo": "photo-1710905219584-8521769e3678", "sourceUrl": "https://unsplash.com/photos/a-white-apple-laptop-sitting-on-top-of-a-table-qnhuX2HKETk" },
+  { "key": "keyboards", "label": "Shop keyboards", "search": "keyboard", "photo": "photo-1632079003110-d694908500da", "sourceUrl": "https://unsplash.com/photos/a-computer-keyboard-sitting-on-top-of-a-wooden-table-4GzqVNX0TCQ" },
+  { "key": "mice", "label": "Shop computer mice", "search": "mouse", "photo": "photo-1707592691247-5c3a1c7ba0e3", "sourceUrl": "https://unsplash.com/photos/a-black-mouse-sitting-on-top-of-a-white-table-O5CZSXxT8NE" },
+  { "key": "mugs", "label": "Shop coffee mugs", "search": "mug", "photo": "photo-1521304243632-16b1b1d1cb51", "sourceUrl": "https://unsplash.com/photos/white-ceramic-mug-with-black-liquid-on-table-5xaNUSVc_7M" },
+  { "key": "speakers", "label": "Shop speakers", "search": "speaker", "photo": "photo-1590783609742-82564b33e5fd", "sourceUrl": "https://unsplash.com/photos/black-and-gray-speaker-with-blue-light-wtresIcJJPg" },
+  { "key": "shirts", "label": "Shop T-shirts", "search": "t-shirt", "photo": "photo-1581655353564-df123a1eb820", "sourceUrl": "https://unsplash.com/photos/white-crew-neck-t-shirt-acn5ERAeSb4" },
+  { "key": "lamps", "label": "Shop lamps", "search": "lamp", "photo": "photo-1685735852762-e1325a20da68", "sourceUrl": "https://unsplash.com/photos/lamp-on-a-table-with-dramatic-sunlight-4wCZCx3aKow" },
+  { "key": "chairs", "label": "Shop chairs", "search": "chair", "photo": "photo-1627239205960-7d050327a02c", "sourceUrl": "https://unsplash.com/photos/white-plastic-chair-beside-yellow-wall-9ugEWNX03dE" },
+  { "key": "bottles", "label": "Shop water bottles", "search": "bottle", "photo": "photo-1591865568769-64dc675b3194", "sourceUrl": "https://unsplash.com/photos/a-bottle-of-water-next-to-a-notebook-and-pen-MjbtS4ZegAU" },
+  { "key": "phones", "label": "Shop smartphones", "search": "smartphone", "photo": "photo-1622400661434-723c5ea4bba2", "sourceUrl": "https://unsplash.com/photos/black-and-silver-smartphone-on-black-table-sV0REElYqgk" },
+  { "key": "skincare", "label": "Shop body lotions", "search": "lotion", "photo": "photo-1664550571382-bf462c60c452", "sourceUrl": "https://unsplash.com/photos/a-hand-holding-a-bottle-of-medicine-HPWejWzJ9Nk" }
+]

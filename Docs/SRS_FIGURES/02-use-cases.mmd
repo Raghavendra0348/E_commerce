@@ -1,0 +1,37 @@
+flowchart LR
+  guest["Actor: Guest"]
+  customer["Actor: Customer"]
+  admin["Actor: Administrator"]
+  provider["Actor: Payment provider"]
+  subgraph system["E-Commerce Web Application"]
+    direction TB
+    uc02(["UC-02 Search catalog"])
+    uc07(["UC-07 Manage account"])
+    uc10(["UC-10 Read / submit reviews"])
+    uc01(["UC-01 Purchase items"])
+    uc03(["UC-03 Maintain addresses"])
+    uc04(["UC-04 Cancel order"])
+    uc08(["UC-08 Manage cart"])
+    uc09(["UC-09 Maintain wishlist"])
+    uc11(["UC-11 View / reorder"])
+    uc05(["UC-05 Maintain catalog"])
+    uc06(["UC-06 Advance fulfilment"])
+    uc12(["UC-12 Administer operations"])
+  end
+  guest --- uc02
+  guest --- uc07
+  guest --- uc10
+  customer --- uc01
+  customer --- uc02
+  customer --- uc03
+  customer --- uc04
+  customer --- uc07
+  customer --- uc08
+  customer --- uc09
+  customer --- uc10
+  customer --- uc11
+  admin --- uc05
+  admin --- uc06
+  admin --- uc12
+  provider --- uc01
+  provider --- uc12

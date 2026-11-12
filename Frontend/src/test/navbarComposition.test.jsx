@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import api from "@/api/axios";
+import Navbar from "../components/layout/Navbar";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import api from "../api/axios";
 
 const { searchRender } = vi.hoisted(() => ({ searchRender: vi.fn() }));
-vi.mock("@/components/layout/NavbarSearch", () => ({ default: () => { searchRender(); return <div id="navbar-search">Search</div>; } }));
-vi.mock("@/components/layout/LocationModal", () => ({ default: ({ open, onLocationSelect, onOpenChange }) => open ? <div role="dialog"><button onClick={() => { onLocationSelect({ pincode: "560001", city: "Bangalore", state: "Karnataka", verified: true }); onOpenChange(false); }}>Use verified test location</button></div> : null }));
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn(), post: vi.fn() } }));
+vi.mock("../components/layout/NavbarSearch", () => ({ default: () => { searchRender(); return <div id="navbar-search">Search</div>; } }));
+vi.mock("../components/layout/LocationModal", () => ({ default: ({ open, onLocationSelect, onOpenChange }) => open ? <div role="dialog"><button onClick={() => { onLocationSelect({ pincode: "560001", city: "Bangalore", state: "Karnataka", verified: true }); onOpenChange(false); }}>Use verified test location</button></div> : null }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn(), post: vi.fn() } }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn() } }));
 function Route() { const location = useLocation(); return <output aria-label="Current route">{location.pathname}</output>; }
 function show() { return render(<MemoryRouter><Navbar /><Route /></MemoryRouter>); }
@@ -36,12 +36,14 @@ describe("navbar composition", () => {
     const view = show();
     fireEvent.click(screen.getAllByRole("button", { name: "Update delivery location" })[0]);
     fireEvent.click(screen.getByRole("button", { name: "Use verified test location" }));
-    expect(screen.getAllByText("Deliver to Bangalore 560001")).toHaveLength(2);
+    expect(screen.getByText("Deliver to Bangalore 560001")).toBeInTheDocument();
+    expect(screen.getByText("Bangalore 560001")).toBeInTheDocument();
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(JSON.parse(localStorage.getItem("amazon_delivery_location"))).toMatchObject({ pincode: "560001", verified: true });
     view.unmount();
     show();
-    expect(screen.getAllByText("Deliver to Bangalore 560001")).toHaveLength(2);
+    expect(screen.getByText("Deliver to Bangalore 560001")).toBeInTheDocument();
+    expect(screen.getByText("Bangalore 560001")).toBeInTheDocument();
   });
 
   it("ignores an unverified saved delivery selection", () => {

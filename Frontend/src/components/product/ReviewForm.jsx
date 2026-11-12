@@ -1,15 +1,15 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Star } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useSubmitReview } from "@/hooks/useProducts";
-import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useSubmitReview } from "../../hooks/useProducts";
+import { cn } from "../../lib/utils";
 
 const reviewSchema = z.object({
   rating: z.number().min(1, "Please select a rating").max(5),

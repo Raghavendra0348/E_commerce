@@ -1,8 +1,8 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Link } from "react-router-dom";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetClose } from "@/components/ui/sheet";
-import { useCategories } from "@/hooks/useCategories";
-import { useAuthStore } from "@/store/useAuthStore";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetClose } from "../ui/sheet";
+import { useCategories } from "../../hooks/useCategories";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export default function MobileMenu({ open, onOpenChange }) {
   const { data: categories = [], isError, refetch } = useCategories();

@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@/store/useAuthStore";
-import { wishlistService } from "@/services/wishlist.service";
-import { getSessionRevision } from "@/lib/session";
+import { useAuthStore } from "../store/useAuthStore";
+import { wishlistService } from "../services/wishlist.service";
+import { getSessionRevision } from "../lib/session";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 

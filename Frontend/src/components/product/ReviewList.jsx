@@ -1,14 +1,14 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { toast } from "sonner";
 import { Trash2, User } from "lucide-react";
-import StarRating from "@/components/common/StarRating";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useProductReviews, useDeleteReview, useMyProductReview } from "@/hooks/useProducts";
+import StarRating from "../common/StarRating";
+import { Skeleton } from "../ui/skeleton";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useProductReviews, useDeleteReview, useMyProductReview } from "../../hooks/useProducts";
 import { useState, useEffect } from "react";
-import Pagination from "@/components/common/Pagination";
+import Pagination from "../common/Pagination";
 import ReviewForm from "./ReviewForm";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 function RatingBar({ star, count, total }) {
   const pct = total > 0 ? Math.round((count / total) * 100) : 0;

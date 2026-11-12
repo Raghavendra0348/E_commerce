@@ -1,0 +1,18 @@
+flowchart TB
+  start(["Select cart items"]) --> address["Validate selection and address"]
+  address --> addressOk{"Valid?"}
+  addressOk -->|"No"| correct(["Show validation error"])
+  addressOk -->|"Yes"| prices["Calculate server prices; check stock"]
+  prices --> stockOk{"Stock OK?"}
+  stockOk -->|"No"| rollback(["Roll back and show error"])
+  stockOk -->|"Yes"| order["Atomic stock reservation and order creation"]
+  order --> method{"Method?"}
+  method -->|"COD"| cod["CONFIRMED; payment PENDING"]
+  method -->|"Online"| online["PENDING; Razorpay checkout"]
+  online --> verify["Server verifies payment"]
+  verify --> paid{"Verified?"}
+  paid -->|"Yes"| confirmed["PAID; confirm eligible order"]
+  paid -->|"No / dismissed"| unpaid(["Show unpaid order and retry option"])
+  unpaid -.->|"Eligible retry"| online
+  cod --> finish(["Show confirmation with actual states"])
+  confirmed --> finish

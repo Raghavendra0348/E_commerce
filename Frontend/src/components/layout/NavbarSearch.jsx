@@ -1,14 +1,14 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
-import { useCategories } from "@/hooks/useCategories";
-import { useDebounce } from "@/hooks/useDebounce";
-import { Skeleton } from "@/components/ui/skeleton";
-import api from "@/api/axios";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useCategories } from "../../hooks/useCategories";
+import { useDebounce } from "../../hooks/useDebounce";
+import { Skeleton } from "../ui/skeleton";
+import api from "../../api/axios";
+import { useTranslation } from "../../hooks/useTranslation";
 
 function Completion({ text, query }) {
   const index = text.toLocaleLowerCase().indexOf(query.toLocaleLowerCase());

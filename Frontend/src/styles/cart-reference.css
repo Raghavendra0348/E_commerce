@@ -53,3 +53,7 @@
   .amazon-cart-page .amazon-cart-line-price { grid-column: 2; text-align: left; font-size: 20px; }
   .amazon-cart-page .amazon-cart-sidebar { width: 100%; }
 }
+
+@media (max-width: 640px) {
+  .amazon-cart-page .amazon-cart-image-wrap { grid-row: 1 / 3; }
+}

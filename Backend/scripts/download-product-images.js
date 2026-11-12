@@ -45,7 +45,7 @@ async function searchPixabay(product) {
       console.log("  Using cached Pixabay results (24-hour cache).");
       return cache.candidates;
     }
-  } catch {}
+  } catch { /* Missing or stale search caches are rebuilt below. */ }
   const url = new URL("https://pixabay.com/api/");
   url.searchParams.set("key", process.env.PIXABAY_API_KEY);
   url.searchParams.set("q", query);
@@ -93,7 +93,7 @@ async function downloadCandidate(candidate, directory) {
   } catch (error) {
     if (error.code !== "EEXIST") throw error;
     const previous = await fs.readFile(filePath);
-    if (hash(previous) !== sha256) throw new Error("Local filename collision: " + filename);
+    if (hash(previous) !== sha256) throw new Error("Local filename collision: " + filename, { cause: error });
   }
   return {
     filename, provider: candidate.provider, providerId: candidate.providerId,

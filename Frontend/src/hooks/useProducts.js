@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import api from "@/api/axios";
-import { useAuthStore } from "@/store/useAuthStore";
+import api from "../api/axios";
+import { useAuthStore } from "../store/useAuthStore";
 
 /**
  * Paginated product list with filters/sort

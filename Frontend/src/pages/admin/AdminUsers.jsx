@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../../components/common/Translation";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -9,9 +9,9 @@ import {
   Phone,
   RefreshCw,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import Pagination from "@/components/common/Pagination";
+import { Button } from "../../components/ui/button";
+import { Skeleton } from "../../components/ui/skeleton";
+import Pagination from "../../components/common/Pagination";
 import {
   Dialog,
   DialogContent,
@@ -19,10 +19,10 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { adminService } from "@/services";
-import { formatPrice, cn } from "@/lib/utils";
-import UserTable from "@/components/admin/UserTable";
+} from "../../components/ui/dialog";
+import { adminService } from "../../services";
+import { formatPrice, cn } from "../../lib/utils";
+import UserTable from "../../components/admin/UserTable";
 
 export default function AdminUsers() {
   const queryClient = useQueryClient();

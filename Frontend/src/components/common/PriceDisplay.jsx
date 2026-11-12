@@ -1,5 +1,5 @@
-import { formatPrice } from "@/lib/utils";
-import { cn } from "@/lib/utils";
+import { formatPrice } from "../../lib/utils";
+import { cn } from "../../lib/utils";
 
 export default function PriceDisplay({
   price,

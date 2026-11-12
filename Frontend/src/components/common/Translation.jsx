@@ -1,6 +1,6 @@
 import { Children, cloneElement, isValidElement } from "react";
-import { useTranslation } from "@/hooks/useTranslation";
-import { translate } from "@/lib/translations";
+import { useTranslation } from "../../hooks/useTranslation";
+import { translate } from "../../lib/translations";
 
 export function T({ children, values }) {
   const { t } = useTranslation();

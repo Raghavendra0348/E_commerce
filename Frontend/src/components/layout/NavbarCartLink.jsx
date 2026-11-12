@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import { useTranslation } from "@/hooks/useTranslation";
-import { T } from "@/components/common/Translation";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useCartStore } from "../../store/useCartStore";
+import { useTranslation } from "../../hooks/useTranslation";
+import { T } from "../common/Translation";
 
 export default function NavbarCartLink() {
   const { t } = useTranslation();

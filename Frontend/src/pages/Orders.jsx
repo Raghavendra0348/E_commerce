@@ -1,139 +1,155 @@
-import { T } from "@/components/common/Translation";
-import { useState } from "react";
+import { T } from "../components/common/Translation";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Package, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import Pagination from "@/components/common/Pagination";
-import OrderCard from "@/components/account/OrderCard";
-import { useOrders } from "@/hooks/useOrders";
-import { useCart } from "@/hooks/useCart";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { cn } from "@/lib/utils";
+import { Package, ChevronRight, Search } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Skeleton } from "../components/ui/skeleton";
+import Pagination from "../components/common/Pagination";
+import OrderCard from "../components/account/OrderCard";
+import { useOrders } from "../hooks/useOrders";
+import { useCart } from "../hooks/useCart";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { cn } from "../lib/utils";
+import "../styles/orders.css";
+
+const dateFromMonths = months => {
+  if (!months) return undefined;
+  const date = new Date();
+  date.setMonth(date.getMonth() - months);
+  return date.toISOString();
+};
 
 export default function Orders() {
   useDocumentTitle("Your Orders");
   const [page, setPage] = useState(1);
-  const [activeTab, setActiveTab] = useState("ALL");
+  const [activeTab, setActiveTab] = useState("ORDERS");
   const [buyingAgainId, setBuyingAgainId] = useState(null);
+  const [searchDraft, setSearchDraft] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dateRange, setDateRange] = useState("3m");
 
-  const status = activeTab === "ALL" ? undefined : activeTab === "IN_PROGRESS" ? "PENDING,CONFIRMED,PROCESSING,SHIPPED" : activeTab;
-  const { data, isLoading, error, refetch } = useOrders({ page, limit: 10, status });
+  const status = activeTab === "NOT_SHIPPED" ? "PENDING,CONFIRMED,PROCESSING" : undefined;
+  const dateFrom = useMemo(() => dateRange === "3m" ? dateFromMonths(3)
+    : dateRange === "6m" ? dateFromMonths(6)
+      : dateRange === "12m" ? dateFromMonths(12) : undefined, [dateRange]);
+  const { data, isLoading, error, refetch } = useOrders({ page, limit: 10, status, dateFrom, search: searchTerm || undefined });
   const { addItem } = useCart();
 
   const orders = data?.orders || [];
-  const pagination = data?.pagination || { totalPages: 1 };
+  const visibleOrders = useMemo(() => activeTab === "BUY_AGAIN"
+    ? orders.filter(order => order.items?.some(item => item.product?.id && item.product?.slug))
+    : orders, [activeTab, orders]);
+  const pagination = data?.pagination || { total: 0, totalPages: 1 };
 
-  const handleBuyAgain = async (item) => {
+  const handleSearch = event => {
+    event.preventDefault();
+    setPage(1);
+    setSearchTerm(searchDraft.trim());
+  };
+  const handleTabChange = tab => {
+    setActiveTab(tab);
+    setPage(1);
+  };
+  const handleBuyAgain = async item => {
     setBuyingAgainId(item.id);
-    await addItem(item.product.id, 1, item.product.name);
-    setBuyingAgainId(null);
+    try { await addItem(item.product.id, 1, item.product.name); }
+    finally { setBuyingAgainId(null); }
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEDED] py-6 sm:py-8">
-      <div className="mx-auto max-w-5xl px-4 space-y-6">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 text-xs text-[#565959]">
-          <Link to="/account/profile" className="hover:text-[#C7511F] hover:underline">
-            <T>{"Your Account"}</T>
-          </Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-[#0F1111] font-semibold"><T>{"Your Orders"}</T></span>
+    <main id="orders-page" className="orders-page">
+      <div className="orders-container">
+        <nav aria-label="Breadcrumb" className="orders-breadcrumb">
+          <Link to="/account/profile"><T>{"Your Account"}</T></Link>
+          <ChevronRight aria-hidden="true" />
+          <span><T>{"Your Orders"}</T></span>
+        </nav>
+
+        <div className="orders-heading-row">
+          <h1><T>{"Your Orders"}</T></h1>
+          <form className="orders-search" role="search" onSubmit={handleSearch}>
+            <label className="orders-search-field">
+              <Search aria-hidden="true" />
+              <input
+                type="search"
+                value={searchDraft}
+                onChange={event => setSearchDraft(event.target.value)}
+                placeholder="Search all orders"
+                aria-label="Search all orders"
+                maxLength={100}
+              />
+            </label>
+            <Button type="submit" className="orders-search-button"><T>{"Search Orders"}</T></Button>
+          </form>
         </div>
 
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]"><T>{"Your Orders"}</T></h1>
-          <p className="text-sm text-[#565959] mt-0.5">
-            Review past orders, download invoices, track packages, and re-order
-          </p>
-        </div>
-
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-2 border-b border-[#D5D9D9] overflow-x-auto pb-px">
+        <div className="orders-tabs" role="tablist" aria-label="Order views">
           {[
-            { id: "ALL", label: "All Orders" },
-            { id: "IN_PROGRESS", label: "In Progress" },
-            { id: "DELIVERED", label: "Delivered" },
-            { id: "CANCELLED", label: "Cancelled" },
-          ].map((tab) => (
+            { id: "ORDERS", label: "Orders" },
+            { id: "BUY_AGAIN", label: "Buy Again" },
+            { id: "NOT_SHIPPED", label: "Not Yet Shipped" },
+          ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => { setActiveTab(tab.id); setPage(1); }}
-              className={cn(
-                "px-4 py-2.5 text-sm font-semibold transition-colors whitespace-nowrap border-b-2 -mb-px",
-                activeTab === tab.id
-                  ? "border-[#FF9900] text-[#0F1111]"
-                  : "border-transparent text-[#565959] hover:text-[#0F1111]"
-              )}
-            >
-              <T>{tab.label}</T>
-            </button>
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              className={cn("orders-tab", activeTab === tab.id && "orders-tab-active")}
+              onClick={() => handleTabChange(tab.id)}
+            ><T>{tab.label}</T></button>
           ))}
         </div>
 
-        {/* Orders List */}
+        <div className="orders-filter-row">
+          <p><strong>{pagination.total || 0} orders</strong> placed in</p>
+          <select
+            aria-label="Order date range"
+            value={dateRange}
+            onChange={event => { setDateRange(event.target.value); setPage(1); }}
+          >
+            <option value="3m">past 3 months</option>
+            <option value="6m">past 6 months</option>
+            <option value="12m">past year</option>
+            <option value="all">all orders</option>
+          </select>
+          {searchTerm && <button type="button" className="orders-clear-search" onClick={() => { setSearchDraft(""); setSearchTerm(""); setPage(1); }}>Clear search</button>}
+        </div>
+
         {error ? (
-          <div id="orders-error" role="alert" className="bg-white p-8 space-y-3">
+          <div id="orders-error" role="alert" className="orders-message">
             <p>Could not load your orders. Please try again.</p>
             <Button onClick={() => refetch()}><T>{"Try again"}</T></Button>
           </div>
         ) : isLoading ? (
-          <div className="space-y-4">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="bg-white rounded-lg border border-[#EDEDED] p-6 space-y-4">
-                <Skeleton className="h-6 w-1/3" />
-                <div className="flex gap-4">
-                  <Skeleton className="h-20 w-20 rounded" />
-                  <div className="space-y-2 flex-1">
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-4 w-1/4" />
-                  </div>
-                </div>
+          <div className="orders-list" aria-label="Loading orders" aria-busy="true">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="orders-loading-card">
+                <div className="orders-loading-header"><Skeleton className="h-5 w-40" /><Skeleton className="h-5 w-48" /></div>
+                <div className="orders-loading-body"><Skeleton className="h-32 w-32 rounded-md" /><div className="flex-1 space-y-3"><Skeleton className="h-5 w-2/3" /><Skeleton className="h-4 w-1/2" /><Skeleton className="h-10 w-48" /></div></div>
               </div>
             ))}
           </div>
-        ) : orders.length === 0 ? (
-          <div className="bg-white rounded-lg border border-[#EDEDED] p-12 text-center space-y-4">
-            <div className="mx-auto h-16 w-16 rounded-full bg-[#F5F5F5] flex items-center justify-center text-[#888C8C]">
-              <Package className="h-8 w-8" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-[#0F1111]">No orders found</h2>
-              <p className="text-xs text-[#565959] mt-1 max-w-sm mx-auto">
-                {activeTab === "ALL"
-                  ? "You haven't placed any orders yet. Discover today's deals."
-                  : `You don't have any orders categorized under "${activeTab.toLowerCase().replace('_', ' ')}".`}
-              </p>
-            </div>
-            <Button asChild className="bg-[#FF9900] hover:bg-[#E68A00] text-[#0F1111] font-semibold text-xs">
-              <Link to="/products"><T>{"Start Shopping"}</T></Link>
-            </Button>
+        ) : visibleOrders.length === 0 ? (
+          <div className="orders-message">
+            <Package aria-hidden="true" />
+            <h2>{searchTerm ? "No matching orders" : activeTab === "BUY_AGAIN" ? "No products available to buy again" : "No orders found"}</h2>
+            <p>{searchTerm ? "Try another order number or product name." : "Try a different date range, or explore the catalog."}</p>
+            <Button asChild><Link to="/products"><T>{"Start Shopping"}</T></Link></Button>
           </div>
         ) : (
-          <div className="space-y-4">
-            {orders.map((order) => (
-              <OrderCard
-                key={order.id}
-                order={order}
-                onBuyAgain={handleBuyAgain}
-                isBuyingAgainId={buyingAgainId}
-              />
+          <div className="orders-list">
+            {visibleOrders.map(order => (
+              <OrderCard key={order.id} order={order} onBuyAgain={handleBuyAgain} isBuyingAgainId={buyingAgainId} />
             ))}
           </div>
         )}
 
-        {/* Pagination */}
         {pagination.totalPages > 1 && (
           <div className="flex justify-center pt-4">
-            <Pagination
-              page={page}
-              totalPages={pagination.totalPages}
-              onPageChange={setPage}
-            />
+            <Pagination page={page} totalPages={pagination.totalPages} onPageChange={setPage} />
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

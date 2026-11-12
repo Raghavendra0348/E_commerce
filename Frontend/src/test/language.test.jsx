@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { act, cleanup, render, renderHook, screen } from "@testing-library/react";
-import LanguageSelector from "@/components/layout/LanguageSelector";
-import LanguageSync from "@/components/common/LanguageSync";
-import { useTranslation } from "@/hooks/useTranslation";
-import { T } from "@/components/common/Translation";
+import LanguageSelector from "../components/layout/LanguageSelector";
+import LanguageSync from "../components/common/LanguageSync";
+import { useTranslation } from "../hooks/useTranslation";
+import { T } from "../components/common/Translation";
 
 afterEach(() => { cleanup(); localStorage.removeItem("storefront_language"); });
 describe("English storefront region display", () => {

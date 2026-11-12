@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor, act, cleanup } from "@testing-library/react";
-import PaymentButton from "@/components/checkout/PaymentButton";
-import { orderService, paymentService } from "@/services";
-vi.mock("@/services", () => ({ orderService: { placeOrder: vi.fn() }, paymentService: { createOrder: vi.fn(), verify: vi.fn() } }));
+import PaymentButton from "../components/checkout/PaymentButton";
+import { orderService, paymentService } from "../services";
+import { toast } from "sonner";
+vi.mock("../services", () => ({ orderService: { placeOrder: vi.fn() }, paymentService: { createOrder: vi.fn(), verify: vi.fn() } }));
 vi.mock("sonner", () => ({ toast: { error: vi.fn(), success: vi.fn(), info: vi.fn() } }));
 let options;
 beforeEach(() => {
@@ -18,6 +19,19 @@ async function openCheckout(props = {}) {
   await waitFor(() => expect(options).toBeDefined());
 }
 describe("Razorpay checkout contract", () => {
+  it("keeps the checkout key stable after an ambiguous order-creation network failure", async () => {
+    const onError = vi.fn();
+    orderService.placeOrder.mockRejectedValueOnce(new Error("Response lost"));
+    render(<PaymentButton addressId={5} amount={499} onError={onError} />);
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(onError).toHaveBeenCalled());
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(options).toBeDefined());
+    const firstKey = orderService.placeOrder.mock.calls[0][0].checkoutKey;
+    const secondKey = orderService.placeOrder.mock.calls[1][0].checkoutKey;
+    expect(firstKey).toMatch(/^[a-f\d-]{36}$/i);
+    expect(secondKey).toBe(firstKey);
+  });
   it("passes the backend order ID and verifies a matching signed callback", async () => {
     const onSuccess = vi.fn(); await openCheckout({ onSuccess });
     expect(options.order_id).toBe("order_expected");
@@ -55,5 +69,14 @@ describe("Razorpay checkout contract", () => {
     fireEvent.click(screen.getByRole("button"));
     await waitFor(() => expect(paymentService.createOrder).toHaveBeenCalledTimes(2));
     expect(orderService.placeOrder).not.toHaveBeenCalled();
+  });
+  it("reports the refund workflow when payment arrives after cancellation", async () => {
+    const onSuccess = vi.fn();
+    paymentService.verify.mockResolvedValueOnce({ data: { data: { status: "REFUND_PENDING" } } });
+    await openCheckout({ onSuccess });
+    await act(() => options.handler({ razorpay_order_id: "order_expected", razorpay_payment_id: "pay_example", razorpay_signature: "signature" }));
+    expect(toast.success).not.toHaveBeenCalled();
+    expect(toast.info).toHaveBeenCalledWith(expect.stringContaining("cancelled order"));
+    expect(onSuccess).toHaveBeenCalledWith(42);
   });
 });

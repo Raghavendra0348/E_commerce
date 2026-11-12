@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { User, Package, Heart, LogOut, LayoutDashboard, ChevronDown } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useTranslation } from "@/hooks/useTranslation";
-import { T } from "@/components/common/Translation";
-import { getSessionRevision } from "@/lib/session";
-import api from "@/api/axios";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useTranslation } from "../../hooks/useTranslation";
+import { T } from "../common/Translation";
+import { getSessionRevision } from "../../lib/session";
+import api from "../../api/axios";
 import { toast } from "sonner";
 
 export function NavbarMobileAccountLink() {

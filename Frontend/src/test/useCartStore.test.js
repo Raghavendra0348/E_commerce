@@ -45,3 +45,19 @@ describe("useCartStore", () => {
     expect(useCartStore.getState().itemCount).toBe(0);
   });
 });
+
+it("keeps selection across quantity changes and resets it between sessions", () => {
+  useCartStore.setState({ cart: { items: [{ id: 1 }, { id: 2 }] } });
+  const store = useCartStore.getState();
+  store.setAllItemsSelected(false);
+  expect(useCartStore.getState().excludedItemIds).toEqual([1, 2]);
+  store.setItemSelected(1, true);
+  expect(useCartStore.getState().excludedItemIds).toEqual([2]);
+  useCartStore.setState({ cart: { items: [{ id: 1, quantity: 3 }, { id: 2 }] } });
+  expect(useCartStore.getState().excludedItemIds).toEqual([2]);
+  store.setAllItemsSelected(true);
+  expect(useCartStore.getState().excludedItemIds).toEqual([]);
+  store.setItemSelected(1, false);
+  store.clearCartState();
+  expect(useCartStore.getState().excludedItemIds).toEqual([]);
+});

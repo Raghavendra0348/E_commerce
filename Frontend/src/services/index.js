@@ -1,4 +1,4 @@
-export { default as api } from "@/api/axios";
+export { default as api } from "../api/axios";
 export { authService } from "./auth.service";
 export { productService } from "./product.service";
 export { categoryService } from "./category.service";

@@ -2,14 +2,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CatalogProductCard, StorefrontProductCard } from "@/components/product/ProductCard";
-import Wishlist from "@/pages/Wishlist";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import api from "@/api/axios";
+import { CatalogProductCard, StorefrontProductCard } from "../components/product/ProductCard";
+import Wishlist from "../pages/Wishlist";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import api from "../api/axios";
 import { toast } from "sonner";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn(), post: vi.fn(), delete: vi.fn() } }));
+vi.mock("../api/axios", () => ({ default: { get: vi.fn(), post: vi.fn(), delete: vi.fn() } }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), info: vi.fn(), error: vi.fn() } }));
 
 const product = { id: 7, slug: "test-product", name: "Test product", stock: 8, price: 499 };

@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -11,7 +11,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -42,8 +42,8 @@ export default function AdminSidebar({
       {/* Logo & Toggle */}
       <div className="flex h-16 items-center justify-between px-4 border-b border-white/10">
         {open && (
-          <Link to="/admin/dashboard" className="font-extrabold text-lg flex items-center">
-            amazon<span className="text-[#FF9900]">.in</span>
+          <Link to="/admin/dashboard" className="font-extrabold text-lg flex items-center gap-2">
+            <img src="/original_logo_white.svg" alt="Amazon.in" className="brand-logo admin-brand-logo" />
             <span className="ml-2 text-xs text-[#BBBFBF] font-normal uppercase tracking-wider bg-white/10 px-1.5 py-0.5 rounded">
               Admin
             </span>

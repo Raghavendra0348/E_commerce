@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, UserRound, Heart, ShoppingCart, Menu } from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useCartStore } from "../../store/useCartStore";
+import { useTranslation } from "../../hooks/useTranslation";
 
 export default function MobileBottomNav({ onBrowse, browseOpen = false }) {
   const { pathname } = useLocation();

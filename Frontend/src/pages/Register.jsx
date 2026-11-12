@@ -1,16 +1,17 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
+import AmazonLogo from "../components/layout/AmazonLogo";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Eye, EyeOff, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { authService } from "@/services/auth.service";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { authService } from "../services/auth.service";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
 import { toast } from "sonner";
 
 const registerSchema = z
@@ -77,9 +78,7 @@ export default function Register() {
     <div className="min-h-[calc(100vh-160px)] flex flex-col items-center justify-start pt-8 pb-12 px-4 bg-white">
       {/* Logo */}
       <Link to="/" className="mb-6">
-        <div className="text-[#0F1111] text-3xl font-extrabold">
-          amazon<span className="text-[#FF9900]">.in</span>
-        </div>
+        <AmazonLogo className="auth-brand-logo" />
       </Link>
 
       {/* Card */}

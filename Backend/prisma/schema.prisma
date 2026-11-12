@@ -30,6 +30,14 @@ enum PaymentStatus {
   REFUNDED        // Gateway confirmed refund complete
 }
 
+enum RefundAttemptStatus {
+  SUBMITTING
+  PENDING
+  PROCESSED
+  FAILED
+  UNKNOWN
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String
@@ -37,6 +45,7 @@ model User {
   password  String
   phone     String?
   role      UserRole @default(USER)
+  tokenVersion Int   @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -145,6 +154,8 @@ model Order {
   status          OrderStatus   @default(PENDING)
   paymentStatus   PaymentStatus @default(PENDING)
   shippingAddress Json?
+  checkoutKey     String?
+  checkoutRequestHash String?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
@@ -154,6 +165,7 @@ model Order {
 
   @@index([userId])
   @@index([status])
+  @@unique([userId, checkoutKey])
 }
 
 model OrderItem {
@@ -177,10 +189,31 @@ model Payment {
   status        PaymentStatus @default(PENDING)
   provider      String?
   transactionId String?
+  razorpayOrderId String?      @unique
+  razorpayPaymentId String?    @unique
+  cashCollectedAt DateTime?
+  cashCollectedBy Int?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  refunds RefundAttempt[]
+}
+
+model RefundAttempt {
+  id Int @id @default(autoincrement())
+  paymentId Int
+  attemptNumber Int
+  requestKey String @unique
+  gatewayRefundId String? @unique
+  amount Decimal @db.Decimal(10, 2)
+  status RefundAttemptStatus @default(SUBMITTING)
+  requestedById Int
+  failureReason String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  @@unique([paymentId, attemptNumber])
 }
 
 model Wishlist {

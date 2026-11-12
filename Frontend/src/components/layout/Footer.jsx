@@ -1,7 +1,7 @@
 import { Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import AmazonLogo from "./AmazonLogo";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 
 const footerGroups = [
   { title: "Get to Know Us", links: [
@@ -75,7 +75,7 @@ export default function Footer() {
       </nav>
       <div className="footer-region-row">
         <Link to="/" className="footer-brand" aria-label="Amazon India Homepage">
-          <AmazonLogo className="footer-amazon-logo" />
+          <AmazonLogo className="footer-amazon-logo" tone="white" />
         </Link>
         <div className="footer-region-badges">
           <span className="footer-region-badge" aria-label="Interface language: English">

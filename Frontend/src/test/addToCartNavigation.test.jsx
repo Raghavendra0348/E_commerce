@@ -2,21 +2,22 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render as renderUi, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter, Routes, Route, useLocation } from "react-router-dom";
-import ProductCard from "@/components/product/ProductCard";
-import ProductDetail from "@/pages/ProductDetail";
-import { useCart } from "@/hooks/useCart";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import api from "@/api/axios";
+import ProductCard from "../components/product/ProductCard";
+import ProductDetail from "../pages/ProductDetail";
+import { useCart } from "../hooks/useCart";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import api from "../api/axios";
 import { toast } from "sonner";
+import { useProduct } from "../hooks/useProducts";
 
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn(), post: vi.fn() } }));
-vi.mock("@/hooks/useProducts", () => ({
-  useProduct: () => ({ data: { id: 7, slug: "test-product", name: "Test product", price: 499, stock: 10, images: [] } }),
+vi.mock("../api/axios", () => ({ default: { get: vi.fn(), post: vi.fn() } }));
+vi.mock("../hooks/useProducts", () => ({
+  useProduct: vi.fn(),
   useProducts: () => ({ data: { products: [] } }),
 }));
-vi.mock("@/components/product/ReviewList", () => ({ default: () => null }));
-vi.mock("@/components/product/ProductImageGallery", () => ({ default: () => null }));
+vi.mock("../components/product/ReviewList", () => ({ default: () => null }));
+vi.mock("../components/product/ProductImageGallery", () => ({ default: () => null }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), info: vi.fn(), error: vi.fn() } }));
 
 const product = { id: 7, slug: "test-product", name: "Test product", price: 499, stock: 10 };
@@ -31,6 +32,7 @@ function BuyAgain() {
   return <button onClick={() => addItem(7, 1, "Test product")}>Buy it again</button>;
 }
 beforeEach(() => {
+  useProduct.mockReturnValue({ data: { ...product, stock: 10, images: [] } });
   client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   useAuthStore.setState({ isAuthenticated: true, user: { id: 1 }, accessToken: "test" });
   useCartStore.getState().clearCartState();
@@ -47,6 +49,15 @@ async function expectAddedWithoutLeaving(path) {
   expect(useCartStore.getState().isDrawerOpen).toBe(false);
 }
 describe("adding products keeps the shopper on the current page", () => {
+  it("shows a demo notification instead of purchase controls on an unavailable product page", () => {
+    useProduct.mockReturnValue({ data: { ...product, stock: 0, images: [] } });
+    render(<MemoryRouter initialEntries={["/products/test-product"]}><Routes><Route path="/products/:slug" element={<ProductDetail />} /></Routes></MemoryRouter>);
+    fireEvent.click(screen.getByRole("button", { name: "Notify me about Test product" }));
+    expect(toast.info).toHaveBeenCalledWith("Demo notification: Test product", expect.any(Object));
+    expect(screen.queryByRole("button", { name: "Add to Cart" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Buy Now" })).not.toBeInTheDocument();
+    expect(api.post).not.toHaveBeenCalled();
+  });
   it.each(["default", "catalog"])("updates the cart from a %s product card without opening the drawer", async variant => {
     const path = "/products?search=test";
     render(<MemoryRouter initialEntries={[path]}><CurrentLocation /><ProductCard product={product} variant={variant} /></MemoryRouter>);
@@ -75,7 +86,7 @@ describe("adding products keeps the shopper on the current page", () => {
 describe("catalog Buy Now", () => {
   function showCard(item = product) {
     render(<MemoryRouter initialEntries={["/products?search=test"]}><CurrentLocation /><ProductCard product={item} variant="catalog" /></MemoryRouter>);
-    return screen.getByRole("button", { name: `Buy ${item.name} now` });
+    return screen.queryByRole("button", { name: `Buy ${item.name} now` });
   }
 
   it("adds one item before taking the shopper to checkout", async () => {
@@ -120,10 +131,13 @@ describe("catalog Buy Now", () => {
     await waitFor(() => expect(screen.getByLabelText("Current location")).toHaveTextContent("/checkout"));
   });
 
-  it("disables buying and adding out-of-stock products", () => {
-    expect(showCard({ ...product, stock: 0 })).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Test product is out of stock" })).toBeDisabled();
+  it("replaces unavailable purchases with a demo notification without writing to the API", () => {
+    expect(showCard({ ...product, stock: 0 })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Add Test product to cart" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Notify me about Test product" }));
+    expect(toast.info).toHaveBeenCalledWith("Demo notification: Test product", expect.objectContaining({ description: expect.stringContaining("No restock alert has been registered or sent") }));
     expect(api.post).not.toHaveBeenCalled();
+    expect(screen.getByLabelText("Current location")).toHaveTextContent("/products?search=test");
   });
 
   it("does not redirect a different account after an old purchase request finishes", async () => {

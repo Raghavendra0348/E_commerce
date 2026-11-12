@@ -1,10 +1,10 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { useCategories } from "@/hooks/useCategories";
-import { useProducts } from "@/hooks/useProducts";
-import ProductImage from "@/components/common/ProductImage";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useCategories } from "../../hooks/useCategories";
+import { useProducts } from "../../hooks/useProducts";
+import ProductImage from "../common/ProductImage";
+import { Skeleton } from "../ui/skeleton";
 
 export const EXTRA_FESTIVAL_CARDS = [
   { slug: "fashion", title: "Styles for every celebration", subtitle: "Everyday essentials & festive favourites", tone: "ruby", label: "Fashion finds" },

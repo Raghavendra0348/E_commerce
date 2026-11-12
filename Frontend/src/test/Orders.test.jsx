@@ -2,12 +2,12 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Orders from "@/pages/Orders";
-import { orderService } from "@/services";
+import Orders from "../pages/Orders";
+import { orderService } from "../services";
 
-vi.mock("@/services", () => ({ orderService: { getOrders: vi.fn() } }));
-vi.mock("@/hooks/useCart", () => ({ useCart: () => ({ addItem: vi.fn() }) }));
-vi.mock("@/components/account/OrderCard", () => ({ default: ({ order }) => <div>Order #{order.id}</div> }));
+vi.mock("../services", () => ({ orderService: { getOrders: vi.fn() } }));
+vi.mock("../hooks/useCart", () => ({ useCart: () => ({ addItem: vi.fn() }) }));
+vi.mock("../components/account/OrderCard", () => ({ default: ({ order }) => <div>Order #{order.id}</div> }));
 let client;
 afterEach(() => { cleanup(); client?.clear(); vi.clearAllMocks(); });
 function show() {

@@ -1,12 +1,12 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Tag, Shirt, Armchair, Headphones, Package, ArrowRight } from "lucide-react";
-import { useProducts } from "@/hooks/useProducts";
-import { useCategories } from "@/hooks/useCategories";
-import { formatPrice } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
+import { useProducts } from "../../hooks/useProducts";
+import { useCategories } from "../../hooks/useCategories";
+import { formatPrice } from "../../lib/utils";
+import { Skeleton } from "../ui/skeleton";
+import { Button } from "../ui/button";
 
 const panels = [
   { id: "value", title: "Discover everyday favourites", subtitle: "Small finds. Plenty to explore.", icon: Tag, link: "Explore all products", tone: "peach" },

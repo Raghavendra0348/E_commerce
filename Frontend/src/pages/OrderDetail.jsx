@@ -1,5 +1,5 @@
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
+import { T } from "../components/common/Translation";
+import ProductImage from "../components/common/ProductImage";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -12,9 +12,9 @@ import {
   ChevronRight,
   XCircle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "../components/ui/button";
+import { Skeleton } from "../components/ui/skeleton";
+import { Separator } from "../components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -22,15 +22,15 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import OrderTimeline from "@/components/account/OrderTimeline";
-import { useOrder, useCancelOrder } from "@/hooks/useOrders";
-import { useCart } from "@/hooks/useCart";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { formatPrice, cn } from "@/lib/utils";
-import PaymentButton from "@/components/checkout/PaymentButton";
-import { useAuthStore } from "@/store/useAuthStore";
-import { isCashOnDelivery } from "@/lib/orderPayment";
+} from "../components/ui/dialog";
+import OrderTimeline from "../components/account/OrderTimeline";
+import { useOrder, useCancelOrder } from "../hooks/useOrders";
+import { useCart } from "../hooks/useCart";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { formatPrice, cn } from "../lib/utils";
+import PaymentButton from "../components/checkout/PaymentButton";
+import { useAuthStore } from "../store/useAuthStore";
+import { isCashOnDelivery } from "../lib/orderPayment";
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -155,6 +155,7 @@ export default function OrderDetail() {
           <OrderTimeline
             status={order.status}
             paymentStatus={order.paymentStatus}
+            refundStatus={order.payment?.refunds?.[0]?.status}
           />
           {order.status === "PENDING" && order.paymentStatus === "PENDING" && order.payment?.provider !== "COD" && (
             <PaymentButton existingOrder={order} user={user} amount={Number(order.totalAmount)} onSuccess={() => refetch()} />
@@ -318,7 +319,7 @@ export default function OrderDetail() {
                 <br />
                 • If payment was made online, a full refund of{" "}
                 <strong className="text-[#0F1111]">{formatPrice(order.totalAmount)}</strong> will
-                be initiated.
+                be due. An administrator must submit the refund after cancellation.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="pt-3">

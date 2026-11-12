@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Sparkles, Laptop, Smartphone, Tv, Shirt, Lamp, Armchair, Headphones, Gamepad2, BookOpen, Dumbbell, Car, Briefcase, Luggage, Watch, Grid2X2 } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useTranslation } from "../../hooks/useTranslation";
 
 const featured = [
   { slug: "electronics", label: "Electronics", icon: Laptop },

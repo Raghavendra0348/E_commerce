@@ -1,8 +1,8 @@
-import { isRateLimited, recordRateLimit, rateLimitError } from "@/lib/rateLimit";
-import { notifyServerChange } from "@/lib/dataSync";
+import { isRateLimited, recordRateLimit, rateLimitError } from "../lib/rateLimit";
+import { notifyServerChange } from "../lib/dataSync";
 import axios from "axios";
-import { useAuthStore } from "@/store/useAuthStore";
-import { getSessionRevision } from "@/lib/session";
+import { useAuthStore } from "../store/useAuthStore";
+import { getSessionRevision, onSessionReset } from "../lib/session";
 
 const api = axios.create({
   baseURL: "/api",
@@ -11,44 +11,66 @@ const api = axios.create({
   },
 });
 
-let isRefreshing = false;
-let failedQueue = [];
+let refreshState = null;
+const sessionChanged = () => new axios.CanceledError("The signed-in account changed while the request was running.");
+const belongsToCurrentSession = config => config?._sessionRevision === getSessionRevision();
+onSessionReset(() => { refreshState = null; });
 
-const processQueue = (error, token = null) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
+function refreshAccessToken(revision) {
+  if (refreshState?.revision === revision) return refreshState.promise;
+  const state = { revision };
+  state.promise = (async () => {
+    try {
+      const data = { data: await useAuthStore.getState().refreshSession() };
+      if (revision !== getSessionRevision()) throw sessionChanged();
+      const accessToken = data?.data?.accessToken;
+      const rotatedToken = data?.data?.refreshToken;
+      if (!accessToken || !rotatedToken) throw new Error("Invalid session refresh response");
+      return accessToken;
+    } catch (error) {
+      if (revision === getSessionRevision() && error.code !== "AUTH_REFRESH_BUSY") {
+        useAuthStore.getState().logout();
+        if (typeof window !== "undefined" && !window.location.pathname.startsWith("/login")) {
+          window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+        }
+      }
+      throw error;
+    } finally {
+      if (refreshState === state) refreshState = null;
     }
-  });
-
-  failedQueue = [];
-};
+  })();
+  refreshState = state;
+  return state.promise;
+}
 
 // Request Interceptor: Attach Bearer Access Token
 api.interceptors.request.use(
   (config) => {
-    if ((config.method || "get").toLowerCase() === "get" && isRateLimited()) return Promise.reject(rateLimitError(config));
+    config._sessionRevision ??= getSessionRevision();
+    if (!belongsToCurrentSession(config)) throw sessionChanged();
+    if ((config.method || "get").toLowerCase() === "get" && isRateLimited()) throw rateLimitError(config);
     const accessToken = useAuthStore.getState().accessToken;
     if (accessToken && !config.headers.Authorization) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => { throw error; },
+  { synchronous: true }
 );
 
 // Response Interceptor: Handle 401 and Token Refresh
 api.interceptors.response.use(
   (response) => {
+    if (!belongsToCurrentSession(response.config)) return Promise.reject(sessionChanged());
     notifyServerChange(response.config);
     return response;
   },
   async (error) => {
-    recordRateLimit(error);
     const originalRequest = error.config;
     if (!originalRequest) return Promise.reject(error);
+    if (!belongsToCurrentSession(originalRequest)) return Promise.reject(sessionChanged());
+    recordRateLimit(error);
 
     // Do not attempt refresh on auth endpoints or if already retried
     const isAuthEndpoint =
@@ -64,54 +86,12 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
 
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        })
-          .then((token) => {
-            originalRequest.headers.Authorization = `Bearer ${token}`;
-            return api(originalRequest);
-          })
-          .catch((err) => Promise.reject(err));
-      }
-
+      // Every waiter gets one retry, and only within its originating session.
       originalRequest._retry = true;
-      isRefreshing = true;
-      const sessionRevision = getSessionRevision();
-
-      try {
-        const { data } = await axios.post("/api/auth/refresh", {
-          refreshToken,
-        });
-        if (sessionRevision !== getSessionRevision()) throw new Error("Session changed during refresh");
-
-        const newAccessToken = data?.data?.accessToken;
-        const newRefreshToken = data?.data?.refreshToken || refreshToken;
-
-        if (!newAccessToken) {
-          throw new Error("No access token returned from refresh");
-        }
-
-        useAuthStore.getState().setTokens({
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-        });
-
-        processQueue(null, newAccessToken);
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        return api(originalRequest);
-      } catch (refreshErr) {
-        processQueue(refreshErr, null);
-        if (sessionRevision !== getSessionRevision()) return Promise.reject(refreshErr);
-        useAuthStore.getState().logout();
-        // Redirect to login if in browser
-        if (typeof window !== "undefined" && !window.location.pathname.startsWith("/login")) {
-          window.location.href = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
-        }
-        return Promise.reject(refreshErr);
-      } finally {
-        isRefreshing = false;
-      }
+      const accessToken = await refreshAccessToken(originalRequest._sessionRevision);
+      if (!belongsToCurrentSession(originalRequest)) throw sessionChanged();
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      return api(originalRequest);
     }
 
     return Promise.reject(error);

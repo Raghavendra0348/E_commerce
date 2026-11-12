@@ -1,0 +1,16 @@
+node_modules
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+**/*.env
+.git
+logs
+*.log
+coverage
+downloads
+uploads
+prisma/pricing-backups
+prisma/*backup*.json
+tests

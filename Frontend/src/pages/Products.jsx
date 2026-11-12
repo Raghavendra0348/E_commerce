@@ -1,16 +1,16 @@
-import { T } from "@/components/common/Translation";
-import { Button } from "@/components/ui/button";
+import { T } from "../components/common/Translation";
+import { Button } from "../components/ui/button";
 import { useSearchParams, Link } from "react-router-dom";
 import { X } from "lucide-react";
-import { useProducts } from "@/hooks/useProducts";
-import { useCategories } from "@/hooks/useCategories";
-import { useDebounce } from "@/hooks/useDebounce";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import ProductGrid from "@/components/product/ProductGrid";
-import ProductFilters from "@/components/product/ProductFilters";
-import ProductSort from "@/components/product/ProductSort";
-import Pagination from "@/components/common/Pagination";
-import { SORT_OPTIONS } from "@/lib/constants";
+import { useProducts } from "../hooks/useProducts";
+import { useCategories } from "../hooks/useCategories";
+import { useDebounce } from "../hooks/useDebounce";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import ProductGrid from "../components/product/ProductGrid";
+import ProductFilters from "../components/product/ProductFilters";
+import ProductSort from "../components/product/ProductSort";
+import Pagination from "../components/common/Pagination";
+import { SORT_OPTIONS } from "../lib/constants";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();

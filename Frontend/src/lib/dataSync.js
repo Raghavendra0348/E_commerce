@@ -1,4 +1,4 @@
-import { isRateLimited } from "@/lib/rateLimit";
+import { isRateLimited } from "./rateLimit";
 // Only resource names are broadcast; account data and tokens stay in their stores.
 export const DATA_CHANGE_EVENT = "storefront:data-changed";
 export const REFRESH_INTERVAL = 180_000;

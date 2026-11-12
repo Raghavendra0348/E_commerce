@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../common/Translation";
 import { useEffect, useState } from "react";
 import { MapPin, Check } from "lucide-react";
 import {
@@ -7,10 +7,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { usePincodeLocation } from "@/hooks/usePincodeLocation";
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { usePincodeLocation } from "../../hooks/usePincodeLocation";
 
 
 

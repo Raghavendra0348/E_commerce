@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
-import MobileCategoryTabs from "@/components/layout/MobileCategoryTabs";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
+import MobileBottomNav from "../components/layout/MobileBottomNav";
+import MobileCategoryTabs from "../components/layout/MobileCategoryTabs";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
 
 afterEach(() => { cleanup(); useAuthStore.getState().logout(); useCartStore.getState().clearCartState(); });
 describe("phone storefront navigation", () => {

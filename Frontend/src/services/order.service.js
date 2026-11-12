@@ -1,4 +1,4 @@
-import api from "@/api/axios";
+import api from "../api/axios";
 
 export const orderService = {
   placeOrder: (data) => api.post("/orders", data),

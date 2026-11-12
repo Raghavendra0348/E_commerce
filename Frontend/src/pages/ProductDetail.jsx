@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
@@ -14,22 +14,23 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
-import ProductImageGallery from "@/components/product/ProductImageGallery";
-import ReviewList from "@/components/product/ReviewList";
-import RelatedProducts from "@/components/product/RelatedProducts";
-import ProductDetailsContent from "@/components/product/ProductDetailsContent";
-import ProductCardSkeleton from "@/components/product/ProductCardSkeleton";
-import StarRating from "@/components/common/StarRating";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import PriceDisplay from "@/components/common/PriceDisplay";
-import { useProduct, useProducts } from "@/hooks/useProducts";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useCartStore } from "@/store/useCartStore";
-import api from "@/api/axios";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Separator } from "../components/ui/separator";
+import { Skeleton } from "../components/ui/skeleton";
+import ProductImageGallery from "../components/product/ProductImageGallery";
+import ReviewList from "../components/product/ReviewList";
+import RelatedProducts from "../components/product/RelatedProducts";
+import ProductDetailsContent from "../components/product/ProductDetailsContent";
+import NotifyStockButton from "../components/product/NotifyStockButton";
+import ProductCardSkeleton from "../components/product/ProductCardSkeleton";
+import StarRating from "../components/common/StarRating";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import PriceDisplay from "../components/common/PriceDisplay";
+import { useProduct, useProducts } from "../hooks/useProducts";
+import { useAuthStore } from "../store/useAuthStore";
+import { useCartStore } from "../store/useCartStore";
+import api from "../api/axios";
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
 function ProductDetailSkeleton() {
@@ -99,7 +100,7 @@ export default function ProductDetail() {
     );
   }
 
-  const isOutOfStock = product.stock === 0;
+  const isOutOfStock = product.stock <= 0;
   const isLowStock = product.stock > 0 && product.stock <= 5;
   const maxQty = Math.min(product.stock, 10);
 
@@ -293,6 +294,7 @@ export default function ProductDetail() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col gap-3 pt-1">
+              {isOutOfStock ? <NotifyStockButton product={product} className="w-full" /> : <>
               <Button
                 type="button"
                 variant="buynow"
@@ -333,6 +335,7 @@ export default function ProductDetail() {
                 )}
               </Button>
 
+              </>}
               <Button
                 variant="secondary"
                 size="sm"

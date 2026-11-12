@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ReviewList from "@/components/product/ReviewList";
-import api from "@/api/axios";
-import { useAuthStore } from "@/store/useAuthStore";
-vi.mock("@/api/axios", () => ({ default: { get: vi.fn() } }));
-vi.mock("@/components/product/ReviewForm", () => ({ default: ({ alreadyReviewed }) => <div>{alreadyReviewed ? "Already reviewed" : "Review form"}</div> }));
+import ReviewList from "../components/product/ReviewList";
+import api from "../api/axios";
+import { useAuthStore } from "../store/useAuthStore";
+vi.mock("../api/axios", () => ({ default: { get: vi.fn() } }));
+vi.mock("../components/product/ReviewForm", () => ({ default: ({ alreadyReviewed }) => <div>{alreadyReviewed ? "Already reviewed" : "Review form"}</div> }));
 let client;
 afterEach(() => { cleanup(); client?.clear(); useAuthStore.setState({ user: null, isAuthenticated: false }); vi.clearAllMocks(); });
 function show(payload, ownReview = null) {

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { T } from "@/components/common/Translation";
-import ProductImage from "@/components/common/ProductImage";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/utils";
+import { T } from "../common/Translation";
+import ProductImage from "../common/ProductImage";
+import { Skeleton } from "../ui/skeleton";
+import { Button } from "../ui/button";
+import { formatPrice } from "../../lib/utils";
 
 export default function ProductDetailsContent({ product, related = [], isLoading = false, error, onRetry }) {
   const hasStock = Number.isInteger(product.stock) && product.stock >= 0;

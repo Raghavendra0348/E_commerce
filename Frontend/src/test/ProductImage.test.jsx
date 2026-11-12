@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import ProductImage from "@/components/common/ProductImage";
+import ProductImage from "../components/common/ProductImage";
 describe("Product image fallback", () => {
   it("shows coming soon for a missing image without requesting a placeholder", () => {
     render(<ProductImage alt="Mouse" />);

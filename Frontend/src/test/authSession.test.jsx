@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
-import AuthSession from "@/components/common/AuthSession";
-import { useAuthStore } from "@/store/useAuthStore";
+import AuthSession from "../components/common/AuthSession";
+import { useAuthStore } from "../store/useAuthStore";
 
 afterEach(() => { cleanup(); useAuthStore.getState().logout(); vi.restoreAllMocks(); });
 
@@ -10,7 +10,7 @@ describe("memory-only access tokens", () => {
   it("persists refresh tokens without persisting access tokens", () => {
     useAuthStore.getState().setAuth({ user: { id: 1 }, accessToken: "secret-access", refreshToken: "refresh-a" });
     useAuthStore.getState().setTokens({ accessToken: "rotated-access", refreshToken: "refresh-b" });
-    expect(JSON.parse(localStorage.getItem("auth_storage"))).toEqual({ user: { id: 1 }, refreshToken: "refresh-b" });
+    expect(JSON.parse(localStorage.getItem("auth_storage"))).toEqual({ user: { id: 1 }, refreshToken: "refresh-b", sessionId: expect.any(String) });
     expect(useAuthStore.getState().accessToken).toBe("rotated-access");
   });
 

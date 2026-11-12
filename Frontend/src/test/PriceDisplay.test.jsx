@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import PriceDisplay from "@/components/common/PriceDisplay";
+import PriceDisplay from "../components/common/PriceDisplay";
 
 describe("Discount prices", () => {
   it("shows selling price, original price, configured percentage and exact savings", () => {

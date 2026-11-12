@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { LockKeyhole, PackageCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { formatPrice } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { formatPrice } from "../../lib/utils";
 
 export default function CartSummary({ subtotal = 0, itemCount = 0, onCheckout, isProceeding = false }) {
   const navigate = useNavigate();

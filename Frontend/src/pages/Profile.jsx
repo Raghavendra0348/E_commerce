@@ -1,4 +1,4 @@
-import { T } from "@/components/common/Translation";
+import { T } from "../components/common/Translation";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -10,12 +10,12 @@ import {
   Shield,
   LogOut,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import ProfileForm from "@/components/account/ProfileForm";
-import PasswordForm from "@/components/account/PasswordForm";
-import api from "@/api/axios";
+import { Button } from "../components/ui/button";
+import { useAuthStore } from "../store/useAuthStore";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import ProfileForm from "../components/account/ProfileForm";
+import PasswordForm from "../components/account/PasswordForm";
+import api from "../api/axios";
 
 export default function Profile() {
   useDocumentTitle("Your Account Profile");
