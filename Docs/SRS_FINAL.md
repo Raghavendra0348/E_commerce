@@ -11,13 +11,13 @@
 | University             | RGUKT RK Valley    |
 | Project Guide          | Lingamurthy        |
 | Academic Year          | 2026-2027          |
-| Status                 | Faculty review     |
+| Status                 | Final submission; faculty approval pending |
 
 <!-- COVER PAGE ENDS: exporters start document control on a new page. -->
 
 **Document details**
 
-Software Requirements Specification for the E-Commerce Web Application. Faculty submission edition, version 0.5. Prepared on 12 November 2026. This specification defines the project scope, required behaviour, interfaces, data and planned acceptance conditions.
+Software Requirements Specification for the E-Commerce Web Application. Final submission edition, version 1.0. Prepared on 12 November 2026. This specification defines the project scope, required behaviour, interfaces, data and planned acceptance conditions. Final submission identifies this document edition; it does not assert faculty approval or completed application acceptance testing.
 
 **Contents**
 
@@ -93,7 +93,7 @@ This Software Requirements Specification defines the expected behaviour and qual
 
 The E-Commerce Web Application provides a browser-based platform through which customers can discover products, manage a shopping cart and wishlist, maintain delivery addresses, place orders and view order progress. Customers can choose online payment through Razorpay or Cash on Delivery. Administrators manage the product catalog, inventory, orders and user roles through a restricted administration area.
 
-The draft scope includes:
+The project scope includes:
 
 - Account registration, sign-in, profile management and password changes.
 - Product browsing, search, category and price filters, sorting and product details.
@@ -105,6 +105,8 @@ The draft scope includes:
 - Administrative catalog, stock, order, user and system-health functions.
 
 Proposed exclusions to confirm with the project guide: a multi-vendor seller portal, live courier GPS tracking, customer wallets and native Android/iOS applications. A responsive website is included.
+
+Real stock-alert delivery is outside this release: the out-of-stock Notify me control is a labelled demonstration and does not register a subscription or send a notification.
 
 ### 1.3 Intended Audience
 
@@ -137,7 +139,7 @@ The project aims to let customers purchase selected catalog items, preserve accu
 | INT            | External interface identifier                                            |
 | UC             | Use case identifier                                                      |
 | AT             | Acceptance check identifier                                              |
-| MRP            | Maximum retail price / original price displayed by the catalog           |
+| MRP            | Maximum Retail Price; a stored original price is not a verified manufacturer MRP |
 | ORM            | Object-relational mapper; Prisma provides the application data interface |
 | JWT            | JSON Web Token used by authentication                                    |
 | Fulfilment     | Order processing and delivery progress                                   |
@@ -275,7 +277,7 @@ The current project uses React and Vite for the frontend, Node.js and Express fo
 
 ### 3.1 Requirement Conventions
 
-Each FR identifier denotes one preserved requirement. Mandatory statements use “The system shall”. All requirements are Draft with proposed Must Have priority (M), pending review. Section 3.2 contains the authoritative statements; Section 3.3 contains inputs, acceptance and failure details; Section 3.4 expands checkout. Chapter 8 retains the original acceptance-check identifiers. No listed check is marked passed.
+Each FR identifier denotes one preserved requirement. Mandatory statements use “The system shall”. Requirements and their proposed Must Have priority (M) await faculty approval. Section 3.2 contains the authoritative statements; Section 3.3 contains inputs, acceptance and failure details; Section 3.4 expands checkout. Chapter 8 retains the original acceptance-check identifiers. No listed check is marked passed.
 
 ### 3.2 Functional Requirement Register
 
@@ -439,6 +441,8 @@ The API also supports legacy whole-cart checkout when item IDs are omitted. Dist
 
 ### 4.2 Interface Contracts
 
+The account interface groups working order, address, wishlist, cart and security destinations. Profile editing, password validation and all-device sign-out use authenticated account operations. The wishlist presents stored product information in responsive rows, with cart or demo stock-notification actions, removal and product-link sharing. Sharing uses supported browser facilities or displays the link; it does not alter the saved list. Review counts and averages come from stored reviews. Saved-item dates, seller identity, delivery promises and multiple-list controls are not inferred when absent from the data. New page and search navigation starts at the top without overriding explicit anchors or browser Back navigation.
+
 *Table 11. 4.2 Interface Contracts*
 
 | Interface ID | Interface          | Input / communication                                                      | Required response / failure handling                                                                                         |
@@ -453,7 +457,7 @@ The API also supports legacy whole-cart checkout when item IDs are omitted. Dist
 
 ## 5. NON-FUNCTIONAL REQUIREMENTS
 
-All quality requirements remain Draft. Proposed targets are not measured results.
+Quality requirements await faculty approval. Proposed targets are not measured results.
 
 ### 5.1 Security integrity and evaluation targets
 
@@ -483,7 +487,7 @@ All quality requirements remain Draft. Proposed targets are not measured results
 
 ### 5.3 Proposed Evaluation Conditions
 
-For NFR-05, proposed evaluation widthsare 390 CSS pixels for phones and 1440 CSS pixels for desktop, with readable content and no page-wide horizontal overflow. Product carousels may scroll within their own containers. These widths require review and do not replace evaluation on actual devices.
+For NFR-05, proposed evaluation widths are 390 CSS pixels for phones and 1440 CSS pixels for desktop, with readable content and no page-wide horizontal overflow. Product carousels may scroll within their own containers. These widths require review and do not replace evaluation on actual devices.
 
 For NFR-06, the guide must approve a response-time percentile, load profile, dataset size, hardware/network configuration and treatment of third-party latency. Availability targets, maintenance windows and recovery thresholds are also open decisions; no uptime percentage or load-test result is asserted here.
 

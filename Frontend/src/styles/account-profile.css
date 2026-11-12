@@ -1,0 +1,66 @@
+.account-profile-page { min-height: 70vh; padding: 28px 20px 48px; background: #fff; color: #0f1111; }
+.account-profile-container { max-width: 1000px; margin: 0 auto; }
+.account-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; font-size: 13px; line-height: 20px; color: #565959; }
+.account-breadcrumb a { color: #2162a1; }
+.account-breadcrumb svg { width: 12px; height: 12px; }
+.account-page-header { margin-bottom: 24px; }
+.account-page-header h1 { margin: 0 0 6px; font-size: 30px; line-height: 38px; font-weight: 400; }
+.account-page-header p { margin: 0; font-size: 14px; line-height: 21px; color: #565959; }
+.account-shortcuts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-bottom: 34px; }
+.account-shortcut { min-width: 0; min-height: 112px; display: flex; align-items: flex-start; gap: 16px; padding: 20px 16px; border: 1px solid #d5d9d9; border-radius: 8px; color: inherit; background: #fff; text-decoration: none; transition: background-color 150ms ease; }
+.account-shortcut:hover { background: #f7fafa; }
+.account-shortcut-icon { flex: 0 0 54px; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #fff4df; color: #9b662a; }
+.account-shortcut-icon svg { width: 42px; height: 42px; }
+.account-icon-security, .account-icon-sessions { background: #eef4f5; color: #426873; }
+.account-icon-addresses { background: #eaf2f8; color: #416681; }
+.account-icon-wishlist { background: #fceef0; color: #b63a53; }
+.account-shortcut-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.account-shortcut-title { font-size: 18px; line-height: 23px; font-weight: 400; }
+.account-shortcut-description { font-size: 13px; line-height: 19px; color: #565959; }
+.account-shortcut-chevron { display: none; }
+.account-security-section { border-top: 1px solid #e3e6e6; padding-top: 26px; scroll-margin-top: 120px; }
+.account-section-heading { margin-bottom: 18px; }
+.account-section-heading h2 { margin: 0 0 5px; font-size: 24px; line-height: 31px; font-weight: 400; }
+.account-section-heading p { margin: 0; color: #565959; font-size: 14px; line-height: 21px; }
+.account-settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+#account-profile .account-form-panel { min-width: 0; border: 1px solid #d5d9d9; border-radius: 8px; box-shadow: none; padding: 22px; }
+#account-profile .account-form-panel h2 { font-size: 18px; line-height: 25px; font-weight: 700; }
+#account-profile .account-form-panel label { font-size: 14px; line-height: 20px; }
+#account-profile .account-form-panel input { font-size: 14px; min-height: 40px; }
+#profile-password input { padding-right: 44px; }
+#profile-password form .relative > button { top: 0; right: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+#account-profile .account-form-panel form button[type="submit"] { min-height: 36px; padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 400; color: #0f1111; background: #ffd814; box-shadow: none; }
+#account-profile .account-form-panel form button[type="submit"]:hover { background: #f7ca00; }
+.profile-details-list { margin: 0; }
+.account-password-note { color: #565959; font-size: 13px; line-height: 20px; }
+.profile-details-card > div:first-child > button { border-radius: 999px; min-height: 32px; padding-inline: 16px; font-size: 13px; }
+.profile-details-list > div { padding: 16px 0; border-bottom: 1px solid #e3e6e6; }
+.profile-details-list > div:first-child { padding-top: 0; }
+.profile-details-list > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.profile-details-list dt { margin-bottom: 5px; font-size: 14px; line-height: 20px; font-weight: 700; }
+.profile-details-list dd { margin: 0; font-size: 14px; line-height: 22px; overflow-wrap: anywhere; }
+.profile-details-list dd small { display: block; font-size: 12px; line-height: 18px; color: #565959; }
+.account-sessions-panel { display: flex; align-items: center; gap: 18px; margin-top: 24px; padding: 22px; border: 1px solid #d5d9d9; border-radius: 8px; scroll-margin-top: 120px; }
+.account-sessions-icon { flex-shrink: 0; width: 34px; height: 34px; color: #565959; }
+.account-sessions-panel h2 { margin: 0 0 5px; font-size: 18px; line-height: 25px; font-weight: 700; }
+.account-sessions-panel p { margin: 0; font-size: 13px; line-height: 20px; color: #565959; }
+.account-sessions-panel .account-session-button { flex-shrink: 0; min-height: 36px; height: auto; border: 1px solid #d5d9d9; border-radius: 999px; padding: 7px 15px; color: #0f1111; font-size: 13px; background: #fff; white-space: normal; }
+.account-sessions-panel .account-session-button:hover { background: #f7fafa; }
+.account-shortcut:focus-visible, .account-breadcrumb a:focus-visible { outline: 3px solid #007185; outline-offset: 3px; }
+@media (min-width: 641px) and (max-width: 900px) { .account-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .account-profile-page { padding: 18px 16px 32px; }
+  .account-page-header h1 { font-size: 28px; line-height: 35px; }
+  .account-shortcuts { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 26px; }
+  .account-shortcut { min-height: 94px; padding: 16px; align-items: center; gap: 14px; }
+  .account-shortcut-copy { flex: 1; }
+  .account-shortcut-chevron { display: block; width: 18px; height: 18px; flex-shrink: 0; color: #565959; }
+  .account-settings-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #account-profile .account-form-panel { padding: 18px 16px; }
+  #account-profile .account-form-panel input { font-size: 16px; min-height: 44px; }
+  #account-profile .account-form-panel form button[type="submit"], .profile-details-card > div:first-child > button { min-height: 44px; }
+  #profile-password form .relative > button { width: 44px; height: 44px; }
+  .account-sessions-panel { flex-wrap: wrap; padding: 18px 16px; gap: 12px; }
+  .account-sessions-panel > div { flex: 1; min-width: 0; }
+  .account-sessions-panel .account-session-button { width: 100%; }
+}

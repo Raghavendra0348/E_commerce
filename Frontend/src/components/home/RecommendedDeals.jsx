@@ -8,26 +8,35 @@ import { Button } from "../ui/button";
 import { formatPrice } from "../../lib/utils";
 import "../../styles/recommended-deals.css";
 
-const PANEL_TITLES = ["Deals for you", "Discover more favourites", "More deals to explore", "Everyday finds for you"];
+const PANELS = [
+  { title: "Recommended deals for you", layout: "deals" },
+  { title: "New picks for you", layout: "picks" },
+  { title: "Everyday favourites | More to explore", layout: "collection" },
+  { title: "Discover your next everyday essential", layout: "collection" },
+];
 const DEAL_PARAMS = { limit: 16, sortBy: "price", sortOrder: "asc" };
 
-function DealTile({ product, featured }) {
+function DealTile({ product, featured, layout }) {
   const originalPrice = Number(product.originalPrice);
   const price = Number(product.price);
   const discount = originalPrice > price && price >= 0
     ? Math.round((originalPrice - price) / originalPrice * 100)
     : 0;
+  const hasDealLabel = layout === "deals" && featured && discount > 0;
+  const [wholePrice, fractionalPrice] = price.toFixed(2).split(".");
 
   return (
-    <div id={`recommended-product-${product.id}`} className="recommended-deal-tile">
-    <Link className="recommended-deal-link" to={`/products/${product.slug}`} aria-label={`${product.name}, ${formatPrice(price)}${discount > 0 ? `, ${discount}% off${featured ? ", Limited deal" : ""}` : ""}`} title={product.name}>
+    <div id={`recommended-product-${product.id}`} className={`recommended-deal-tile recommended-tile-${layout}`}>
+    <Link className="recommended-deal-link" to={`/products/${product.slug}`} aria-label={`${product.name}, ${formatPrice(price)}${discount > 0 ? `, ${discount}% off${hasDealLabel ? ", Limited deal" : ""}` : ""}`} title={product.name}>
       <div className="recommended-deal-image">
         <ProductImage src={product.images?.[0]?.url || product.imageUrl} alt={product.name} loading="lazy" />
       </div>
       <div className="recommended-deal-details">
+        {layout === "deals" ? <div className="recommended-deal-offer">
         <span className="recommended-deal-badge">{discount > 0 ? `${discount}% off` : formatPrice(price)}</span>
-        <span className="recommended-deal-price">{discount > 0 ? formatPrice(price) : "Explore product"}</span>
-        {featured && discount > 0 && <span className="recommended-deal-label">Limited deal</span>}
+        {hasDealLabel && <span className="recommended-deal-label">Limited deal</span>}
+        </div> : <span className="recommended-product-name">{product.name}{layout === "collection" && discount > 0 ? ` | ${discount}% off` : ""}</span>}
+        {layout === "picks" && <span className="recommended-pick-price"><span>₹</span>{Number(wholePrice).toLocaleString("en-IN")}<sup>{fractionalPrice}</sup></span>}
         {product.stock <= 0 && <span className="recommended-deal-label">Out of Stock</span>}
       </div>
     </Link>
@@ -53,16 +62,16 @@ export default function RecommendedDeals() {
         <p className="recommended-deals-message">More finds are on the way. <Link to="/products">Explore all products</Link></p>
       ) : (
         <div className="recommended-deals-panels" aria-busy={isLoading}>
-          {PANEL_TITLES.map((title, index) => {
+          {PANELS.map(({ title, layout }, index) => {
             const panelProducts = products.slice(index * 4, index * 4 + 4);
             if (!isLoading && !panelProducts.length) return null;
             return (
-              <article id={`recommended-deals-panel-${index}`} className="recommended-deals-panel" key={title}>
+              <article id={`recommended-deals-panel-${index}`} className={`recommended-deals-panel recommended-panel-${layout}`} key={title}>
                 <Link className="recommended-deals-heading" to="/products?sortBy=price&sortOrder=asc">
-                  <h3>{title}</h3><ChevronRight aria-hidden="true" strokeWidth={2} />
+                  <h3>{title}</h3>{layout !== "picks" && <ChevronRight aria-hidden="true" strokeWidth={2} />}
                 </Link>
                 <div className="recommended-deals-tiles">
-                  {isLoading ? Array.from({ length: 4 }, (_, tile) => <Skeleton key={tile} className="recommended-deal-skeleton" />) : panelProducts.map((product, tile) => <DealTile key={product.id} product={product} featured={tile === 0} />)}
+                  {isLoading ? Array.from({ length: 4 }, (_, tile) => <Skeleton key={tile} className="recommended-deal-skeleton" />) : panelProducts.map((product, tile) => <DealTile key={product.id} product={product} layout={layout} featured={tile < 2} />)}
                 </div>
               </article>
             );

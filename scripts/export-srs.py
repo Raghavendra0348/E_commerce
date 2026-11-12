@@ -4,7 +4,7 @@ The PDF uses ReportLab pagination. The editable DOCX uses native Word fields;
 its pagination/TOC must be updated and checked in a native Word renderer.
 """
 from pathlib import Path
-import re, json, html, copy
+import re, json, html, copy, argparse
 from xml.sax.saxutils import escape
 from PIL import Image as PILImage
 from docx import Document
@@ -26,6 +26,12 @@ from reportlab.platypus.tableofcontents import TableOfContents
 ROOT=Path(__file__).resolve().parents[1]
 DOCS=ROOT/'Docs'
 source=(DOCS/'SRS_FINAL.md').read_text(encoding='utf-8')
+arguments=argparse.ArgumentParser(description='Export the final SRS document.')
+arguments.add_argument('--pdf-only',action='store_true')
+arguments.add_argument('--output-pdf',type=Path,default=DOCS/'SRS_FINAL.pdf')
+options=arguments.parse_args()
+version_match=re.search(r'version\s+(\d+\.\d+)',source,re.I)
+VERSION=version_match[1] if version_match else '1.0'
 data=json.loads((ROOT/'output/srs-data.json').read_text(encoding='utf-8'))
 figures=data['figures']
 
@@ -123,7 +129,7 @@ def pdf_table(tab,available):
     t=Table(cells,colWidths=widths(tab,available),repeatRows=1,hAlign='LEFT')
     commands=[('BACKGROUND',(0,0),(-1,0),colors.HexColor('#eeeeee')),('GRID',(0,0),(-1,-1),.5,colors.HexColor('#d9d9d9')),
               ('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),5),('RIGHTPADDING',(0,0),(-1,-1),5),
-              ('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5)]
+              ('TOPPADDING',(0,0),(-1,-1),4),('BOTTOMPADDING',(0,0),(-1,-1),4)]
     t.setStyle(TableStyle(commands));t.spaceAfter=9
     return t
 
@@ -131,8 +137,8 @@ def footer(canvas,doc):
     if doc.page==1:return
     page_w,page_h=canvas._pagesize
     canvas.saveState();canvas.setFont('TNR',9)
-    canvas.drawString(M,page_h-43,'E-Commerce Web Application | SRS Version 0.5')
-    canvas.drawString(M,39,'Draft for review — approval pending')
+    canvas.drawString(M,page_h-43,f'E-Commerce Web Application | SRS Version {VERSION}')
+    canvas.drawString(M,39,'Final submission - faculty approval pending')
     canvas.drawRightString(page_w-M,39,f'Page {doc.page}')
     canvas.restoreState()
 
@@ -153,7 +159,8 @@ def pdf_heading(level,title):
     return p
 
 def make_pdf():
-    document=SrsPDF(str(DOCS/'SRS_FINAL.pdf'),pagesize=A4,leftMargin=M,rightMargin=M,topMargin=M,bottomMargin=M,
+    options.output_pdf.parent.mkdir(parents=True,exist_ok=True)
+    document=SrsPDF(str(options.output_pdf),pagesize=A4,leftMargin=M,rightMargin=M,topMargin=M,bottomMargin=M,
                     title='Software Requirements Specification for E-Commerce Web Application',author='Arella Raghavendra')
     document.addPageTemplates([
       PageTemplate(id='portrait',frames=[Frame(M,M,PW,H-2*M,leftPadding=0,rightPadding=0,topPadding=0,bottomPadding=0)],onPage=footer,pagesize=A4),
@@ -163,12 +170,17 @@ def make_pdf():
     for kind,value in cover:
         if kind=='caption':story.append(Paragraph(escape(value),styles['caption']))
         if kind=='table':story.append(pdf_table(value,PW))
+    contents_index=next(i for i,block in enumerate(body) if block[0]=='toc')
+    story.append(Spacer(1,16))
+    for kind,value in body[:contents_index]:
+        if kind=='paragraph':story.append(Paragraph(rich(value),styles['body']))
     story.append(PageBreak());wide=False
-    for block_index,(kind,value) in enumerate(body):
+    document_body=body[contents_index:]
+    for block_index,(kind,value) in enumerate(document_body):
         if kind=='toc':
             story.extend([Spacer(1,18),Paragraph('Contents',styles['h1'])])
-            toc=TableOfContents();toc.levelStyles=[ParagraphStyle('toc'+str(i),fontName='TNR-Bold' if i==0 else 'TNR',fontSize=10.5,leading=13,leftIndent=i*14,firstLineIndent=0,spaceBefore=2 if i==0 else 0) for i in range(3)]
-            toc.tableStyle=TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),0)])
+            toc=TableOfContents();toc.levelStyles=[ParagraphStyle('toc'+str(i),fontName='TNR-Bold' if i==0 else 'TNR',fontSize=10,leading=11.5,leftIndent=i*14,firstLineIndent=0,spaceBefore=1 if i==0 else 0) for i in range(3)]
+            toc.tableStyle=TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),0),('RIGHTPADDING',(0,0),(-1,-1),0),('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),0)])
             story.append(toc);continue
         if kind=='heading':
             level,title=value
@@ -177,7 +189,7 @@ def make_pdf():
             elif level==2:
                 if wide:story.append(NextPageTemplate('portrait'));wide=False
                 story.append(PageBreak())
-            if block_index+2<len(body) and body[block_index+1][0]=='caption' and body[block_index+2][0]=='table':
+            if block_index+2<len(document_body) and document_body[block_index+1][0]=='caption' and document_body[block_index+2][0]=='table':
                 story.append(CondPageBreak(170))
             story.append(pdf_heading(level,title));continue
         if kind=='figure':
@@ -256,9 +268,9 @@ def make_docx():
     doc.styles['Heading 1'].paragraph_format.page_break_before=True
     doc.styles['Title'].font.size=Pt(22)
     doc.styles['Caption'].font.size=Pt(10.5);doc.styles['Caption'].font.italic=True;doc.styles['Caption'].paragraph_format.line_spacing=1.1
-    head=doc.sections[0].header.paragraphs[0];head.text='E-Commerce Web Application | SRS Version 0.5';head.runs[0].font.size=Pt(9)
+    head=doc.sections[0].header.paragraphs[0];head.text=f'E-Commerce Web Application | SRS Version {VERSION}';head.runs[0].font.size=Pt(9)
     foot=doc.sections[0].footer.paragraphs[0];foot.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    foot.add_run('Draft for review | Page ').font.size=Pt(9);field(foot,'PAGE')
+    foot.add_run('Final submission - approval pending | Page ').font.size=Pt(9);field(foot,'PAGE')
     doc.add_paragraph().paragraph_format.space_after=Pt(12)
     for title,style in [('SOFTWARE REQUIREMENTS SPECIFICATION','Title'),('FOR','Normal'),('E-COMMERCE WEB APPLICATION','Subtitle'),('Academic project — Amazon-inspired storefront','Normal')]:
         p=doc.add_paragraph(title,style);p.alignment=WD_ALIGN_PARAGRAPH.CENTER
@@ -291,9 +303,9 @@ def make_docx():
         if kind=='list':p.paragraph_format.left_indent=Pt(12);p.paragraph_format.first_line_indent=Pt(-12)
     update=OxmlElement('w:updateFields');update.set(qn('w:val'),'true');doc.settings.element.append(update)
     doc.core_properties.title='Software Requirements Specification for E-Commerce Web Application'
-    doc.core_properties.author='Arella Raghavendra';doc.core_properties.version='0.5';doc.core_properties.subject='Faculty submission specification'
+    doc.core_properties.author='Arella Raghavendra';doc.core_properties.version=VERSION;doc.core_properties.subject='Faculty submission specification'
     doc.save(DOCS/'SRS_FINAL.docx')
 
 make_pdf()
-make_docx()
-print('Created SRS_FINAL.pdf with generated page-aware contents and SRS_FINAL.docx with native TOC/page fields.')
+if not options.pdf_only:make_docx()
+print(f'Created {options.output_pdf} with generated page-aware contents, version {VERSION}.')

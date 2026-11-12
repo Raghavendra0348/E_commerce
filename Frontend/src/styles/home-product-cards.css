@@ -33,11 +33,11 @@
 .home-product-card .product-card-image img { object-fit: contain; }
 .home-product-card .product-card-body {
   display: flex;
-  flex: 1;
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 5px;
-  padding: 8px 12px 14px;
+  gap: 4px;
+  padding: 8px 12px 10px;
 }
 .home-card-title {
   display: block;
@@ -73,14 +73,17 @@
   line-height: 1.25;
 }
 .home-card-festival {
-  margin-top: auto;
-  padding-top: 4px;
+  margin-top: 3px;
+  padding-top: 0;
   color: #cc0c39;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.35;
 }
 .home-card-cart-action { position: absolute; top: 94px; right: 8px; z-index: 10; }
+.home-card-cart-action .home-card-notify { height: 32px; padding: 0 9px; gap: 5px; border-radius: 999px; background: #ffd814; border-color: #ffd814; color: #0f1111; font-size: 12px; line-height: 18px; white-space: nowrap; }
+.home-card-cart-action .home-card-notify:hover { background: #f7ca00; border-color: #f7ca00; }
+.home-card-cart-action .home-card-notify svg { width: 14px; height: 14px; }
 .home-product-card .home-card-cart-action .product-card-cart {
   width: 32px;
   height: 32px;

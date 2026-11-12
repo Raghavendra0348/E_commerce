@@ -1,34 +1,38 @@
 import { T } from "../components/common/Translation";
 import { Link } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { Heart, ChevronRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { WishlistProductCard } from "../components/product/ProductCard";
-import ProductCardSkeleton from "../components/product/ProductCardSkeleton";
+import { Skeleton } from "../components/ui/skeleton";
 import { useWishlist } from "../hooks/useWishlist";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import "../styles/wishlist.css";
 
 export default function Wishlist() {
+  useDocumentTitle("Your Wishlist");
   const { products, isLoading, error, refetch, removeFromWishlist, isRemoving } = useWishlist();
 
   return (
-    <div id="wishlist-page" className="wishlist-page min-h-screen bg-[#EAEDED] py-6 sm:py-8">
-      <div className="mx-auto max-w-[1500px] px-4">
+    <div id="wishlist-page" className="wishlist-page">
+      <div className="wishlist-container">
+        <nav className="wishlist-breadcrumb" aria-label="Breadcrumb"><Link to="/account/profile">Your Account</Link><ChevronRight aria-hidden="true" /><span aria-current="page">Your Wishlist</span></nav>
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="wishlist-page-header">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <Heart className="h-6 w-6 text-[#CC0C39] fill-[#CC0C39]" />
-            <h1 className="text-2xl font-bold text-[#0F1111]"><T>{"Your Wishlist"}</T></h1>
+            <h1><T>{"Your Wishlist"}</T></h1>
             {!isLoading && (
               <span className="text-sm text-[#565959]">
                 ({products.length} {products.length === 1 ? "item" : "items"})
               </span>
             )}
           </div>
+          <Link className="wishlist-continue" to="/products">Continue shopping</Link>
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <ProductCardSkeleton key={i} />
+          <div className="wishlist-list" aria-busy="true" aria-label="Loading wishlist">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div className="wishlist-row-skeleton" key={i}><Skeleton className="wishlist-skeleton-image" /><div><Skeleton className="h-6 w-4/5" /><Skeleton className="h-4 w-1/2 mt-3" /><Skeleton className="h-7 w-24 mt-3" /><Skeleton className="h-10 w-36 mt-8" /></div></div>
             ))}
           </div>
         ) : error ? (
@@ -51,7 +55,7 @@ export default function Wishlist() {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+          <div className="wishlist-list">
             {products.map((product) => (
               <WishlistProductCard key={product.id} product={product} onRemove={removeFromWishlist} busy={isRemoving} />
             ))}

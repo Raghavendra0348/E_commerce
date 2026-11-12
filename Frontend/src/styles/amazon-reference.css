@@ -152,6 +152,23 @@ body { font-family: var(--amazon-font-body); font-size: var(--amazon-body-size);
 .discovery-heading h2, .home-product-row h2 { font-size: 22px; line-height: 28px; letter-spacing: -.25px; }
 .discovery-tile-image { border-radius: 4px; }
 .discovery-product-price { font-weight: 400; }
+/* Let gold-card images occupy spare height created by the taller neighbouring cards. */
+:is(#discovery-panel-value, #discovery-panel-fashion) .discovery-products { flex: 1; grid-template-rows: repeat(2, minmax(0, 1fr)); }
+:is(#discovery-panel-value, #discovery-panel-fashion) .discovery-tile { min-height: 0; }
+:is(#discovery-panel-value, #discovery-panel-fashion) .discovery-tile-image { flex: 1; aspect-ratio: auto; min-height: 130px; }
+:is(#discovery-panel-value, #discovery-panel-fashion) :is(.discovery-product-name, .discovery-product-price) { flex-shrink: 0; }
+/* Furniture and audio use compact storefront cards; the first two retain gold. */
+:is(#discovery-panel-furniture, #discovery-panel-audio) { background: #fff; border-color: #d5d9d9; border-radius: 12px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-heading { min-height: 83px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-heading p { font-size: 13px; line-height: 20px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-products { flex: 1; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-tile { min-height: 0; padding: 10px; border: 1px solid #e3e6e6; border-radius: 8px; background: #fafafa; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-tile-image { flex: 1; aspect-ratio: auto; min-height: 130px; border-radius: 4px; background: #f3f4f4; margin-bottom: 9px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-product-name { flex-shrink: 0; font-size: 13px; line-height: 19px; min-height: 38px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-product-price { flex-shrink: 0; margin-top: 6px; font-size: 18px; line-height: 24px; font-weight: 600; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-shop-link { justify-content: center; min-height: 44px; margin-top: auto; padding: 10px 14px; border-radius: 999px; background: #ffd814; color: #0f1111; font-size: 14px; line-height: 20px; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) .discovery-shop-link:hover { background: #f7ca00; text-decoration: none; }
+:is(#discovery-panel-furniture, #discovery-panel-audio) :is(.discovery-tile, .discovery-shop-link):focus-visible { outline: 3px solid #007185; outline-offset: 2px; }
 .home-category-section, .home-product-row { max-width: 1768px; margin: 24px auto; }
 .home-product-row .site-product-card { display: flex; flex-direction: column; height: 100%; border-radius: 5px; }
 .home-product-row .product-card-body { flex: 1; }

@@ -15,8 +15,12 @@ describe("recommended homepage deals", () => {
     const { container } = show();
     expect(container.querySelectorAll(".recommended-deals-panel")).toHaveLength(4);
     expect(container.querySelectorAll(".recommended-deal-tile")).toHaveLength(16);
-    expect(screen.getAllByText("25% off")).toHaveLength(16);
-    expect(screen.getAllByText("Limited deal")).toHaveLength(4);
+    expect(screen.getAllByText("25% off")).toHaveLength(4);
+    expect(screen.getAllByText("Limited deal")).toHaveLength(2);
+    expect(container.querySelectorAll(".recommended-panel-deals")).toHaveLength(1);
+    expect(container.querySelectorAll(".recommended-panel-picks")).toHaveLength(1);
+    expect(container.querySelectorAll(".recommended-panel-collection")).toHaveLength(2);
+    expect(container.querySelectorAll(".recommended-pick-price")).toHaveLength(4);
     expect(screen.getByRole("link", { name: /Existing product 0,/ })).toHaveAttribute("href", "/products/existing-0");
     expect(screen.getByAltText("Existing product 0")).toHaveAttribute("src", "/uploads/product-0.jpg");
     expect(screen.queryByText(/Sponsored|Limited time deal/)).not.toBeInTheDocument();

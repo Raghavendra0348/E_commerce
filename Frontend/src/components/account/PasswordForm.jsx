@@ -50,11 +50,12 @@ export default function PasswordForm({ onSave, isSaving = false }) {
   };
 
   return (
-    <div className="account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
+    <div id="profile-password" className="account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
       <div className="flex items-center gap-2 pb-3 border-b border-[#EDEDED]">
         <KeyRound className="h-5 w-5 text-[#FF9900]" />
         <h2 className="text-base sm:text-lg font-bold text-[#0F1111]"><T>{"Change Password"}</T></h2>
       </div>
+      <p className="account-password-note">You will need to sign in again after changing your password.</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5">
         <div>
@@ -64,6 +65,7 @@ export default function PasswordForm({ onSave, isSaving = false }) {
           <div className="relative mt-1">
             <Input
               id="currPw"
+              autoComplete="current-password"
               type={showCurrentPw ? "text" : "password"}
               {...register("currentPassword")}
               placeholder="Enter current password"
@@ -89,6 +91,7 @@ export default function PasswordForm({ onSave, isSaving = false }) {
           <div className="relative mt-1">
             <Input
               id="newPw"
+              autoComplete="new-password"
               type={showNewPw ? "text" : "password"}
               {...register("newPassword")}
               placeholder="Min. 8 characters with 1 number & uppercase"
@@ -114,6 +117,7 @@ export default function PasswordForm({ onSave, isSaving = false }) {
           <div className="relative mt-1">
             <Input
               id="confPw"
+              autoComplete="new-password"
               type={showConfirmPw ? "text" : "password"}
               {...register("confirmPassword")}
               placeholder="Confirm new password"

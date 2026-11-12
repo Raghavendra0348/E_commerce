@@ -45,7 +45,7 @@ beforeEach(() => {
   });
   api.delete.mockImplementation(() => { records = []; return Promise.resolve({ data: {} }); });
 });
-afterEach(() => { cleanup(); client.clear(); useAuthStore.getState().logout(); vi.resetAllMocks(); });
+afterEach(() => { cleanup(); client.clear(); useAuthStore.getState().logout(); vi.resetAllMocks(); vi.unstubAllGlobals(); });
 
 describe("composed product cards and shared wishlist", () => {
   it("reads the backend array and deduplicates wishlist reads across card layouts", async () => {
@@ -77,10 +77,32 @@ describe("composed product cards and shared wishlist", () => {
     const remove = await screen.findByRole("button", { name: "Remove from wishlist" });
     expect(screen.queryByRole("button", { name: "Add to wishlist" })).not.toBeInTheDocument();
     const card = remove.closest(".site-product-card");
-    expect(within(card).getAllByRole("button")).toHaveLength(2); // Remove and Add to Cart.
+    expect(within(card).getAllByRole("button")).toHaveLength(3); // Add to Cart, Share and Remove.
     fireEvent.click(remove);
     await screen.findByText("Your Wishlist is empty");
     expect(api.delete).toHaveBeenCalledWith("/wishlist/7");
+  });
+
+  it("shows real wishlist metadata in wide rows without invented dates or delivery claims", async () => {
+    records = [{ ...saved, product: { ...product, category: { name: "Fashion" }, avgRating: 4.5, reviewCount: 3, originalPrice: 999 } }];
+    show(<Wishlist />);
+    const title = await screen.findByText(product.name);
+    expect(title.closest(".wishlist-product-row")).toBeInTheDocument();
+    expect(screen.getByText("Fashion")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Read 3 reviews for Test product" })).toHaveAttribute("href", "/products/test-product#reviews");
+    expect(screen.queryByText(/Item added|FREE Delivery|Fulfilled/)).not.toBeInTheDocument();
+  });
+
+  it("copies a product link from the wishlist share control without modifying saved items", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal("navigator", { ...navigator, share: undefined, clipboard: { writeText } });
+    records = [saved];
+    show(<Wishlist />);
+    fireEvent.click(await screen.findByRole("button", { name: "Share Test product" }));
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith(new URL("/products/test-product", window.location.origin).href));
+    expect(toast.success).toHaveBeenCalledWith("Product link copied");
+    expect(api.delete).not.toHaveBeenCalled();
+    expect(api.post).not.toHaveBeenCalled();
   });
 
   it("retains saved state after a failed toggle and permits retry", async () => {

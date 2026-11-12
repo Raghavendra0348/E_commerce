@@ -9,6 +9,9 @@ import {
   ChevronRight,
   Shield,
   LogOut,
+  ShoppingCart,
+  LockKeyhole,
+  MonitorSmartphone,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useAuthStore } from "../store/useAuthStore";
@@ -16,6 +19,29 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import ProfileForm from "../components/account/ProfileForm";
 import PasswordForm from "../components/account/PasswordForm";
 import api from "../api/axios";
+import "../styles/account-profile.css";
+
+const ACCOUNT_SHORTCUTS = [
+  { title: "Your Orders", description: "Track orders, view details or buy again", href: "/account/orders", icon: Package, tone: "orders" },
+  { title: "Login & security", description: "Edit your name, mobile number and password", href: "#login-security", icon: LockKeyhole, tone: "security" },
+  { title: "Your Addresses", description: "Add or edit your delivery addresses", href: "/account/addresses", icon: MapPin, tone: "addresses" },
+  { title: "Your Wishlist", description: "Rediscover the products you saved", href: "/wishlist", icon: Heart, tone: "wishlist" },
+  { title: "Your Cart", description: "View items and continue to checkout", href: "/cart", icon: ShoppingCart, tone: "cart" },
+  { title: "Your Devices & Sessions", description: "Manage access across your devices", href: "#account-sessions", icon: MonitorSmartphone, tone: "sessions" },
+];
+
+function AccountShortcut({ item }) {
+  const Destination = item.href.startsWith("#") ? "a" : Link;
+  const destination = item.href.startsWith("#") ? { href: item.href } : { to: item.href };
+  const Icon = item.icon;
+  return (
+    <Destination id={`account-shortcut-${item.tone}`} {...destination} className="account-shortcut">
+      <span className={`account-shortcut-icon account-icon-${item.tone}`}><Icon aria-hidden="true" strokeWidth={1.5} /></span>
+      <span className="account-shortcut-copy"><span className="account-shortcut-title"><T>{item.title}</T></span><span className="account-shortcut-description">{item.description}</span></span>
+      <ChevronRight className="account-shortcut-chevron" aria-hidden="true" />
+    </Destination>
+  );
+}
 
 export default function Profile() {
   useDocumentTitle("Your Account Profile");
@@ -80,103 +106,46 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAEDED] py-6 sm:py-8">
-      <div className="mx-auto max-w-5xl px-4 space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1111]"><T>{"Your Account"}</T></h1>
-          <p className="text-sm text-[#565959] mt-0.5">
-            Manage your personal profile, credentials, and saved addresses
-          </p>
-        </div>
-
-        {/* Quick Links Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Link
-            to="/account/orders"
-            className="flex items-center gap-4 bg-white p-4 rounded-lg border border-[#EDEDED] shadow-xs hover:border-[#FF9900] transition-colors group"
-          >
-            <div className="h-12 w-12 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#FF9900] group-hover:scale-105 transition-transform">
-              <Package className="h-6 w-6" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                <T>{"Your Orders"}</T>
-              </h3>
-              <p className="text-xs text-[#565959] truncate">Track, return, or buy again</p>
-            </div>
-            <ChevronRight className="h-4 w-4 text-[#888C8C]" />
-          </Link>
-
-          <Link
-            to="/account/addresses"
-            className="flex items-center gap-4 bg-white p-4 rounded-lg border border-[#EDEDED] shadow-xs hover:border-[#FF9900] transition-colors group"
-          >
-            <div className="h-12 w-12 rounded-full bg-[#E6F5F0] flex items-center justify-center text-[#067D62] group-hover:scale-105 transition-transform">
-              <MapPin className="h-6 w-6" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                <T>{"Your Addresses"}</T>
-              </h3>
-              <p className="text-xs text-[#565959] truncate">Edit addresses for orders</p>
-            </div>
-            <ChevronRight className="h-4 w-4 text-[#888C8C]" />
-          </Link>
-
-          <Link
-            to="/wishlist"
-            className="flex items-center gap-4 bg-white p-4 rounded-lg border border-[#EDEDED] shadow-xs hover:border-[#FF9900] transition-colors group"
-          >
-            <div className="h-12 w-12 rounded-full bg-[#FCE8EC] flex items-center justify-center text-[#CC0C39] group-hover:scale-105 transition-transform">
-              <Heart className="h-6 w-6" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm text-[#0F1111] group-hover:text-[#C7511F]">
-                <T>{"Your Wishlist"}</T>
-              </h3>
-              <p className="text-xs text-[#565959] truncate">View saved items</p>
-            </div>
-            <ChevronRight className="h-4 w-4 text-[#888C8C]" />
-          </Link>
-        </div>
-
-        {/* Forms Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div id="account-profile" className="account-profile-page">
+      <div className="account-profile-container">
+        <nav className="account-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><ChevronRight aria-hidden="true" /><span aria-current="page">Your Account</span></nav>
+        <header className="account-page-header">
+          <h1><T>{"Your Account"}</T></h1>
+          <p>Hello, {user?.name || "there"}. Manage your account and shopping preferences.</p>
+        </header>
+        <nav id="account-shortcuts" className="account-shortcuts" aria-label="Account services">
+          {ACCOUNT_SHORTCUTS.map(item => <AccountShortcut key={item.tone} item={item} />)}
+        </nav>
+        <section id="login-security" className="account-security-section" aria-labelledby="account-security-title">
+          <div className="account-section-heading"><h2 id="account-security-title">Login &amp; security</h2><p>Keep your personal details and password up to date.</p></div>
+          <div className="account-settings-grid">
           <ProfileForm
             user={user}
             onSave={handleSaveProfile}
             isSaving={profileSaving}
           />
 
-          <div className="space-y-6">
             <PasswordForm
               onSave={handleChangePassword}
               isSaving={passwordSaving}
             />
 
-            {/* Session Management Card */}
-            <div className="account-form-panel bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-3">
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-[#067D62]" />
-                <h3 className="text-sm font-semibold text-[#0F1111]">Active Sessions</h3>
-              </div>
-              <p className="text-xs text-[#565959]">
-                If you suspect unauthorized activity, you can securely sign out from all active browsers and devices.
-              </p>
+          </div>
+        </section>
+        <section id="account-sessions" className="account-sessions-panel" aria-labelledby="account-sessions-title">
+          <Shield className="account-sessions-icon" aria-hidden="true" />
+          <div><h2 id="account-sessions-title">Secure your account</h2><p>Signed in on a shared device? Sign out of all browsers and devices to protect your account.</p></div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleLogoutAll}
                 disabled={loggingOutAll}
-                className="text-xs border-[#CC0C39] text-[#CC0C39] hover:bg-[#CC0C39]/10"
+                className="account-session-button"
               >
                 <LogOut className="h-3.5 w-3.5 mr-1.5" />
                 {loggingOutAll ? "Signing Out..." : "Sign Out of All Devices"}
               </Button>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );

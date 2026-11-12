@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { User, CheckCircle } from "lucide-react";
+import { User } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -50,12 +50,12 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
   };
 
   return (
-    <div className="account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
-      <div className="flex items-center justify-between pb-3 border-b border-[#EDEDED]">
+    <div id="profile-details" className="profile-details-card account-form-panel min-w-0 bg-white rounded-lg border border-[#EDEDED] shadow-xs p-6 space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#EDEDED]">
         <div className="flex items-center gap-2">
           <User className="h-5 w-5 text-[#FF9900]" />
           <h2 className="text-base sm:text-lg font-bold text-[#0F1111]">
-            Login & Profile Details
+            Personal details
           </h2>
         </div>
         {!isEditing && (
@@ -63,56 +63,42 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
             variant="outline"
             size="sm"
             onClick={handleEditClick}
+            aria-label="Edit profile"
             className="text-xs h-8 border-[#D5D9D9]"
           >
-            Edit Profile
+            Edit
           </Button>
         )}
       </div>
 
       {!isEditing ? (
-        <div className="space-y-4 text-xs">
+        <dl className="profile-details-list">
           <div>
-            <span className="font-semibold text-[#565959] uppercase tracking-wider block">
+            <dt>
               <T>{"Full Name"}</T>
-            </span>
-            <p className="text-sm font-semibold text-[#0F1111] mt-0.5">
+            </dt>
+            <dd>
               {user?.name || "Not set"}
-            </p>
+            </dd>
           </div>
 
           <div>
-            <span className="font-semibold text-[#565959] uppercase tracking-wider block">
+            <dt>
               <T>{"Email Address"}</T>
-            </span>
-            <div className="flex items-center gap-2 mt-0.5">
-              <p className="text-sm font-semibold text-[#0F1111]">{user?.email}</p>
-              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#067D62] bg-[#E6F5F0] px-2 py-0.5 rounded-full">
-                <CheckCircle className="h-3 w-3" /> Verified
-              </span>
-            </div>
+            </dt>
+            <dd>{user?.email || "Not set"}<small>Your sign-in email address</small></dd>
           </div>
 
           <div>
-            <span className="font-semibold text-[#565959] uppercase tracking-wider block">
+            <dt>
               Mobile Phone
-            </span>
-            <p className="text-sm font-medium text-[#0F1111] mt-0.5">
+            </dt>
+            <dd>
               {user?.phone || <span className="text-gray-400 italic">No phone added</span>}
-            </p>
+            </dd>
           </div>
 
-          <div>
-            <span className="font-semibold text-[#565959] uppercase tracking-wider block">
-              Account Role
-            </span>
-            <div className="mt-0.5">
-              <span className="inline-block bg-[#131921] text-white text-xs font-semibold px-2.5 py-0.5 rounded">
-                {user?.role || "USER"}
-              </span>
-            </div>
-          </div>
-        </div>
+        </dl>
       ) : (
         <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
           <div>
@@ -121,6 +107,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
             </Label>
             <Input
               id="profName"
+              autoComplete="name"
               {...register("name")}
               placeholder="Enter your full name"
               className="mt-1"
@@ -136,6 +123,8 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
             </Label>
             <Input
               id="profPhone"
+              type="tel"
+              autoComplete="tel"
               {...register("phone")}
               placeholder="+919876543210"
               className="mt-1"
@@ -158,6 +147,7 @@ export default function ProfileForm({ user, onSave, isSaving = false }) {
               variant="outline"
               size="sm"
               onClick={() => setIsEditing(false)}
+              disabled={isSaving}
               className="text-xs"
             >
               <T>{"Cancel"}</T>

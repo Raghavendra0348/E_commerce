@@ -95,7 +95,7 @@ export default function PaymentButton({
         key: razorpayKey,
         amount: rzpData.amount, // in paise
         currency: rzpData.currency || "INR",
-        name: "Amazon India Clone",
+        name: "amazon.in",
         description: `Payment for Order #${order.id}`,
         order_id: rzpData.razorpayOrderId,
         prefill: {

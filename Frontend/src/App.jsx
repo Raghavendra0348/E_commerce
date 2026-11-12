@@ -27,6 +27,7 @@ import AdminRoute from "./components/common/AdminRoute";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 // LoadingSpinner → The spinner shown inside <Suspense> while lazy pages download
 import LoadingSpinner from "./components/common/LoadingSpinner";
+import ScrollToTop from "./components/common/ScrollToTop";
 // AdminLayout    → Admin shell: sidebar + admin header (wraps all admin pages)
 import AdminLayout from "./components/admin/AdminLayout";
 
@@ -79,6 +80,7 @@ export default function App() {
       <BrowserRouter>
         {/* Suspense → shows the spinner while any lazy page is loading */}
         <Suspense fallback={<RouteLoadingFallback />}>
+          <ScrollToTop />
           <Routes>
 
             {/* ─── Customer-facing routes (with Navbar + Footer) ─────── */}

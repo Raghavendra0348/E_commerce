@@ -120,17 +120,7 @@ export default function Checkout() {
   return (
     <div id="checkout-page" className="checkout-page min-h-screen bg-[#EAEDED]">
       {/* Checkout Minimal Top Header */}
-      <header className="bg-[#131921] text-white py-3 px-4 border-b border-white/10">
-        <div className="mx-auto max-w-[1200px] flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <AmazonLogo className="checkout-brand-logo" tone="white" />
-          </Link>
-          <div className="flex items-center gap-1.5 text-xs text-gray-300">
-            <Lock className="h-3.5 w-3.5 text-[#067D62]" />
-            <span className="font-semibold text-white">100% Secure Checkout</span>
-          </div>
-        </div>
-      </header>
+      
 
       {/* Stepper */}
       <div className="bg-white border-b border-[#D5D9D9] shadow-2xs">

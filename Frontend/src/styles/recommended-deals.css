@@ -1,37 +1,46 @@
-.recommended-deals { max-width: 1800px; margin: 28px auto; padding: 0 18px; color: #0f1111; }
-.recommended-deals > h2 { margin: 0 0 20px; font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: 0; }
+.recommended-deals { max-width: 1840px; margin: 24px auto; padding: 0 4px; color: #0f1111; }
+.recommended-deals > h2 { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .recommended-deals-panels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.recommended-deals-panel { min-width: 0; padding: 18px; border: 1px solid #d5d9d9; border-radius: 24px; background: #fff; }
-.recommended-deals-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; color: inherit; text-decoration: none; }
-.recommended-deals-heading h3 { margin: 0; font-size: 22px; line-height: 28px; font-weight: 700; }
-.recommended-deals-heading svg { flex: 0 0 30px; width: 30px; height: 28px; }
-.recommended-deals-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.recommended-deal-tile { min-width: 0; display: flex; flex-direction: column; background: #f7f7f7; border-radius: 20px; overflow: hidden; text-decoration: none; color: #cc0c39; transition: background-color 150ms ease; }
-.recommended-deal-image { aspect-ratio: 1; padding: 12px; display: flex; align-items: center; justify-content: center; }
-.recommended-deal-link { display: flex; flex: 1; flex-direction: column; color: inherit; text-decoration: none; min-width: 0; }
-.recommended-deal-notify { margin: 0 12px 12px; }
+.recommended-deals-panel { min-width: 0; height: clamp(520px, 35.2vw, 648px); display: flex; flex-direction: column; padding: 18px; border: 1px solid #d5d9d9; border-radius: 24px; background: #fff; }
+.recommended-deals-heading { flex-shrink: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 14px; color: inherit; text-decoration: none; }
+.recommended-deals-heading h3 { margin: 0; font-size: clamp(20px, 1.52vw, 28px); line-height: 1.3; font-weight: 700; letter-spacing: 0; }
+.recommended-deals-heading svg { flex: 0 0 28px; width: 28px; height: 30px; margin-top: 3px; }
+.recommended-deals-tiles { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.recommended-deal-tile { min-width: 0; min-height: 0; display: flex; flex-direction: column; background: #f7f7f7; border-radius: 18px; overflow: hidden; text-decoration: none; color: #0f1111; }
+.recommended-deal-image { flex: 1; min-height: 0; padding: 12px; display: flex; align-items: center; justify-content: center; }
+.recommended-deal-link { display: flex; flex: 1; flex-direction: column; color: inherit; text-decoration: none; min-width: 0; min-height: 0; }
+.recommended-deal-notify { flex-shrink: 0; margin: 0 8px 8px; min-height: 34px; white-space: normal; }
 .recommended-deal-image > img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
 .recommended-deal-image > .product-image-coming-soon { width: 100%; height: 100%; }
-.recommended-deal-details { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px; margin-top: auto; }
-.recommended-deal-badge { display: inline-block; border-radius: 6px; padding: 6px 9px; background: #cc0c39; color: #fff; font-size: 18px; line-height: 24px; font-weight: 700; }
-.recommended-deal-price { font-size: 18px; line-height: 24px; font-weight: 700; }
-.recommended-deal-label { color: #cc0c39; font-size: 16px; line-height: 22px; font-weight: 700; }
-.recommended-deal-tile:hover { background: #efefef; }
+.recommended-deal-details { flex-shrink: 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 4px 6px 12px; }
+.recommended-deal-offer { display: flex; align-items: center; gap: 8px; min-height: 54px; width: 100%; }
+.recommended-deal-badge { flex-shrink: 0; display: inline-block; border-radius: 6px; padding: 6px 9px; background: #cc0c39; color: #fff; font-size: clamp(13px, 1.04vw, 18px); line-height: 24px; font-weight: 700; }
+.recommended-deal-label { color: #cc0c39; font-size: clamp(13px, 1.04vw, 18px); line-height: 24px; font-weight: 700; }
+.recommended-product-name { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: clamp(16px, 1.18vw, 22px); line-height: 28px; font-weight: 400; }
+.recommended-pick-price { display: flex; align-items: flex-start; font-size: 32px; line-height: 36px; font-weight: 400; }
+.recommended-pick-price > span, .recommended-pick-price > sup { position: static; font-size: 16px; line-height: 23px; }
+.recommended-tile-collection { background: transparent; border-radius: 0; }
+.recommended-tile-collection .recommended-deal-image { padding: 0; border-radius: 18px; overflow: hidden; background: #f7f7f7; }
+.recommended-tile-collection .recommended-deal-image > img { object-fit: cover; mix-blend-mode: normal; }
+.recommended-tile-collection .recommended-deal-details { padding: 6px 0 18px; }
+.recommended-deal-link:hover .recommended-product-name { color: #007185; }
 .recommended-deals-heading:hover { color: #007185; }
 .recommended-deal-link:focus-visible, .recommended-deals-heading:focus-visible { outline: 3px solid #007185; outline-offset: -3px; }
-.recommended-deal-skeleton { aspect-ratio: .72; width: 100%; border-radius: 20px; }
+.recommended-deal-skeleton { width: 100%; height: 100%; border-radius: 18px; }
 .recommended-deals-message { padding: 24px; border: 1px solid #d5d9d9; border-radius: 20px; }
 @media (min-width: 768px) and (max-width: 1279px) {
   .recommended-deals-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .recommended-deals-panel { height: 600px; }
+  .recommended-deals-heading h3 { font-size: 26px; }
 }
 @media (max-width: 767px) {
   .recommended-deals { margin: 20px auto; padding: 0 12px; }
-  .recommended-deals > h2 { font-size: 24px; line-height: 30px; margin-bottom: 16px; }
   .recommended-deals-panels { grid-template-columns: minmax(0, 1fr); }
-  .recommended-deals-panel { padding: 14px; }
-  .recommended-deals-heading h3 { font-size: 20px; line-height: 26px; }
+  .recommended-deals-panel { padding: 18px; height: clamp(540px, 155vw, 680px); }
+  .recommended-deals-heading h3 { font-size: 24px; line-height: 31px; }
   .recommended-deals-tiles { gap: 10px; }
   .recommended-deal-image { padding: 8px; }
-  .recommended-deal-details { padding: 10px; gap: 5px; }
-  .recommended-deal-badge, .recommended-deal-price { font-size: 16px; line-height: 22px; }
+  .recommended-deal-details { padding: 4px 6px 10px; }
+  .recommended-deal-badge, .recommended-deal-label { font-size: 14px; line-height: 20px; }
+  .recommended-product-name { font-size: 18px; line-height: 25px; }
 }

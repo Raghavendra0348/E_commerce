@@ -524,3 +524,9 @@ docker compose up -d --build
 - User approved adding Skullet; pinned frontend dependency to 0.0.3. Only the catalog ProductGrid now uses its measured skeleton with a scoped light/shimmer theme and existing CatalogProductCard layouts. Other skeleton implementations remain in place.
 - Uses local inert sample products/inline SVG during loading, preserves actual card actions and the empty state, and adds no artificial API delay. Sample shapes approximate content; shorter result pages and variable copy can change grid height on reveal. It does not cover the pre-JavaScript startup blank screen.
 - Verified 134 frontend tests, production build and real Edge loading/reveal screenshots at 1440/390px with mocked API responses and no overflow. Products route adds about 20 kB gzip. Local guide and verification details: Docs/SKULLET_PRODUCT_GRID.md.
+
+## Account and wishlist reference UI - 2026-11-12
+
+- Profile now uses a white account dashboard with six working shortcuts, real personal-details rows and the existing password/session handlers. Removed an unsupported email verification badge.
+- Wishlist now uses wide reference-style rows, shared cart/stock/remove actions and functional product-link sharing. The existing authenticated wishlist read adds catalogue pricing/category and batched review summaries; reload the backend if auto-restart is disabled. No migration or dependency is needed.
+- Production build, scoped frontend checks, changed backend-file lint and whitespace checks passed. Added account/wishlist tests remain unexecuted because approval controls rejected test execution; browser visual QA was unavailable. Details and reference: Docs/ACCOUNT_WISHLIST_UI.md.

@@ -14,9 +14,11 @@ export default function HomeProductCard({ product }) {
     <Card.Root product={product} className="home-product-card">
       <Card.WishlistToggle />
       <Card.Image />
-      {product.stock > 0 && <div className="home-card-cart-action">
-        <Card.AddToCart><CartIcon /></Card.AddToCart>
-      </div>}
+      <div className="home-card-cart-action">
+        {product.stock <= 0
+          ? <NotifyStockButton product={product} className="home-card-notify" />
+          : <Card.AddToCart><CartIcon /></Card.AddToCart>}
+      </div>
       <Card.Body>
         <Link className="home-card-title" to={`/products/${product.slug}`} title={product.name}>
           {product.name}
@@ -27,7 +29,6 @@ export default function HomeProductCard({ product }) {
         )}
         {discount > 0 && <span className="home-card-discount">{discount}% off</span>}
         <Card.Stock />
-        {product.stock <= 0 && <><span className="text-sm text-[#CC0C39]">Out of Stock</span><NotifyStockButton product={product} className="w-full" /></>}
         <span className="home-card-festival">Great Indian Festival</span>
       </Card.Body>
     </Card.Root>
