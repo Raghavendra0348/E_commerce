@@ -9,7 +9,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
 const profileSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters"),
+  name: z.string().trim().min(2, "Name must be at least 2 characters")
+    .regex(/^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u, "Use letters, spaces, apostrophes or hyphens only"),
   phone: z
     .string()
     .trim()

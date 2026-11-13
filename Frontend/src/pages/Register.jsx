@@ -16,8 +16,9 @@ import { toast } from "sonner";
 
 const registerSchema = z
   .object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
+    name: z.string().trim().min(2, "Name must be at least 2 characters")
+      .regex(/^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u, "Use letters, spaces, apostrophes or hyphens only"),
+    email: z.string().trim().email("Please enter a valid email address").toLowerCase(),
     phone: z
       .string()
       .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number")
@@ -51,6 +52,7 @@ export default function Register() {
     formState: { errors },
     setError,
   } = useForm({ resolver: zodResolver(registerSchema) });
+  const phoneField = register("phone");
 
   const onSubmit = async ({ name, email, phone, password }) => {
     setIsLoading(true);
@@ -123,14 +125,23 @@ export default function Register() {
               <Input
                 id="phone"
                 type="tel"
-                autoComplete="tel"
+                autoComplete="tel-national"
+                inputMode="numeric"
+                maxLength={10}
+                pattern="[6-9][0-9]{9}"
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? "phone-error" : undefined}
                 placeholder="10-digit mobile number"
                 className="rounded-l-none"
-                {...register("phone")}
+                {...phoneField}
+                onChange={(event) => {
+                  event.target.value = event.target.value.replace(/\D/g, "").slice(0, 10);
+                  phoneField.onChange(event);
+                }}
               />
             </div>
             {errors.phone && (
-              <p className="text-xs text-[#CC0C39]">{errors.phone.message}</p>
+              <p id="phone-error" className="text-xs text-[#CC0C39]">{errors.phone.message}</p>
             )}
           </div>
 

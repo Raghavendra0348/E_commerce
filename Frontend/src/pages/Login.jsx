@@ -15,7 +15,7 @@ import { useCartStore } from "../store/useCartStore";
 import { toast } from "sonner";
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string().trim().email("Please enter a valid email address").toLowerCase(),
   password: z.string().min(1, "Password is required"),
 });
 
@@ -74,7 +74,7 @@ export default function Login() {
 
           {/* Email */}
           <div className="space-y-1">
-            <Label htmlFor="email"><T>{"Email or mobile phone number"}</T></Label>
+            <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"

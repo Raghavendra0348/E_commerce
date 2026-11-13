@@ -31,6 +31,7 @@
   #storefront-navbar[data-mobile-layout="compact"], #storefront-navbar[data-mobile-layout="catalog"] { background: white; border-bottom: 1px solid #e3e6e6; }
   #storefront-navbar[data-mobile-layout="compact"] .navbar-main { flex-wrap: nowrap; padding: 0 10px 4px; min-height: 48px; }
   #storefront-navbar[data-mobile-layout="catalog"] .navbar-main { padding-top: 0; }
+  #storefront-navbar[data-mobile-layout="catalog"] .navbar-main > .navbar-logo { display: none; }
   #storefront-navbar:not([data-mobile-layout="home"]) .navbar-logo { margin-bottom: 0; background: transparent; }
   #storefront-navbar[data-mobile-layout="compact"] #navbar-search,
   #storefront-navbar:not([data-mobile-layout="home"]) .navbar-location-row { display: none; }

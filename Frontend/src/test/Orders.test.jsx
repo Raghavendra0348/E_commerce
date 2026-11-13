@@ -20,9 +20,10 @@ describe("order status filters", () => {
     show();
     expect(await screen.findByText("Order #1")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Next page" }));
-    await waitFor(() => expect(orderService.getOrders).toHaveBeenCalledWith({ page: 2, limit: 10, status: undefined }));
-    fireEvent.click(screen.getByRole("button", { name: "Delivered" }));
-    await waitFor(() => expect(orderService.getOrders).toHaveBeenCalledWith({ page: 1, limit: 10, status: "DELIVERED" }));
+    await waitFor(() => expect(orderService.getOrders).toHaveBeenLastCalledWith({ page: 2, limit: 10, status: undefined, dateFrom: expect.any(String), search: undefined }));
+    const dateFrom = orderService.getOrders.mock.lastCall[0].dateFrom;
+    fireEvent.click(screen.getByRole("tab", { name: "Not Yet Shipped" }));
+    await waitFor(() => expect(orderService.getOrders).toHaveBeenLastCalledWith({ page: 1, limit: 10, status: "PENDING,CONFIRMED,PROCESSING", dateFrom, search: undefined }));
   });
   it("shows a retryable API error instead of an empty order history", async () => {
     orderService.getOrders.mockRejectedValue(new Error("Offline"));

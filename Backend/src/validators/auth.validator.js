@@ -1,12 +1,14 @@
 const { z } = require("zod");
 
-const phoneRegex = /^\+?[1-9]\d{6,14}$/;
+const phoneRegex = /^[6-9]\d{9}$/;
+const nameRegex = /^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u;
 
 const registerSchema = z.object({
     body: z.object({
         name: z.string({ required_error: "Name is required" })
             .trim()
-            .min(1, "Name is required"),
+            .min(2, "Name must be at least 2 characters")
+            .regex(nameRegex, "Use letters, spaces, apostrophes or hyphens only"),
         email: z.string({ required_error: "Valid email is required" })
             .trim()
             .email("Valid email is required")
@@ -17,7 +19,7 @@ const registerSchema = z.object({
             .regex(/[A-Z]/, "Password must contain an uppercase letter"),
         phone: z.string()
             .trim()
-            .regex(phoneRegex, "Valid phone number required")
+            .regex(phoneRegex, "Enter a valid 10-digit Indian mobile number starting with 6–9")
             .optional()
             .or(z.literal("").transform(() => undefined))
     })
@@ -38,11 +40,12 @@ const updateProfileSchema = z.object({
     body: z.object({
         name: z.string()
             .trim()
-            .min(1, "Name cannot be empty")
+            .min(2, "Name must be at least 2 characters")
+            .regex(nameRegex, "Use letters, spaces, apostrophes or hyphens only")
             .optional(),
         phone: z.string()
             .trim()
-            .regex(phoneRegex, "Valid phone number required")
+            .regex(phoneRegex, "Enter a valid 10-digit Indian mobile number starting with 6–9")
             .optional()
             .or(z.literal("").transform(() => undefined))
     })
