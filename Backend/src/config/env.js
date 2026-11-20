@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("./loadEnv");
 const { z } = require("zod");
 const { isIP } = require("net");
 

@@ -9,6 +9,10 @@
 
 ## SRS faculty edition — 2026-11-12
 
+- UML supplement adds class and checkout sequence diagrams, bringing the current final PDF to 40 pages and seven diagrams. New diagrams are in Sections 7.17-7.18; identifier and margin checks pass and both new pages were visually reviewed. This supersedes the 36-page pre-supplement count below.
+
+- Superseded by final submission version 1.0: `output/pdf/E_Commerce_SRS_Final.pdf`, mirrored to `Docs/SRS_FINAL.pdf`, verified at 36 pages with five diagrams. Preserves all baseline requirements and mappings; includes account/wishlist interface updates and demo-only Notify me scope. Version 0.5 is archived. Faculty approval, unagreed targets and application acceptance execution remain pending; the old DOCX is not updated. Validation: `output/srs-submission-validation.json`.
+
 - Shortened `Docs/SRS_FINAL.md` to version 0.5; `Docs/SRS_FINAL.pdf` is verified at 35 pages, including cover, contents and five diagrams.
 - Retained all 39 functional statements, 12 quality requirements, seven interfaces, 12 use cases and 51 acceptance mappings. Preserved the original draft and archived the longer edition in `Docs/SRS_ARCHIVE/SRS_FULL_REVIEW_EDITION.md`.
 - Document validation and limitations are recorded in `Docs/SRS_DESIGN_REVIEW.md`. The editable DOCX export remains unverified because the available renderer requires missing LibreOffice; the 35-page guarantee applies to PDF only. Academic approval and application acceptance testing remain pending.
@@ -530,3 +534,29 @@ docker compose up -d --build
 - Profile now uses a white account dashboard with six working shortcuts, real personal-details rows and the existing password/session handlers. Removed an unsupported email verification badge.
 - Wishlist now uses wide reference-style rows, shared cart/stock/remove actions and functional product-link sharing. The existing authenticated wishlist read adds catalogue pricing/category and batched review summaries; reload the backend if auto-restart is disabled. No migration or dependency is needed.
 - Production build, scoped frontend checks, changed backend-file lint and whitespace checks passed. Added account/wishlist tests remain unexecuted because approval controls rejected test execution; browser visual QA was unavailable. Details and reference: Docs/ACCOUNT_WISHLIST_UI.md.
+
+## Login and registration validation - 2026-11-13
+
+- Login now labels its identifier Email; login and registration trim and lowercase email addresses before submission. Registration trims names and requires at least two characters on both frontend and backend.
+- Optional registration mobile input accepts digits only, limits input to ten digits and validates a first digit of 6-9. Backend registration and profile-update phone validation enforce the same ten-digit Indian mobile format.
+- Verified seven frontend validation tests, sixteen backend validation tests, changed-backend-file ESLint and frontend production build. Existing unrelated CI test failures identified earlier were outside this change; full suites were not rerun.
+
+## Frontend CI test alignment - 2026-11-13
+
+- Updated Orders pagination regression to check the current Not Yet Shipped tab, preserve the date filter and assert page reset with server-side pending statuses.
+- Updated catalog-card coverage for description/details links and out-of-stock demo Notify me behavior, including no purchase action and the explicit demo toast.
+- Verified all 157 frontend tests across 38 files and the production build. Changes are local; a new GitHub run requires committing and pushing.
+
+## Development API 404 correction - 2026-11-14
+
+- Changed Vite /api and /uploads proxy targets from explicit IPv4 127.0.0.1 to localhost to match the backend listener. On this Windows session a different Express process occupied IPv4 port 5000 while the project API responded on IPv6 ::1.
+- Verified categories and all four reported product query variants through the running frontend at port 5175 return HTTP 200 with success=true. Vite reloaded the config automatically; unrelated processes were preserved.
+
+
+## Neon database connection — 2026-11-20
+
+- Linked requested Neon project dark-silence-89394818, organization org-red-band-49571297, branch production. Only Postgres is configured in root neon.ts; neon deploy succeeded. Root .env.local and .neon are ignored.
+- Backend loads Neon root env before Backend/.env, preserving explicit process variables. Existing Prisma 6 TCP client uses pooled DATABASE_URL; Backend/prisma.config.ts uses direct DATABASE_URL_UNPOOLED for migrations. All 10 migrations applied.
+- Added root npm run build/db:deploy and scripts/verify-neon.cjs. Final build and frontend-to-API-to-Neon HTTP registration/login/profile persistence checks pass; temporary account removed and local verification servers closed.
+- Broader backend suite: 88 passed, 18 failed, 2 skipped (timeouts, transaction expiry, admin assertion, fresh-schema/cleanup failures). Not a full acceptance pass. Verified leftover fixtures removed; database users/products/categories/orders all zero afterward. No previous catalog was copied, and frontend/API public hosting remains separate.
+- Setup and verification details: docs/NEON_SETUP.md. Existing unrelated user edits were preserved.

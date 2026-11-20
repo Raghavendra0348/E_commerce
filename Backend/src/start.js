@@ -1,4 +1,5 @@
 const { spawnSync } = require("child_process");
+require("./config/loadEnv");
 
 function start({ run = spawnSync, boot = () => require("./server") } = {}) {
     const result = run(process.execPath, [require.resolve("prisma/build/index.js"), "migrate", "deploy"], {

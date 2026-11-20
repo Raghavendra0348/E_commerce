@@ -27,12 +27,13 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:5000',
+        // Match the backend's localhost listener (IPv6 on Windows).
+        target: 'http://localhost:5000',
         xfwd: true,
         changeOrigin: true,
       },
       '/uploads': {
-        target: 'http://127.0.0.1:5000',
+        target: 'http://localhost:5000',
         xfwd: true,
         changeOrigin: true,
       },

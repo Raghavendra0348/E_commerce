@@ -12,6 +12,7 @@ RUN npm ci
 
 # Only runtime source is copied; local environment files never enter the image.
 COPY src ./src/
+COPY prisma.config.ts ./
 
 # Generate Prisma Client
 RUN npx prisma generate

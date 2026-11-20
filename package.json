@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/dev.mjs"
+    "dev": "node scripts/dev.mjs",
+    "build": "npm --prefix Backend run db:generate && npm --prefix Frontend run build",
+    "db:deploy": "npm --prefix Backend run db:deploy"
+  },
+  "dependencies": {
+    "@neon/config": "^1.14.5",
+    "@neon/env": "^2.1.8"
   }
 }
