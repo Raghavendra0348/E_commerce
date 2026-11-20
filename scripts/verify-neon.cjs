@@ -2,7 +2,7 @@
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
-const { randomUUID } = require("node:crypto");
+const { randomUUID, randomBytes, randomInt } = require("node:crypto");
 require("../Backend/src/config/loadEnv");
 const prisma = require("../Backend/src/config/database");
 const app = require("../Backend/src/app");
@@ -12,7 +12,8 @@ async function main() {
     assert(host.endsWith(".neon.tech"), "Expected a Neon database");
     console.log(`Database: ${host} (credentials hidden)`);
     const email = `neon-smoke-${randomUUID()}@example.com`;
-    const password = `Smoke9-${randomUUID()}`;
+    // Generate every character at runtime, including required digit/uppercase classes.
+    const password = [randomBytes(32).toString("base64url"), randomInt(10), String.fromCharCode(randomInt(65, 91))].join("");
     const api = await new Promise(resolve => {
         const server = app.listen(0, "127.0.0.1", () => resolve(server));
     });
