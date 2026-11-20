@@ -192,7 +192,7 @@ body { font-family: var(--amazon-font-body); font-size: var(--amazon-body-size);
 .storefront-footer { background: var(--amazon-nav); color: #ddd; font-family: Arial, sans-serif; }
 .storefront-footer .footer-back-to-top { display: block; width: 100%; min-height: 49px; padding: 14px; border: 0; border-radius: 0; background: #37475a; color: white; font-size: 13px; font-weight: 400; box-shadow: none; }
 .storefront-footer .footer-back-to-top:hover { background: #485769; color: white; }
-.footer-main-links { display: grid; grid-template-columns: .85fr .9fr 1.3fr 1.05fr; gap: clamp(32px, 6vw, 100px); max-width: 1200px; margin: 0 auto; padding: 48px 24px 60px; }
+.footer-main-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 6vw, 100px); max-width: 1200px; margin: 0 auto; padding: 48px 24px 60px; }
 .footer-link-group { min-width: 0; }
 .footer-link-group h2 { color: white; font-size: 18px; line-height: 24px; font-weight: 700; margin: 0 0 16px; }
 .footer-link-group ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }

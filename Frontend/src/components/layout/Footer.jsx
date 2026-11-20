@@ -4,53 +4,20 @@ import AmazonLogo from "./AmazonLogo";
 import { Button } from "../ui/button";
 
 const footerGroups = [
-  { title: "Get to Know Us", links: [
-    ["About Amazon", "https://www.aboutamazon.in/"],
-    ["Careers", "https://www.amazon.jobs/"],
-    ["Press Releases", "https://press.aboutamazon.in/"],
-    ["Amazon Science", "https://www.amazon.science/"],
+  { title: "Shop", links: [
+    ["Home", "/"],
+    ["All Products", "/products"],
+    ["Your Cart", "/cart"],
   ] },
-  { title: "Connect with Us", links: [
-    ["Facebook", "https://www.facebook.com/AmazonIN"],
-    ["Twitter", "https://twitter.com/AmazonIN"],
-    ["Instagram", "https://www.instagram.com/amazonin/"],
+  { title: "Your Account", links: [
+    ["Your Profile", "/account/profile"],
+    ["Saved Addresses", "/account/addresses"],
   ] },
-  { title: "Make Money with Us", links: [
-    ["Sell on Amazon", "https://sell.amazon.in/"],
-    ["Sell under Amazon Accelerator", "https://accelerator.amazon.in/"],
-    ["Protect and Build Your Brand", "https://brandservices.amazon.in/"],
-    ["Amazon Global Selling", "https://sell.amazon.in/grow-your-business/amazon-global-selling.html"],
-    ["Supply to Amazon", "https://supply.amazon.com/"],
-    ["Become an Affiliate", "https://affiliate-program.amazon.in/"],
-    ["Fulfilment by Amazon", "https://services.amazon.in/services/fulfilment-by-amazon/benefits.html"],
-    ["Advertise Your Products", "https://advertising.amazon.com/"],
-    ["Amazon Pay on Merchants", "https://www.amazonpay.in/merchant"],
-  ] },
-  { title: "Let Us Help You", links: [
-    ["Your Account", "/account/profile"],
-    ["Returns Centre", "https://www.amazon.in/gp/css/returns/homepage.html"],
-    ["Recalls and Product Safety Alerts", "https://www.amazon.in/your-product-safety-alerts"],
-    ["100% Purchase Protection", "https://www.amazon.in/gp/help/customer/display.html?nodeId=201083470"],
-    ["Amazon App Download", "https://www.amazon.in/gp/browse.html?node=6967393031"],
-    ["Help", "https://www.amazon.in/gp/help/customer/display.html"],
+  { title: "Orders & Lists", links: [
+    ["Your Orders", "/account/orders"],
+    ["Your Wishlist", "/wishlist"],
   ] },
 ];
-
-const services = [
-  ["AbeBooks", "Books, art & collectibles", "https://www.abebooks.com/"],
-  ["Amazon Web Services", "Scalable Cloud Computing Services", "https://aws.amazon.com/"],
-  ["Audible", "Download Audio Books", "https://www.audible.in/"],
-  ["IMDb", "Movies, TV & Celebrities", "https://www.imdb.com/"],
-  ["Shopbop", "Designer Fashion Brands", "https://www.shopbop.com/"],
-  ["Amazon Business", "Everything For Your Business", "https://business.amazon.in/"],
-  ["Amazon Music", "Stream millions of songs", "https://music.amazon.in/"],
-];
-
-function FooterLink({ href, children }) {
-  return href.startsWith("/")
-    ? <Link to={href}>{children}</Link>
-    : <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
-}
 
 export default function Footer() {
   const backToTop = () => window.scrollTo({
@@ -68,7 +35,7 @@ export default function Footer() {
           <section key={title} className="footer-link-group" aria-label={title}>
             <h2>{title}</h2>
             <ul>{links.map(([label, href]) => (
-              <li key={label}><FooterLink href={href}>{label}</FooterLink></li>
+              <li key={label}><Link to={href}>{label}</Link></li>
             ))}</ul>
           </section>
         ))}
@@ -86,21 +53,7 @@ export default function Footer() {
           </span>
         </div>
       </div>
-      <nav id="footer-services" className="footer-services" aria-label="Amazon services">
-        <div className="footer-services-grid">
-          {services.map(([name, description, href]) => (
-            <a key={name} href={href} target="_blank" rel="noopener noreferrer">
-              <span>{name}</span><span>{description}</span>
-            </a>
-          ))}
-        </div>
-      </nav>
       <div className="footer-legal">
-        <nav aria-label="Footer legal links">
-          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200545940">Conditions of Use &amp; Sale</FooterLink>
-          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=200534380">Privacy Notice</FooterLink>
-          <FooterLink href="https://www.amazon.in/gp/help/customer/display.html?nodeId=202075050">Interest-Based Ads</FooterLink>
-        </nav>
         <p>© {new Date().getFullYear()} E-commerce storefront</p>
       </div>
     </footer>
